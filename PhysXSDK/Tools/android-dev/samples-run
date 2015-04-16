@@ -1,0 +1,29 @@
+#! /bin/sh +x
+
+source parseArgs.sh 
+
+SDK_ROOT=../..
+ANDROID_NDK=$SDK_ROOT/externals/android-ndk-r9/
+ANDROID_SDK=$SDK_ROOT/externals/android-sdk/
+pushd $ANDROID_SDK/platform-tools > /dev/null
+ADB=`pwd`/adb
+popd > /dev/null
+
+parseArgs $@
+saveArgs
+
+executable=Samples$suffix
+if [[ $ANDROID_CONFIG == *_neon ]]; then
+	executable=SamplesNeon$suffix
+fi
+echo Executable is $executable, debug=$debug
+
+# wait until device is ready
+$ADB wait-for-device
+if [[  -f "$cmdFile" ]]; then
+	adb push $cmdFile sdcard/media/PhysX/3.3/Samples/user
+fi
+
+# run
+$ADB shell "am start -n com.nvidia.physx.samples.$executable/com.nvidia.physx.samples.SamplesActivity"
+

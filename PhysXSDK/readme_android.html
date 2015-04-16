@@ -1,0 +1,144 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<title>NVIDIA PhysX SDK for Android ReadMe</title>
+<link rel="stylesheet" href="stylesheet.css" type="text/css">
+</head>
+
+<body>
+<h1 style="TEXT-ALIGN: center">NVIDIA<sup>&reg;</sup> PhysX<sup>&reg;</sup> SDK for Android ReadMe</h1>
+
+<blockquote>
+
+	<h4>Platform Requirements:</h4>
+	<ul>
+		<li>Android API level 8 (FROYO) for the PhysX SDK.</li>
+		<li>Android API level 9 (GINGERBREAD) for the graphical samples.</li>
+	</ul>
+
+	<h4>Location of Binaries:</h4>
+	<ul>
+		<li>SDK static libraries: Lib/</li>
+		<li>NVTX Profiler static libraries: externals/nvToolsExt/1/lib/armv7/</li>
+		<li>Sample Application Packages: Samples/AndroidActivities/Samples[Neon]/[build_config]/bin</li>
+	</ul>
+
+	<h4>Prerequisites:</h4>
+	<ul>
+		<li>JDK: To build the Sample apk files.</li>
+		<ul>
+			<li>Environment Variables Setup: Either YourJdkFolder/bin has to be in PATH or export JAVA_HOME=YourJdkFolder.</li>
+		</ul>
+		<li>Android SDK: adb.exe should be in PATH. (upload/install files to device).</li>
+		<li>Extract this installer to a path without white spaces in its name.</li>
+	</ul>
+
+	<h4>Running the Packaged Samples:</h4>
+	<ul>
+		<li>Copy the media folder to /sdcard</li>
+		<li>cd Samples/AndroidActivities/Samples[Neon]/release/bin</li>
+		<li>adb install [apk_file]</li>
+		<li>Find the Sample in your Applications list and click it.</li>
+		<i>Note: The prebuilt release apk file is only available in the Core packages.</i>
+	</ul>
+
+	<h4>Building Source with the Shipped Makefiles:</h4>
+	<ul>
+		<li>To reduce the size of the package we removed some external libraries, these have to be copied first to the "externals" folder. Empty folders are already in place to define the layout and the required version.</li>
+		<ul>
+			<li>Android NDK: Version r9d</li>
+			<li>Android SDK: Android-10 Headers needed, (adb for deploying to device)</li>
+			<li>Apache Ant: Version 1.8.2.</li>
+		</ul>
+		<li>Run the Makefiles from within MinGW - MSYS.</li>
+		<ul>
+			<li>e.g. for building the release build of the Samples, "cd ./Samples/compiler/android9[_neon]/" and run "make release".</li>
+			<li>Build configs separately! "make all" is likely to run out of heap memory (msys). See rebase woraround in known issues section.</li>
+			<li>Cygwin should work as well after fixing the line endings (d2u). And after correcting the drive letters of absolute paths!</li>
+		</ul>
+	</ul>
+	
+	<h4>Rebuilding Serialization Metadata:</h4>
+	<ul>
+		<li>Physics and Extensions: run "./Tools/PhysXMetaDataGenerator/PxPhysicsWithExtensions/runClang_android.bat"</li>
+		<li>Vehicle: run "./Tools/PhysXMetaDataGenerator/PxVehicleExtension/runClang_android.bat"</li>
+		<li>Snippet Extension: run "./Tools/PhysXMetaDataGenerator/PxSnippetExtension/runClang_android.bat"</li>
+		<li>Please consult the PhysX Guide for additional information.</li>
+	</ul>
+
+	<h4>Helper Scripts to build, deploy and run the SDK libraries, Samples and Snippets (Tools/android-dev).</h4>
+		Prerequisite environement variables
+		<ul>
+			<li>ANDROID_CONFIG: {android9, android9_neon} </li>
+			<li>MAKE_THREADS: {number of parallel make jobs; adjust this to your CPU} </li>
+			<li>JAVA_HOME: Absolute Path to JDK </li>
+			<br><i>Example:</i> export ANDROID_CONFIG=android9; export MAKE_THREADS=4; export JAVA_HOME=$PWD/../../externals/jdk
+		</ul>
+		SDK
+		<ul>
+			<li>physx-make {clean, debug, checked, profile, release}</li>
+			<br><i>Example:</i> physx-make clean; physx-make release
+		</ul>
+		Samples
+		<ul>
+			<li>physx-make {clean, debug, checked, profile, release}</li>
+			<li>samples-make {clean, debug, checked, profile, release}</li>
+			<li>samples-deploy {debug, checked, profile, release}</li>
+			<li>samples-run {debug, checked, profile, release} {--pvdhost=XX.XX.XX.XX} {--pvdport=XX} {--pvdtimeout=XX} {--nonVizPvd}
+			<ul>
+				<li>pvdhost: connect to PVD host at IP XX.XX.XX.XX (default is 127.0.0.1)</li>
+				<li>pvdport: connect to PVD host at port XX (default is 5425)</li>
+				<li>pvdtimeout: how long to block waiting for a new connection[ms] (default is 10 ms)</li>
+				<li>nonVizPvd: populate PVD's profile view (default is false)</li>
+			</ul>
+			</li>
+			<br><i>Example:</i> physx-make clean; physx-make release; samples-make release; samples-deploy release
+			<br><i>Note: Samples can also be run from the application list on the device.</i>
+		</ul>
+		Snippets
+		<ul>
+			<li>physx-make {clean, debug, checked, profile, release}</li>
+			<li>snippets-make {clean, debug, checked, profile, release}</li>
+			<li>snippets-deploy {debug, checked, profile, release} SNIPPET_NAME</li>
+			<li>snippets-run {debug, checked, profile, release} SNIPPET_NAME</li>
+			<br><i>Example:</i> physx-make clean; physx-make release; snippet-make release; snippet-deploy release HelloWorld
+			<br><i>Note: You need a rooted device in order to deploy and run snippets. The scripts assume that files can be read, written and executed in /data and its subfolders. Please mount this folder accordingly or change the script to use a folder with the same access properties (e.g. /data/local).</i>
+		</ul>
+
+	<h4>Nsight Profiling Events</h4>
+	<ul>
+		<li>All builds excpet the Release build of the SDK emits also NVTX (Nsight) events of the SDK profile zones. Therefore your application needs to link against the static libs in externals/nvToolsExt/1/lib/armv7.</li>
+		<li>SDK Source owners can disable this for all builds by removing PX_NVTX from the makefiles.</li>
+	</ul>
+
+	<h4>Known Issues:</h4>
+	<ul>
+		<li>Linking against the PhysX libraries: The NDK linker does not resolve library interdependencies by default, therefore you have to either bundle all obj files into a single static library or use the following linker flags to group the PhysX libraries: -Wl,--start-group $(addprefix -l, $(PhysX_libraries)) -Wl,--end-group. In order to avoid the cyclic dependencies, the following libraries are packed into libPhysX3.a by the Makefiles: LowLevel, LowLevelCloth, PhysX3, PhysXProfileSDK, PhysXVisualDebuggerSDK, PvdRuntime, PxTask, SceneQuery and SimulationController.</li>
+		<li>If this installer is unpacked to a path with white spaces in its name, then creating the final Sample Application packages will fail.</li>
+		<li>Samples can trigger a timeout watchdog message at loading time. Happens when switching samples in the Samples application.</li>
+		<li>Articulations can produce NaNs if the SDK is built with the official NDK. Fixed with patched gcc in NVNDK and since NDK r8e (gcc 4.7).</li>
+		<li>Builds fail with: "cc1plus.exe: out of memory allocating N bytes". Try raising the virtual memory size on the build machine or reduce the number of parallel build jobs (in the helper scripts).</li>
+		<li>Builds fail with: "Couldn't reserve space for cygwin's heap, Win32 error 0". Try "rebase -b 0x30000000 msys-1.0.dll"</li>
+		<li>Aggregates can fail if the SDK is built with the official NDK. Fixed with patched gcc in NVNDK and since NDK r8e (gcc 4.7).</li>
+		<li>Profiling builds can be slower than release and checked builds because of different build options (keep frame pointer) and profiling framework overhead.</li>
+		<li>There is no rendering support for Snippets on android devices.</li>
+	</ul>
+
+	<h4>Limitations:</h4>
+	<ul>
+		<li>The maximum number of shapes in each scene must be less than 32767.</li>
+		<li>The maximum number of dynamic actors added to each scene must be less than 65535.</li>
+		<li>The maximum number of broadphase overlap pairs must be less than 65535. Overlap pairs above this limit will be neglected.</li>
+	</ul>
+
+</blockquote>
+
+
+
+<p><br>
+Copyright (C) 2008-2014 NVIDIA Corporation, 2701 San Thomas Expressway, Santa Clara, CA 95050 U.S.A. All rights reserved. <A href="http://www.nvidia.com">www.nvidia.com</A>
+</p>
+</body>
+</html>

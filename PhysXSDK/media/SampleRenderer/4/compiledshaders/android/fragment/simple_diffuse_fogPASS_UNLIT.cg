@@ -1,0 +1,125 @@
+ps_3_0
+// cgc version 2.2.0017, build date Jan 29 2010
+// command line args: -profile ps_3_0 -I../include -DGLSL_COMPILER -DPASS_UNLIT -DNO_SUPPORT_DDX_DDY
+// source file: simple_diffuse_fog.cg
+//vendor NVIDIA Corporation
+//version 2.2.0.17
+//profile ps_3_0
+//program fmain
+//semantic g_MVP
+//semantic g_modelMatrix
+//semantic g_modelViewMatrix
+//semantic g_modelViewProjMatrix
+//semantic g_viewMatrix
+//semantic g_projMatrix
+//semantic g_eyePosition
+//semantic g_eyeDirection
+//semantic g_invViewProjMatrix
+//semantic g_boneMatrices
+//semantic g_fogColorAndDistance
+//semantic g_ambientColor
+//semantic g_lightColor
+//semantic g_lightDirection
+//semantic g_lightPosition
+//semantic g_lightIntensity
+//semantic g_lightInnerRadius
+//semantic g_lightOuterRadius
+//semantic g_lightInnerCone
+//semantic g_lightOuterCone
+//semantic shadeMode
+//semantic diffuseTexture
+//var float3 params.worldSpacePosition : $vin.TEXCOORD4 :  : 0 : 0
+//var float3 params.worldSpaceNormal : $vin.TEXCOORD5 :  : 0 : 0
+//var float3 params.worldSpaceTangent : $vin.TEXCOORD6 :  : 0 : 0
+//var float3 params.worldSpaceBinormal : $vin.TEXCOORD7 :  : 0 : 0
+//var float4 params.texcoord0 : $vin.TEXCOORD0 : ATTR0 : 0 : 1
+//var float4 params.texcoord1 : $vin.TEXCOORD1 :  : 0 : 0
+//var float4 params.texcoord2 : $vin.TEXCOORD2 :  : 0 : 0
+//var float4 params.texcoord3 : $vin.TEXCOORD3 :  : 0 : 0
+//var float4 params.color : $vin.COLOR0 :  : 0 : 0
+//var float4x4 g_MVP :  : , 4 : -1 : 0
+//var float4x4 g_modelMatrix :  : , 4 : -1 : 0
+//var float4x4 g_modelViewMatrix :  : , 4 : -1 : 0
+//var float4x4 g_modelViewProjMatrix :  : , 4 : -1 : 0
+//var float4x4 g_viewMatrix :  : , 4 : -1 : 0
+//var float4x4 g_projMatrix :  : , 4 : -1 : 0
+//var float3 g_eyePosition :  :  : -1 : 0
+//var float3 g_eyeDirection :  :  : -1 : 0
+//var float4x4 g_invViewProjMatrix :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[0] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[1] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[2] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[3] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[4] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[5] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[6] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[7] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[8] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[9] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[10] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[11] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[12] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[13] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[14] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[15] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[16] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[17] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[18] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[19] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[20] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[21] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[22] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[23] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[24] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[25] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[26] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[27] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[28] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[29] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[30] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[31] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[32] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[33] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[34] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[35] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[36] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[37] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[38] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[39] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[40] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[41] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[42] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[43] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[44] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[45] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[46] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[47] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[48] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[49] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[50] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[51] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[52] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[53] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[54] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[55] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[56] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[57] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[58] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[59] :  : , 4 : -1 : 0
+//var float4 g_fogColorAndDistance :  :  : -1 : 0
+//var float3 g_ambientColor :  :  : -1 : 0
+//var float3 g_lightColor :  :  : -1 : 0
+//var float3 g_lightDirection :  :  : -1 : 0
+//var float3 g_lightPosition :  :  : -1 : 0
+//var float g_lightIntensity :  :  : -1 : 0
+//var float g_lightInnerRadius :  :  : -1 : 0
+//var float g_lightOuterRadius :  :  : -1 : 0
+//var float g_lightInnerCone :  :  : -1 : 0
+//var float g_lightOuterCone :  :  : -1 : 0
+//var float shadeMode :  :  : -1 : 0
+//var sampler2D diffuseTexture :  : texunit 0 : -1 : 1
+//var float4 fmain.color : $vout.COLOR0 : COL : -1 : 1
+dcl_2d s0
+dcl_texcoord0 v0.xy
+texld r0, v0, s0
+mov_pp oC0, r0

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SamplesActivityDEBUG" default="help">
+    <property file="./local.properties" />
+    <property file="../../AntProperties/build.properties" />
+    <property file="./project.properties" />
+    <import file="${sdk.dir}/tools/ant/build.xml" />
+</project>

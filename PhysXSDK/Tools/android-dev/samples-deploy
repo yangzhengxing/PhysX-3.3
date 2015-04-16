@@ -1,0 +1,74 @@
+#! /bin/sh +x
+set -e
+
+source parseArgs.sh  
+
+SDK_ROOT=../..
+ANDROID_SDK=$SDK_ROOT/externals/android-sdk/
+pushd $ANDROID_SDK/platform-tools > /dev/null
+ADB=`pwd`/adb
+popd > /dev/null
+
+parseArgs $@
+executable=libSamples$suffix.so
+
+echo Executable is $executable
+
+if [ $skipMedia -eq 0 ]; then
+	# wait until device is ready
+	$ADB wait-for-device
+	
+	# delete media folder
+	$ADB shell rm -r sdcard/media
+
+	# compile shaders
+	echo compiling shaders
+	./prepareShaders.sh
+
+	# create folder hierarchy
+	# and copy media files
+	COPY_FOLDERS=(SampleRenderer/4/compiledshaders/android SampleRenderer/4/materials SampleRenderer/4/textures SampleRenderer/4/fonts PhysX/3.3/Samples)
+	for FOLDER in "${COPY_FOLDERS[@]}"; do
+		pushd ../../media/$FOLDER
+		for dir in $(find ./ -type d); do
+			$ADB shell mkdir -p sdcard/media/$FOLDER/$dir
+		done
+		$ADB push . sdcard/media/$FOLDER
+		popd
+	done
+	
+	# make shaders folder, else shaders/../compiledshaders access won't work
+	$ADB shell mkdir -p sdcard/media/SampleRenderer/4/shaders
+	
+	# make media files writeable
+	$ADB shell chmod -R 777 sdcard/media/*
+fi
+
+# ant build and deploy
+echo ant build and deploy
+
+SampleDir="Samples"
+if [[ $ANDROID_CONFIG == *_neon ]]; then
+	SampleDir="SamplesNeon"
+fi
+nativeLibDir=$SDK_ROOT/Samples/AndroidActivities/$SampleDir/$target/libs/armeabi-v7a
+mkdir -p $nativeLibDir
+
+# delete old .so files
+if [ -e $nativeLibDir/*.so ]; then
+	rm $nativeLibDir/*.so
+fi
+
+cp $SDK_ROOT/Samples/lib/$ANDROID_CONFIG/$executable $nativeLibDir/$executable
+
+pushd $SDK_ROOT/Samples/AndroidActivities/$SampleDir/$target
+echo "sdk.dir=../../$ANDROID_SDK" > ./local.properties
+if [ $skipAntInstall -eq 0 ]; then
+	# wait until device is ready
+	$ADB wait-for-device
+	../../../../externals/apache-ant-1.8.2/bin/ant uninstall
+	../../../../externals/apache-ant-1.8.2/bin/ant debug install
+else
+	../../../../externals/apache-ant-1.8.2/bin/ant debug
+fi
+popd

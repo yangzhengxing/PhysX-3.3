@@ -1,0 +1,1029 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Migrating From PhysX SDK 3.2 to 3.3 &mdash; NVIDIA PhysX SDK 3.3.3 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nvidia.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.3.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="NVIDIA PhysX SDK 3.3.3 Documentation" href="../index.html" />
+    <link rel="up" title="User&#39;s Guide" href="Index.html" />
+    <link rel="prev" title="Migrating From PhysX SDK 2.x to 3.x" href="MigrationFrom28.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="MigrationFrom28.html" title="Migrating From PhysX SDK 2.x to 3.x"
+             accesskey="P">previous</a></li>
+        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.3 Documentation</a> &raquo;</li>
+          <li><a href="Index.html" accesskey="U">User's Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="migrating-from-physx-sdk-3-2-to-3-3">
+<span id="migrationto33"></span><h1>Migrating From PhysX SDK 3.2 to 3.3<a class="headerlink" href="#migrating-from-physx-sdk-3-2-to-3-3" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>This guide highlights all significant parts of the API that have changed in the last dot release.  An application with a working integration of the older version of PhysX should be able to easily migrate to the newer version by following these pointers.</li>
+</ul>
+<div class="section" id="math-classes">
+<h2>Math Classes<a class="headerlink" href="#math-classes" title="Permalink to this headline">¶</a></h2>
+<p>The static <em>createIdentity()</em> and <em>createZero()</em> methods are now deprecated, and will be removed in a future release. The preferred method
+is to use the constructors <em>PxMat33(PxIdentity)</em>, <em>PxMat44(PxIdentity)</em>, <em>PxQuat(PxIdentity</em>), <em>PxTransform(PxIdentity)</em> for identity transforms, and
+<em>PxMat33(PxZero</em>) and <em>PxMat44(PxZero)</em> for zero matrices.</p>
+</div>
+<div class="section" id="scene-query-api">
+<h2>Scene Query API<a class="headerlink" href="#scene-query-api" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>The Scene Query API underwent significant changes. The highlights are:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>Former <em>raycastAny</em>, <em>raycastMultiple</em>, <em>raycastSingle</em> API calls are now folded into a single <em>PxScene::raycast</em> call</dt>
+<dd><ul class="first last">
+<li><p class="first">Same for overlaps and sweeps</p>
+</li>
+<li><p class="first">Same for <em>PxBatchQuery</em> and <em>PxVolumeCache</em></p>
+</li>
+<li><dl class="first docutils">
+<dt>For <em>PxScene</em> queries a deprecated backwards compatibility mapping was added to aid the transition</dt>
+<dd><ul class="first last simple">
+<li>This mapping will be removed in the next dot release</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>There are now dedicated callback and buffer classes for receiving query results, replacing <em>PxRaycastHit</em> array and count parameters.</dt>
+<dd><ul class="first last simple">
+<li>Same for sweeps and overlaps</li>
+<li>See <em>PxRaycastBuffer</em>, <em>PxSweepBuffer</em>, <em>PxOverlapBuffer</em>, <em>PxRaycastCallback</em>, <em>PxSweepCallback</em>, <em>PxOverlapCallback</em></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">The way results are returned is now more robust and it is possible to transparently handle unbounded number of results without dynamic allocations.</p>
+</li>
+<li><p class="first">Header PxSceneQueryFiltering.h was renamed to PxQueryFiltering.h, PxSceneQueryReport.h to PxQueryReport.h</p>
+</li>
+<li><p class="first"><em>PxHitFlag::eIMPACT</em> changed to <em>PxHitFlag::ePOSITION</em></p>
+</li>
+<li><p class="first"><em>PxRaycastHit.impact</em> renamed to <em>PxRaycastHit.position</em> (same for <em>PxSweepHit.impact</em>)</p>
+</li>
+<li><p class="first"><em>PxQueryFlag::eNO_BLOCK</em> and <em>PxQueryFlag::eANY_HIT</em> flags were added</p>
+</li>
+<li><dl class="first docutils">
+<dt>The following classes were renamed</dt>
+<dd><ul class="first last simple">
+<li><em>PxSceneQueryHit</em> -&gt; <em>PxQueryHit</em></li>
+<li><em>PxSceneQueryFlags</em> -&gt; <em>PxHitFlags</em></li>
+<li><em>PxSceneQueryHitType</em> -&gt; <em>PxQueryHitType</em></li>
+<li><em>PxSceneQueryFilterData</em> -&gt; <em>PxQueryFilterData</em></li>
+<li><em>PxSceneQueryFilterCallback</em> -&gt; <em>PxQueryFilterCallback</em></li>
+<li><em>PxSceneQueryFilterFlags</em> -&gt; <em>PxQueryFlags</em></li>
+<li><em>PxSceneQueryCache</em> -&gt; <em>PxQueryCache</em></li>
+<li><em>PxCCTNonWalkableMode</em> -&gt; <em>PxControllerNonWalkableMode</em></li>
+<li><em>PxControllerFlags</em> -&gt; <em>PxControllerCollisionFlags</em></li>
+<li><em>PxCCTHit</em> -&gt; <em>PxControllerHit</em></li>
+<li><em>PxConstraintDominance</em> -&gt; <em>PxDominanceGroupPair</em></li>
+<li><em>PxActorTypeSelectionFlags</em> -&gt; <em>PxActorTypeFlags</em></li>
+<li><em>PxFindOverlapTriangleMeshUtil</em> -&gt; <em>PxMeshOverlapUtil</em></li>
+<li>Old versions are #defined to new versions to simplify transition. These #defines are deprecated and will be phased out.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>queryClient</em> parameter was removed from raycast/sweep/overlap parameter list and added to <em>PxQueryFilterData</em></dt>
+<dd><ul class="first last simple">
+<li>The fix is to simply pass the same value via <em>PxQueryFilterData::clientId</em></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>PxBatchQueryDesc</em> now requires 3 parameters at construction time, <em>PxU32 maxRaycastsPerExecute, PxU32 maxSweepsPerExecute, PxU32 maxOverlapsPerExecute</em></dt>
+<dd><ul class="first last simple">
+<li>Each of these numbers is an upper bound on the number of <em>PxBatchQuery::raycast()</em>, <em>sweep()</em> and <em>overlap()</em> calls before a call to <em>execute()</em></li>
+<li>Previously there was no way to check for results buffer overflow in batch query code since sizes of these buffers were not specified.</li>
+<li>The fix is to specify the batch query result (different from hit) buffer sizes at construction.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>PxBatchQueryDesc</em> no longer directly holds pointers to memory for queries, in 3.3 these are moved to <em>PxBatchQueryMemory</em>.</dt>
+<dd><ul class="first last simple">
+<li>It is now possible to set a new batch query memory descriptor before each execute</li>
+<li><em>userRaycastHitBuffer</em> has been renamed to <em>userRaycastTouchBuffer</em></li>
+<li><em>raycastHitBufferSize</em> has been renamed to <em>raycastTouchBufferSize</em></li>
+<li>same for overlaps and sweeps (<em>userSweepHitBuffer</em>, <em>sweepHitBufferSize</em>, <em>userOverlapHitBuffer</em>, <em>overlapHitBufferSize</em>)</li>
+<li>A code snippet below illustrates the migration for these code changes</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>PxQueryFilterData</em> constructors are now explicit. This means that previously it was possible to write</dt>
+<dd><ul class="first last simple">
+<li>scene-&gt;raycast(..., PxQueryFlag::eDYNAMIC | PxQueryFlag::eSTATIC, ...), causing <em>PxQueryFilterData</em> to be implicitly constructed by the compiler</li>
+<li>now it is required to explicitly write: scene-&gt;raycast(...,PxQueryFilterData(PxQueryFlag::eDYNAMIC | PxQueryFlag::eSTATIC), ...)</li>
+<li>This change was made to improve type safety and reduce confusion while reading the code employing implicit constructors</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>PxRaycastBufferN</em>, <em>PxOverlapBufferN</em> and <em>PxSweepBufferN</em> were added for convenience</dt>
+<dd><ul class="first last simple">
+<li>A buffer object with space for 10 touching hits and one blocking hit can now be conveniently declared as PxRaycastBufferN&lt;10&gt; hits;</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><em>PxRaycastHit</em> and <em>PxSweepHit</em> now inherit from <em>PxLocationHit</em> (formerly from <em>PxSceneQueryImpactHit</em>)</p>
+</li>
+<li><p class="first"><em>bool PxLocationHit::hadInitialOverlap()</em> function was added to determine if a swept shape was overlapping at sweep distance=0 or if a raycast hit a shape at distance=0.</p>
+</li>
+<li><p class="first">Functionality of <em>PxSceneQueryFlag::eINITIAL_OVERLAP</em> and <em>PxSceneQueryFlag::eINITIAL_OVERLAP_KEEP</em> was replaced with <em>PxHitFlag::eASSUME_NO_INITIAL_OVERLAP</em> and <em>PxLocationHit::hadInitialOverlap()</em>.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Overlap scene queries with <em>preFilter</em> or <em>postFilter</em> returning multiple <em>eBLOCK</em> hits would previously return multiple results as touching hits.</dt>
+<dd><ul class="first last simple">
+<li><em>eBLOCK</em> should not be returned from user filters for <em>overlap()</em>. Doing so will result in undefined behavior, and a warning will be issued.</li>
+<li>If the <em>PxQueryFlag::eNO_BLOCK</em> flag is set, the <em>eBLOCK</em> will instead be automatically converted to an <em>eTOUCH</em> and the warning suppressed.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Sweeps in 3.3 execute using a new faster code path, in some cases with reduced precision.
+If you encounter precision issues not previously experienced in earlier versions of PhysX, use <em>ePRECISE_SWEEP</em> flag to enable
+the backwards compatible more accurate sweep code.</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Snippets demonstrating API migration:</p>
+</li>
+</ul>
+<p>Former raycastSingle call:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">PxRaycastHit</span> <span class="n">hit</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">hadHit</span> <span class="o">=</span> <span class="n">scene</span><span class="o">-&gt;</span><span class="n">raycastSingle</span><span class="p">(...,</span> <span class="n">hit</span><span class="p">,</span> <span class="p">...);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">hadHit</span><span class="p">)</span> <span class="n">doStuff</span><span class="p">(</span><span class="n">hit</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Is now:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">PxRaycastBuffer</span> <span class="n">buf</span><span class="p">;</span>
+<span class="n">Bool</span> <span class="n">hadHit</span> <span class="o">=</span> <span class="n">scene</span><span class="o">-&gt;</span><span class="n">raycast</span><span class="p">(...,</span> <span class="n">buf</span><span class="p">,</span> <span class="p">...);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">hadHit</span><span class="p">)</span> <span class="n">doStuff</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">block</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Former <em>raycastAny</em> call:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">PxSceneQueryHit</span> <span class="n">hit</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">hadHit</span> <span class="o">=</span> <span class="n">scene</span><span class="o">-&gt;</span><span class="n">raycastAny</span><span class="p">(</span><span class="n">hit</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">hadHit</span><span class="p">)</span> <span class="n">doStuff</span><span class="p">(</span><span class="n">hit</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Is now:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">PxRaycastBuffer</span> <span class="n">buf</span><span class="p">;</span> <span class="c1">// declare a hit buffer with room for a single blocking hit</span>
+<span class="n">PxFilterData</span> <span class="n">fdAny</span><span class="p">;</span> <span class="n">fdAny</span><span class="p">.</span><span class="n">flags</span> <span class="o">|=</span> <span class="n">PxQueryFlag</span><span class="o">::</span><span class="n">eANY_HIT</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">hadHit</span> <span class="o">=</span> <span class="n">scene</span><span class="o">-&gt;</span><span class="n">raycast</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">PxHitFlags</span><span class="p">(),</span> <span class="n">fdAny</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">hadHit</span><span class="p">)</span> <span class="n">doStuff</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">block</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Former Multiple call:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">PxRaycastHit</span> <span class="n">buffer</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">hasBlock</span><span class="p">;</span>
+<span class="n">PxI32</span> <span class="n">result</span> <span class="o">=</span> <span class="n">Scene</span><span class="o">-&gt;</span><span class="n">raycastMultiple</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">hasBlock</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">handleOverflow</span><span class="p">();</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">hasBlock</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">doBlocking</span><span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="n">result</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="n">doTouches</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">result</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">doTouches</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Is now:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">PxRaycastBufferN</span><span class="o">&lt;</span><span class="n">N</span><span class="o">&gt;</span> <span class="n">buf</span><span class="p">;</span>
+<span class="n">scene</span><span class="o">-&gt;</span><span class="n">raycast</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">hasBlock</span><span class="p">)</span>
+    <span class="n">doBlocking</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">block</span><span class="p">);</span>
+<span class="n">doTouches</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">touches</span><span class="p">,</span> <span class="n">buf</span><span class="p">.</span><span class="n">nbTouches</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">buf</span><span class="p">.</span><span class="n">getNbAnyHits</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="c1">// &quot;any&quot; in this context refers to blocking or</span>
+                                               <span class="c1">// touching hits</span>
+    <span class="n">doAnyHit</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">getAnyHit</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Former batch query memory setup code in 3.2:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">const</span> <span class="n">PxU32</span> <span class="n">maxRaycastHits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">maxRaycastQueries</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+<span class="n">PxRaycastQueryResult</span><span class="o">*</span> <span class="n">resultBuffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PxRaycastQueryResult</span><span class="p">[</span><span class="n">maxRaycastQueries</span><span class="p">];</span>
+<span class="n">PxRaycastHitBuffer</span><span class="o">*</span> <span class="n">hitBuffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PxRaycastHit</span><span class="p">[</span><span class="n">maxRaycastHits</span><span class="p">];</span>
+<span class="n">PxBatchQueryDesc</span> <span class="n">desc</span><span class="p">;</span> <span class="c1">// required no arguments, there was no safety check for maximum number</span>
+                       <span class="c1">// of queries per batch (not hits per query)</span>
+<span class="n">desc</span><span class="p">.</span><span class="n">userRaycastResultBuffer</span> <span class="o">=</span> <span class="n">resultBuffer</span><span class="p">;</span>
+<span class="n">desc</span><span class="p">.</span><span class="n">userRaycastHitBuffer</span> <span class="o">=</span> <span class="n">hitBuffer</span><span class="p">;</span>
+<span class="n">desc</span><span class="p">.</span><span class="n">raycastHitBufferSize</span> <span class="o">=</span> <span class="n">maxRaycastHits</span><span class="p">;</span>
+<span class="n">PxBatchQuery</span><span class="o">*</span> <span class="n">bq</span> <span class="o">=</span> <span class="n">PxCreateBatchQuery</span><span class="p">(</span><span class="n">desc</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">iQuery</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iQuery</span> <span class="o">&lt;</span> <span class="n">maxRaycastQueries</span><span class="p">;</span> <span class="n">iQuery</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">bq</span><span class="o">-&gt;</span><span class="n">raycastSingle</span><span class="p">(...);</span> <span class="c1">// up to 8 raycast queries are allowed per PxBatchQuery::execute()</span>
+                            <span class="c1">// call but there was no overflow check in 3.2</span>
+<span class="n">bq</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">();</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">iResult</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iResult</span> <span class="o">&lt;</span> <span class="n">nQueries</span><span class="p">;</span> <span class="n">iResult</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">iHit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iHit</span> <span class="o">&lt;</span> <span class="n">resultBuffer</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">nbHits</span><span class="p">;</span> <span class="n">iHit</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">isBlocking</span> <span class="o">=</span> <span class="p">(</span><span class="n">iHit</span> <span class="o">==</span> <span class="n">resultBuffer</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">nbHits</span> <span class="o">&amp;&amp;</span>
+            <span class="p">(</span><span class="n">resultBuffer</span><span class="p">[</span><span class="n">iResult</span><span class="p">].</span><span class="n">hits</span><span class="p">[</span><span class="n">iHit</span><span class="p">].</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">PxSceneQueryFlag</span><span class="o">::</span><span class="n">eBLOCKING_HIT</span><span class="p">));</span>
+        <span class="n">processHit</span><span class="p">(</span><span class="n">resultBuffer</span><span class="p">[</span><span class="n">iResult</span><span class="p">].</span><span class="n">hits</span><span class="p">[</span><span class="n">iHit</span><span class="p">],</span> <span class="n">isBlocking</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Batch query setup code in 3.3:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">const</span> <span class="n">PxU32</span> <span class="n">maxRaycastHits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">maxRaycastQueries</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+<span class="n">PxBatchQueryDesc</span> <span class="nf">desc</span><span class="p">(</span><span class="n">maxQueries</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// note the new required maximum of queries per batch</span>
+                                         <span class="c1">// (this is different from maximum hits)</span>
+<span class="n">PxBatchQuery</span><span class="o">*</span> <span class="n">bq</span> <span class="o">=</span> <span class="n">scene</span><span class="o">-&gt;</span><span class="n">createBatchQuery</span><span class="p">(</span><span class="n">desc</span><span class="p">);</span>
+
+<span class="n">PxRaycastQueryResult</span><span class="o">*</span> <span class="n">resultBuffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PxRaycastQueryResult</span><span class="p">[</span><span class="n">maxRaycastQueries</span><span class="p">];</span>
+<span class="n">PxRaycastHitBuffer</span> <span class="n">hitBuffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PxRaycastHit</span><span class="p">[</span><span class="n">maxRaycastHits</span><span class="p">];</span>
+<span class="n">PxBatchQueryMemory</span> <span class="nf">mem</span><span class="p">(</span><span class="n">maxQueries</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// maximum number of queries for each type</span>
+                                          <span class="c1">// (raycasts, overlaps, sweeps)</span>
+<span class="n">mem</span><span class="p">.</span><span class="n">userRaycastResultBuffer</span> <span class="o">=</span> <span class="n">resultBuffer</span><span class="p">;</span>
+<span class="n">mem</span><span class="p">.</span><span class="n">userRaycastTouchBuffer</span> <span class="o">=</span> <span class="n">hitBuffer</span><span class="p">;</span>
+<span class="n">mem</span><span class="p">.</span><span class="n">raycastTouchBufferSize</span>  <span class="o">=</span> <span class="n">maxHits</span><span class="p">;</span>
+
+<span class="n">PxBatchQuery</span><span class="o">*</span> <span class="n">bq</span> <span class="o">=</span> <span class="n">PxCreateBatchQuery</span><span class="p">(</span><span class="n">desc</span><span class="p">);</span>
+<span class="n">bq</span><span class="o">-&gt;</span><span class="n">setUserMemory</span><span class="p">(</span><span class="n">mem</span><span class="p">);</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">iQuery</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iQuery</span> <span class="o">&lt;</span> <span class="n">maxRaycastQueries</span><span class="p">;</span> <span class="n">iQuery</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">bq</span><span class="o">-&gt;</span><span class="n">raycastSingle</span><span class="p">(...);</span> <span class="c1">// up to 8 raycast queries are allowed per PxBatchQuery::execute()</span>
+                            <span class="c1">// with query count overflow check as of 3.3</span>
+<span class="n">bq</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">();</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">iResult</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iResult</span> <span class="o">&lt;</span> <span class="n">nQueries</span><span class="p">;</span> <span class="n">iResult</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// note that the blocking hit is now reported in resultBuffer[i].block and touching hits in</span>
+    <span class="c1">// resultBuffer[i].touches</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">iHit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iHit</span> <span class="o">&lt;</span> <span class="n">resultBuffer</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">nbTouches</span><span class="p">;</span> <span class="n">iHit</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">processTouchingHit</span><span class="p">(</span><span class="n">resultBuffer</span><span class="p">[</span><span class="n">iResult</span><span class="p">].</span><span class="n">touches</span><span class="p">[</span><span class="n">iHit</span><span class="p">]);</span>
+
+    <span class="n">processBlockingHit</span><span class="p">(</span><span class="n">resultBuffer</span><span class="p">[</span><span class="n">iResult</span><span class="p">].</span><span class="n">block</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spu-batch-queries">
+<h2>SPU batch queries<a class="headerlink" href="#spu-batch-queries" title="Permalink to this headline">¶</a></h2>
+<p>In 3.2 the number of SPUs to be used per batch query was controlled by a global setting via <em>setSceneParamInt</em> call:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">PxPS3Config</span><span class="o">::</span><span class="n">setSceneParamInt</span><span class="p">(</span><span class="n">getScene</span><span class="p">(),</span> <span class="n">PxPS3ConfigParam</span><span class="o">::</span><span class="n">eSPU_RAYCAST</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In 3.3 <em>PxBatchQuery</em> no longer automatically executes on multiple SPUs but requires a separate PPU thread, this design allows higher
+flexibility, such as executing batches on multiple SPU and PPU threads simultaneously, better control of parallel execution and allows the user to fine tune thread load balancing.
+Here's one possible way to run batch queries on multiple SPUs in 3.3:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">BQThread</span> <span class="o">:</span> <span class="n">shdfnd</span><span class="o">::</span><span class="n">Thread</span>
+<span class="p">{</span>
+    <span class="n">Ps</span><span class="o">::</span><span class="n">Sync</span> <span class="n">mBatchReady</span><span class="p">;</span>
+    <span class="n">Ps</span><span class="o">::</span><span class="n">Sync</span> <span class="n">mBatchCompleted</span><span class="p">;</span>
+    <span class="n">PxBatchQuery</span><span class="o">*</span> <span class="n">mBatch</span><span class="p">;</span>
+
+    <span class="n">PX_FORCE_INLINE</span> <span class="nf">BQThread</span><span class="p">()</span> <span class="p">{</span> <span class="n">mBatch</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">PX_FORCE_INLINE</span> <span class="kt">void</span> <span class="nf">submitBatch</span><span class="p">(</span><span class="n">PxBatchQuery</span><span class="o">*</span> <span class="n">batch</span><span class="p">)</span> <span class="p">{</span> <span class="n">mBatch</span> <span class="o">=</span> <span class="n">batch</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">execute</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// execute submitted batches until quit is signalled</span>
+        <span class="k">for</span><span class="p">(;;)</span>
+        <span class="p">{</span>
+            <span class="n">mBatchReady</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span>
+            <span class="n">mBatchReady</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">quitIsSignalled</span><span class="p">())</span>
+                <span class="k">break</span><span class="p">;</span>
+
+            <span class="n">mBatch</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">();</span>
+
+            <span class="n">mBatch</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+            <span class="n">mBatchCompleted</span><span class="p">.</span><span class="n">set</span><span class="p">();</span>
+        <span class="p">}</span> <span class="c1">// for (;;)</span>
+
+        <span class="n">quit</span><span class="p">();</span> <span class="c1">// shutdown thread</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// main thread code:</span>
+<span class="c1">// pre-create and launch batch execute threads</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">iThread</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iThread</span> <span class="o">&lt;</span> <span class="n">nThreads</span><span class="p">;</span> <span class="n">iThread</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">BQThread</span><span class="o">*</span> <span class="n">t</span> <span class="o">=</span> <span class="n">PX_NEW</span><span class="p">(</span><span class="n">BQThread</span><span class="p">);</span>
+    <span class="n">t</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+    <span class="n">mThreads</span><span class="p">.</span><span class="n">pushBack</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// submit batches</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">iThread</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iThread</span> <span class="o">&lt;</span> <span class="n">nThreads</span><span class="p">;</span> <span class="n">iThread</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// create batches</span>
+    <span class="n">PxBatchQuery</span><span class="o">*</span> <span class="n">threadBatch</span> <span class="o">=</span> <span class="n">createBatch</span><span class="p">(...);</span>
+    <span class="n">threadBatch</span><span class="o">-&gt;</span><span class="n">setRunOnSpu</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+    <span class="n">mThreads</span><span class="p">[</span><span class="n">iThread</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">submitBatch</span><span class="p">(</span><span class="n">threadBatch</span><span class="p">);</span>
+    <span class="n">mThreads</span><span class="p">[</span><span class="n">iThread</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">mBatchReady</span><span class="p">.</span><span class="n">set</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// execute another batch on PPU in the meantime.</span>
+<span class="n">PxBatchQuery</span><span class="o">*</span> <span class="n">threadBatch</span> <span class="o">=</span> <span class="n">createBatch</span><span class="p">(...);</span>
+<span class="n">threadBatch</span><span class="o">-&gt;</span><span class="n">setRunOnSpu</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+<span class="n">threadBatch</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">();</span>
+
+<span class="c1">// do other PPU work...</span>
+
+<span class="c1">// wait for SPU batches to complete:</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">mThreads</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">mThreads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">mBatchCompleted</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span>
+    <span class="n">mThreads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">mBatchCompleted</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+    <span class="n">releaseBatch</span><span class="p">(</span><span class="n">mThreads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">mBatch</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// terminate batch threads</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">mThreads</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">mThreads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">signalQuit</span><span class="p">();</span>
+    <span class="n">mThreads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">mBatchReady</span><span class="p">.</span><span class="n">set</span><span class="p">();</span>
+    <span class="n">mThreads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">waitForQuit</span><span class="p">();</span>
+    <span class="n">PX_DELETE</span><span class="p">(</span><span class="n">mThreads</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Whether the batch is executed on SPU or PPU is determined by either <em>bool PxBatchQueryDesc::runOnSpu</em> or <em>PxBatchQuery::setRunOnSpu(bool)</em>,
+by default batch query is executed on SPU:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">PxBatchQueryDesc</span> <span class="n">desc</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="n">desc</span><span class="p">.</span><span class="n">runOnSpu</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="core-physx">
+<h2>Core PhysX<a class="headerlink" href="#core-physx" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The following methods require that the corresponding objects have been added to a scene. Calling these methods for objects which are not in a scene will result in undefined behavior. In the CHECKED build configuration an error message will get sent.</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>addForce/addTorque/clearForce/clearTorque()</em> on a <em>PxRigidBody</em></li>
+<li><em>isSleeping/wakeUp/putToSleep()</em> on a <em>PxRigidDynamic</em>, <em>PxArticulation</em> or <em>PxCloth</em></li>
+<li><em>PxScene::resetFiltering()</em> and the deprecated counterparts on <em>PxShape</em> and <em>PxParticleBase</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">The sleep behavior of dynamic rigid bodies has changed significantly. Among the changes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <em>wakeUp()</em> method of <em>PxRigidDynamic</em> and <em>PxArticulation</em> has lost the wake counter parameter. Use the newly introduced method <em>setWakeCounter()</em> instead to set a specific value.</li>
+<li>Putting a dynamic rigid actor to sleep will clear any pending force updates.</li>
+<li>Switching a dynamic actor to kinematic will put the actor to sleep immediately.</li>
+<li>Switching a kinematic actor back to dynamic will not affect the sleep state (previously the actor was woken up).</li>
+<li>Calling <em>wakeUp/putToSleep()</em> on a kinematically controlled dynamic actor is not valid any longer. The sleep state of a kinematic actor is solely defined based on whether a target pose has been set (see API documentation of <em>isSleeping()</em> for details).</li>
+<li>A call to <em>PxRigidBody::setCMassLocalPose()</em> does not wake up the actor anymore. Add a call to <em>PxRigidBody::wakeUp()</em> to get the old behavior back. Note: this also affects related methods in PhysXExtensions like <em>PxRigidBodyExt::updateMassAndInertia()</em> etc.</li>
+<li>Adding or removing a <em>PxConstraint</em> to/from the scene does not wake the connected actors up automatically anymore (note: this applies to <em>PxJoint</em> in PhysX Extensions as well).</li>
+<li>If a non-zero velocity or force is set through <em>PxRigidBody::setLinearVelocity()</em>, <em>::setAngularVelocity()</em>, <em>::addForce()</em> or <em>::addTorque()</em>, the actor will get woken up automatically even if the autowake parameter is false.</li>
+<li><em>PxRigidBody::clearForce()</em> and <em>::clearTorque()</em> do not have the autowake parameter, to optionally wake the actor up, anymore. These methods will not change the sleep state any longer. Call <em>::wakeUp()</em> subsequently to get the old default behavior.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Shapes may now be shared between actors.  This change has several ramifications:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxShape::getActor()</em> now returns a pointer rather than a reference. If the shape is shareable, the pointer is NULL.</li>
+<li>The following methods of <em>PxShape</em> have been removed: <em>getGlobalPose()</em>, <em>raycast()</em>, <em>sweep()</em>, <em>overlap()</em>, <em>getWorldBounds()</em>. Replacements can be found in <em>PxShapeExt</em>.</li>
+<li><em>PxShape</em> now has the same reference counting semantics as meshes and materials, so that <em>release()</em> releases the user reference, and when the last reference is released, the shape is destroyed.</li>
+<li>Shapes created through <em>PxRigidActor::createShape()</em> are still destroyed automatically when the actor is released. However, after serializing and deserializing such a shape, the regular reference counting semantics apply.</li>
+<li>return results from scene queries which previously specified a shape now specify an actor also.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Shape local transforms cannot be specified on shape creation anymore. Instead set the local transform after creation with <em>PxShape::setLocalPose()</em>.</p>
+</li>
+<li><p class="first">The <em>PxObserver/PxObservable</em> system has been replaced by the <em>PxDeletionListener</em> API. The supported object types have been extended from <em>PxActor</em> to all core objects inheriting from <em>PxBase</em>. Furthermore, two kinds of deletion events are now distinguished: user release and memory release. The following snippet shows pseudocode for the transition from the previous to the new API:</p>
+</li>
+</ul>
+<p>old API:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyObserver</span> <span class="o">:</span> <span class="k">public</span> <span class="n">PxObserver</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">onRelease</span><span class="p">(</span><span class="k">const</span> <span class="n">PxObservable</span><span class="o">&amp;</span> <span class="n">observable</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">MyObserver</span> <span class="n">myObs</span><span class="p">;</span>
+<span class="n">PxRigidDynamic</span><span class="o">*</span> <span class="n">d</span> <span class="o">=</span> <span class="n">create</span><span class="p">...;</span>
+<span class="n">d</span><span class="o">-&gt;</span><span class="n">registerObserver</span><span class="p">(</span><span class="n">myObs</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>new API:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyDelListener</span> <span class="o">:</span> <span class="k">public</span> <span class="n">PxDeletionListener</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">onRelease</span><span class="p">(</span><span class="k">const</span> <span class="n">PxBase</span><span class="o">*</span> <span class="n">observable</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">userData</span><span class="p">,</span>
+        <span class="n">PxDeletionEventFlag</span><span class="o">::</span><span class="n">Enum</span> <span class="n">deletionEvent</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">MyDelListener</span> <span class="n">myDelListener</span><span class="p">;</span>
+<span class="n">PxPhysics</span><span class="o">*</span> <span class="n">physics</span> <span class="o">=</span> <span class="n">create</span><span class="p">...;</span>
+<span class="n">PxRigidDynamic</span><span class="o">*</span> <span class="n">d</span> <span class="o">=</span> <span class="n">create</span><span class="p">...;</span>
+<span class="n">physics</span><span class="o">-&gt;</span><span class="n">registerDeletionListener</span><span class="p">(</span><span class="n">myDelListener</span><span class="p">,</span> <span class="n">PxDeletionEventFlag</span><span class="o">::</span><span class="n">eUSER_RELEASE</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+<span class="n">PxBase</span><span class="o">*</span> <span class="n">b</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+<span class="n">physics</span><span class="o">-&gt;</span><span class="n">registerDeletionListenerObjects</span><span class="p">(</span><span class="n">myDelListener</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">The <em>contactStream</em> in <em>PxContactPair</em> is now stored in a variable-size compressed contact stream. This is used to save memory. As such, you can <strong>no longer</strong> simply cast it to a PxContactPoint* and access the data. Instead, you must either use <em>PxContactPair::extractContacts</em> or us a <em>PxContactStreamIterator</em> to interpret the data. Please see the callbacks section of the user guide for further information.</p>
+</li>
+<li><p class="first">The friction API and behavior for dynamic rigid bodies has changed slightly:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Friction mode flags <em>eENABLE_ONE_DIRECTIONAL_FRICTION</em> and <em>eENABLE_TWO_DIRECTIONAL_FRICTION</em> have been replaced by <em>PxFrictionType::Enum PxSceneDesc::frictionType</em>.</li>
+<li><em>PxSceneDesc::contactCorrelationDistance</em> has been deprecated, and it no longer has an influence on how many friction anchors are created in a single frame, only on when they are removed in later frames.  This may cause a very minor change in friction behavior.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>PxShape::resetFiltering()</em> and <em>PxParticleBase::resetFiltering()</em> have been deprecated. Please use one of the new overloaded methods <em>PxScene::resetFiltering()</em> instead.</p>
+</li>
+<li><p class="first"><em>PxClientBehaviorBit</em> and <em>PxActorClientBehaviorBit</em> have been renamed to <em>PxClientBehaviorFlag</em> and <em>PxActorClientBehaviorFlag</em> respectively.</p>
+</li>
+<li><p class="first"><em>PxActorTypeSelectionFlag</em> and <em>PxActorTypeSelectionFlags</em> have been renamed to <em>PxActorTypeFlag</em> and <em>PxActorTypeFlags</em> respectively.</p>
+</li>
+<li><p class="first"><em>PxConstraintDominance</em> has been renamed to <em>PxDominanceGroupPair</em></p>
+</li>
+<li><p class="first">The parameter <em>'spring'</em> on articulation joints has been renamed <em>'stiffness'</em>.</p>
+</li>
+<li><p class="first">The parameter <em>'tangentialSpring'</em> on articulation joints has been renamed <em>'tangentialStiffness'</em>.</p>
+</li>
+<li><p class="first"><em>PxConstraintFlag::Type</em> has been renamed to <em>PxConstraintFlag::Enum</em></p>
+</li>
+<li><p class="first">Discrete contact reports are no longer produced for pairs without <em>PxPairFlag::eDETECT_DISCRETE_CONTACT</em> raised in the filter shader. Previously, discrete contact generation would always have been performed regardless of the presence of the <em>PxPairFlag::eDETECT_DISCRETE_CONTACT</em> flag. This change potentially improves performance when using specific shapes for CCD-only collision, which would have previously generated discrete contacts and then ignored them in the solver.</p>
+</li>
+<li><p class="first">Trigger reports are no longer produced for pairs without <em>PxPairFlag::eDETECT_DISCRETE_CONTACT</em> raised in the filter shader. <em>PxPairFlag::eTRIGGER_DEFAULT</em> has been modified to include the <em>PxPairFlag::eDETECT_DISCRETE_CONTACT</em> flag.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="physx-extensions">
+<h2>PhysX Extensions<a class="headerlink" href="#physx-extensions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Joint limits have been more carefully separated into <em>PxJointLinearLimit</em>, <em>PxJointAngularLimitPair</em>, <em>PxJointLinearLimitPair</em>.</li>
+<li><em>PxJoint::getType()</em> is deprecated. Joints now inherit from <em>PxBase</em>, and <em>getConcreteType()</em> replaces <em>getType()</em>. Alternatively, to dynamically cast to a particular joint type, use e.g. joint-&gt;is&lt;PxD6Joint&gt;() which will return a pointer to a D6 joint if the type matches, otherwise NULL.</li>
+<li>The parameter <em>'spring'</em> in joint limits and drives has been renamed <em>'stiffness'</em>.</li>
+<li>Dominance settings no longer apply to joints. To achieve this effect, use <em>setInvMassScale</em>. For example if <em>actor0</em> in the joint is to affect <em>actor1</em> but not conversely, use setInvMassScale0(0.0f), setInverseInertiaScale0(0.0f).</li>
+</ul>
+</div>
+<div class="section" id="physx-character-controller">
+<h2>PhysX Character Controller<a class="headerlink" href="#physx-character-controller" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>When creating a <em>PxControllerManager</em>, a reference to a <em>PxScene</em> has to be provided. As a consequence, creating a controller from a <em>PxControllerManager</em> now only requires the controller descriptor as an argument.</li>
+<li>On <em>PxControllerManager::release()</em>, all associated <em>PxObstacleContext</em> instances will get deleted automatically. Make sure to not access <em>PxObstacleContext</em> instances after the corresponding manager has been released.</li>
+</ul>
+</div>
+<div class="section" id="physx-vehicles">
+<h2>PhysX Vehicles<a class="headerlink" href="#physx-vehicles" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">A new struct has been introduced to hold the enumerated list that began with <em>PxVehicleDrive4W::eFRONT_LEFT_WHEEL</em>.  The changes are</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxVehicleDrive4W::eFRONT_LEFT_WHEEL</em> -&gt; <em>PxVehicleDrive4WWheelOrder::eFRONT_LEFT</em></li>
+<li><em>PxVehicleDrive4W::eFRONT_RIGHT_WHEEL</em> -&gt; <em>PxVehicleDrive4WWheelOrder::eFRONT_RIGHT</em></li>
+<li><em>PxVehicleDrive4W::eREAR_LEFT_WHEEL</em> -&gt; <em>PxVehicleDrive4WWheelOrder::eREAR_LEFT</em></li>
+<li><em>PxVehicleDrive4W::eREAR_RIGHT_WHEEL</em> -&gt; <em>PxVehicleDrive4WWheelOrder::eREAR_RIGHT</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">A new struct has been introduced to hold the enumerated list that began with <em>PxVehicleDrive4WControl::eANALOG_INPUT_ACCEL</em>.  The changes are</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxVehicleDrive4W::eANALOG_INPUT_ACCEL</em> -&gt; <em>PxVehicleDrive4WControl::eANALOG_INPUT_ACCEL</em></li>
+<li><em>PxVehicleDrive4W::eANALOG_INPUT_BRAKE</em> -&gt; <em>PxVehicleDrive4WControl::eANALOG_INPUT_BRAKE</em></li>
+<li><em>PxVehicleDrive4W::eANALOG_INPUT_HANDBRAKE</em> -&gt; <em>PxVehicleDrive4WControl::eANALOG_INPUT_HANDBRAKE</em></li>
+<li><em>PxVehicleDrive4W::eANALOG_INPUT_STEER_LEFT</em> -&gt; <em>PxVehicleDrive4WControl::eANALOG_INPUT_STEER_LEFT</em></li>
+<li><em>PxVehicleDrive4W::eANALOG_INPUT_STEER_RIGHT</em> -&gt; <em>PxVehicleDrive4WControl::eANALOG_INPUT_STEER_RIGHT</em></li>
+<li><em>PxVehicleDrive4W::eMAX_NUM_DRIVE4W_ANALOG_INPUTS</em> -&gt; <em>PxVehicleDrive4WControl::eMAX_NB_DRIVE4W_ANALOG_INPUTS</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">A new struct has been introduced to hold the enumerated list that began with <em>PxVehicleDrive4W::eFRONT_LEFT_WHEEL</em>.  The changes are</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::eFRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::eFRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_1ST_FROM_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e1ST_FROM_FRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_1ST_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e1ST_FROM_FRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_2ND_FROM_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e2ND_FROM_FRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_2ND_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e2ND_FROM_FRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_3RD_FROM_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e3RD_FROM_FRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_3RD_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder:: e3RD_FROM_FRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_4TH_FROM_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e4TH_FROM_FRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_4TH_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e4TH_FROM_FRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_5TH_FROM_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e5TH_FROM_FRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_5TH_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e5TH_FROM_FRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_6TH_FROM_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e6TH_FROM_FRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_6TH_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e6TH_FROM_FRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_7TH_FROM_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e7TH_FROM_FRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_7TH_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e7TH_FROM_FRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_8TH_FROM_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e8TH_FROM_FRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_8TH_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e8TH_FROM_FRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_9TH_FROM_FRONT_LEFT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e9TH_FROM_FRONT_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_9TH_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e9TH_FROM_FRONT_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eTANK_WHEEL_9TH_FROM_FRONT_RIGHT</em> -&gt; <em>PxVehicleDriveTankWheelOrder::e9TH_FROM_FRONT_RIGHT</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">A new struct has been introduced to hold the enumerated list that began with <em>PxVehicleDriveTank::eANALOG_INPUT_ACCEL</em>.  The changes are</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxVehicleDriveTank::eANALOG_INPUT_ACCEL</em> -&gt; <em>PxVehicleDriveTankControl::eANALOG_INPUT_ACCEL</em></li>
+<li><em>PxVehicleDriveTank::eANALOG_INPUT_BRAKE_LEFT</em> -&gt; <em>PxVehicleDriveTankControl::eANALOG_INPUT_BRAKE_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eANALOG_INPUT_BRAKE_RIGHT</em> -&gt; <em>PxVehicleDriveTankControl::eANALOG_INPUT_BRAKE_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eANALOG_INPUT_THRUST_LEFT</em> -&gt; <em>PxVehicleDriveTankControl::eANALOG_INPUT_THRUST_LEFT</em></li>
+<li><em>PxVehicleDriveTank::eANALOG_INPUT_THRUST_RIGHT</em> -&gt; <em>PxVehicleDriveTankControl::eANALOG_INPUT_THRUST_RIGHT</em></li>
+<li><em>PxVehicleDriveTank::eMAX_NUM_DRIVETANK_ANALOG_INPUTS</em> -&gt; <em>PxVehicleDriveTankControl::eMAX_NB_DRIVETANK_ANALOG_INPUTS</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">A new struct has been introduced to hold the enumerated list that began with <em>PxVehicleDriveTank::eDRIVE_MODEL_STANDARD</em>.  The changes are</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxVehicleDriveTank::eDRIVE_MODEL_STANDARD</em> -&gt; <em>PxVehicleDriveTankControlModel::eSTANDARD</em></li>
+<li><em>PxVehicleDriveTank::eDRIVE_MODEL_SPECIAL</em> -&gt; <em>PxVehicleDriveTankControlModel::eSPECIAL</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">A new struct has been introduced to hold the enumerated list that began with <em>eVEHICLE_TYPE_DRIVE4W</em>.  The changes are</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>eVEHICLE_TYPE_DRIVE4W</em> -&gt; <em>PxVehicleTypes::eDRIVE4W</em></li>
+<li><em>eVEHICLE_TYPE_DRIVETANK</em> -&gt; <em>PxVehicleTypes::eDRIVETANK</em></li>
+<li><em>eVEHICLE_TYPE_NODRIVE</em> -&gt; <em>PxVehicleTypes::eNODRIVE</em></li>
+<li><em>eMAX_NUM_VEHICLE_TYPES</em> -&gt; <em>PxVehicleTypes::eMAX_NB_VEHICLE_TYPES</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">A new struct has been introduced to hold the enumerated list that began with <em>PxVehicleGraph::eCHANNEL_JOUNCE</em>.  The changes are</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxVehicleGraph::eCHANNEL_JOUNCE</em> -&gt; <em>PxVehicleWheelGraphChannel::eJOUNCE</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_SUSPFORCE</em> -&gt; <em>PxVehicleWheelGraphChannel::eSUSPFORCE</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_TIRELOAD</em> -&gt; <em>PxVehicleWheelGraphChannel::eTIRELOAD</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_NORMALIZED_TIRELOAD</em> -&gt; <em>PxVehicleWheelGraphChannel::eNORMALIZED_TIRELOAD</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_WHEEL_OMEGA</em> -&gt; <em>PxVehicleWheelGraphChannel::eWHEEL_OMEGA</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_TIRE_FRICTION</em> -&gt; <em>PxVehicleWheelGraphChannel::eTIRE_FRICTION</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_TIRE_LONG_SLIP</em> -&gt; <em>PxVehicleWheelGraphChannel::eTIRE_LONG_SLIP</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_NORM_TIRE_LONG_FORCE</em> -&gt; <em>PxVehicleWheelGraphChannel::eNORM_TIRE_LONG_FORCE</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_TIRE_LAT_SLIP</em> -&gt; <em>PxVehicleWheelGraphChannel::eTIRE_LAT_SLIP</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_NORM_TIRE_LAT_FORCE</em> -&gt; <em>PxVehicleWheelGraphChannel::eNORM_TIRE_LAT_FORCE</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_NORM_TIRE_ALIGNING_MOMENT</em> -&gt; <em>PxVehicleWheelGraphChannel::eNORM_TIRE_ALIGNING_MOMENT</em></li>
+<li><em>PxVehicleGraph::eMAX_NUM_WHEEL_CHANNELS</em> -&gt; <em>PxVehicleWheelGraphChannel::eMAX_NB_WHEEL_CHANNELS</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">A new struct has been introduced to hold the enumerated list that began with <em>PxVehicleGraph::eCHANNEL_ENGINE_REVS</em>.  The changes are</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxVehicleGraph::eCHANNEL_ENGINE_REVS</em> -&gt; <em>PxVehicleDriveGraphChannel::eENGINE_REVS</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_ENGINE_DRIVE_TORQUE</em> -&gt; <em>PxVehicleDriveGraphChannel::eENGINE_DRIVE_TORQUE</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_CLUTCH_SLIP</em> -&gt; <em>PxVehicleDriveGraphChannel::eCLUTCH_SLIP</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_ACCEL_CONTROL</em> -&gt; <em>PxVehicleDriveGraphChannel::eACCEL_CONTROL</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_BRAKE_CONTROL</em> -&gt; <em>PxVehicleDriveGraphChannel::eBRAKE_CONTROL</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_HANDBRAKE_CONTROL</em> -&gt; <em>PxVehicleDriveGraphChannel::eHANDBRAKE_CONTROL</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_STEER_LEFT_CONTROL</em> -&gt; <em>PxVehicleDriveGraphChannel::eSTEER_LEFT_CONTROL</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_STEER_RIGHT_CONTROL</em> -&gt; <em>PxVehicleDriveGraphChannel::eSTEER_RIGHT_CONTROL</em></li>
+<li><em>PxVehicleGraph::eCHANNEL_GEAR_RATIO</em> -&gt; <em>PxVehicleDriveGraphChannel::eGEAR_RATIO</em></li>
+<li><em>PxVehicleGraph::eMAX_NUM_ENGINE_CHANNELS</em> -&gt; <em>PxVehicleDriveGraphChannel::eMAX_NB_DRIVE_CHANNELS</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">A new struct has been introduced to hold the enumerated list that began with <em>PxVehicleGraph::eGRAPH_TYPE_WHEEL</em>.  The changes are</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxVehicleGraph::eGRAPH_TYPE_WHEEL</em> -&gt; <em>PxVehicleGraphType::eWHEEL</em></li>
+<li><em>PxVehicleGraph::eGRAPH_TYPE_ENGINE</em> -&gt; <em>PxVehicleGraphType::eDRIVE</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Non-persistent data is no longer stored in the vehicle.  Instead of storing this data in each vehicle it is stored in an array and passed to <em>PxVehicleUpdates</em> as an extra function argument.  A simple example of how to construct, use, and read this data is given below.  This example code updates an array of vehicles and tests if they are in the air.  If the vehicles are not in the air then the actor under each wheel is recorded and stored in an array:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">updateVehicles</span><span class="p">(</span><span class="k">const</span> <span class="n">PxF32</span> <span class="n">timestep</span><span class="p">,</span> <span class="k">const</span> <span class="n">PxVec3</span><span class="o">&amp;</span> <span class="n">gravity</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">PxVehicleDrivableSurfaceToTireFrictionPairs</span><span class="o">&amp;</span> <span class="n">fricPairs</span><span class="p">,</span>
+    <span class="n">PxVehicleWheels</span><span class="o">**</span> <span class="n">vehicles</span><span class="p">,</span> <span class="n">PxU32</span> <span class="n">numVehicles</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PxActor</span><span class="o">*&gt;&amp;</span> <span class="n">hitActors</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//Count the total number of wheels.</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">numWheels</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numVehicles</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">numWheels</span> <span class="o">+=</span> <span class="n">vehicles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">mWheelsSimData</span><span class="p">.</span><span class="n">getNbWheels</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">//Allocate buffers to store results for each vehicle and each wheel.</span>
+    <span class="n">PxVehicleWheelQueryResult</span><span class="o">*</span> <span class="n">vehicleWheelQueryResults</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="n">PxVehicleWheelQueryResult</span><span class="p">[</span><span class="n">numVehicles</span><span class="p">];</span>
+    <span class="n">PxWheelQueryResult</span><span class="o">*</span> <span class="n">wheelQueryResults</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PxWheelQueryResult</span><span class="p">[</span><span class="n">numWheels</span><span class="p">];</span>
+    <span class="n">PxU32</span> <span class="n">wheelCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numVehicles</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">vehicleWheelQueryResults</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">nbWheelQueryResults</span> <span class="o">=</span>
+            <span class="n">vehicles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">mWheelsSimData</span><span class="p">.</span><span class="n">getNbWheels</span><span class="p">();</span>
+        <span class="n">vehicleWheelQueryResults</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">wheelQueryResults</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">wheelQueryResults</span><span class="p">[</span><span class="n">wheelCount</span><span class="p">];</span>
+        <span class="n">wheelCount</span> <span class="o">+=</span>  <span class="n">vehicles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">mWheelsSimData</span><span class="p">.</span><span class="n">getNbWheels</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">//Update the array of vehicles.</span>
+    <span class="n">PxVehicleUpdates</span><span class="p">(</span><span class="n">timestep</span><span class="p">,</span> <span class="n">gravity</span><span class="p">,</span> <span class="n">fricPairs</span><span class="p">,</span> <span class="n">numVehicles</span><span class="p">,</span> <span class="n">vehicles</span><span class="p">,</span>
+        <span class="n">vehicleWheelQueryResults</span><span class="p">);</span>
+
+    <span class="c1">//Test if each vehicle is in the air.</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numVehicles</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">PxVehicleIsInAir</span><span class="p">(</span><span class="n">vehicleWheelQueryResults</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="n">PxU32</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">vehicleWheelQueryResults</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">nbWheelQueryResults</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">vehicleWheelQueryResults</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">wheelQueryResults</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">tireContactActor</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">hitActors</span><span class="p">.</span><span class="n">push_back</span>
+                        <span class="p">(</span><span class="n">vehicleWheelQueryResults</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">wheelQueryResults</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">tireContactActor</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">delete</span><span class="p">[]</span> <span class="n">vehicleWheelQueryResults</span><span class="p">;</span>
+    <span class="k">delete</span><span class="p">[]</span> <span class="n">wheelQueryResults</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The following accessors to non-persistent data associated with each wheel have been replaced as follows</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>PxVehicleWheelsDynData::getSuspLineStart</em> -&gt; <em>PxWheelQueryResult::suspLineStart</em></li>
+<li><em>PxVehicleWheelsDynData::getSuspLineDir</em> -&gt; <em>PxWheelQueryResult::suspLineDir</em></li>
+<li><em>PxVehicleWheels::getSuspRaycast</em> -&gt; <em>PxWheelQueryResult::suspLineStart</em>, <em>PxWheelQueryResult::suspLineDir</em>, <em>PxWheelQueryResult::suspLineLength</em></li>
+<li><em>PxVehicleWheelsDynData::getTireDrivableSurfaceShape</em> -&gt; <em>PxWheelQueryResult::tireContactShape</em></li>
+<li><em>PxVehicleWheelsDynData::getTireDrivableSurfaceMaterial</em> -&gt; <em>PxWheelQueryResult::tireSurfaceMaterial</em></li>
+<li><em>PxVehicleWheelsDynData::getTireDrivableSurfaceType</em> -&gt; <em>PxWheelQueryResult::tireSurfaceType</em></li>
+<li><em>PxVehicleWheelsDynData::getTireDrivableSurfaceContactPoint</em> -&gt; <em>PxWheelQueryResult::tireContactPoint</em></li>
+<li><em>PxVehicleWheelsDynData::getTireDrivableSurfaceContactNormal</em> -&gt; <em>PxWheelQueryResult::tireContactNormal</em></li>
+<li><em>PxVehicleWheelsDynData::getTireFriction</em> -&gt; <em>PxWheelQueryResult::tireFriction</em></li>
+<li><em>PxVehicleWheelsDynData::getSuspJounce</em> -&gt; <em>PxWheelQueryResult::suspJounce</em></li>
+<li><em>PxVehicleWheelsDynData::getSuspensionForce</em> -&gt; <em>PxWheelQueryResult::suspSpringForce</em></li>
+<li><em>PxVehicleWheelsDynData::getTireLongitudinalDir</em> -&gt; <em>PxWheelQueryResult::tireLongitudinalDir</em></li>
+<li><em>PxVehicleWheelsDynData::getTireLateralDir</em> -&gt; <em>PxWheelQueryResult::tireLateralDir</em></li>
+<li><em>PxVehicleWheelsDynData::getTireLongSlip</em> -&gt; <em>PxWheelQueryResult::longitudinalSlip</em></li>
+<li><em>PxVehicleWheelsDynData::getTireLatSlip</em> -&gt; <em>PxWheelQueryResult::lateralSlip</em></li>
+<li><em>PxVehicleWheelsDynData::getSteer</em> -&gt; <em>PxWheelQueryResult::steerAngle</em></li>
+<li><em>PxVehicleWheels::isInAir</em> -&gt; <em>PxWheelQueryResult::isInAir</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>PxVehicleWheels::setWheelShapeMapping</em> and <em>PxVehicleWheels::getWheelShapeMapping</em> have been moved to <em>PxVehicleWheelsSimData::setWheelShapeMapping</em> and <em>PxVehicleWheelsSimData::getWheelShapeMapping</em></p>
+</li>
+<li><p class="first"><em>PxVehicleWheels::setSceneQueryFilterData</em> and <em>PxVehicleWheels::getSceneQueryFilterData</em> have been moved to <em>PxVehicleWheelsSimData::setSceneQueryFilterData</em> and <em>PxVehicleWheelsSimData::getSceneQueryFilterData</em></p>
+</li>
+<li><p class="first"><em>PxVehicle4WEnable3WTadpoleMode</em> and <em>PxVehicle4WEnable3WDeltaMode</em> now take an extra function argument: a non-const reference to a <em>PxVehicleWheelsDynData</em></p>
+</li>
+<li><p class="first"><em>PxVehicleWheels::isInAir()</em> has been replaced with <em>PxVehicleIsInAir(const PxVehicleWheelQueryResult&amp; vehWheelQueryResults)</em></p>
+</li>
+<li><p class="first"><em>PxVehicleDrive4WSmoothAnalogRawInputsAndSetAnalogInputs</em> now takes an extra function argument &quot;const bool isVehicleInAir&quot;.  This can be calculated using the function <em>PxVehicleIsInAir</em></p>
+</li>
+<li><p class="first">To improve api consistency <em>PxVehicleTelemetryData::getNumWheelGraphs</em> is now <em>PxVehicleTelemetryData::getNbWheelGraphs</em></p>
+</li>
+<li><p class="first">To improve api consistency <em>PX_MAX_NUM_WHEELS</em> is now <em>PX_MAX_NB_WHEELS</em></p>
+</li>
+<li><p class="first">To improve api consistency <em>PxVehicleGraph::eMAX_NUM_TITLE_CHARS</em> is now <em>PxVehicleGraph::eMAX_NB_TITLE_CHARS</em></p>
+</li>
+<li><p class="first"><em>PxVehicleTireData::mCamberStiffness</em> has been replaced with <em>PxVehicleTireData::mCamberStiffnessPerUnitGravity</em>. <em>PxVehicleTireData::mCamberStiffnessPerUnitGravity</em> should be set so that it is equivalent to the old value of <em>PxVehicleTireData::mCamberStiffness</em> divided by the magnitude of gravitational acceleration (<em>PxScene::getGravity().magnitude()</em>).  The advantage of using <em>PxVehicleTireData::mCamberStiffnessPerUnitGravity</em> is that it independent of length scale.</p>
+</li>
+<li><p class="first"><em>PxVehicleComputeTireForceDefault</em> has been removed from the public vehicle api. Custom tire shaders that call <em>PxVehicleComputeTireForceDefault</em> are best implemented by taking a copy of <em>PxVehicleComputeTireForceDefault</em> and calling the copy instead.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="ccd">
+<h2>CCD<a class="headerlink" href="#ccd" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The mechanism to activate CCD per shape has changed in 3.3.  The <em>PxShapeFlag::eUSE_SWEPT_BOUNDS</em> that was used in 3.2 to active swept bounds per shape has been removed.  In its place is a new flag <em>PxRigidBodyFlag::eENABLE_CCD</em> that is set per rigid actor.  Setting this flag for an actor in 3.3 has approximately the same effect as setting <em>PxShapeFlag::eUSE_SWEPT_BOUNDS</em> on all the actor's shapes in 3.2.</p>
+</li>
+<li><p class="first"><em>PxPairFlag::eSWEPT_INTEGRATION_LINEAR</em> has been replaced with <em>PxPairFlag::eCCD_LINEAR</em> in PhysX 3.3.</p>
+</li>
+<li><p class="first"><em>PxSceneFlag::eENABLE_SWEPT_INTEGRATION</em> flag in 3.2 has been replaced with <em>PxSceneFlag::eENABLE_CCD</em> in PhysX 3.3.</p>
+</li>
+<li><p class="first">A simple example of how to enable CCD on a specific shape is given below. This demonstrates creating a body consisting of a large box and a smaller sphere, where the box is only used in discrete collision detection and the sphere is only used in CCD.  The simulation filter shader shown here requires that the filter data of both shapes be flagged with <em>eCCD_RESPONSE</em> to generate a CCD response (<em>PxPairFlag::eCCD_LINEAR</em>).  Likewise, the filter shader shown here is configured so that the filter data of both shapes need to be flagged with <em>eDISCRETE_RESPONSE</em> in order to generate a collision response (<em>PxPairFlag::eRESOLVE_CONTACTS</em>).  A final remark is that the following shader requires that shapes of static actors have filter data with flags <em>eDISCRETE_RESPONSE | eCCD_RESPONSE</em> in order to ensure ccd and collision response from pairs that involve a static actor and a CCD-enabled dynamic actor:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">CCDFilterTest</span>
+<span class="p">{</span>
+    <span class="k">enum</span> <span class="n">FilterFlags</span>
+    <span class="p">{</span>
+        <span class="n">eDISCRETE_RESPONSE</span>    <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span>
+        <span class="n">eCCD_RESPONSE</span>        <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+    <span class="p">};</span>
+    <span class="k">static</span> <span class="n">PxFilterFlags</span> <span class="nf">filterShader</span><span class="p">(</span>
+        <span class="n">PxFilterObjectAttributes</span> <span class="n">attributes0</span><span class="p">,</span>
+        <span class="n">PxFilterData</span> <span class="n">filterData0</span><span class="p">,</span>
+        <span class="n">PxFilterObjectAttributes</span> <span class="n">attributes1</span><span class="p">,</span>
+        <span class="n">PxFilterData</span> <span class="n">filterData1</span><span class="p">,</span>
+        <span class="n">PxPairFlags</span><span class="o">&amp;</span> <span class="n">pairFlags</span><span class="p">,</span>
+        <span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">constantBlock</span><span class="p">,</span>
+        <span class="n">PxU32</span> <span class="n">constantBlockSize</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">pairFlags</span> <span class="o">=</span> <span class="n">PxPairFlags</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+        <span class="n">PxU32</span> <span class="n">combo</span> <span class="o">=</span> <span class="n">filterData0</span><span class="p">.</span><span class="n">word0</span> <span class="o">&amp;</span> <span class="n">filterData1</span><span class="p">.</span><span class="n">word0</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">combo</span> <span class="o">&amp;</span> <span class="n">eDISCRETE_RESPONSE</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">pairFlags</span> <span class="o">|=</span> <span class="n">PxPairFlag</span><span class="o">::</span><span class="n">eRESOLVE_CONTACTS</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">combo</span> <span class="o">&amp;</span> <span class="n">eCCD_RESPONSE</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">pairFlags</span> <span class="o">|=</span> <span class="n">PxPairFlag</span><span class="o">::</span><span class="n">eCCD_LINEAR</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">PxFilterFlags</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">....</span>
+
+<span class="n">PxRigidDynamic</span><span class="o">*</span> <span class="n">dyn</span> <span class="o">=</span> <span class="n">getPhysics</span><span class="p">().</span><span class="n">createRigidDynamic</span><span class="p">(</span><span class="n">PxTransform</span><span class="p">(</span><span class="n">PxVec3</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)));</span>
+<span class="n">PxBoxGeometry</span> <span class="n">box</span><span class="p">;</span>
+<span class="n">box</span><span class="p">.</span><span class="n">halfExtents</span> <span class="o">=</span> <span class="n">PxVec3</span><span class="p">(</span><span class="mf">1.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">);</span>
+<span class="n">PxSphereGeometry</span> <span class="n">sphere</span><span class="p">;</span>
+<span class="n">sphere</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mf">0.75f</span><span class="p">;</span>
+<span class="n">PxShape</span><span class="o">*</span> <span class="n">boxShape</span> <span class="o">=</span> <span class="n">dyn</span><span class="o">-&gt;</span><span class="n">createShape</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">getDefaultMaterial</span><span class="p">());</span>
+<span class="n">PxShape</span><span class="o">*</span> <span class="n">sphereShape</span> <span class="o">=</span> <span class="n">dyn</span><span class="o">-&gt;</span><span class="n">createShape</span><span class="p">(</span><span class="n">sphere</span><span class="p">,</span> <span class="n">getDefaultMaterial</span><span class="p">());</span>
+
+<span class="n">PxFilterData</span> <span class="n">data</span> <span class="o">=</span> <span class="n">boxShape</span><span class="o">-&gt;</span><span class="n">getSimulationFilterData</span><span class="p">();</span>
+<span class="n">data</span><span class="p">.</span><span class="n">word0</span> <span class="o">|=</span> <span class="n">CCDFilterTest</span><span class="o">::</span><span class="n">eDISCRETE_RESPONSE</span><span class="p">;</span>
+<span class="n">boxShape</span><span class="o">-&gt;</span><span class="n">setSimulationFilterData</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">sphereShape</span><span class="o">-&gt;</span><span class="n">getSimulationFilterData</span><span class="p">();</span>
+<span class="n">data</span><span class="p">.</span><span class="n">word0</span> <span class="o">|=</span> <span class="n">CCDFilterTest</span><span class="o">::</span><span class="n">eCCD_RESPONSE</span><span class="p">;</span>
+<span class="n">sphereShape</span><span class="o">-&gt;</span><span class="n">setSimulationFilterData</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+<span class="n">dyn</span><span class="o">-&gt;</span><span class="n">setRigidBodyFlag</span><span class="p">(</span><span class="n">PxRigidBodyFlag</span><span class="o">::</span><span class="n">eENABLE_CCD</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+<span class="n">getActiveScene</span><span class="p">().</span><span class="n">addActor</span><span class="p">(</span><span class="o">*</span><span class="n">dyn</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="physx-visual-debugger">
+<h2>PhysX Visual Debugger<a class="headerlink" href="#physx-visual-debugger" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>A new flag has been introduced to configure the visualizing of constraints:</dt>
+<dd><p class="first last">PxVisualDebuggerFlag::eTRANSMIT_CONSTRAINTS;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>A new function has been introduced to configure <em>PxVisualDebugger</em> flags:</dt>
+<dd><p class="first last">PxVisualDebugger::setVisualDebuggerFlags( PxVisualDebuggerFlags flags);</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>A new funtion has been introduced to send error stream to PVD:</dt>
+<dd><p class="first last">PxVisualDebugger::sendErrorMessage((PxErrorCode::Enum code, const char* message, const char* file, PxU32 line);</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>The following functions were renamed:</dt>
+<dd><p class="first last">PxVisualDebugger::getPvdConnectionFactory() -&gt; PxVisualDebugger::getPvdConnection();
+PxVisualDebugger::getPvdConnection() -&gt; PxVisualDebugger::getPvdDataStream();</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>The PVD connect function changed to the same method as previously 3.2 version:</dt>
+<dd><p class="first last">PxVisualDebuggerExt::connect -&gt; PxVisualDebuggerExt::createConnection;</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">The constraint, contacts and scene queries visualizing can all be configed with <em>PxVisualDebuggerFlag</em> in 3.3. Here is an example for how to enable pvd visualizing the contacts :</p>
+<blockquote>
+<div><p>mPhysics-&gt;getVisualDebugger()-&gt;setVisualDebuggerFlags(PxVisualDebuggerFlag::eTRANSMIT_CONTACTS | PxVisualDebuggerFlag::eTRANSMIT_CONSTRAINTS);</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="physx-cloth">
+<h2>PhysX Cloth<a class="headerlink" href="#physx-cloth" title="Permalink to this headline">¶</a></h2>
+<p>There have been substantial changes to the PhysX 3.3 cloth solver that improve performance and behavior. This has resulted in
+a reorganization of how constraints are stored and processed in the cloth fabric. Prior to PhysX 3.3 the cloth solver used fibers to
+organize edge constraints into independent groups. In PhysX 3.3 it is no longer necessary to decompose constraints into fibers,
+instead edge constraints now exist individually and are solved in larger, independent sets. Interface changes are detailed below:</p>
+<ul>
+<li><p class="first">Previously there were multiple solver types to choose from for each group of constraints such as <em>eFAST</em>, <em>eSTIFF</em>, <em>eBENDING</em>, etc (previously <em>PxClothPhaseSolverConfig::SolverType</em>). There is now one type of solver for all edge constraints, this is a flexible distance constraint with controls to adjust stiffness within certain ranges of compression and stretch (see <em>PxClothStretchConfig</em>). Behaviors such as bending are now achieved by the way distance constraints are arranged geometrically, rather than through a specialized bending solver.</p>
+</li>
+<li><p class="first">To reduce stretching a new constraint type has been added called &quot;tether&quot; constraints. These constraints do not act along edges of the mesh, but act as long range attachments between particles that enforce a maximum distance between two points. See <em>PxClothFabric::getTetherAnchors()</em>.</p>
+</li>
+<li><p class="first">Cloth cooking which was previously part of the <em>PxCooking</em> library has been moved to the extension library, see <em>PxClothFabricCooker</em>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// PhysX 3.2.x</span>
+<span class="n">cooking</span><span class="o">-&gt;</span><span class="n">cookClothFabric</span><span class="p">(</span><span class="n">meshDesc</span><span class="p">,</span> <span class="n">gravity</span><span class="p">,</span> <span class="n">outputStream</span><span class="p">);</span>
+
+<span class="c1">// PhysX 3.3</span>
+<span class="n">PxClothFabricCooker</span> <span class="nf">cooker</span><span class="p">(</span><span class="n">meshDesc</span><span class="p">,</span> <span class="n">gravity</span><span class="p">,</span> <span class="n">useGeodesicTethers</span><span class="p">);</span>
+<span class="n">cooker</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">outputStream</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The <em>PxClothCollisionData</em> parameter has been removed from <em>PxPhysx::createCloth()</em>. The collision shapes can now be added after cloth creation using <em>PxCloth::addCollisionSphere</em> and <em>PxCloth::addCollisionCapsule</em>.</p>
+</li>
+<li><p class="first"><em>PxCloth::wakeUp()</em> does not have a parameter anymore. Use the newly introduced method <em>setWakeCounter()</em> instead to set a specific value.</p>
+</li>
+<li><p class="first"><em>PxCloth::setDampingCoefficient</em> now takes a <em>PxVec3</em> instead of a <em>PxReal</em> to specify the damping per axis.</p>
+</li>
+<li><p class="first"><em>PxCloth::setPhaseSolverConfig()</em> has been renamed to <em>PxCloth::setStretchConfig()</em></p>
+</li>
+<li><p class="first"><em>PxCloth::lockClothReadData()</em> has been renamed to <em>PxCloth::lockParticleData()</em></p>
+</li>
+<li><p class="first">PxClothFabricTypes.h has been removed, this header has been merged with PxClothFabric.h</p>
+</li>
+</ul>
+</div>
+<div class="section" id="repx-serialization">
+<h2>RepX Serialization<a class="headerlink" href="#repx-serialization" title="Permalink to this headline">¶</a></h2>
+<p>Substantial changes were made to the PhysX 3.3 serialization interface. Handling of collections and references between collections have been unified for RepX and binary serialization.</p>
+<ul>
+<li><p class="first">The RepX and RepXUpgrader libraries have been removed. RepX functionality is now provided through PhysXExtensions.</p>
+</li>
+<li><p class="first">RepXCollection has been replaced with <em>PxCollection</em>, which is the common collection class for both RepX and binary serialization in 3.3. Collections are now instantiated on deserialization with <em>PxSerialization::createCollectionFromXml()</em>. Empty collections can be created with <em>PxCreateCollection()</em>. Serialization into RepX format is achieved through <em>PxSerialization::serializeCollectionToXml()</em>.</p>
+</li>
+<li><p class="first"><em>TRepXId</em> has been replaced with <em>PxSerialObjectId</em>.</p>
+</li>
+<li><p class="first"><em>RepXIdToRepXObjectMap</em> and <em>RepXObject</em> have been replaced with new functionality in <em>PxCollection</em>, which now maps between serializable objects and <em>PxSerialObjectId</em> values.</p>
+</li>
+<li><p class="first"><em>RepXExtension</em> was removed. Serialization and deserialization of serializable types is achieved through the <em>PxRepXSerializer</em> interface.</p>
+</li>
+<li><dl class="first docutils">
+<dt><em>RepXUtility</em> and <em>PxToolkit</em> functionality has been replaced with various functions in <em>PxSerialization</em>, <em>PxCollection</em> and <em>PxScene</em>.</dt>
+<dd><ul class="first last simple">
+<li>A <em>PxCollection</em> with all <em>PxPhysics</em>-level objects such as shapes, meshes or materials (formally referred to as buffers) can be created using <em>PxCollectionExt::createCollection(PxPhysics&amp;)</em>.</li>
+<li>Similarly <em>PxCollectionExt::createCollection(PxScene&amp;)</em> can be used to create a collection of <em>PxScene</em>-level objects.</li>
+<li>Dependencies between objects and collections can be handled with <em>PxSerialization::complete()</em>.</li>
+<li>The objects of a collection can be added to a scene with <em>PxScene::addCollection()</em>.</li>
+<li>Operations on files are generally handled with abstract interfaces: <em>PxOutputStream</em> and <em>PxInputData</em>. Default implementations are available as <em>PxDefaultFileOutputStream</em> and <em>PxDefaultFileInputData</em>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><em>RepXUpgrader::upgradeCollection</em> was removed. RepX data can be converted to newer PhysX versions by deserializing and re-serializing a collection: <em>PxSerialization::createCollectionFromXml()</em>, <em>PxSerialization::serializeCollectionToXml()</em>.</p>
+</li>
+<li><p class="first">Serialization functionality requires a <em>PxSerializationRegistry</em> instance which can be created with <em>PxSerialization::createSerializationRegistry()</em>.</p>
+</li>
+<li><p class="first">XML serialization can be configured to store the cooked triangle and convex mesh data along with the plain data for faster loading.</p>
+</li>
+<li><p class="first">PhysXVehicles supports RepX serialization. <em>PxSerializationRegistry</em> needs to be provided to <em>PxInitVehicleSDK()</em> for vehicle serialization, <em>PxCloseVehicleSDK()</em> for cleanup.</p>
+</li>
+<li><p class="first">Custom class RepX serialization is supported in 3.3, more information please read <a class="reference internal" href="Serialization.html#serialization"><em>Serialization</em></a>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="binary-serialization">
+<h2>Binary Serialization<a class="headerlink" href="#binary-serialization" title="Permalink to this headline">¶</a></h2>
+<p>The binary serialization interface has been refactored and unified with the RepX serialization interface.</p>
+<ul>
+<li><p class="first">Most serialization functionality requires an instance of the new class <em>PxSerializationRegistry</em>. It is application managed and can be created with <em>PxSerialization::createSerializationRegistry()</em> and released with <em>PxSerializationRegistry::release()</em>.</p>
+</li>
+<li><p class="first">The base class for serializable types has been renamed from <em>PxSerializable</em> to <em>PxBase</em>. Most of the serialization functionality moved to a separate <em>PxSerializer</em> class. A <em>PxSerializer</em> instance per serializable type is registered in the <em>PxSerializationRegistry</em>. All PhysX and PhysXExtension serializables are registered by default.</p>
+</li>
+<li><dl class="first docutils">
+<dt><em>PxCollection</em> has been reworked.</dt>
+<dd><ul class="first last simple">
+<li><em>PxCollection::serialize()</em> and <em>PxCollection::deserialize()</em> were replaced with <em>PxSerialization::createCollectionFromBinary()</em> <em>PxSerialization::serializeCollectionToBinary()</em> in PhysXExtensions.</li>
+<li><em>PxSerializable::collectForExport()</em> has been replaced with <em>PxCollection::add()</em>. <em>PxSerialzation::complete()</em> helps to add required objects for resolving dependencies. <em>PxSerializable::isSerializable()</em> should be used check whether a collection can be successfully serialized.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><em>PxUserReferences</em> was removed: <em>PxCollection</em> instances can now be used directly to resolve dependencies between collections on deserialization. <em>PxSerialization::complete()</em> supports creating collections with external dependencies to other collections.</p>
+</li>
+<li><p class="first"><em>PxSerialObjectRef</em> has been replaced with <em>PxSerialObjectId</em>.</p>
+</li>
+<li><p class="first"><em>PxCollectForExportSDK()</em> and <em>PxCollectForExportScene()</em> functions were replaced with <em>PxCollectionExt::createCollection(PxPhysics&amp; physics)</em> and <em>PxCollectionExt::createCollection(PxScene&amp; scene)</em>.</p>
+</li>
+<li><p class="first"><em>PxDumpMetaData()</em> was replaced with <em>PxSerialization::dumpBinaryMetaData()</em>.</p>
+</li>
+<li><p class="first">The <em>PxBinaryConverter</em> moved from <em>PhysXCooking</em> to <em>PhysXExtensions</em>. <em>PxCooking::createBinaryConverter()</em> was replaced with <em>PxSerialization::createBinaryConverter()</em>.</p>
+</li>
+<li><p class="first">PhysXVehicles supports binary serialization.  <em>PxSerializationRegistry</em> needs to be provided to <em>PxInitVehicleSDK()</em> for vehicle serialization, <em>PxCloseVehicleSDK()</em> for cleanup.</p>
+</li>
+<li><p class="first">Custom class binary serialization is supported in 3.3, more information please read <a class="reference internal" href="Serialization.html#serialization"><em>Serialization</em></a>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="physx-taskmanager">
+<h2>PhysX TaskManager<a class="headerlink" href="#physx-taskmanager" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The <em>pxtask</em> namespace has been removed and all it's types are now included in the physx namespace with a Px prefix, for example <em>pxtask::LightCpuTask</em> has become <em>physx::PxLightCpuTask</em>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../Index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Migrating From PhysX SDK 3.2 to 3.3</a><ul>
+<li><a class="reference internal" href="#math-classes">Math Classes</a></li>
+<li><a class="reference internal" href="#scene-query-api">Scene Query API</a></li>
+<li><a class="reference internal" href="#spu-batch-queries">SPU batch queries</a></li>
+<li><a class="reference internal" href="#core-physx">Core PhysX</a></li>
+<li><a class="reference internal" href="#physx-extensions">PhysX Extensions</a></li>
+<li><a class="reference internal" href="#physx-character-controller">PhysX Character Controller</a></li>
+<li><a class="reference internal" href="#physx-vehicles">PhysX Vehicles</a></li>
+<li><a class="reference internal" href="#ccd">CCD</a></li>
+<li><a class="reference internal" href="#physx-visual-debugger">PhysX Visual Debugger</a></li>
+<li><a class="reference internal" href="#physx-cloth">PhysX Cloth</a></li>
+<li><a class="reference internal" href="#repx-serialization">RepX Serialization</a></li>
+<li><a class="reference internal" href="#binary-serialization">Binary Serialization</a></li>
+<li><a class="reference internal" href="#physx-taskmanager">PhysX TaskManager</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="MigrationFrom28.html"
+                        title="previous chapter">Migrating From PhysX SDK 2.x to 3.x</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="MigrationFrom28.html" title="Migrating From PhysX SDK 2.x to 3.x"
+             >previous</a></li>
+        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.3 Documentation</a> &raquo;</li>
+          <li><a href="Index.html" >User's Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2015 NVIDIA Corporation, 2701 San Tomas Expressway, Santa Clara, CA 95050 U.S.A. All rights reserved.
+    </div>
+  </body>
+</html>

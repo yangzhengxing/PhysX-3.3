@@ -1,0 +1,76 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<title>NVIDIA PhysX SDK for iOS ReadMe</title>
+<link rel="stylesheet" href="stylesheet.css" type="text/css">
+</head>
+
+<body>
+<h1 style="TEXT-ALIGN: center">NVIDIA<sup>&reg;</sup> PhysX<sup>&reg;</sup> SDK for iOS ReadMe</h1>
+
+<blockquote>
+	<h4>Location of Binaries:</h4>
+	<ul>
+		<li>SDK static libraries: Lib/ios and Lib/ios64</li>
+		<li>Snippet executables: Bin/ios and Bin/ios64 (not pre-built as app needs signature in order to run)</li>
+	</ul>	
+
+	<h4>Building SDK Source with XCode:</h4>
+	<ul>
+		<li>XCode projects are in Source/compiler/xcode_ios | xcode_ios64</li>
+		<li>Source Distribution: Open PhysX.xcodeproj to build the entire SDK source within XCode</li>
+		<li>Binary Distribution: Open PhysXExtensions.xcodeproj, PhysXCharacterKinematic.xcodeproj or PhysXVehicle.xcodeproj to build the available SDK source within XCode</li>
+		<li>Build from command line using e.g.: xcodebuild -project PhysX.xcodeproj -sdk iphoneos -alltargets -configuration (debug|checked|profile|release)</li>
+	</ul>
+	
+	<h4>Building and Running Snippets with XCode:</h4>
+	<ul>
+		<li>Open XCode project Snippets/compiler/xcode_ios|xcode_ios64/Snippets.xcodeproj</li>
+		<li>Select one of the snippet schemes from the drop down list (e.g. HelloWorld)</li>
+		<li>Make sure the iPad is selected as opposed to the simulator</li>
+		<li>Press "Run" to build and run the snippet</li>
+		<li>In order to build and run release mode you need to select "Edit Scheme..." and change the "Build Configuration" to "release". Additionally, after building, you need to manually choose the "Executable" under ".../Bin/ios/SNIPPET_EXE_NAME". See "Known XCode issues" below.</li>
+	</ul>
+
+	<h4>Rebuilding XML Serialization Metadata:</h4>
+	<ul>
+		<li>Physics and Extensions: run "./Tools/PhysXMetaDataGenerator/PxPhysicsWithExtensions/runClang_ios.sh"</li>
+		<li>Vehicle: run "./Tools/PhysXMetaDataGenerator/PxVehicleExtension/runClang_ios.sh"</li>
+		<li>Snippet Extension: run "./Tools/PhysXMetaDataGenerator/PxSnippetExtension/runClang_ios.sh"</li>
+		<li>Please consult the PhysX Guide for additional information.</li>
+	</ul>
+		
+	<h4>Notes:</h4>
+	<ul>
+		<li>No support for building the SDK or Snippets with makefiles currently</li>
+		<li>No rendering support for Snippets</li>
+		<li>Current xcode projects target:</li>
+		<ul>	
+		 	<li>XCode version: 5.0|5.0.1|6.2</li>
+		 	<li>Apple clang version 5.0|6.0</li>
+		 	<li>OS: iPhoneOS 5.1|7|8.2</li>
+		 	<li>platform: armv7|arm64</li>
+		</ul>
+		<li>Building for the simulator is currently not supported</li>
+		<li>Known XCode issues:</li>
+		<ul>		
+			<li>Differently named products across configurations don't seem to be supported properly. Changing the active configuration (Edit Scheme... , Run , Build Configuration) doesn't display the correct Executable products. When running the configuration the right executable is picked however.</li>	
+		</ul>
+	</ul>
+	
+	<h4>Limitations:</h4>
+	<ul>
+		<li>The maximum number of shapes in each scene must be less than 32767.</li>
+		<li>The maximum number of dynamic actors added to each scene must be less than 65535.</li>
+		<li>The maximum number of broadphase overlap pairs must be less than 65535. Overlap pairs above this limit will be neglected.</li>		
+	</ul>
+
+</blockquote>
+
+<p><br>
+Copyright (C) 2008-2014 NVIDIA Corporation, 2701 San Thomas Expressway, Santa Clara, CA 95050 U.S.A. All rights reserved. <A href="http://www.nvidia.com">www.nvidia.com</A>
+</p>
+</body>       
+</html>

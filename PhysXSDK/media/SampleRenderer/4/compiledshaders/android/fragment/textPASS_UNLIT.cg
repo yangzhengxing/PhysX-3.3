@@ -1,0 +1,19 @@
+ps_3_0
+// cgc version 2.2.0017, build date Jan 29 2010
+// command line args: -profile ps_3_0 -I../include -DGLSL_COMPILER -DPASS_UNLIT -DNO_SUPPORT_DDX_DDY
+// source file: text.cg
+//vendor NVIDIA Corporation
+//version 2.2.0.17
+//profile ps_3_0
+//program fmain
+//semantic diffuseTexture
+//var float4 params.worldSpacePosition : $vin.TEXCOORD4 :  : 0 : 0
+//var float2 params.texcoord0 : $vin.TEXCOORD0 : ATTR0 : 0 : 1
+//var float4 params.color : $vin.COLOR0 : ATTR1 : 0 : 1
+//var sampler2D diffuseTexture :  : texunit 0 : -1 : 1
+//var float4 fmain.color : $vout.COLOR0 : COL : -1 : 1
+dcl_2d s0
+dcl_texcoord0 v0.xy
+dcl_color0 v1
+texld r0, v0, s0
+mul_pp oC0, r0, v1

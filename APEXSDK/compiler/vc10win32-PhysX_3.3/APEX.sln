@@ -1,0 +1,77 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApexCommon", "ApexCommon.vcxproj", "{7983FC25-0A11-A903-8F25-01A53A6B37FD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApexShared", "ApexShared.vcxproj", "{86F4D4B1-D5DD-5784-351F-A307121BA5DC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApexFramework", "ApexFramework.vcxproj", "{A0A981B4-3303-1860-F1DA-F3F7976A0B27}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD} = {7983FC25-0A11-A903-8F25-01A53A6B37FD}
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC} = {86F4D4B1-D5DD-5784-351F-A307121BA5DC}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "APEX_Destructible", "APEX_Destructible.vcxproj", "{AC1A563B-6900-6314-FBB9-90BEF2140F8C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD} = {7983FC25-0A11-A903-8F25-01A53A6B37FD}
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC} = {86F4D4B1-D5DD-5784-351F-A307121BA5DC}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "APEX_Clothing", "APEX_Clothing.vcxproj", "{277304E9-9F93-5095-DA69-98AB2D08A392}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD} = {7983FC25-0A11-A903-8F25-01A53A6B37FD}
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC} = {86F4D4B1-D5DD-5784-351F-A307121BA5DC}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		checked|Win32 = checked|Win32
+		debug|Win32 = debug|Win32
+		profile|Win32 = profile|Win32
+		release|Win32 = release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD}.checked|Win32.ActiveCfg = checked|Win32
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD}.checked|Win32.Build.0 = checked|Win32
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD}.debug|Win32.ActiveCfg = debug|Win32
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD}.debug|Win32.Build.0 = debug|Win32
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD}.profile|Win32.ActiveCfg = profile|Win32
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD}.profile|Win32.Build.0 = profile|Win32
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD}.release|Win32.ActiveCfg = release|Win32
+		{7983FC25-0A11-A903-8F25-01A53A6B37FD}.release|Win32.Build.0 = release|Win32
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC}.checked|Win32.ActiveCfg = checked|Win32
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC}.checked|Win32.Build.0 = checked|Win32
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC}.debug|Win32.ActiveCfg = debug|Win32
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC}.debug|Win32.Build.0 = debug|Win32
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC}.profile|Win32.ActiveCfg = profile|Win32
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC}.profile|Win32.Build.0 = profile|Win32
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC}.release|Win32.ActiveCfg = release|Win32
+		{86F4D4B1-D5DD-5784-351F-A307121BA5DC}.release|Win32.Build.0 = release|Win32
+		{A0A981B4-3303-1860-F1DA-F3F7976A0B27}.checked|Win32.ActiveCfg = checked|Win32
+		{A0A981B4-3303-1860-F1DA-F3F7976A0B27}.checked|Win32.Build.0 = checked|Win32
+		{A0A981B4-3303-1860-F1DA-F3F7976A0B27}.debug|Win32.ActiveCfg = debug|Win32
+		{A0A981B4-3303-1860-F1DA-F3F7976A0B27}.debug|Win32.Build.0 = debug|Win32
+		{A0A981B4-3303-1860-F1DA-F3F7976A0B27}.profile|Win32.ActiveCfg = profile|Win32
+		{A0A981B4-3303-1860-F1DA-F3F7976A0B27}.profile|Win32.Build.0 = profile|Win32
+		{A0A981B4-3303-1860-F1DA-F3F7976A0B27}.release|Win32.ActiveCfg = release|Win32
+		{A0A981B4-3303-1860-F1DA-F3F7976A0B27}.release|Win32.Build.0 = release|Win32
+		{AC1A563B-6900-6314-FBB9-90BEF2140F8C}.checked|Win32.ActiveCfg = checked|Win32
+		{AC1A563B-6900-6314-FBB9-90BEF2140F8C}.checked|Win32.Build.0 = checked|Win32
+		{AC1A563B-6900-6314-FBB9-90BEF2140F8C}.debug|Win32.ActiveCfg = debug|Win32
+		{AC1A563B-6900-6314-FBB9-90BEF2140F8C}.debug|Win32.Build.0 = debug|Win32
+		{AC1A563B-6900-6314-FBB9-90BEF2140F8C}.profile|Win32.ActiveCfg = profile|Win32
+		{AC1A563B-6900-6314-FBB9-90BEF2140F8C}.profile|Win32.Build.0 = profile|Win32
+		{AC1A563B-6900-6314-FBB9-90BEF2140F8C}.release|Win32.ActiveCfg = release|Win32
+		{AC1A563B-6900-6314-FBB9-90BEF2140F8C}.release|Win32.Build.0 = release|Win32
+		{277304E9-9F93-5095-DA69-98AB2D08A392}.checked|Win32.ActiveCfg = checked|Win32
+		{277304E9-9F93-5095-DA69-98AB2D08A392}.checked|Win32.Build.0 = checked|Win32
+		{277304E9-9F93-5095-DA69-98AB2D08A392}.debug|Win32.ActiveCfg = debug|Win32
+		{277304E9-9F93-5095-DA69-98AB2D08A392}.debug|Win32.Build.0 = debug|Win32
+		{277304E9-9F93-5095-DA69-98AB2D08A392}.profile|Win32.ActiveCfg = profile|Win32
+		{277304E9-9F93-5095-DA69-98AB2D08A392}.profile|Win32.Build.0 = profile|Win32
+		{277304E9-9F93-5095-DA69-98AB2D08A392}.release|Win32.ActiveCfg = release|Win32
+		{277304E9-9F93-5095-DA69-98AB2D08A392}.release|Win32.Build.0 = release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

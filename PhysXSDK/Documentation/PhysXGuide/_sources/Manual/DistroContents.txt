@@ -1,0 +1,118 @@
+.. _Distro Contents:
+
+-----------------------
+Distro Package Contents
+-----------------------
+==============
+Release Layout
+==============
+
+Depending on your license, we provide you with the Core installer or with the Source installer of the PhysX SDK. 
+
+The Core SDK comprises header files and libraries for the major components of the SDK, with source code for 
+ancillary components such as Extensions, Character and Vehicle Controllers, Samples and Snippets. Source for the major 
+components of the SDK, such as the collision detection routines and constraint solver pipeline, is not provided 
+with the Core SDK.
+
+The Source SDK includes everything found in the Core SDK, plus the source code to the major components provided
+as libraries or DLLs in the Core SDK.
+
+Core Installer
+==============
+.. raw:: html
+
+    <table class="borderless">
+    <tr><td>Bin/                       </td><td>Executables and dlls in platform specific folders (does not exist for some platforms).</td></tr>
+    <tr><td>Documentation/             </td><td>PhysXGuide & PhysXAPI documentation.</td></tr>
+    <tr><td>externals/                 </td><td>External libraries.</td></tr>
+    <tr><td>Include/                   </td><td>API Include Headers.</td></tr>
+    <tr><td>Lib/                       </td><td>Libraries in platform specific folders.</td></tr>
+    <tr><td>media/                     </td><td>Media files.</td></tr>
+    <tr><td>Samples/                   </td><td>PhysX Samples, solutions are in the compiler folder.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;compiler/                </td><td>Solutions for building the Sample application.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PxToolkit/               </td><td>Utilities for the sample framework.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleBase/              </td><td>Utility classes used across multiple samples.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleBridges/           </td><td>Code for 'Bridges' sample. The basics of Hello World, plus character controller, joints, kinematics.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleCCTSharedCode/     </td><td>Code shared by any sample using a Character Controller.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleCharacterCloth/    </td><td>Simple animated character with a cloth cape.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleCustomGravity/     </td><td>Small planet with gravity always pointing towards the center.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleFramework/         </td><td>Sample application framework.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleHelloWorld/        </td><td>Basic sample: initialize PhysX, create a stack of blocks, knock them down.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleLargeWorld/        </td><td>Streaming of a large world.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleNorthPole/         </td><td>Simple example of rigid bodies in a static environment.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleParticles/         </td><td>Particle system, emitters, drains.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleSubmarine/         </td><td>Articulated crabs, 'submarine' controller, explosive mines.  Triggers and callbacks.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleVehicle/            </td><td>Basic test track and compact cars.</td></tr>
+    <tr><td>Snippets/                   </td><td>PhysX Code Snippets, compact console applications illustrating specific PhysX concepts.</td></tr>
+    <tr><td>Source/                     </td><td>Public Source Code.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Common/                  </td><td>Functionality shared by all PhysX modules.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;compiler/                </td><td>Solutions for building modules.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;foundation/              </td><td>Functionality shared by all PhysX and APEX modules.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;GeomUtils/               </td><td>Geometry Math.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXCharacterKinematic/ </td><td>Character Controller.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXExtensions/         </td><td>Extensions, Helper Classes.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXMetaData/           </td><td>Serialization.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXProfileSDK/         </td><td>Profiling SDK.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXVehicle/            </td><td>Vehicle Controller.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PvdRuntime/              </td><td>SDK integration of Visual Debugger connection module.</td></tr>
+    <tr><td>Tools/                     </td><td>MetaData Generator.</td></tr>
+    <tr><td>readme_???.html            </td><td>Platform specific readme file.</td></tr>
+    <tr><td>release_notes.html         </td><td>PhysX Release Notes.</td></tr>
+    <tr><td>version-PhysX.txt           </td><td>PhysX version and build number of this installer.</td></tr>
+	</table>
+
+Source Installer adds the following to the above:
+=================================================
+.. raw:: html
+
+    <table class="borderless">
+	<tr><td>Source/					</td><td>Full Source Code (see core installer for details about the public sections).</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;LowLevel/				</td><td>Low level simulation module.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;LowLevelCloth/           </td><td>Low level cloth simulation module.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysX/                   </td><td>High level PhysX Core management.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXCooking/            </td><td>PhysX Cooking.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXGpu/                </td><td>GPU simulation module, including GPU infrastructure (windows only).</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXVisualDebuggerSDK/  </td><td>Visual Debugger connection module.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;pxtask/                  </td><td>Task infrastructure.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SceneQuery/              </td><td>Scene Query module.</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SimulationController/    </td><td>High level simulation module.</td></tr>
+    </table>
+	
+=============================================
+Snippets versus Samples
+=============================================
+
+The suite of samples listed above are small demonstration programs of the SDK, each covering a number of topics:
+
+* The **Hello World Sample** shows a minimal physx setup.
+* The **North Pole Sample** demonstrates basic functionality covered in :ref:`startup`, :ref:`RigidBodyOverview`, :ref:`RigidBodyCollisionShapes`, and :ref:`RigidBodyDynamics`.
+* The **Bridges Sample** demonstrates joints, described in the chapter :ref:`joints`, as well as the character controller explained in :ref:`character`.
+* The **Vehicle Sample** demonstrates the use of vehicles described in the chapter :ref:`vehicles`.
+* The **Particles Sample** demonstrates the use of particle effects, which is the topic of :ref:`particles`.
+* The **Character Cloth Sample** demonstrates clothing functionality, described in the chapter :ref:`cloth`.
+* The **Custom Gravity Sample** demonstrates using the character controller in a context where the vertical direction is not fixed.
+* The **Large World Sample** demonstrates multithreading and serialization, described in the chapter :ref:`serialization` and :ref:`Threading`.
+* Finally, the **Submarine Sample** shows off a number of advanced features, which receive a treatment in the chapters :ref:`SceneQueries`, :ref:`callbacks`, :ref:`AdvancedCollisionDetection`, and :ref:`taskman`. 
+
+The samples are built on top of an abstraction layer called the SampleFramework, which encapsulates much of the PhysX API, 
+and sometimes makes reading and understanding the code relatively complicated.  To create example programs with better readable source code, we have
+created a suite of snippets.  These have either no rendering or very rudimentary graphics, and instead focus on presenting individual features with very simple source code.  See :ref:`HelloWorld` for more information.
+
+.. _Building and Running the Samples:
+
+=============================================
+Building and Running the Samples on Windows
+=============================================
+
+On Windows, PhysX requires either Visual Studio 2008 with Service Pack 1 or higher, Visual Studio 2010, or Visual Studio 2012. 
+
+To see the samples, open the Visual Studio solution called Samples.sln, found in, e.g., 
+
+{SDK ROOT}/Samples/compiler/vc11win32/Samples.sln .
+
+This solution includes the samples listed above within the project Samples, plus some additional projects which implement common operations. There
+is a single executable covering all samples for a given platform and configuration, e.g. SamplesCHECKED.exe, found in, e.g. 
+
+{SDK ROOT}/Bin/Win32 .
+
+The samples are not ported to all available platforms.  For non-windows platforms that include the samples, please refer to the readme file of the respective platform for platform specific instructions.

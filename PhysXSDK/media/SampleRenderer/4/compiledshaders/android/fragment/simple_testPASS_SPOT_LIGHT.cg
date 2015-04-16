@@ -1,0 +1,196 @@
+ps_3_0
+// cgc version 2.2.0017, build date Jan 29 2010
+// command line args: -profile ps_3_0 -I../include -DGLSL_COMPILER -DPASS_SPOT_LIGHT -DNO_SUPPORT_DDX_DDY
+// source file: simple_test.cg
+//vendor NVIDIA Corporation
+//version 2.2.0.17
+//profile ps_3_0
+//program fmain
+//semantic g_MVP
+//semantic g_modelMatrix
+//semantic g_modelViewMatrix
+//semantic g_modelViewProjMatrix
+//semantic g_viewMatrix
+//semantic g_projMatrix
+//semantic g_eyePosition
+//semantic g_eyeDirection
+//semantic g_invViewProjMatrix
+//semantic g_boneMatrices
+//semantic g_fogColorAndDistance
+//semantic g_ambientColor
+//semantic g_lightColor
+//semantic g_lightDirection
+//semantic g_lightPosition
+//semantic g_lightIntensity
+//semantic g_lightInnerRadius
+//semantic g_lightOuterRadius
+//semantic g_lightInnerCone
+//semantic g_lightOuterCone
+//semantic g_lightShadowMap
+//semantic g_lightShadowMatrix
+//semantic shadeMode
+//semantic diffuseColor
+//semantic diffuseTexture
+//var float3 params.worldSpacePosition : $vin.TEXCOORD4 : ATTR0 : 0 : 1
+//var float3 params.worldSpaceNormal : $vin.TEXCOORD5 : ATTR1 : 0 : 1
+//var float3 params.worldSpaceTangent : $vin.TEXCOORD6 : ATTR2 : 0 : 0
+//var float3 params.worldSpaceBinormal : $vin.TEXCOORD7 : ATTR3 : 0 : 0
+//var float4 params.texcoord0 : $vin.TEXCOORD0 : ATTR4 : 0 : 1
+//var float4 params.texcoord1 : $vin.TEXCOORD1 :  : 0 : 0
+//var float4 params.texcoord2 : $vin.TEXCOORD2 :  : 0 : 0
+//var float4 params.texcoord3 : $vin.TEXCOORD3 :  : 0 : 0
+//var float4 params.color : $vin.COLOR0 :  : 0 : 0
+//var float4x4 g_MVP :  : , 4 : -1 : 0
+//var float4x4 g_modelMatrix :  : , 4 : -1 : 0
+//var float4x4 g_modelViewMatrix :  : , 4 : -1 : 0
+//var float4x4 g_modelViewProjMatrix :  : , 4 : -1 : 0
+//var float4x4 g_viewMatrix :  : , 4 : -1 : 0
+//var float4x4 g_projMatrix :  : , 4 : -1 : 0
+//var float3 g_eyePosition :  : c[0] : -1 : 1
+//var float3 g_eyeDirection :  :  : -1 : 0
+//var float4x4 g_invViewProjMatrix :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[0] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[1] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[2] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[3] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[4] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[5] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[6] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[7] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[8] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[9] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[10] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[11] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[12] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[13] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[14] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[15] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[16] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[17] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[18] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[19] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[20] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[21] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[22] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[23] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[24] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[25] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[26] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[27] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[28] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[29] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[30] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[31] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[32] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[33] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[34] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[35] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[36] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[37] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[38] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[39] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[40] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[41] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[42] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[43] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[44] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[45] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[46] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[47] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[48] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[49] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[50] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[51] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[52] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[53] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[54] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[55] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[56] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[57] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[58] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[59] :  : , 4 : -1 : 0
+//var float4 g_fogColorAndDistance :  :  : -1 : 0
+//var float3 g_ambientColor :  : c[1] : -1 : 1
+//var float3 g_lightColor :  : c[2] : -1 : 1
+//var float3 g_lightDirection :  : c[3] : -1 : 1
+//var float3 g_lightPosition :  : c[4] : -1 : 1
+//var float g_lightIntensity :  : c[5] : -1 : 1
+//var float g_lightInnerRadius :  : c[6] : -1 : 1
+//var float g_lightOuterRadius :  : c[7] : -1 : 1
+//var float g_lightInnerCone :  : c[8] : -1 : 1
+//var float g_lightOuterCone :  : c[9] : -1 : 1
+//var sampler2D g_lightShadowMap :  :  : -1 : 0
+//var float4x4 g_lightShadowMatrix :  : , 4 : -1 : 0
+//var float shadeMode :  :  : -1 : 0
+//var float3 diffuseColor :  : c[10] : -1 : 1
+//var sampler2D diffuseTexture :  : texunit 0 : -1 : 1
+//var float4 fmain.color : $vout.COLOR0 : COL : -1 : 1
+//const c[11] = 0 1 2 16
+//const c[12] = 0.19995117
+dcl_2d s0
+def c11, 0.00000000, 1.00000000, 2.00000000, 16.00000000
+def c12, 0.19995117, 0, 0, 0
+dcl_texcoord4 v0.xyz
+dcl_texcoord5 v1.xyz
+dcl_texcoord0 v4.xy
+add r0.xyz, -v0, c4
+dp3 r0.w, r0, r0
+dp3 r1.x, v1, v1
+rsq r1.w, r1.x
+rsq r0.w, r0.w
+mul r1.xyz, r0.w, r0
+mul r2.xyz, r1.w, v1
+dp3 r0.x, r1, r2
+add r3.xyz, v0, -c0
+dp3 r1.w, r3, r3
+mul r0.xyz, r2, r0.x
+rsq r1.w, r1.w
+mul r3.xyz, r1.w, r3
+rcp r1.w, r0.w
+mad r0.xyz, -r0, c11.z, r1
+dp3_sat r3.x, r0, r3
+pow r0, r3.x, c11.w
+add r2.w, r1, -c6.x
+cmp r0.y, r2.w, c11.x, c11
+add r0.w, r1, -c7.x
+abs_pp r0.y, r0
+mov r0.z, c7.x
+mov_pp r3.xyz, c2
+cmp r0.w, r0, c11.x, c11.y
+cmp_pp r0.y, -r0, c11, c11.x
+mul_pp r0.y, r0, r0.w
+add r0.z, -c6.x, r0
+rcp r0.w, r0.z
+add r0.z, r1.w, -c6.x
+mad r0.w, -r0.z, r0, c11.y
+cmp r0.z, r0, c11.x, c11.y
+cmp r1.w, -r0.y, r0.z, r0
+dp3 r0.w, r1, -c3
+mov r0.y, c8.x
+add r0.y, -c9.x, r0
+add r0.z, r0.w, -c9.x
+rcp r2.w, r0.y
+cmp r0.y, r0.z, r1.w, c11.x
+mul r0.z, r0, r2.w
+add r1.w, r0, -c9.x
+mul r0.z, r0.y, r0
+cmp r1.w, r1, c11.x, c11.y
+add r2.w, r0, -c8.x
+abs_pp r0.w, r1
+cmp r1.w, r2, c11.x, c11.y
+cmp_pp r0.w, -r0, c11.y, c11.x
+mul_pp r0.w, r0, r1
+cmp r0.w, -r0, r0.y, r0.z
+mul_pp r1.w, r0, r0.x
+mul_pp r3.xyz, c5.x, r3
+mul_pp r4.xyz, r3, r1.w
+dp3_sat r1.w, r1, r2
+texld r0.xyz, v4, s0
+mul r0.xyz, r0, c10
+mul_pp r1.xyz, r0, c1
+mul_pp r0.w, r0, r1
+mad_pp r1.xyz, r0.w, r3, r1
+mul_pp r2.xyz, r4, c12.x
+mul_pp r0.xyz, r0, r1
+add oC0.xyz, r0, r2
+mov_pp oC0.w, c11.y

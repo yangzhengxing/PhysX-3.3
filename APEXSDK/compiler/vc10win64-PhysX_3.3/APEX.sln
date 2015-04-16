@@ -1,0 +1,77 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApexCommon", "ApexCommon.vcxproj", "{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApexShared", "ApexShared.vcxproj", "{385AF688-A691-3239-1483-BDBEF221F12E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApexFramework", "ApexFramework.vcxproj", "{770FF6FD-4AD0-C55C-9884-82EED339EECE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294} = {F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}
+		{385AF688-A691-3239-1483-BDBEF221F12E} = {385AF688-A691-3239-1483-BDBEF221F12E}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "APEX_Destructible", "APEX_Destructible.vcxproj", "{337AF7AF-83CE-C602-0088-88076E16423E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294} = {F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}
+		{385AF688-A691-3239-1483-BDBEF221F12E} = {385AF688-A691-3239-1483-BDBEF221F12E}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "APEX_Clothing", "APEX_Clothing.vcxproj", "{AA10FFAE-CBF7-CF60-5D61-D52314FBF57A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294} = {F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}
+		{385AF688-A691-3239-1483-BDBEF221F12E} = {385AF688-A691-3239-1483-BDBEF221F12E}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		checked|x64 = checked|x64
+		debug|x64 = debug|x64
+		profile|x64 = profile|x64
+		release|x64 = release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}.checked|x64.ActiveCfg = checked|x64
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}.checked|x64.Build.0 = checked|x64
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}.debug|x64.ActiveCfg = debug|x64
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}.debug|x64.Build.0 = debug|x64
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}.profile|x64.ActiveCfg = profile|x64
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}.profile|x64.Build.0 = profile|x64
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}.release|x64.ActiveCfg = release|x64
+		{F56F7DAB-465C-A02E-C4EE-84F0CC6A7294}.release|x64.Build.0 = release|x64
+		{385AF688-A691-3239-1483-BDBEF221F12E}.checked|x64.ActiveCfg = checked|x64
+		{385AF688-A691-3239-1483-BDBEF221F12E}.checked|x64.Build.0 = checked|x64
+		{385AF688-A691-3239-1483-BDBEF221F12E}.debug|x64.ActiveCfg = debug|x64
+		{385AF688-A691-3239-1483-BDBEF221F12E}.debug|x64.Build.0 = debug|x64
+		{385AF688-A691-3239-1483-BDBEF221F12E}.profile|x64.ActiveCfg = profile|x64
+		{385AF688-A691-3239-1483-BDBEF221F12E}.profile|x64.Build.0 = profile|x64
+		{385AF688-A691-3239-1483-BDBEF221F12E}.release|x64.ActiveCfg = release|x64
+		{385AF688-A691-3239-1483-BDBEF221F12E}.release|x64.Build.0 = release|x64
+		{770FF6FD-4AD0-C55C-9884-82EED339EECE}.checked|x64.ActiveCfg = checked|x64
+		{770FF6FD-4AD0-C55C-9884-82EED339EECE}.checked|x64.Build.0 = checked|x64
+		{770FF6FD-4AD0-C55C-9884-82EED339EECE}.debug|x64.ActiveCfg = debug|x64
+		{770FF6FD-4AD0-C55C-9884-82EED339EECE}.debug|x64.Build.0 = debug|x64
+		{770FF6FD-4AD0-C55C-9884-82EED339EECE}.profile|x64.ActiveCfg = profile|x64
+		{770FF6FD-4AD0-C55C-9884-82EED339EECE}.profile|x64.Build.0 = profile|x64
+		{770FF6FD-4AD0-C55C-9884-82EED339EECE}.release|x64.ActiveCfg = release|x64
+		{770FF6FD-4AD0-C55C-9884-82EED339EECE}.release|x64.Build.0 = release|x64
+		{337AF7AF-83CE-C602-0088-88076E16423E}.checked|x64.ActiveCfg = checked|x64
+		{337AF7AF-83CE-C602-0088-88076E16423E}.checked|x64.Build.0 = checked|x64
+		{337AF7AF-83CE-C602-0088-88076E16423E}.debug|x64.ActiveCfg = debug|x64
+		{337AF7AF-83CE-C602-0088-88076E16423E}.debug|x64.Build.0 = debug|x64
+		{337AF7AF-83CE-C602-0088-88076E16423E}.profile|x64.ActiveCfg = profile|x64
+		{337AF7AF-83CE-C602-0088-88076E16423E}.profile|x64.Build.0 = profile|x64
+		{337AF7AF-83CE-C602-0088-88076E16423E}.release|x64.ActiveCfg = release|x64
+		{337AF7AF-83CE-C602-0088-88076E16423E}.release|x64.Build.0 = release|x64
+		{AA10FFAE-CBF7-CF60-5D61-D52314FBF57A}.checked|x64.ActiveCfg = checked|x64
+		{AA10FFAE-CBF7-CF60-5D61-D52314FBF57A}.checked|x64.Build.0 = checked|x64
+		{AA10FFAE-CBF7-CF60-5D61-D52314FBF57A}.debug|x64.ActiveCfg = debug|x64
+		{AA10FFAE-CBF7-CF60-5D61-D52314FBF57A}.debug|x64.Build.0 = debug|x64
+		{AA10FFAE-CBF7-CF60-5D61-D52314FBF57A}.profile|x64.ActiveCfg = profile|x64
+		{AA10FFAE-CBF7-CF60-5D61-D52314FBF57A}.profile|x64.Build.0 = profile|x64
+		{AA10FFAE-CBF7-CF60-5D61-D52314FBF57A}.release|x64.ActiveCfg = release|x64
+		{AA10FFAE-CBF7-CF60-5D61-D52314FBF57A}.release|x64.Build.0 = release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

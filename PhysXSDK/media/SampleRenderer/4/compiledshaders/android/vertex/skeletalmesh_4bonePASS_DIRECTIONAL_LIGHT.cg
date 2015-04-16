@@ -1,0 +1,214 @@
+vs_3_0
+// cgc version 2.2.0017, build date Jan 29 2010
+// command line args: -profile vs_3_0 -I../include -DGLSL_COMPILER -DPASS_DIRECTIONAL_LIGHT -DNO_SUPPORT_DDX_DDY
+// source file: skeletalmesh_4bone.cg
+//vendor NVIDIA Corporation
+//version 2.2.0.17
+//profile vs_3_0
+//program vmain
+//semantic g_MVP
+//semantic g_modelMatrix
+//semantic g_modelViewMatrix
+//semantic g_modelViewProjMatrix
+//semantic g_viewMatrix
+//semantic g_projMatrix
+//semantic g_eyePosition
+//semantic g_eyeDirection
+//semantic g_invViewProjMatrix
+//semantic g_boneMatrices
+//semantic g_fogColorAndDistance
+//semantic g_ambientColor
+//semantic g_lightColor
+//semantic g_lightDirection
+//semantic g_lightPosition
+//semantic g_lightIntensity
+//semantic g_lightInnerRadius
+//semantic g_lightOuterRadius
+//semantic g_lightInnerCone
+//semantic g_lightOuterCone
+//var float4 localSpacePosition : $vin.POSITION0 : ATTR0 : 0 : 1
+//var float3 localSpaceNormal : $vin.NORMAL0 : ATTR1 : 1 : 1
+//var float4 localSpaceTangent : $vin.TEXCOORD5 :  : 2 : 0
+//var float4 vertexTexcoord0 : $vin.TEXCOORD0 : ATTR2 : 3 : 1
+//var float4 vertexTexcoord1 : $vin.TEXCOORD1 : ATTR3 : 4 : 1
+//var float4 vertexTexcoord2 : $vin.TEXCOORD2 : ATTR4 : 5 : 1
+//var float4 vertexTexcoord3 : $vin.TEXCOORD3 : ATTR5 : 6 : 1
+//var float4 vertexColor : $vin.COLOR0 : ATTR6 : 7 : 1
+//var float4 boneIndices : $vin.TEXCOORD6 : ATTR7 : 8 : 1
+//var float4 boneWeights : $vin.TEXCOORD7 : ATTR8 : 9 : 1
+//var float4x4 g_MVP :  : c[0], 4 : -1 : 1
+//var float4x4 g_modelMatrix :  : c[4], 4 : -1 : 1
+//var float4x4 g_modelViewMatrix :  : , 4 : -1 : 0
+//var float4x4 g_modelViewProjMatrix :  : , 4 : -1 : 0
+//var float4x4 g_viewMatrix :  : , 4 : -1 : 0
+//var float4x4 g_projMatrix :  : , 4 : -1 : 0
+//var float3 g_eyePosition :  :  : -1 : 0
+//var float3 g_eyeDirection :  :  : -1 : 0
+//var float4x4 g_invViewProjMatrix :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[0] :  : c[8], 4 : -1 : 1
+//var float4x4 g_boneMatrices[1] :  : c[12], 4 : -1 : 1
+//var float4x4 g_boneMatrices[2] :  : c[16], 4 : -1 : 1
+//var float4x4 g_boneMatrices[3] :  : c[20], 4 : -1 : 1
+//var float4x4 g_boneMatrices[4] :  : c[24], 4 : -1 : 1
+//var float4x4 g_boneMatrices[5] :  : c[28], 4 : -1 : 1
+//var float4x4 g_boneMatrices[6] :  : c[32], 4 : -1 : 1
+//var float4x4 g_boneMatrices[7] :  : c[36], 4 : -1 : 1
+//var float4x4 g_boneMatrices[8] :  : c[40], 4 : -1 : 1
+//var float4x4 g_boneMatrices[9] :  : c[44], 4 : -1 : 1
+//var float4x4 g_boneMatrices[10] :  : c[48], 4 : -1 : 1
+//var float4x4 g_boneMatrices[11] :  : c[52], 4 : -1 : 1
+//var float4x4 g_boneMatrices[12] :  : c[56], 4 : -1 : 1
+//var float4x4 g_boneMatrices[13] :  : c[60], 4 : -1 : 1
+//var float4x4 g_boneMatrices[14] :  : c[64], 4 : -1 : 1
+//var float4x4 g_boneMatrices[15] :  : c[68], 4 : -1 : 1
+//var float4x4 g_boneMatrices[16] :  : c[72], 4 : -1 : 1
+//var float4x4 g_boneMatrices[17] :  : c[76], 4 : -1 : 1
+//var float4x4 g_boneMatrices[18] :  : c[80], 4 : -1 : 1
+//var float4x4 g_boneMatrices[19] :  : c[84], 4 : -1 : 1
+//var float4x4 g_boneMatrices[20] :  : c[88], 4 : -1 : 1
+//var float4x4 g_boneMatrices[21] :  : c[92], 4 : -1 : 1
+//var float4x4 g_boneMatrices[22] :  : c[96], 4 : -1 : 1
+//var float4x4 g_boneMatrices[23] :  : c[100], 4 : -1 : 1
+//var float4x4 g_boneMatrices[24] :  : c[104], 4 : -1 : 1
+//var float4x4 g_boneMatrices[25] :  : c[108], 4 : -1 : 1
+//var float4x4 g_boneMatrices[26] :  : c[112], 4 : -1 : 1
+//var float4x4 g_boneMatrices[27] :  : c[116], 4 : -1 : 1
+//var float4x4 g_boneMatrices[28] :  : c[120], 4 : -1 : 1
+//var float4x4 g_boneMatrices[29] :  : c[124], 4 : -1 : 1
+//var float4x4 g_boneMatrices[30] :  : c[128], 4 : -1 : 1
+//var float4x4 g_boneMatrices[31] :  : c[132], 4 : -1 : 1
+//var float4x4 g_boneMatrices[32] :  : c[136], 4 : -1 : 1
+//var float4x4 g_boneMatrices[33] :  : c[140], 4 : -1 : 1
+//var float4x4 g_boneMatrices[34] :  : c[144], 4 : -1 : 1
+//var float4x4 g_boneMatrices[35] :  : c[148], 4 : -1 : 1
+//var float4x4 g_boneMatrices[36] :  : c[152], 4 : -1 : 1
+//var float4x4 g_boneMatrices[37] :  : c[156], 4 : -1 : 1
+//var float4x4 g_boneMatrices[38] :  : c[160], 4 : -1 : 1
+//var float4x4 g_boneMatrices[39] :  : c[164], 4 : -1 : 1
+//var float4x4 g_boneMatrices[40] :  : c[168], 4 : -1 : 1
+//var float4x4 g_boneMatrices[41] :  : c[172], 4 : -1 : 1
+//var float4x4 g_boneMatrices[42] :  : c[176], 4 : -1 : 1
+//var float4x4 g_boneMatrices[43] :  : c[180], 4 : -1 : 1
+//var float4x4 g_boneMatrices[44] :  : c[184], 4 : -1 : 1
+//var float4x4 g_boneMatrices[45] :  : c[188], 4 : -1 : 1
+//var float4x4 g_boneMatrices[46] :  : c[192], 4 : -1 : 1
+//var float4x4 g_boneMatrices[47] :  : c[196], 4 : -1 : 1
+//var float4x4 g_boneMatrices[48] :  : c[200], 4 : -1 : 1
+//var float4x4 g_boneMatrices[49] :  : c[204], 4 : -1 : 1
+//var float4x4 g_boneMatrices[50] :  : c[208], 4 : -1 : 1
+//var float4x4 g_boneMatrices[51] :  : c[212], 4 : -1 : 1
+//var float4x4 g_boneMatrices[52] :  : c[216], 4 : -1 : 1
+//var float4x4 g_boneMatrices[53] :  : c[220], 4 : -1 : 1
+//var float4x4 g_boneMatrices[54] :  : c[224], 4 : -1 : 1
+//var float4x4 g_boneMatrices[55] :  : c[228], 4 : -1 : 1
+//var float4x4 g_boneMatrices[56] :  : c[232], 4 : -1 : 1
+//var float4x4 g_boneMatrices[57] :  : c[236], 4 : -1 : 1
+//var float4x4 g_boneMatrices[58] :  : c[240], 4 : -1 : 1
+//var float4x4 g_boneMatrices[59] :  : c[244], 4 : -1 : 1
+//var float4 g_fogColorAndDistance :  :  : -1 : 0
+//var float3 g_ambientColor :  :  : -1 : 0
+//var float3 g_lightColor :  :  : -1 : 0
+//var float3 g_lightDirection :  :  : -1 : 0
+//var float3 g_lightPosition :  :  : -1 : 0
+//var float g_lightIntensity :  :  : -1 : 0
+//var float g_lightInnerRadius :  :  : -1 : 0
+//var float g_lightOuterRadius :  :  : -1 : 0
+//var float g_lightInnerCone :  :  : -1 : 0
+//var float g_lightOuterCone :  :  : -1 : 0
+//var float3 vmain.params.worldSpacePosition : $vout.TEXCOORD4 : ATTR0 : -1 : 1
+//var float3 vmain.params.worldSpaceNormal : $vout.TEXCOORD5 : ATTR1 : -1 : 1
+//var float3 vmain.params.worldSpaceTangent : $vout.TEXCOORD6 :  : -1 : 0
+//var float3 vmain.params.worldSpaceBinormal : $vout.TEXCOORD7 :  : -1 : 0
+//var float4 vmain.params.texcoord0 : $vout.TEXCOORD0 : ATTR2 : -1 : 1
+//var float4 vmain.params.texcoord1 : $vout.TEXCOORD1 : ATTR3 : -1 : 1
+//var float4 vmain.params.texcoord2 : $vout.TEXCOORD2 : ATTR4 : -1 : 1
+//var float4 vmain.params.texcoord3 : $vout.TEXCOORD3 : ATTR5 : -1 : 1
+//var float4 vmain.params.color : $vout.COLOR0 : ATTR6 : -1 : 1
+//var float4 vmain.screenSpacePosition : $vout.POSITION : ATTR7 : -1 : 1
+//const c[248] = 0 1 4
+dcl_texcoord4 o0
+dcl_texcoord5 o1
+dcl_texcoord0 o2
+dcl_texcoord1 o3
+dcl_texcoord2 o4
+dcl_texcoord3 o5
+dcl_color0 o6
+dcl_position o7
+def c248, 0.00000000, 1.00000000, 4.00000000, 0
+dcl_texcoord6 v7
+dcl_texcoord7 v8
+dcl_position0 v0
+dcl_normal0 v1
+dcl_texcoord0 v2
+dcl_texcoord1 v3
+dcl_texcoord2 v4
+dcl_texcoord3 v5
+dcl_color0 v6
+abs r1, v7
+frc r2, r1
+slt r0, v7, c248.x
+max r0, -r0, r0
+slt r0, c248.x, r0
+add r1, r1, -r2
+add r3, -r0, c248.y
+mul r2, r1, r3
+mad r0, r0, -r1, r2
+frc r1.x, r0.w
+add r0.w, r0, -r1.x
+frc r1.x, r0.z
+add r0.z, r0, -r1.x
+mul r0.w, r0, c248.z
+mova a0.x, r0.w
+frc r1.x, r0.y
+add r1.x, r0.y, -r1
+frc r0.y, r0.x
+add r0.x, r0, -r0.y
+mul r0.z, r0, c248
+mul r1.x, r1, c248.z
+mova a0.w, r1.x
+mul r0.x, r0, c248.z
+mova a0.z, r0.x
+mova a0.y, r0.z
+mul r1, v8.y, c[a0.w + 10]
+mad r1, v8.x, c[a0.z + 10], r1
+mad r1, v8.z, c[a0.y + 10], r1
+mul r3, v8.y, c[a0.w + 8]
+mul r2, v8.y, c[a0.w + 9]
+mad r3, v8.x, c[a0.z + 8], r3
+mad r2, v8.x, c[a0.z + 9], r2
+mad r3, v8.z, c[a0.y + 8], r3
+mad r2, v8.z, c[a0.y + 9], r2
+mov r0.xyz, v1
+mov r0.w, c248.x
+mad r1, v8.w, c[a0.x + 10], r1
+mad r3, v8.w, c[a0.x + 8], r3
+mad r2, v8.w, c[a0.x + 9], r2
+dp4 r4.z, r1, r0
+dp4 r4.x, r3, r0
+dp4 r4.y, r2, r0
+dp3 r0.x, r4, r4
+rsq r0.x, r0.x
+mul r0.xyz, r0.x, r4
+mov r0.w, c248.x
+dp4 r4.z, r0, c6
+dp4 r4.x, r0, c4
+dp4 r4.y, r0, c5
+dp3 r0.x, r4, r4
+rsq r0.x, r0.x
+mul o1.xyz, r0.x, r4
+dp4 r0.z, r1, v0
+dp4 r0.y, v0, r2
+dp4 r0.x, v0, r3
+mov r0.w, c248.y
+dp4 o0.z, r0, c6
+dp4 o0.y, r0, c5
+dp4 o0.x, r0, c4
+dp4 o7.w, r0, c3
+dp4 o7.z, r0, c2
+dp4 o7.y, r0, c1
+dp4 o7.x, r0, c0
+mov o2, v2
+mov o3, v3
+mov o4, v4
+mov o5, v5
+mov o6, v6

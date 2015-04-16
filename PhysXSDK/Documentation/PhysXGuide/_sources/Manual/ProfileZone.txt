@@ -1,0 +1,481 @@
+.. _profileZone:
+
+------------------------------------------
+ProfileZoneManager and ProfileZone
+------------------------------------------
+
+==================
+Introduction
+==================
+
+The PhysX profiling system can be customized so that PhysX profiling events can be read and used by the application. This Section describes how to configure and query PhysX SDK profiling events.
+
+
+.. _Basic Concepts:
+
+==================
+Basic Concepts
+==================
+
+++++++++++++++++++++++++++
+Overview
+++++++++++++++++++++++++++
+
+The basic classes are *PxProfileZoneManager* and *PxProfileZone*.  *PxProfileZone* describes an island of profile information, while *PxProfileZoneManager* is a collection of *PxProfileZone* instances.
+
+A key concept to PhysX profiling is the event buffer that is managed by each profile zone. The event buffer is an in-memory buffer of event data such as the timestamp at event start/end.  To retrieve this event data the buffer must be flushed.  Typically, the buffer would be flushed to mark the end of a profile frame.  When the buffer is flushed it is sent to all registered clients (*PxProfileZoneClient*) before it resets so that it may begin recording the next frame of profile events.  Parsing the event buffer is performed using a custom handler (*PxProfileEventHandler*) that parses each event in turn.  The classes involved in this procedure shall be introduced in the following Sections.
+
+++++++++++++++++++++++++++
+PxProfileZoneManager
+++++++++++++++++++++++++++
+
+*PxProfileZoneManager* is a singleton-like class that serves as a collection of profile zones. *PxProfileZoneHandler* instances can be registered with *PxProfileZoneManager* in order to receive an event when a *PxProfileZone* instance is added or removed. Individual profile zones can be added to or removed from *PxProfileZoneManager*.
+
+*PxProfileZoneManager* instance is instantiated with the following code::
+
+    gProfileZoneManager = &PxProfileZoneManager::createProfileZoneManager(gFoundation);
+
+Further key functions are
+
+* *addProfileZone* - adds a profile zone to the manager.
+* *addProfileZoneHandler* - adds a *PxProfileZoneHandler* to provide notifications about *addProfileZone/removeProfileZone*
+* *removeProfileZoneHandler* - removes a *PxProfileZoneHandler*.
+* *removeProfileZone* - removes a profile zone from the manager.
+* *createProfileZone* - creates a new profile zone and adds it to the manager.
+* *release* - destroys the profile zone manager.
+
+++++++++++++++++++++++++++
+PxProfileZone
+++++++++++++++++++++++++++
+
+*PxProfileZone* serves as an island of profile events. When *flushProfileEvents* is called, the flushed events buffer can be captured by all *PxProfileZoneClient* instances that have been added to the *PxProfileZone*. Example code is provided in Section :ref:`PxProfileZoneClient and PxProfileEventHandler`, while instantiation of a *PxProfileZone* is detailed in section :ref:`Adding Custom Profile Zones`.
+
+Further key functions are
+
+* *startEvent* - starts the event profiling.
+* *stopEvent* - stops the event profiling.
+* *addClient* - adds *PxProfileZoneClient*.
+* *removeClient* - removes *PxProfileZoneClient*.
+* *flushProfileEvents* - flushes the profile events for *PxProfileZoneClients*.
+* *release* - destroys the profile zone.
+
+==========
+Shutdown
+==========
+
+The shutdown process follows the pattern typical of the PhysX SDK::
+
+    gProfileZoneManager->release();
+
+If a *PxProfileZone* has been instantiated outside the PhysX SDK then it must also be released::
+
+    gProfileZone->release();
+
+=================================
+Extracting PhysX SDK Event Data
+=================================
+
+++++++++++++++++++++++++++
+Overview
+++++++++++++++++++++++++++
+
+The principal classes involved are *PxDefaultBufferedProfiler* and *PxBufferedProfilerCallback*.  The event buffer, described in Section :ref:`Basic Concepts`, is flushed with the function *PxDefaultBufferedProfiler::flushEvents*.  After calling this function the contents of the event buffer are sent (one event at a time) to the callback so that they may be recorded for later use.  These classes shall be discussed in more detail in the following Sections.
+
+++++++++++++++++++++++++++
+PxDefaultBufferedProfiler
+++++++++++++++++++++++++++
+
+Instances of *PxDefaultBufferedProfiler* are created by calling the function *PxDefaultBufferedProfilerCreate*.  The specific profile zones that will be managed by the instantiated *PxDefaultBufferedProfiler* are governed by a string detailing the zone names.
+
+Further key functions are
+
+* *flushEvents* - flushes all event buffers that were specified in *PxDefaultBufferedProfilerCreate*.
+* *addBufferedProfilerCallback* - adds a *PxBufferedProfilerCallback* instance, which receives the events after calling flushEvents.
+* *removeBufferedProfilerCallback* - removes a *PxBufferedProfilerCallback* instance.
+* *release* - releases the default buffered profiler.
+
+Instances of *PxDefaultBufferedProfiler* must be created before the *PxPhysics* instance because the function *PxCreatePhysics* takes a reference to a *PxFoundation* as function argument. The extensions class *PxDefaultBufferedProfiler* constructs and owns the required *PxProfileZoneManager* instance. Example code is as follows::
+
+    // PxProfileZoneManager is instantiated before PxPhysics to ensure that a PxProfileZoneManager
+    // instance can be passed to PxCreatePhysics as a function argument.
+    gDefaultBufferProfiler = PxDefaultBufferedProfilerCreate(*gFoundation, "PhysXSDK ApexSDK");
+
+    gPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(), true,
+        &gDefaultBufferProfiler->getProfileZoneManager());
+
+
+++++++++++++++++++++++++++++++
+PxBufferedProfilerCallback
+++++++++++++++++++++++++++++++
+
+The *PxBufferedProfilerCallback* class manages the reporting and recording of profile events after flushing the event buffer.  When used in conjunction with *PxDefaultBufferedProfiler* the events in all profile zones being managed by the *PxDefaultBufferedProfiler* instance are sent to the callback.  The function *PxBufferedProfilerCallback::onEvent* receives each event in sequence after the buffers have been flushed.
+
+Events are sent to the callback using the *PxBufferedProfilerEvent* struct.  This struct has several member variables:
+
+* *startTimeNs* - the event start time in nanoseconds.
+* *stopTimeNs* - the event end time in nanoseconds.
+* *name* - the event name.
+* *profileZoneName* - the name of the profile zone in which the event was generated.
+* *contextId* - the event contextId.
+* *threadId* - the thread in which the event was executed.
+* *id* - the event ID.
+* *threadPriority* - the priority of the thread in which the event was executed.
+* *cpuId* - the CPU on which the event was executed.
+
+An example implementation is as follows::
+
+    // This is the main class that handles events and collects them for later printing
+    class SnippetBufferedProfilerCallback: public PxBufferedProfilerCallback
+    {
+    public:
+        // if the event buffer is flushed, each event is send in this callback
+        virtual void onEvent(const PxBufferedProfilerEvent& event)
+        {
+            mEvents.push_back(event);
+        }
+    }   snippetBufferedProfilerCallback;
+
+    // we add our callback to receive events after the event buffer has been flushed.
+    gDefaultBufferProfiler->addBufferedProfilerCallback(snippetBufferedProfilerCallback);
+
+For more implementation details please see the *PxDefaultBufferedProfiler* extension class and SnippetProfileZone.
+
+
+.. _Adding Custom Profile Zones:
+
+====================================
+Adding Custom Profile Zones
+====================================
+
+++++++++++++++++++++++++++
+Introduction
+++++++++++++++++++++++++++
+
+The key classes involved are *PxProfileZoneManager*, *PxProfileZone* and *PxProfileNameProvider*. For each *PxProfileZone* a *PxProfileNameProvider* instance is used to describe the mapping between profile event integer IDs and strings that are used for PVD visualization.
+
+Custom profile events can be described with one or more *PxProfileZone* instances.  Adding these *PxProfileZone* instances to the singleton *PxProfileZoneManager* instance (that is passed to *PxCreatePhysics*) allows custom events to be profiled in addition to PhysX profile events.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PxProfileNameProvider And Customization of PxProfileZone
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The *PxProfileNameProvider* class describes the mapping between the integer ID of each custom profile event and a corresponding string used for visualization in PVD.
+
+For example, three unique custom events with mapped strings can be added to the custom profile zone as follows::
+
+    // profile IDs used for identification within a profileZone
+    enum E_ProfileIds
+    {
+        E_PROFILE_ID_1 = 1,
+        E_PROFILE_ID_2,
+        E_PROFILE_ID_3,
+    };
+
+    // profile events definitions
+    static PxProfileEventName gEventNames[] = {
+        PxProfileEventName( "Profile_Id1", PxProfileEventId( E_PROFILE_ID_1 ) ),
+        PxProfileEventName( "Profile_Id2", PxProfileEventId( E_PROFILE_ID_2 ) ),
+        PxProfileEventName( "Profile_Id3", PxProfileEventId( E_PROFILE_ID_3 ) )
+    };
+
+This mapping is passed to the *PxProfileZone* instance by first implementing a sub-class of *PxProfileNameProvider* and then passing an instance of the sub-class to *PxProfileZone::createProfileZone*.  The following code creates an instance of a sub-class of *PxProfileNameProvider*::
+
+    struct ExampleProfileEventNameProvider : public physx::PxProfileNameProvider
+    {
+        virtual physx::PxProfileNames getProfileNames() const
+        {
+            return PxProfileNames(3,gEventNames);
+        }
+    };
+    ExampleProfileEventNameProvider    gExampleProfileZoneNameProvider;
+
+The last step is to pass the mapping as a function argument to *PxProfileZone::createProfileZone*::
+
+    gProfileZone = &physx::PxProfileZone::createProfileZone(gFoundation,
+        "ExampleProfileZone", gExampleProfileZoneNameProvider);
+
+*PxProfileZone* is instantiated and added to the *PxProfileZoneManager* instance with the following code::
+
+    void createProfilerZone()
+    {
+        gProfileZoneManager->addProfileZone(*gProfileZone);
+    }
+
+++++++++++++++++++++++++++
+Profiling
+++++++++++++++++++++++++++
+
+Each event in a profile zone can be profiled with the *startEvent* and *stopEvent* functions::
+
+    void updateProfileZones()
+    {
+        // start profile zone 1
+        gProfileZone->startEvent( E_PROFILE_ID_1,0);
+
+        // start and end profile zone 2
+        shdfnd::Thread::sleep(2);
+        {
+            gProfileZone->startEvent( E_PROFILE_ID_2,0);
+            shdfnd::Thread::sleep(3);
+            gProfileZone->stopEvent( E_PROFILE_ID_2,0);
+        }
+
+        // start and end profile zone 3
+        {
+            gProfileZone->startEvent( E_PROFILE_ID_3,0);
+            shdfnd::Thread::sleep(4);
+            gProfileZone->stopEvent( E_PROFILE_ID_3,0);
+        }
+
+        // end profile zone 1
+        gProfileZone->stopEvent( E_PROFILE_ID_1,0);
+    }
+
+==========================================================================
+Advanced
+==========================================================================
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Extracting PhysX SDK Event Data Using The PxProfileZoneManager Interface
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Overview
+++++++++++++++++++++++++++
+
+The principal classes involved are *PxProfileZoneManager*, *PxProfileZone* and the event buffer described in Section :ref:`Basic Concepts`.
+
+In order to flush the buffer of a profile zone, a reference to a *PxProfileZone* instance must first be retrieved.  Profile zones internal to the PhysX SDK may be retrieved by implementing a sub-class of *PxProfileZoneHandler* and adding it to *PxProfileZoneManager*.  The implemented functions *PxProfileZoneHandler::onZoneAdded* and *PxProfileZoneHandler::onZoneRemoved* receive references to affected profile zones.
+
+.. _PxProfileZoneHandler:
+
+
+PxProfileZoneHandler
+++++++++++++++++++++++++++
+
+*PxProfileZoneHandler* handles addition/removal of a *PxProfileZone* to/from *PxProfileZoneManager*. More specifically, it receives references to added/removed *PxProfileZone* instances.  This is particularly useful for gaining access to profile event data that is internal to the PhysX SDK.  The following code illustrates how this might be used in practice::
+
+    // our zone handler. This is used to watch for the zone we're interested in, and then hook
+    // our client into it.
+    class ExampleProfileZoneHandler: public PxProfileZoneHandler
+    {
+    public:
+
+        // check for the PhysXSDK profile zone
+        virtual void onZoneAdded( PxProfileZone& inSDK )
+        {
+            if(strstr(inSDK.getName(),"PhysXSDK") != 0)
+            {
+                gPhysXProfileZone = &inSDK;
+                inSDK.addClient(exampleProfileZoneClient);
+            }
+        }
+
+        virtual void onZoneRemoved( PxProfileZone&  )    {}
+
+    }   exampleProfileZoneHandler;
+
+    // first create the PxProfileZoneManager
+    gProfileZoneManager = &PxProfileZoneManager::createProfileZoneManager(gFoundation);
+
+    // when PhysX starts up, it will add a profile zone to the manager. We register the
+    // handler before creating PxPhysics, so that it receives the zone creation event.
+    // When we receive the event, we attach our client to the zone.
+    gProfileZoneManager->addProfileZoneHandler(exampleProfileZoneHandler);
+
+.. _PxProfileZoneClient and PxProfileEventHandler:
+
+
+PxProfileZoneClient and PxProfileEventHandler
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The class *PxProfileZoneClient* captures profile event data when the event buffer of a *PxProfileZone* instance is flushed using the function *PxProfileZone::flushProfileEvents*::
+
+    // our profile zone client. This forwards events to our handler object.
+    class ExampleProfileZoneClient : public PxProfileZoneClient
+    {
+    public:
+        virtual void handleEventAdded( const PxProfileEventName& ) {}
+        virtual void handleClientRemoved() {}
+
+        virtual void handleBufferFlush( const PxU8* inData, PxU32 inLength )
+        {
+            PxProfileEventHandler::parseEventBuffer(inData, inLength, exampleProfileEventHandler,
+                false);
+        }
+
+    }   exampleProfileZoneClient;
+
+
+Registering the client with the profile zone can be achieved automatically by implementing the function *PxProfileZoneHandler::onZoneAdded*,  as illustrated in Section :ref:`PxProfileZoneHandler`.
+
+In ExampleProfileZone, the buffer is flushed immediately after the simulate step has been completed::
+
+    // in the update loop
+    gScene->fetchResults(true);
+
+    // flush the profile zone events so we can parse them and get the recorded data
+    if(gPhysXProfileZone)
+    {
+        gPhysXProfileZone->flushProfileEvents();
+    }
+
+.. note::  A complete set of PhysX SDK event data is guaranteed if the event buffer is flushed after *PxScene::fetchResults* has been called.
+
+The *PxProfileEventHandler* class parses the flushed event buffer. Please note that events are sent per thread and that cross-thread events have a specific identifier *PxProfileEventSender::CrossThreadId*. An example of how to parse the events per thread is as follows::
+
+    // This is the main class that handles stop and start events and collects them for later printing
+    class ExampleProfileEventHandler: public PxProfileEventHandler
+    {
+    public:
+
+        static const PxU32     COLLECTION_SIZE = 1024;
+        static const PxU32     NUM_COLLECTIONS = 16;
+
+        // help structure to hold the event data. Times are in profiler ticks that are converted when
+        // we print.
+        struct ProfileEvent
+        {
+            PxU16 id;
+            PxU64 startTime;
+            PxU64 stopTime;
+
+            static const PxU64 INVALID_TIME = PxU64(-1);
+        };
+
+        struct EventCollection
+        {
+            PxU32              threadId;
+            ProfileEvent       events[COLLECTION_SIZE];
+            PxU32              numEvents;
+        };
+
+    public:
+        ExampleProfileEventHandler()
+        {
+            clear();
+        }
+
+        virtual void onStartEvent( const PxProfileEventId& inId, PxU32 threadId, PxU64 contextId,
+            PxU8 cpuId, PxU8 threadPriority, PxU64 timestamp )
+        {
+            PX_UNUSED(contextId);
+            PX_UNUSED(cpuId);
+            PX_UNUSED(threadPriority);
+
+            EventCollection* threadCollection = findCollection(threadId);
+
+            // add a new collection for this thread ID if it's not already there
+            if(!threadCollection)
+            {
+                threadCollection = &mThreadCollections[mNumThreads++];
+                threadCollection->threadId = threadId;
+                PX_ASSERT(mNumThreads < NUM_COLLECTIONS);
+            }
+
+            // add the event record
+            ProfileEvent ev = { inId, timestamp, ProfileEvent::INVALID_TIME };
+            threadCollection->events[threadCollection->numEvents++] = ev;
+
+            PX_ASSERT(threadCollection->numEvents < COLLECTION_SIZE);
+        }
+
+        virtual void onStopEvent( const PxProfileEventId& inId, PxU32 threadId, PxU64 contextId,
+            PxU8 cpuId, PxU8 threadPriority, PxU64 timestamp )
+        {
+            PX_UNUSED(contextId);
+            PX_UNUSED(cpuId);
+            PX_UNUSED(threadPriority);
+
+            EventCollection* threadCollection = findCollection(threadId);
+            PX_ASSERT(threadCollection != NULL);
+
+            // an event (e.g. narrow phase batch) can occur several times per thread per frame, so
+            // we take the earliest event with a matching ID that does not yet have a stop time
+            for (PxU32 i = 0; i < threadCollection->numEvents; i++)
+            {
+                ProfileEvent& ev = threadCollection->events[i];
+                if(ev.id == inId.mEventId && ev.stopTime == ProfileEvent::INVALID_TIME)
+                {
+                    PX_ASSERT(timestamp > ev.startTime);
+                    ev.stopTime = timestamp;
+                    break;
+                }
+            }
+        }
+
+        virtual void onEventValue( const PxProfileEventId& , PxU32 , PxU64 , PxI64  ) {}
+        virtual void onCUDAProfileBuffer( PxU64 , PxF32 , const PxU8* , PxU32 , PxU32  ) {}
+
+        void clear()
+        {
+            mNumThreads = 0;
+            mCrossThreadCollection.numEvents = 0;
+            for (PxU32 i = 0; i < NUM_COLLECTIONS; i++)
+                mThreadCollections[i].numEvents = 0;
+        }
+
+        // lets print the stored events on screen
+        void printEvents()
+        {
+            printf("-------------------------- frame start -------------------------------- \n");
+
+            printf("---------------------- Cross-thread events ---------------------------- \n");
+            printCollection(mCrossThreadCollection);
+
+            for (PxU32 j = 0; j < mNumThreads; j++)
+            {
+                printf("\n---------------------- Thread ID %d events -------------------------- \n",
+                    mThreadCollections[j].threadId);
+                printCollection(mThreadCollections[j]);
+            }
+
+            printf("--------------------------- frame end --------------------------------- \n");
+            clear();
+        }
+
+    protected:
+        EventCollection* findCollection(PxU32 threadId)
+        {
+            if(threadId == PxProfileEventSender::CrossThreadId)
+                return &mCrossThreadCollection;
+
+            for (PxU32 i = 0; i < mNumThreads; i++)
+            {
+                if(mThreadCollections[i].threadId == threadId)
+                    return &mThreadCollections[i];
+            }
+            return NULL;
+        }
+
+        void printCollection(const EventCollection &collection)
+        {
+            for (PxU32 i = 0; i < collection.numEvents; i++)
+            {
+                const ProfileEvent& ev = collection.events[i];
+                const char* name = findEventName(ev.id);
+                PxU64 duration = shdfnd::Time::getBootCounterFrequency().toTensOfNanos
+                    ( ev.stopTime - ev.startTime );
+                float timeInMs = duration/100000.0f;
+                printf("%-40s: %5.5f ms\n", name, timeInMs);
+            }
+        }
+
+
+        const char* findEventName(PxU16 eventId)
+        {
+            const PxProfileNames& names = gPhysXProfileZone->getProfileNames();
+            for (PxU32 i = 0; i < names.mEventCount; i++)
+            {
+                if(names.mEvents[i].mEventId.mEventId == eventId)
+                    return names.mEvents[i].mName;
+            }
+            return "<unknown event>";
+        }
+
+        EventCollection        mCrossThreadCollection;
+        EventCollection        mThreadCollections[NUM_COLLECTIONS];
+        PxU32                  mNumThreads;
+
+    }   exampleProfileEventHandler;
+

@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Distro Package Contents &mdash; NVIDIA PhysX SDK 3.3.3 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nvidia.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.3.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="NVIDIA PhysX SDK 3.3.3 Documentation" href="../index.html" />
+    <link rel="up" title="User&#39;s Guide" href="Index.html" />
+    <link rel="next" title="Snippets" href="HelloWorld.html" />
+    <link rel="prev" title="Welcome to PhysX" href="Introduction.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="HelloWorld.html" title="Snippets"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="Introduction.html" title="Welcome to PhysX"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.3 Documentation</a> &raquo;</li>
+          <li><a href="Index.html" accesskey="U">User's Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="distro-package-contents">
+<span id="distro-contents"></span><h1>Distro Package Contents<a class="headerlink" href="#distro-package-contents" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="release-layout">
+<h2>Release Layout<a class="headerlink" href="#release-layout" title="Permalink to this headline">¶</a></h2>
+<p>Depending on your license, we provide you with the Core installer or with the Source installer of the PhysX SDK.</p>
+<p>The Core SDK comprises header files and libraries for the major components of the SDK, with source code for
+ancillary components such as Extensions, Character and Vehicle Controllers, Samples and Snippets. Source for the major
+components of the SDK, such as the collision detection routines and constraint solver pipeline, is not provided
+with the Core SDK.</p>
+<p>The Source SDK includes everything found in the Core SDK, plus the source code to the major components provided
+as libraries or DLLs in the Core SDK.</p>
+<div class="section" id="core-installer">
+<h3>Core Installer<a class="headerlink" href="#core-installer" title="Permalink to this headline">¶</a></h3>
+<table class="borderless">
+<tr><td>Bin/                       </td><td>Executables and dlls in platform specific folders (does not exist for some platforms).</td></tr>
+<tr><td>Documentation/             </td><td>PhysXGuide & PhysXAPI documentation.</td></tr>
+<tr><td>externals/                 </td><td>External libraries.</td></tr>
+<tr><td>Include/                   </td><td>API Include Headers.</td></tr>
+<tr><td>Lib/                       </td><td>Libraries in platform specific folders.</td></tr>
+<tr><td>media/                     </td><td>Media files.</td></tr>
+<tr><td>Samples/                   </td><td>PhysX Samples, solutions are in the compiler folder.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;compiler/                </td><td>Solutions for building the Sample application.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PxToolkit/               </td><td>Utilities for the sample framework.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleBase/              </td><td>Utility classes used across multiple samples.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleBridges/           </td><td>Code for 'Bridges' sample. The basics of Hello World, plus character controller, joints, kinematics.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleCCTSharedCode/     </td><td>Code shared by any sample using a Character Controller.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleCharacterCloth/    </td><td>Simple animated character with a cloth cape.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleCustomGravity/     </td><td>Small planet with gravity always pointing towards the center.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleFramework/         </td><td>Sample application framework.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleHelloWorld/        </td><td>Basic sample: initialize PhysX, create a stack of blocks, knock them down.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleLargeWorld/        </td><td>Streaming of a large world.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleNorthPole/         </td><td>Simple example of rigid bodies in a static environment.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleParticles/         </td><td>Particle system, emitters, drains.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleSubmarine/         </td><td>Articulated crabs, 'submarine' controller, explosive mines.  Triggers and callbacks.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SampleVehicle/            </td><td>Basic test track and compact cars.</td></tr>
+<tr><td>Snippets/                   </td><td>PhysX Code Snippets, compact console applications illustrating specific PhysX concepts.</td></tr>
+<tr><td>Source/                     </td><td>Public Source Code.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Common/                  </td><td>Functionality shared by all PhysX modules.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;compiler/                </td><td>Solutions for building modules.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;foundation/              </td><td>Functionality shared by all PhysX and APEX modules.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;GeomUtils/               </td><td>Geometry Math.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXCharacterKinematic/ </td><td>Character Controller.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXExtensions/         </td><td>Extensions, Helper Classes.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXMetaData/           </td><td>Serialization.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXProfileSDK/         </td><td>Profiling SDK.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXVehicle/            </td><td>Vehicle Controller.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PvdRuntime/              </td><td>SDK integration of Visual Debugger connection module.</td></tr>
+<tr><td>Tools/                     </td><td>MetaData Generator.</td></tr>
+<tr><td>readme_???.html            </td><td>Platform specific readme file.</td></tr>
+<tr><td>release_notes.html         </td><td>PhysX Release Notes.</td></tr>
+<tr><td>version-PhysX.txt           </td><td>PhysX version and build number of this installer.</td></tr>
+    </table></div>
+<div class="section" id="source-installer-adds-the-following-to-the-above">
+<h3>Source Installer adds the following to the above:<a class="headerlink" href="#source-installer-adds-the-following-to-the-above" title="Permalink to this headline">¶</a></h3>
+<table class="borderless">
+    <tr><td>Source/                                 </td><td>Full Source Code (see core installer for details about the public sections).</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;LowLevel/                           </td><td>Low level simulation module.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;LowLevelCloth/           </td><td>Low level cloth simulation module.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysX/                   </td><td>High level PhysX Core management.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXCooking/            </td><td>PhysX Cooking.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXGpu/                </td><td>GPU simulation module, including GPU infrastructure (windows only).</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;PhysXVisualDebuggerSDK/  </td><td>Visual Debugger connection module.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;pxtask/                  </td><td>Task infrastructure.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SceneQuery/              </td><td>Scene Query module.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;SimulationController/    </td><td>High level simulation module.</td></tr>
+</table></div>
+</div>
+<div class="section" id="snippets-versus-samples">
+<h2>Snippets versus Samples<a class="headerlink" href="#snippets-versus-samples" title="Permalink to this headline">¶</a></h2>
+<p>The suite of samples listed above are small demonstration programs of the SDK, each covering a number of topics:</p>
+<ul class="simple">
+<li>The <strong>Hello World Sample</strong> shows a minimal physx setup.</li>
+<li>The <strong>North Pole Sample</strong> demonstrates basic functionality covered in <a class="reference internal" href="Startup.html#startup"><em>Startup and Shutdown</em></a>, <a class="reference internal" href="RigidBodyOverview.html#rigidbodyoverview"><em>Rigid Body Overview</em></a>, <a class="reference internal" href="RigidBodyCollision.html#rigidbodycollisionshapes"><em>Shapes</em></a>, and <a class="reference internal" href="RigidBodyDynamics.html#rigidbodydynamics"><em>Rigid Body Dynamics</em></a>.</li>
+<li>The <strong>Bridges Sample</strong> demonstrates joints, described in the chapter <a class="reference internal" href="Joints.html#joints"><em>Joints</em></a>, as well as the character controller explained in <a class="reference internal" href="CharacterControllers.html#character"><em>Character Controllers</em></a>.</li>
+<li>The <strong>Vehicle Sample</strong> demonstrates the use of vehicles described in the chapter <a class="reference internal" href="Vehicles.html#vehicles"><em>Vehicles</em></a>.</li>
+<li>The <strong>Particles Sample</strong> demonstrates the use of particle effects, which is the topic of <a class="reference internal" href="Particles.html#particles"><em>Particles</em></a>.</li>
+<li>The <strong>Character Cloth Sample</strong> demonstrates clothing functionality, described in the chapter <a class="reference internal" href="Cloth.html#cloth"><em>Cloth</em></a>.</li>
+<li>The <strong>Custom Gravity Sample</strong> demonstrates using the character controller in a context where the vertical direction is not fixed.</li>
+<li>The <strong>Large World Sample</strong> demonstrates multithreading and serialization, described in the chapter <a class="reference internal" href="Serialization.html#serialization"><em>Serialization</em></a> and <a class="reference internal" href="Threading.html#threading"><em>Threading</em></a>.</li>
+<li>Finally, the <strong>Submarine Sample</strong> shows off a number of advanced features, which receive a treatment in the chapters <a class="reference internal" href="SceneQueries.html#scenequeries"><em>Scene Queries</em></a>, <a class="reference internal" href="Simulation.html#callbacks"><em>Callback Sequence</em></a>, <a class="reference internal" href="AdvancedCollisionDetection.html#advancedcollisiondetection"><em>Advanced Collision Detection</em></a>, and <a class="reference internal" href="Threading.html#taskman"><em>Multithreaded Simulation</em></a>.</li>
+</ul>
+<p>The samples are built on top of an abstraction layer called the SampleFramework, which encapsulates much of the PhysX API,
+and sometimes makes reading and understanding the code relatively complicated.  To create example programs with better readable source code, we have
+created a suite of snippets.  These have either no rendering or very rudimentary graphics, and instead focus on presenting individual features with very simple source code.  See <a class="reference internal" href="HelloWorld.html#helloworld"><em>Snippets</em></a> for more information.</p>
+</div>
+<div class="section" id="building-and-running-the-samples-on-windows">
+<span id="building-and-running-the-samples"></span><h2>Building and Running the Samples on Windows<a class="headerlink" href="#building-and-running-the-samples-on-windows" title="Permalink to this headline">¶</a></h2>
+<p>On Windows, PhysX requires either Visual Studio 2008 with Service Pack 1 or higher, Visual Studio 2010, or Visual Studio 2012.</p>
+<p>To see the samples, open the Visual Studio solution called Samples.sln, found in, e.g.,</p>
+<p>{SDK ROOT}/Samples/compiler/vc11win32/Samples.sln .</p>
+<p>This solution includes the samples listed above within the project Samples, plus some additional projects which implement common operations. There
+is a single executable covering all samples for a given platform and configuration, e.g. SamplesCHECKED.exe, found in, e.g.</p>
+<p>{SDK ROOT}/Bin/Win32 .</p>
+<p>The samples are not ported to all available platforms.  For non-windows platforms that include the samples, please refer to the readme file of the respective platform for platform specific instructions.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../Index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Distro Package Contents</a><ul>
+<li><a class="reference internal" href="#release-layout">Release Layout</a><ul>
+<li><a class="reference internal" href="#core-installer">Core Installer</a></li>
+<li><a class="reference internal" href="#source-installer-adds-the-following-to-the-above">Source Installer adds the following to the above:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#snippets-versus-samples">Snippets versus Samples</a></li>
+<li><a class="reference internal" href="#building-and-running-the-samples-on-windows">Building and Running the Samples on Windows</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Introduction.html"
+                        title="previous chapter">Welcome to PhysX</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="HelloWorld.html"
+                        title="next chapter">Snippets</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="HelloWorld.html" title="Snippets"
+             >next</a></li>
+        <li class="right" >
+          <a href="Introduction.html" title="Welcome to PhysX"
+             >previous</a> |</li>
+        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.3 Documentation</a> &raquo;</li>
+          <li><a href="Index.html" >User's Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2015 NVIDIA Corporation, 2701 San Tomas Expressway, Santa Clara, CA 95050 U.S.A. All rights reserved.
+    </div>
+  </body>
+</html>

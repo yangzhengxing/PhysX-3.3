@@ -1,0 +1,12 @@
+ps_3_0
+// cgc version 2.2.0017, build date Jan 29 2010
+// command line args: -profile ps_3_0 -I../include -DGLSL_COMPILER -DPASS_DEPTH -DNO_SUPPORT_DDX_DDY
+// source file: lines.cg
+//vendor NVIDIA Corporation
+//version 2.2.0.17
+//profile ps_3_0
+//program fmain
+//var float4 params.color : $vin.COLOR0 : ATTR0 : 0 : 1
+//var float4 fmain : $vout.COLOR0 : COL : -1 : 1
+dcl_color0 v0
+mov_pp oC0, v0

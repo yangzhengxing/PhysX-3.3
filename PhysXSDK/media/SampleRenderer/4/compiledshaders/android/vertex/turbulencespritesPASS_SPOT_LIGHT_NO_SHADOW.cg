@@ -1,0 +1,216 @@
+vs_3_0
+// cgc version 2.2.0017, build date Jan 29 2010
+// command line args: -profile vs_3_0 -I../include -DGLSL_COMPILER -DPASS_SPOT_LIGHT_NO_SHADOW -DNO_SUPPORT_DDX_DDY
+// source file: turbulencesprites.cg
+//vendor NVIDIA Corporation
+//version 2.2.0.17
+//profile vs_3_0
+//program vmain
+//semantic g_MVP
+//semantic g_modelMatrix
+//semantic g_modelViewMatrix
+//semantic g_modelViewProjMatrix
+//semantic g_viewMatrix
+//semantic g_projMatrix
+//semantic g_eyePosition
+//semantic g_eyeDirection
+//semantic g_invViewProjMatrix
+//semantic g_boneMatrices
+//semantic g_fogColorAndDistance
+//semantic g_ambientColor
+//semantic g_lightColor
+//semantic g_lightDirection
+//semantic g_lightPosition
+//semantic g_lightIntensity
+//semantic g_lightInnerRadius
+//semantic g_lightOuterRadius
+//semantic g_lightInnerCone
+//semantic g_lightOuterCone
+//var float4 localSpacePosition : $vin.POSITION0 : ATTR0 : 0 : 1
+//var float4 vertexColor : $vin.COLOR0 :  : 1 : 0
+//var float3 localSpaceNormal : $vin.NORMAL0 : ATTR1 : 2 : 1
+//var float4 localSpaceTangent : $vin.TEXCOORD5 : ATTR2 : 3 : 1
+//var float4 vertexTexcoord0 : $vin.TEXCOORD0 : ATTR3 : 4 : 1
+//var float4 vertexTexcoord1 : $vin.TEXCOORD1 : ATTR4 : 5 : 1
+//var float4 vertexTexcoord2 : $vin.TEXCOORD2 : ATTR5 : 6 : 1
+//var float4 vertexTexcoord3 : $vin.TEXCOORD3 : ATTR6 : 7 : 1
+//var float3 instancePosition : $vin.TEXCOORD8 : ATTR7 : 8 : 1
+//var float4 instanceVelocity : $vin.TEXCOORD9 : ATTR8 : 9 : 1
+//var float4x4 g_MVP :  : , 4 : -1 : 0
+//var float4x4 g_modelMatrix :  : c[0], 4 : -1 : 1
+//var float4x4 g_modelViewMatrix :  : , 4 : -1 : 0
+//var float4x4 g_modelViewProjMatrix :  : , 4 : -1 : 0
+//var float4x4 g_viewMatrix :  : c[4], 4 : -1 : 1
+//var float4x4 g_projMatrix :  : c[8], 4 : -1 : 1
+//var float3 g_eyePosition :  :  : -1 : 0
+//var float3 g_eyeDirection :  :  : -1 : 0
+//var float4x4 g_invViewProjMatrix :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[0] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[1] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[2] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[3] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[4] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[5] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[6] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[7] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[8] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[9] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[10] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[11] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[12] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[13] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[14] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[15] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[16] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[17] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[18] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[19] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[20] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[21] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[22] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[23] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[24] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[25] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[26] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[27] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[28] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[29] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[30] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[31] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[32] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[33] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[34] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[35] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[36] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[37] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[38] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[39] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[40] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[41] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[42] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[43] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[44] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[45] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[46] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[47] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[48] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[49] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[50] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[51] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[52] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[53] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[54] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[55] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[56] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[57] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[58] :  : , 4 : -1 : 0
+//var float4x4 g_boneMatrices[59] :  : , 4 : -1 : 0
+//var float4 g_fogColorAndDistance :  :  : -1 : 0
+//var float3 g_ambientColor :  :  : -1 : 0
+//var float3 g_lightColor :  :  : -1 : 0
+//var float3 g_lightDirection :  :  : -1 : 0
+//var float3 g_lightPosition :  :  : -1 : 0
+//var float g_lightIntensity :  :  : -1 : 0
+//var float g_lightInnerRadius :  :  : -1 : 0
+//var float g_lightOuterRadius :  :  : -1 : 0
+//var float g_lightInnerCone :  :  : -1 : 0
+//var float g_lightOuterCone :  :  : -1 : 0
+//var float3 vmain.params.worldSpacePosition : $vout.TEXCOORD4 : ATTR0 : -1 : 1
+//var float3 vmain.params.worldSpaceNormal : $vout.TEXCOORD5 : ATTR1 : -1 : 1
+//var float3 vmain.params.worldSpaceTangent : $vout.TEXCOORD6 : ATTR2 : -1 : 1
+//var float3 vmain.params.worldSpaceBinormal : $vout.TEXCOORD7 : ATTR3 : -1 : 1
+//var float4 vmain.params.texcoord0 : $vout.TEXCOORD0 : ATTR4 : -1 : 1
+//var float4 vmain.params.texcoord1 : $vout.TEXCOORD1 : ATTR5 : -1 : 1
+//var float4 vmain.params.texcoord2 : $vout.TEXCOORD2 : ATTR6 : -1 : 1
+//var float4 vmain.params.texcoord3 : $vout.TEXCOORD3 : ATTR7 : -1 : 1
+//var float4 vmain.params.color : $vout.COLOR0 : ATTR8 : -1 : 1
+//var float4 vmain.screenSpacePosition : $vout.POSITION : ATTR9 : -1 : 1
+//const c[12] = 0.050000001 1 0
+dcl_texcoord4 o0
+dcl_texcoord5 o1
+dcl_texcoord6 o2
+dcl_texcoord7 o3
+dcl_texcoord0 o4
+dcl_texcoord1 o5
+dcl_texcoord2 o6
+dcl_texcoord3 o7
+dcl_color0 o8
+dcl_position o9
+def c12, 0.05000000, 1.00000000, 0.00000000, 0
+dcl_position0 v0
+dcl_texcoord8 v7
+dcl_normal0 v1
+dcl_texcoord5 v2
+dcl_texcoord9 v8
+dcl_texcoord0 v3
+dcl_texcoord1 v4
+dcl_texcoord2 v5
+dcl_texcoord3 v6
+mov r0.xyz, v2
+mov r0.w, c12.z
+dp4 r1.z, r0, c2
+dp4 r1.x, r0, c0
+dp4 r1.y, r0, c1
+dp3 r1.w, r1, r1
+rsq r1.w, r1.w
+mul r4.xyz, r1.w, r1
+mov r2.xyz, v1
+mov r2.w, c12.z
+dp4 r0.z, r2, c2
+dp4 r0.x, r2, c0
+dp4 r0.y, r2, c1
+dp3 r0.w, r0, r0
+rsq r0.w, r0.w
+mul r3.xyz, r0.w, r0
+mul r0.xyz, r3.zxyw, r4.yzxw
+mad r0.xyz, r3.yzxw, r4.zxyw, -r0
+mov r1.x, c11
+mov r2.x, c11.w
+mov r3.w, c8.y
+mov r0.w, c11.y
+mul o3.xyz, v2.w, r0
+mul r0, c5, r0.w
+mad r0, c4, r1.x, r0
+mov r1.x, c11.z
+mad r0, c6, r1.x, r0
+mul r1, v0, c12.xxxy
+mad r0, c7, r2.x, r0
+add r1.xyz, r1, v7
+mov r2.x, c10.y
+dp4 o9.w, r0, r1
+mul r0, c5, r2.x
+mov r2.x, c10
+mad r0, c4, r2.x, r0
+mov r2.x, c10.z
+mad r0, c6, r2.x, r0
+mov r2.x, c10.w
+mad r0, c7, r2.x, r0
+mov r2.x, c9.y
+dp4 o9.z, r1, r0
+mul r0, c5, r2.x
+mov r2.x, c9
+mad r0, c4, r2.x, r0
+mov r2.x, c9.z
+mad r0, c6, r2.x, r0
+mov r2.x, c9.w
+mad r2, c7, r2.x, r0
+mul r0, c5, r3.w
+mov r3.w, c8.x
+mad r0, c4, r3.w, r0
+mov r3.w, c8.z
+mad r0, c6, r3.w, r0
+mov r3.w, c8
+mad r0, c7, r3.w, r0
+dp4 o9.y, r1, r2
+dp4 o9.x, r1, r0
+mov o1.xyz, r3
+mov o2.xyz, r4
+mov o4, v3
+mov o5, v4
+mov o6, v5
+mov o7, v6
+mov o8.yzw, c12.xzzy
+dp4 o0.z, v0, c2
+dp4 o0.y, v0, c1
+dp4 o0.x, v0, c0
+mov o8.x, v8.w

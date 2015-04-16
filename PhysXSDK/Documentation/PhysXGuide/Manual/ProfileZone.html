@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ProfileZoneManager and ProfileZone &mdash; NVIDIA PhysX SDK 3.3.3 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nvidia.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.3.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="NVIDIA PhysX SDK 3.3.3 Documentation" href="../index.html" />
+    <link rel="up" title="User&#39;s Guide" href="Index.html" />
+    <link rel="next" title="Debug Visualization" href="DebugVisualization.html" />
+    <link rel="prev" title="Cloth" href="Cloth.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="DebugVisualization.html" title="Debug Visualization"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="Cloth.html" title="Cloth"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.3 Documentation</a> &raquo;</li>
+          <li><a href="Index.html" accesskey="U">User's Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="profilezonemanager-and-profilezone">
+<span id="profilezone"></span><h1>ProfileZoneManager and ProfileZone<a class="headerlink" href="#profilezonemanager-and-profilezone" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The PhysX profiling system can be customized so that PhysX profiling events can be read and used by the application. This Section describes how to configure and query PhysX SDK profiling events.</p>
+</div>
+<div class="section" id="basic-concepts">
+<span id="id1"></span><h2>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>The basic classes are <em>PxProfileZoneManager</em> and <em>PxProfileZone</em>.  <em>PxProfileZone</em> describes an island of profile information, while <em>PxProfileZoneManager</em> is a collection of <em>PxProfileZone</em> instances.</p>
+<p>A key concept to PhysX profiling is the event buffer that is managed by each profile zone. The event buffer is an in-memory buffer of event data such as the timestamp at event start/end.  To retrieve this event data the buffer must be flushed.  Typically, the buffer would be flushed to mark the end of a profile frame.  When the buffer is flushed it is sent to all registered clients (<em>PxProfileZoneClient</em>) before it resets so that it may begin recording the next frame of profile events.  Parsing the event buffer is performed using a custom handler (<em>PxProfileEventHandler</em>) that parses each event in turn.  The classes involved in this procedure shall be introduced in the following Sections.</p>
+</div>
+<div class="section" id="pxprofilezonemanager">
+<h3>PxProfileZoneManager<a class="headerlink" href="#pxprofilezonemanager" title="Permalink to this headline">¶</a></h3>
+<p><em>PxProfileZoneManager</em> is a singleton-like class that serves as a collection of profile zones. <em>PxProfileZoneHandler</em> instances can be registered with <em>PxProfileZoneManager</em> in order to receive an event when a <em>PxProfileZone</em> instance is added or removed. Individual profile zones can be added to or removed from <em>PxProfileZoneManager</em>.</p>
+<p><em>PxProfileZoneManager</em> instance is instantiated with the following code:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">gProfileZoneManager</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">PxProfileZoneManager</span><span class="o">::</span><span class="n">createProfileZoneManager</span><span class="p">(</span><span class="n">gFoundation</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Further key functions are</p>
+<ul class="simple">
+<li><em>addProfileZone</em> - adds a profile zone to the manager.</li>
+<li><em>addProfileZoneHandler</em> - adds a <em>PxProfileZoneHandler</em> to provide notifications about <em>addProfileZone/removeProfileZone</em></li>
+<li><em>removeProfileZoneHandler</em> - removes a <em>PxProfileZoneHandler</em>.</li>
+<li><em>removeProfileZone</em> - removes a profile zone from the manager.</li>
+<li><em>createProfileZone</em> - creates a new profile zone and adds it to the manager.</li>
+<li><em>release</em> - destroys the profile zone manager.</li>
+</ul>
+</div>
+<div class="section" id="pxprofilezone">
+<h3>PxProfileZone<a class="headerlink" href="#pxprofilezone" title="Permalink to this headline">¶</a></h3>
+<p><em>PxProfileZone</em> serves as an island of profile events. When <em>flushProfileEvents</em> is called, the flushed events buffer can be captured by all <em>PxProfileZoneClient</em> instances that have been added to the <em>PxProfileZone</em>. Example code is provided in Section <a class="reference internal" href="#pxprofilezoneclient-and-pxprofileeventhandler"><em>PxProfileZoneClient and PxProfileEventHandler</em></a>, while instantiation of a <em>PxProfileZone</em> is detailed in section <a class="reference internal" href="#adding-custom-profile-zones"><em>Adding Custom Profile Zones</em></a>.</p>
+<p>Further key functions are</p>
+<ul class="simple">
+<li><em>startEvent</em> - starts the event profiling.</li>
+<li><em>stopEvent</em> - stops the event profiling.</li>
+<li><em>addClient</em> - adds <em>PxProfileZoneClient</em>.</li>
+<li><em>removeClient</em> - removes <em>PxProfileZoneClient</em>.</li>
+<li><em>flushProfileEvents</em> - flushes the profile events for <em>PxProfileZoneClients</em>.</li>
+<li><em>release</em> - destroys the profile zone.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="shutdown">
+<h2>Shutdown<a class="headerlink" href="#shutdown" title="Permalink to this headline">¶</a></h2>
+<p>The shutdown process follows the pattern typical of the PhysX SDK:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">gProfileZoneManager</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If a <em>PxProfileZone</em> has been instantiated outside the PhysX SDK then it must also be released:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">gProfileZone</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extracting-physx-sdk-event-data">
+<h2>Extracting PhysX SDK Event Data<a class="headerlink" href="#extracting-physx-sdk-event-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Overview<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The principal classes involved are <em>PxDefaultBufferedProfiler</em> and <em>PxBufferedProfilerCallback</em>.  The event buffer, described in Section <a class="reference internal" href="#basic-concepts"><em>Basic Concepts</em></a>, is flushed with the function <em>PxDefaultBufferedProfiler::flushEvents</em>.  After calling this function the contents of the event buffer are sent (one event at a time) to the callback so that they may be recorded for later use.  These classes shall be discussed in more detail in the following Sections.</p>
+</div>
+<div class="section" id="pxdefaultbufferedprofiler">
+<h3>PxDefaultBufferedProfiler<a class="headerlink" href="#pxdefaultbufferedprofiler" title="Permalink to this headline">¶</a></h3>
+<p>Instances of <em>PxDefaultBufferedProfiler</em> are created by calling the function <em>PxDefaultBufferedProfilerCreate</em>.  The specific profile zones that will be managed by the instantiated <em>PxDefaultBufferedProfiler</em> are governed by a string detailing the zone names.</p>
+<p>Further key functions are</p>
+<ul class="simple">
+<li><em>flushEvents</em> - flushes all event buffers that were specified in <em>PxDefaultBufferedProfilerCreate</em>.</li>
+<li><em>addBufferedProfilerCallback</em> - adds a <em>PxBufferedProfilerCallback</em> instance, which receives the events after calling flushEvents.</li>
+<li><em>removeBufferedProfilerCallback</em> - removes a <em>PxBufferedProfilerCallback</em> instance.</li>
+<li><em>release</em> - releases the default buffered profiler.</li>
+</ul>
+<p>Instances of <em>PxDefaultBufferedProfiler</em> must be created before the <em>PxPhysics</em> instance because the function <em>PxCreatePhysics</em> takes a reference to a <em>PxFoundation</em> as function argument. The extensions class <em>PxDefaultBufferedProfiler</em> constructs and owns the required <em>PxProfileZoneManager</em> instance. Example code is as follows:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// PxProfileZoneManager is instantiated before PxPhysics to ensure that a PxProfileZoneManager</span>
+<span class="c1">// instance can be passed to PxCreatePhysics as a function argument.</span>
+<span class="n">gDefaultBufferProfiler</span> <span class="o">=</span> <span class="n">PxDefaultBufferedProfilerCreate</span><span class="p">(</span><span class="o">*</span><span class="n">gFoundation</span><span class="p">,</span> <span class="s">&quot;PhysXSDK ApexSDK&quot;</span><span class="p">);</span>
+
+<span class="n">gPhysics</span> <span class="o">=</span> <span class="n">PxCreatePhysics</span><span class="p">(</span><span class="n">PX_PHYSICS_VERSION</span><span class="p">,</span> <span class="o">*</span><span class="n">gFoundation</span><span class="p">,</span> <span class="n">PxTolerancesScale</span><span class="p">(),</span> <span class="nb">true</span><span class="p">,</span>
+    <span class="o">&amp;</span><span class="n">gDefaultBufferProfiler</span><span class="o">-&gt;</span><span class="n">getProfileZoneManager</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pxbufferedprofilercallback">
+<h3>PxBufferedProfilerCallback<a class="headerlink" href="#pxbufferedprofilercallback" title="Permalink to this headline">¶</a></h3>
+<p>The <em>PxBufferedProfilerCallback</em> class manages the reporting and recording of profile events after flushing the event buffer.  When used in conjunction with <em>PxDefaultBufferedProfiler</em> the events in all profile zones being managed by the <em>PxDefaultBufferedProfiler</em> instance are sent to the callback.  The function <em>PxBufferedProfilerCallback::onEvent</em> receives each event in sequence after the buffers have been flushed.</p>
+<p>Events are sent to the callback using the <em>PxBufferedProfilerEvent</em> struct.  This struct has several member variables:</p>
+<ul class="simple">
+<li><em>startTimeNs</em> - the event start time in nanoseconds.</li>
+<li><em>stopTimeNs</em> - the event end time in nanoseconds.</li>
+<li><em>name</em> - the event name.</li>
+<li><em>profileZoneName</em> - the name of the profile zone in which the event was generated.</li>
+<li><em>contextId</em> - the event contextId.</li>
+<li><em>threadId</em> - the thread in which the event was executed.</li>
+<li><em>id</em> - the event ID.</li>
+<li><em>threadPriority</em> - the priority of the thread in which the event was executed.</li>
+<li><em>cpuId</em> - the CPU on which the event was executed.</li>
+</ul>
+<p>An example implementation is as follows:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// This is the main class that handles events and collects them for later printing</span>
+<span class="k">class</span> <span class="nc">SnippetBufferedProfilerCallback</span><span class="o">:</span> <span class="k">public</span> <span class="n">PxBufferedProfilerCallback</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="c1">// if the event buffer is flushed, each event is send in this callback</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">onEvent</span><span class="p">(</span><span class="k">const</span> <span class="n">PxBufferedProfilerEvent</span><span class="o">&amp;</span> <span class="n">event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">mEvents</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>   <span class="n">snippetBufferedProfilerCallback</span><span class="p">;</span>
+
+<span class="c1">// we add our callback to receive events after the event buffer has been flushed.</span>
+<span class="n">gDefaultBufferProfiler</span><span class="o">-&gt;</span><span class="n">addBufferedProfilerCallback</span><span class="p">(</span><span class="n">snippetBufferedProfilerCallback</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For more implementation details please see the <em>PxDefaultBufferedProfiler</em> extension class and SnippetProfileZone.</p>
+</div>
+</div>
+<div class="section" id="adding-custom-profile-zones">
+<span id="id3"></span><h2>Adding Custom Profile Zones<a class="headerlink" href="#adding-custom-profile-zones" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>Introduction<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>The key classes involved are <em>PxProfileZoneManager</em>, <em>PxProfileZone</em> and <em>PxProfileNameProvider</em>. For each <em>PxProfileZone</em> a <em>PxProfileNameProvider</em> instance is used to describe the mapping between profile event integer IDs and strings that are used for PVD visualization.</p>
+<p>Custom profile events can be described with one or more <em>PxProfileZone</em> instances.  Adding these <em>PxProfileZone</em> instances to the singleton <em>PxProfileZoneManager</em> instance (that is passed to <em>PxCreatePhysics</em>) allows custom events to be profiled in addition to PhysX profile events.</p>
+</div>
+<div class="section" id="pxprofilenameprovider-and-customization-of-pxprofilezone">
+<h3>PxProfileNameProvider And Customization of PxProfileZone<a class="headerlink" href="#pxprofilenameprovider-and-customization-of-pxprofilezone" title="Permalink to this headline">¶</a></h3>
+<p>The <em>PxProfileNameProvider</em> class describes the mapping between the integer ID of each custom profile event and a corresponding string used for visualization in PVD.</p>
+<p>For example, three unique custom events with mapped strings can be added to the custom profile zone as follows:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// profile IDs used for identification within a profileZone</span>
+<span class="k">enum</span> <span class="n">E_ProfileIds</span>
+<span class="p">{</span>
+    <span class="n">E_PROFILE_ID_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">E_PROFILE_ID_2</span><span class="p">,</span>
+    <span class="n">E_PROFILE_ID_3</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// profile events definitions</span>
+<span class="k">static</span> <span class="n">PxProfileEventName</span> <span class="n">gEventNames</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">PxProfileEventName</span><span class="p">(</span> <span class="s">&quot;Profile_Id1&quot;</span><span class="p">,</span> <span class="n">PxProfileEventId</span><span class="p">(</span> <span class="n">E_PROFILE_ID_1</span> <span class="p">)</span> <span class="p">),</span>
+    <span class="n">PxProfileEventName</span><span class="p">(</span> <span class="s">&quot;Profile_Id2&quot;</span><span class="p">,</span> <span class="n">PxProfileEventId</span><span class="p">(</span> <span class="n">E_PROFILE_ID_2</span> <span class="p">)</span> <span class="p">),</span>
+    <span class="n">PxProfileEventName</span><span class="p">(</span> <span class="s">&quot;Profile_Id3&quot;</span><span class="p">,</span> <span class="n">PxProfileEventId</span><span class="p">(</span> <span class="n">E_PROFILE_ID_3</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This mapping is passed to the <em>PxProfileZone</em> instance by first implementing a sub-class of <em>PxProfileNameProvider</em> and then passing an instance of the sub-class to <em>PxProfileZone::createProfileZone</em>.  The following code creates an instance of a sub-class of <em>PxProfileNameProvider</em>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">ExampleProfileEventNameProvider</span> <span class="o">:</span> <span class="k">public</span> <span class="n">physx</span><span class="o">::</span><span class="n">PxProfileNameProvider</span>
+<span class="p">{</span>
+    <span class="k">virtual</span> <span class="n">physx</span><span class="o">::</span><span class="n">PxProfileNames</span> <span class="n">getProfileNames</span><span class="p">()</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">PxProfileNames</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">gEventNames</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="n">ExampleProfileEventNameProvider</span>    <span class="n">gExampleProfileZoneNameProvider</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The last step is to pass the mapping as a function argument to <em>PxProfileZone::createProfileZone</em>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">gProfileZone</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">physx</span><span class="o">::</span><span class="n">PxProfileZone</span><span class="o">::</span><span class="n">createProfileZone</span><span class="p">(</span><span class="n">gFoundation</span><span class="p">,</span>
+    <span class="s">&quot;ExampleProfileZone&quot;</span><span class="p">,</span> <span class="n">gExampleProfileZoneNameProvider</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><em>PxProfileZone</em> is instantiated and added to the <em>PxProfileZoneManager</em> instance with the following code:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">createProfilerZone</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">gProfileZoneManager</span><span class="o">-&gt;</span><span class="n">addProfileZone</span><span class="p">(</span><span class="o">*</span><span class="n">gProfileZone</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="profiling">
+<h3>Profiling<a class="headerlink" href="#profiling" title="Permalink to this headline">¶</a></h3>
+<p>Each event in a profile zone can be profiled with the <em>startEvent</em> and <em>stopEvent</em> functions:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">updateProfileZones</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// start profile zone 1</span>
+    <span class="n">gProfileZone</span><span class="o">-&gt;</span><span class="n">startEvent</span><span class="p">(</span> <span class="n">E_PROFILE_ID_1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="c1">// start and end profile zone 2</span>
+    <span class="n">shdfnd</span><span class="o">::</span><span class="n">Thread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">{</span>
+        <span class="n">gProfileZone</span><span class="o">-&gt;</span><span class="n">startEvent</span><span class="p">(</span> <span class="n">E_PROFILE_ID_2</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">shdfnd</span><span class="o">::</span><span class="n">Thread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+        <span class="n">gProfileZone</span><span class="o">-&gt;</span><span class="n">stopEvent</span><span class="p">(</span> <span class="n">E_PROFILE_ID_2</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// start and end profile zone 3</span>
+    <span class="p">{</span>
+        <span class="n">gProfileZone</span><span class="o">-&gt;</span><span class="n">startEvent</span><span class="p">(</span> <span class="n">E_PROFILE_ID_3</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">shdfnd</span><span class="o">::</span><span class="n">Thread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+        <span class="n">gProfileZone</span><span class="o">-&gt;</span><span class="n">stopEvent</span><span class="p">(</span> <span class="n">E_PROFILE_ID_3</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// end profile zone 1</span>
+    <span class="n">gProfileZone</span><span class="o">-&gt;</span><span class="n">stopEvent</span><span class="p">(</span> <span class="n">E_PROFILE_ID_1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="advanced">
+<h2>Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="extracting-physx-sdk-event-data-using-the-pxprofilezonemanager-interface">
+<h3>Extracting PhysX SDK Event Data Using The PxProfileZoneManager Interface<a class="headerlink" href="#extracting-physx-sdk-event-data-using-the-pxprofilezonemanager-interface" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h4>Overview<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>The principal classes involved are <em>PxProfileZoneManager</em>, <em>PxProfileZone</em> and the event buffer described in Section <a class="reference internal" href="#basic-concepts"><em>Basic Concepts</em></a>.</p>
+<p>In order to flush the buffer of a profile zone, a reference to a <em>PxProfileZone</em> instance must first be retrieved.  Profile zones internal to the PhysX SDK may be retrieved by implementing a sub-class of <em>PxProfileZoneHandler</em> and adding it to <em>PxProfileZoneManager</em>.  The implemented functions <em>PxProfileZoneHandler::onZoneAdded</em> and <em>PxProfileZoneHandler::onZoneRemoved</em> receive references to affected profile zones.</p>
+</div>
+<div class="section" id="pxprofilezonehandler">
+<span id="id6"></span><h4>PxProfileZoneHandler<a class="headerlink" href="#pxprofilezonehandler" title="Permalink to this headline">¶</a></h4>
+<p><em>PxProfileZoneHandler</em> handles addition/removal of a <em>PxProfileZone</em> to/from <em>PxProfileZoneManager</em>. More specifically, it receives references to added/removed <em>PxProfileZone</em> instances.  This is particularly useful for gaining access to profile event data that is internal to the PhysX SDK.  The following code illustrates how this might be used in practice:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// our zone handler. This is used to watch for the zone we&#39;re interested in, and then hook</span>
+<span class="c1">// our client into it.</span>
+<span class="k">class</span> <span class="nc">ExampleProfileZoneHandler</span><span class="o">:</span> <span class="k">public</span> <span class="n">PxProfileZoneHandler</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+
+    <span class="c1">// check for the PhysXSDK profile zone</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">onZoneAdded</span><span class="p">(</span> <span class="n">PxProfileZone</span><span class="o">&amp;</span> <span class="n">inSDK</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">inSDK</span><span class="p">.</span><span class="n">getName</span><span class="p">(),</span><span class="s">&quot;PhysXSDK&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">gPhysXProfileZone</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">inSDK</span><span class="p">;</span>
+            <span class="n">inSDK</span><span class="p">.</span><span class="n">addClient</span><span class="p">(</span><span class="n">exampleProfileZoneClient</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">onZoneRemoved</span><span class="p">(</span> <span class="n">PxProfileZone</span><span class="o">&amp;</span>  <span class="p">)</span>    <span class="p">{}</span>
+
+<span class="p">}</span>   <span class="n">exampleProfileZoneHandler</span><span class="p">;</span>
+
+<span class="c1">// first create the PxProfileZoneManager</span>
+<span class="n">gProfileZoneManager</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">PxProfileZoneManager</span><span class="o">::</span><span class="n">createProfileZoneManager</span><span class="p">(</span><span class="n">gFoundation</span><span class="p">);</span>
+
+<span class="c1">// when PhysX starts up, it will add a profile zone to the manager. We register the</span>
+<span class="c1">// handler before creating PxPhysics, so that it receives the zone creation event.</span>
+<span class="c1">// When we receive the event, we attach our client to the zone.</span>
+<span class="n">gProfileZoneManager</span><span class="o">-&gt;</span><span class="n">addProfileZoneHandler</span><span class="p">(</span><span class="n">exampleProfileZoneHandler</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pxprofilezoneclient-and-pxprofileeventhandler">
+<span id="id7"></span><h4>PxProfileZoneClient and PxProfileEventHandler<a class="headerlink" href="#pxprofilezoneclient-and-pxprofileeventhandler" title="Permalink to this headline">¶</a></h4>
+<p>The class <em>PxProfileZoneClient</em> captures profile event data when the event buffer of a <em>PxProfileZone</em> instance is flushed using the function <em>PxProfileZone::flushProfileEvents</em>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// our profile zone client. This forwards events to our handler object.</span>
+<span class="k">class</span> <span class="nc">ExampleProfileZoneClient</span> <span class="o">:</span> <span class="k">public</span> <span class="n">PxProfileZoneClient</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleEventAdded</span><span class="p">(</span> <span class="k">const</span> <span class="n">PxProfileEventName</span><span class="o">&amp;</span> <span class="p">)</span> <span class="p">{}</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleClientRemoved</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleBufferFlush</span><span class="p">(</span> <span class="k">const</span> <span class="n">PxU8</span><span class="o">*</span> <span class="n">inData</span><span class="p">,</span> <span class="n">PxU32</span> <span class="n">inLength</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">PxProfileEventHandler</span><span class="o">::</span><span class="n">parseEventBuffer</span><span class="p">(</span><span class="n">inData</span><span class="p">,</span> <span class="n">inLength</span><span class="p">,</span> <span class="n">exampleProfileEventHandler</span><span class="p">,</span>
+            <span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>   <span class="n">exampleProfileZoneClient</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Registering the client with the profile zone can be achieved automatically by implementing the function <em>PxProfileZoneHandler::onZoneAdded</em>,  as illustrated in Section <a class="reference internal" href="#pxprofilezonehandler"><em>PxProfileZoneHandler</em></a>.</p>
+<p>In ExampleProfileZone, the buffer is flushed immediately after the simulate step has been completed:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// in the update loop</span>
+<span class="n">gScene</span><span class="o">-&gt;</span><span class="n">fetchResults</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+<span class="c1">// flush the profile zone events so we can parse them and get the recorded data</span>
+<span class="k">if</span><span class="p">(</span><span class="n">gPhysXProfileZone</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">gPhysXProfileZone</span><span class="o">-&gt;</span><span class="n">flushProfileEvents</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A complete set of PhysX SDK event data is guaranteed if the event buffer is flushed after <em>PxScene::fetchResults</em> has been called.</p>
+</div>
+<p>The <em>PxProfileEventHandler</em> class parses the flushed event buffer. Please note that events are sent per thread and that cross-thread events have a specific identifier <em>PxProfileEventSender::CrossThreadId</em>. An example of how to parse the events per thread is as follows:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// This is the main class that handles stop and start events and collects them for later printing</span>
+<span class="k">class</span> <span class="nc">ExampleProfileEventHandler</span><span class="o">:</span> <span class="k">public</span> <span class="n">PxProfileEventHandler</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+
+    <span class="k">static</span> <span class="k">const</span> <span class="n">PxU32</span>     <span class="n">COLLECTION_SIZE</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">const</span> <span class="n">PxU32</span>     <span class="n">NUM_COLLECTIONS</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+
+    <span class="c1">// help structure to hold the event data. Times are in profiler ticks that are converted when</span>
+    <span class="c1">// we print.</span>
+    <span class="k">struct</span> <span class="n">ProfileEvent</span>
+    <span class="p">{</span>
+        <span class="n">PxU16</span> <span class="n">id</span><span class="p">;</span>
+        <span class="n">PxU64</span> <span class="n">startTime</span><span class="p">;</span>
+        <span class="n">PxU64</span> <span class="n">stopTime</span><span class="p">;</span>
+
+        <span class="k">static</span> <span class="k">const</span> <span class="n">PxU64</span> <span class="n">INVALID_TIME</span> <span class="o">=</span> <span class="n">PxU64</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="n">EventCollection</span>
+    <span class="p">{</span>
+        <span class="n">PxU32</span>              <span class="n">threadId</span><span class="p">;</span>
+        <span class="n">ProfileEvent</span>       <span class="n">events</span><span class="p">[</span><span class="n">COLLECTION_SIZE</span><span class="p">];</span>
+        <span class="n">PxU32</span>              <span class="n">numEvents</span><span class="p">;</span>
+    <span class="p">};</span>
+
+<span class="nl">public:</span>
+    <span class="n">ExampleProfileEventHandler</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">clear</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">onStartEvent</span><span class="p">(</span> <span class="k">const</span> <span class="n">PxProfileEventId</span><span class="o">&amp;</span> <span class="n">inId</span><span class="p">,</span> <span class="n">PxU32</span> <span class="n">threadId</span><span class="p">,</span> <span class="n">PxU64</span> <span class="n">contextId</span><span class="p">,</span>
+        <span class="n">PxU8</span> <span class="n">cpuId</span><span class="p">,</span> <span class="n">PxU8</span> <span class="n">threadPriority</span><span class="p">,</span> <span class="n">PxU64</span> <span class="n">timestamp</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">PX_UNUSED</span><span class="p">(</span><span class="n">contextId</span><span class="p">);</span>
+        <span class="n">PX_UNUSED</span><span class="p">(</span><span class="n">cpuId</span><span class="p">);</span>
+        <span class="n">PX_UNUSED</span><span class="p">(</span><span class="n">threadPriority</span><span class="p">);</span>
+
+        <span class="n">EventCollection</span><span class="o">*</span> <span class="n">threadCollection</span> <span class="o">=</span> <span class="n">findCollection</span><span class="p">(</span><span class="n">threadId</span><span class="p">);</span>
+
+        <span class="c1">// add a new collection for this thread ID if it&#39;s not already there</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">threadCollection</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">threadCollection</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">mThreadCollections</span><span class="p">[</span><span class="n">mNumThreads</span><span class="o">++</span><span class="p">];</span>
+            <span class="n">threadCollection</span><span class="o">-&gt;</span><span class="n">threadId</span> <span class="o">=</span> <span class="n">threadId</span><span class="p">;</span>
+            <span class="n">PX_ASSERT</span><span class="p">(</span><span class="n">mNumThreads</span> <span class="o">&lt;</span> <span class="n">NUM_COLLECTIONS</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// add the event record</span>
+        <span class="n">ProfileEvent</span> <span class="n">ev</span> <span class="o">=</span> <span class="p">{</span> <span class="n">inId</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">ProfileEvent</span><span class="o">::</span><span class="n">INVALID_TIME</span> <span class="p">};</span>
+        <span class="n">threadCollection</span><span class="o">-&gt;</span><span class="n">events</span><span class="p">[</span><span class="n">threadCollection</span><span class="o">-&gt;</span><span class="n">numEvents</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">ev</span><span class="p">;</span>
+
+        <span class="n">PX_ASSERT</span><span class="p">(</span><span class="n">threadCollection</span><span class="o">-&gt;</span><span class="n">numEvents</span> <span class="o">&lt;</span> <span class="n">COLLECTION_SIZE</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">onStopEvent</span><span class="p">(</span> <span class="k">const</span> <span class="n">PxProfileEventId</span><span class="o">&amp;</span> <span class="n">inId</span><span class="p">,</span> <span class="n">PxU32</span> <span class="n">threadId</span><span class="p">,</span> <span class="n">PxU64</span> <span class="n">contextId</span><span class="p">,</span>
+        <span class="n">PxU8</span> <span class="n">cpuId</span><span class="p">,</span> <span class="n">PxU8</span> <span class="n">threadPriority</span><span class="p">,</span> <span class="n">PxU64</span> <span class="n">timestamp</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">PX_UNUSED</span><span class="p">(</span><span class="n">contextId</span><span class="p">);</span>
+        <span class="n">PX_UNUSED</span><span class="p">(</span><span class="n">cpuId</span><span class="p">);</span>
+        <span class="n">PX_UNUSED</span><span class="p">(</span><span class="n">threadPriority</span><span class="p">);</span>
+
+        <span class="n">EventCollection</span><span class="o">*</span> <span class="n">threadCollection</span> <span class="o">=</span> <span class="n">findCollection</span><span class="p">(</span><span class="n">threadId</span><span class="p">);</span>
+        <span class="n">PX_ASSERT</span><span class="p">(</span><span class="n">threadCollection</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">// an event (e.g. narrow phase batch) can occur several times per thread per frame, so</span>
+        <span class="c1">// we take the earliest event with a matching ID that does not yet have a stop time</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">threadCollection</span><span class="o">-&gt;</span><span class="n">numEvents</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ProfileEvent</span><span class="o">&amp;</span> <span class="n">ev</span> <span class="o">=</span> <span class="n">threadCollection</span><span class="o">-&gt;</span><span class="n">events</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">ev</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">inId</span><span class="p">.</span><span class="n">mEventId</span> <span class="o">&amp;&amp;</span> <span class="n">ev</span><span class="p">.</span><span class="n">stopTime</span> <span class="o">==</span> <span class="n">ProfileEvent</span><span class="o">::</span><span class="n">INVALID_TIME</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">PX_ASSERT</span><span class="p">(</span><span class="n">timestamp</span> <span class="o">&gt;</span> <span class="n">ev</span><span class="p">.</span><span class="n">startTime</span><span class="p">);</span>
+                <span class="n">ev</span><span class="p">.</span><span class="n">stopTime</span> <span class="o">=</span> <span class="n">timestamp</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">onEventValue</span><span class="p">(</span> <span class="k">const</span> <span class="n">PxProfileEventId</span><span class="o">&amp;</span> <span class="p">,</span> <span class="n">PxU32</span> <span class="p">,</span> <span class="n">PxU64</span> <span class="p">,</span> <span class="n">PxI64</span>  <span class="p">)</span> <span class="p">{}</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">onCUDAProfileBuffer</span><span class="p">(</span> <span class="n">PxU64</span> <span class="p">,</span> <span class="n">PxF32</span> <span class="p">,</span> <span class="k">const</span> <span class="n">PxU8</span><span class="o">*</span> <span class="p">,</span> <span class="n">PxU32</span> <span class="p">,</span> <span class="n">PxU32</span>  <span class="p">)</span> <span class="p">{}</span>
+
+    <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">mNumThreads</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">mCrossThreadCollection</span><span class="p">.</span><span class="n">numEvents</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">NUM_COLLECTIONS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">mThreadCollections</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">numEvents</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// lets print the stored events on screen</span>
+    <span class="kt">void</span> <span class="n">printEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;-------------------------- frame start -------------------------------- </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;---------------------- Cross-thread events ---------------------------- </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="n">printCollection</span><span class="p">(</span><span class="n">mCrossThreadCollection</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">mNumThreads</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">---------------------- Thread ID %d events -------------------------- </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="n">mThreadCollections</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">threadId</span><span class="p">);</span>
+            <span class="n">printCollection</span><span class="p">(</span><span class="n">mThreadCollections</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;--------------------------- frame end --------------------------------- </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="n">clear</span><span class="p">();</span>
+    <span class="p">}</span>
+
+<span class="nl">protected:</span>
+    <span class="n">EventCollection</span><span class="o">*</span> <span class="n">findCollection</span><span class="p">(</span><span class="n">PxU32</span> <span class="n">threadId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">threadId</span> <span class="o">==</span> <span class="n">PxProfileEventSender</span><span class="o">::</span><span class="n">CrossThreadId</span><span class="p">)</span>
+            <span class="k">return</span> <span class="o">&amp;</span><span class="n">mCrossThreadCollection</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">mNumThreads</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">mThreadCollections</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">threadId</span> <span class="o">==</span> <span class="n">threadId</span><span class="p">)</span>
+                <span class="k">return</span> <span class="o">&amp;</span><span class="n">mThreadCollections</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">printCollection</span><span class="p">(</span><span class="k">const</span> <span class="n">EventCollection</span> <span class="o">&amp;</span><span class="n">collection</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">collection</span><span class="p">.</span><span class="n">numEvents</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">const</span> <span class="n">ProfileEvent</span><span class="o">&amp;</span> <span class="n">ev</span> <span class="o">=</span> <span class="n">collection</span><span class="p">.</span><span class="n">events</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">name</span> <span class="o">=</span> <span class="n">findEventName</span><span class="p">(</span><span class="n">ev</span><span class="p">.</span><span class="n">id</span><span class="p">);</span>
+            <span class="n">PxU64</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">shdfnd</span><span class="o">::</span><span class="n">Time</span><span class="o">::</span><span class="n">getBootCounterFrequency</span><span class="p">().</span><span class="n">toTensOfNanos</span>
+                <span class="p">(</span> <span class="n">ev</span><span class="p">.</span><span class="n">stopTime</span> <span class="o">-</span> <span class="n">ev</span><span class="p">.</span><span class="n">startTime</span> <span class="p">);</span>
+            <span class="kt">float</span> <span class="n">timeInMs</span> <span class="o">=</span> <span class="n">duration</span><span class="o">/</span><span class="mf">100000.0f</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%-40s: %5.5f ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">timeInMs</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+
+    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">findEventName</span><span class="p">(</span><span class="n">PxU16</span> <span class="n">eventId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">const</span> <span class="n">PxProfileNames</span><span class="o">&amp;</span> <span class="n">names</span> <span class="o">=</span> <span class="n">gPhysXProfileZone</span><span class="o">-&gt;</span><span class="n">getProfileNames</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">PxU32</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">names</span><span class="p">.</span><span class="n">mEventCount</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">names</span><span class="p">.</span><span class="n">mEvents</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">mEventId</span><span class="p">.</span><span class="n">mEventId</span> <span class="o">==</span> <span class="n">eventId</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">names</span><span class="p">.</span><span class="n">mEvents</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">mName</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;unknown event&gt;&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">EventCollection</span>        <span class="n">mCrossThreadCollection</span><span class="p">;</span>
+    <span class="n">EventCollection</span>        <span class="n">mThreadCollections</span><span class="p">[</span><span class="n">NUM_COLLECTIONS</span><span class="p">];</span>
+    <span class="n">PxU32</span>                  <span class="n">mNumThreads</span><span class="p">;</span>
+
+<span class="p">}</span>   <span class="n">exampleProfileEventHandler</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../Index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ProfileZoneManager and ProfileZone</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#basic-concepts">Basic Concepts</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#pxprofilezonemanager">PxProfileZoneManager</a></li>
+<li><a class="reference internal" href="#pxprofilezone">PxProfileZone</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shutdown">Shutdown</a></li>
+<li><a class="reference internal" href="#extracting-physx-sdk-event-data">Extracting PhysX SDK Event Data</a><ul>
+<li><a class="reference internal" href="#id2">Overview</a></li>
+<li><a class="reference internal" href="#pxdefaultbufferedprofiler">PxDefaultBufferedProfiler</a></li>
+<li><a class="reference internal" href="#pxbufferedprofilercallback">PxBufferedProfilerCallback</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#adding-custom-profile-zones">Adding Custom Profile Zones</a><ul>
+<li><a class="reference internal" href="#id4">Introduction</a></li>
+<li><a class="reference internal" href="#pxprofilenameprovider-and-customization-of-pxprofilezone">PxProfileNameProvider And Customization of PxProfileZone</a></li>
+<li><a class="reference internal" href="#profiling">Profiling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced">Advanced</a><ul>
+<li><a class="reference internal" href="#extracting-physx-sdk-event-data-using-the-pxprofilezonemanager-interface">Extracting PhysX SDK Event Data Using The PxProfileZoneManager Interface</a><ul>
+<li><a class="reference internal" href="#id5">Overview</a></li>
+<li><a class="reference internal" href="#pxprofilezonehandler">PxProfileZoneHandler</a></li>
+<li><a class="reference internal" href="#pxprofilezoneclient-and-pxprofileeventhandler">PxProfileZoneClient and PxProfileEventHandler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Cloth.html"
+                        title="previous chapter">Cloth</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="DebugVisualization.html"
+                        title="next chapter">Debug Visualization</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="DebugVisualization.html" title="Debug Visualization"
+             >next</a></li>
+        <li class="right" >
+          <a href="Cloth.html" title="Cloth"
+             >previous</a> |</li>
+        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.3 Documentation</a> &raquo;</li>
+          <li><a href="Index.html" >User's Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2015 NVIDIA Corporation, 2701 San Tomas Expressway, Santa Clara, CA 95050 U.S.A. All rights reserved.
+    </div>
+  </body>
+</html>
