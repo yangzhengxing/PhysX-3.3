@@ -239,6 +239,10 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ResourceCompile Include="..\resource\apex.rc">
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="..\..\module\clothing\src\ClothingActor.cpp">
     </ClCompile>
     <ClCompile Include="..\..\module\clothing\src\ClothingActorData.cpp">
