@@ -1708,7 +1708,12 @@ void DestructibleAsset::applyTransformation(const physx::PxMat44& transformation
 
 	/* bounds */
 	PX_ASSERT(!mParams->bounds.isEmpty());
-	mParams->bounds.scaleFast(scale);
+	mParams->bounds.minimum *= scale;
+	mParams->bounds.maximum *= scale;
+	if (scale < 0.0f)
+	{
+		physx::swap(mParams->bounds.minimum, mParams->bounds.maximum);
+	}
 	mParams->bounds = physx::transform(transformation, mParams->bounds);
 
 	/* chunk convex hulls */

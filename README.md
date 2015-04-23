@@ -17,3 +17,4 @@ Supported platforms: Windows, Linux, OSX, Android,iOS
 ________________________________________________________________________________________________
 To build PhysX Snippets: open one of the solutions found under \PhysXSDK\Snippets\compiler.
 To build PhysX Samples: open one of the solutions found under \PhysXSDK\Samples\compiler.
+
