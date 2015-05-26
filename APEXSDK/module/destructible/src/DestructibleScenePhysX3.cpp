@@ -62,6 +62,11 @@ void DestructibleUserNotify::onConstraintBreak(PxConstraintInfo* constraints, Px
 
 void DestructibleUserNotify::onWake(PxActor** actors, physx::PxU32 count)
 {
+	if (mDestructibleScene->mUsingActiveTransforms)	// The remaining code in this function only updates the destructible actor awake list when not using active transforms
+	{
+		return;
+	}
+
 	for (physx::PxU32 i = 0; i < count; i++)
 	{
 		PxActor* actor = actors[i];
@@ -102,6 +107,11 @@ void DestructibleUserNotify::onWake(PxActor** actors, physx::PxU32 count)
 
 void DestructibleUserNotify::onSleep(PxActor** actors, physx::PxU32 count)
 {
+	if (mDestructibleScene->mUsingActiveTransforms)	// The remaining code in this function only updates the destructible actor awake list when not using active transforms
+	{
+		return;
+	}
+
 	for (physx::PxU32 i = 0; i < count; i++)
 	{
 		PxActor* actor = actors[i];
@@ -364,7 +374,7 @@ void DestructibleContactModify::onContactModify(PxContactModifyPair* const pairs
 		const int externalRBIndex = (int)(moduleOwnsActor[1] == 0);
 
 		destructibleScene->mApexScene->getPhysXScene()->lockRead();
-		const bool externalActorDynamic = pair.shape[externalRBIndex]->getActor()->isRigidDynamic() != NULL;
+		const bool externalActorDynamic = pair.actor[externalRBIndex]->isRigidDynamic() != NULL;
 		destructibleScene->mApexScene->getPhysXScene()->unlockRead();
 
 		if (!externalActorDynamic)
@@ -700,7 +710,22 @@ void DestructibleScene::addActorsToScene()
 					PxRigidDynamic* rigidDynamic = actor->isRigidDynamic();
 					if (rigidDynamic && !(rigidDynamic->getRigidDynamicFlags() & physx::PxRigidDynamicFlag::eKINEMATIC))
 					{
-						PxRigidBodyExt::addForceAtPos(*actor->isRigidBody(), forceToAdd.force, forceToAdd.pos, forceToAdd.mode, forceToAdd.wakeup);
+						if (!forceToAdd.force.isZero())
+						{
+							PxRigidBodyExt::addForceAtPos(*actor->isRigidBody(), forceToAdd.force, forceToAdd.pos, forceToAdd.mode, forceToAdd.wakeup);
+						}
+						else
+						{
+							// No force, but we will apply the wakeup flag
+							if (forceToAdd.wakeup)
+							{
+								rigidDynamic->wakeUp();
+							}
+							else
+							{
+								rigidDynamic->putToSleep();
+							}
+						}
 					}
 				}
 			}

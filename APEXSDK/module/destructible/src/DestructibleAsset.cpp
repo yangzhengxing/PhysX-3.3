@@ -3542,7 +3542,7 @@ physx::Array<NxConvexMesh*>* DestructibleAssetCollision::getConvexMeshesAtScale(
 	return &mConvexMeshContainer[(physx::PxU32)scaleIndex];
 }
 
-physx::PxFileBuf& DestructibleAssetCollision::deserialize(physx::PxFileBuf& stream)
+physx::PxFileBuf& DestructibleAssetCollision::deserialize(physx::PxFileBuf& stream, const char* assetName)
 {
 	// If there are any referenced meshes in ANY scales we're going to revoke this operation as not supported
 	for (physx::PxU32 i=0; i<mConvexMeshContainer.size(); i++)
@@ -3565,6 +3565,9 @@ physx::PxFileBuf& DestructibleAssetCollision::deserialize(physx::PxFileBuf& stre
 	NxParameterized::Handle handle(*mParams);
 	mParams->getParameterHandle("assetName", handle);
 	mParams->setParamString(handle, name.c_str());
+
+	if (assetName != NULL)
+		mParams->setParamString(handle, assetName);
 
 	stream >> mParams->cookingPlatform;
 	stream >> mParams->cookingVersionNum;
