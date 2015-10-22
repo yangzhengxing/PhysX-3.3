@@ -59,20 +59,14 @@ LowLevelCloth_debug_common_cflags    += -MMD
 LowLevelCloth_debug_common_cflags    += $(addprefix -D, $(LowLevelCloth_debug_defines))
 LowLevelCloth_debug_common_cflags    += $(addprefix -I, $(LowLevelCloth_debug_hpaths))
 LowLevelCloth_debug_common_cflags  += -m64
+LowLevelCloth_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+LowLevelCloth_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+LowLevelCloth_debug_common_cflags  += -Wno-long-long
+LowLevelCloth_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+LowLevelCloth_debug_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+LowLevelCloth_debug_common_cflags  += -g3 -gdwarf-2
 LowLevelCloth_debug_cflags	:= $(LowLevelCloth_debug_common_cflags)
-LowLevelCloth_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevelCloth_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevelCloth_debug_cflags  += -Wno-long-long
-LowLevelCloth_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevelCloth_debug_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevelCloth_debug_cflags  += -g3 -gdwarf-2
 LowLevelCloth_debug_cppflags	:= $(LowLevelCloth_debug_common_cflags)
-LowLevelCloth_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevelCloth_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevelCloth_debug_cppflags  += -Wno-long-long
-LowLevelCloth_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevelCloth_debug_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevelCloth_debug_cppflags  += -g3 -gdwarf-2
 LowLevelCloth_debug_lflags    := $(LowLevelCloth_custom_lflags)
 LowLevelCloth_debug_lflags    += $(addprefix -L, $(LowLevelCloth_debug_lpaths))
 LowLevelCloth_debug_lflags    += -Wl,--start-group $(addprefix -l, $(LowLevelCloth_debug_libraries)) -Wl,--end-group
@@ -155,20 +149,14 @@ LowLevelCloth_checked_common_cflags    += -MMD
 LowLevelCloth_checked_common_cflags    += $(addprefix -D, $(LowLevelCloth_checked_defines))
 LowLevelCloth_checked_common_cflags    += $(addprefix -I, $(LowLevelCloth_checked_hpaths))
 LowLevelCloth_checked_common_cflags  += -m64
+LowLevelCloth_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+LowLevelCloth_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+LowLevelCloth_checked_common_cflags  += -Wno-long-long
+LowLevelCloth_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+LowLevelCloth_checked_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+LowLevelCloth_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 LowLevelCloth_checked_cflags	:= $(LowLevelCloth_checked_common_cflags)
-LowLevelCloth_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevelCloth_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevelCloth_checked_cflags  += -Wno-long-long
-LowLevelCloth_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevelCloth_checked_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevelCloth_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 LowLevelCloth_checked_cppflags	:= $(LowLevelCloth_checked_common_cflags)
-LowLevelCloth_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevelCloth_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevelCloth_checked_cppflags  += -Wno-long-long
-LowLevelCloth_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevelCloth_checked_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevelCloth_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 LowLevelCloth_checked_lflags    := $(LowLevelCloth_custom_lflags)
 LowLevelCloth_checked_lflags    += $(addprefix -L, $(LowLevelCloth_checked_lpaths))
 LowLevelCloth_checked_lflags    += -Wl,--start-group $(addprefix -l, $(LowLevelCloth_checked_libraries)) -Wl,--end-group
@@ -251,20 +239,14 @@ LowLevelCloth_profile_common_cflags    += -MMD
 LowLevelCloth_profile_common_cflags    += $(addprefix -D, $(LowLevelCloth_profile_defines))
 LowLevelCloth_profile_common_cflags    += $(addprefix -I, $(LowLevelCloth_profile_hpaths))
 LowLevelCloth_profile_common_cflags  += -m64
+LowLevelCloth_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+LowLevelCloth_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+LowLevelCloth_profile_common_cflags  += -Wno-long-long
+LowLevelCloth_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+LowLevelCloth_profile_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+LowLevelCloth_profile_common_cflags  += -O3 -fno-strict-aliasing
 LowLevelCloth_profile_cflags	:= $(LowLevelCloth_profile_common_cflags)
-LowLevelCloth_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevelCloth_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevelCloth_profile_cflags  += -Wno-long-long
-LowLevelCloth_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevelCloth_profile_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevelCloth_profile_cflags  += -O3 -fno-strict-aliasing
 LowLevelCloth_profile_cppflags	:= $(LowLevelCloth_profile_common_cflags)
-LowLevelCloth_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevelCloth_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevelCloth_profile_cppflags  += -Wno-long-long
-LowLevelCloth_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevelCloth_profile_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevelCloth_profile_cppflags  += -O3 -fno-strict-aliasing
 LowLevelCloth_profile_lflags    := $(LowLevelCloth_custom_lflags)
 LowLevelCloth_profile_lflags    += $(addprefix -L, $(LowLevelCloth_profile_lpaths))
 LowLevelCloth_profile_lflags    += -Wl,--start-group $(addprefix -l, $(LowLevelCloth_profile_libraries)) -Wl,--end-group
@@ -345,20 +327,14 @@ LowLevelCloth_release_common_cflags    += -MMD
 LowLevelCloth_release_common_cflags    += $(addprefix -D, $(LowLevelCloth_release_defines))
 LowLevelCloth_release_common_cflags    += $(addprefix -I, $(LowLevelCloth_release_hpaths))
 LowLevelCloth_release_common_cflags  += -m64
+LowLevelCloth_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+LowLevelCloth_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+LowLevelCloth_release_common_cflags  += -Wno-long-long
+LowLevelCloth_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+LowLevelCloth_release_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+LowLevelCloth_release_common_cflags  += -O3 -fno-strict-aliasing
 LowLevelCloth_release_cflags	:= $(LowLevelCloth_release_common_cflags)
-LowLevelCloth_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevelCloth_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevelCloth_release_cflags  += -Wno-long-long
-LowLevelCloth_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevelCloth_release_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevelCloth_release_cflags  += -O3 -fno-strict-aliasing
 LowLevelCloth_release_cppflags	:= $(LowLevelCloth_release_common_cflags)
-LowLevelCloth_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevelCloth_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevelCloth_release_cppflags  += -Wno-long-long
-LowLevelCloth_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevelCloth_release_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevelCloth_release_cppflags  += -O3 -fno-strict-aliasing
 LowLevelCloth_release_lflags    := $(LowLevelCloth_custom_lflags)
 LowLevelCloth_release_lflags    += $(addprefix -L, $(LowLevelCloth_release_lpaths))
 LowLevelCloth_release_lflags    += -Wl,--start-group $(addprefix -l, $(LowLevelCloth_release_libraries)) -Wl,--end-group

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Scene Queries &mdash; NVIDIA PhysX SDK 3.3.3 Documentation</title>
+    <title>Scene Queries &mdash; NVIDIA PhysX SDK 3.3.4 Documentation</title>
     
     <link rel="stylesheet" href="../_static/nvidia.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '3.3.3',
+        VERSION:     '3.3.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="NVIDIA PhysX SDK 3.3.3 Documentation" href="../index.html" />
+    <link rel="top" title="NVIDIA PhysX SDK 3.3.4 Documentation" href="../index.html" />
     <link rel="up" title="User&#39;s Guide" href="Index.html" />
     <link rel="next" title="Vehicles" href="Vehicles.html" />
     <link rel="prev" title="Spatial Queries" href="SpatialQueries.html" /> 
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="SpatialQueries.html" title="Spatial Queries"
              accesskey="P">previous</a> |</li>
-        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.3 Documentation</a> &raquo;</li>
+        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.4 Documentation</a> &raquo;</li>
           <li><a href="Index.html" accesskey="U">User's Guide</a> &raquo;</li> 
       </ul>
     </div>  
@@ -551,7 +551,7 @@ memory footprint than that of <em>eSTATIC_AABB_TREE</em>.</p>
 * added objects are inserted into the grid. Such additions, or removals of objects currently in the grid, or changes to AABBs
 of objects in the grid, cause it to be rebuilt.</p>
 <p>In addition, a new tree is incrementally built during <em>fetchResults()</em>, over a number of frames controlled by <em>PxScene</em>'s
-<em>dynamicTreeRebuiltRateHint</em> attribute. When the build starts, it includes all of the objects in the current tree and grid.
+<em>dynamicTreeRebuildRateHint</em> attribute. When the build starts, it includes all of the objects in the current tree and grid.
 When it finishes, some frames later, the new tree is refitted in accordance with any AABB changes or removals since the build started,
 and then replaces the current tree. Any objects that were added since the start of the build remain in the grid.</p>
 <p>To force a full immediate rebuild, call <em>PxScene::forceDynamicTreeRebuild()</em>. This can be useful in cases such as the following:</p>
@@ -647,7 +647,7 @@ especially if the additions are localized so as to put pressure on just a few of
         <li class="right" >
           <a href="SpatialQueries.html" title="Spatial Queries"
              >previous</a> |</li>
-        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.3 Documentation</a> &raquo;</li>
+        <li><a href="../Index.html">NVIDIA PhysX SDK 3.3.4 Documentation</a> &raquo;</li>
           <li><a href="Index.html" >User's Guide</a> &raquo;</li> 
       </ul>
     </div>

@@ -271,7 +271,23 @@ protected:
 } // namespace physx
 #endif
 
-PX_C_EXPORT PX_PHYSX_CHARACTER_API physx::PxControllerManager* PX_CALL_CONV PxCreateControllerManager(physx::PxScene& scene);
+	/**
+	\brief Creates the controller manager.
+
+	\param[in] scene PhysX scene.
+	\param[in] lockingEnabled Enables/disables internal locking.
+
+	The character controller is informed by #PxDeletionListener::onRelease() when actors or shapes are released, and updates its internal
+	caches accordingly. If character controller movement or a call to #PxControllerManager::shiftOrigin() may overlap with actor/shape releases,
+	internal data structures must be guarded against concurrent access.
+
+	Locking guarantees thread safety in such scenarios.
+
+	\note locking may result in significant slowdown for release of actors or shapes.
+
+	By default, locking is disabled.
+	*/
+PX_C_EXPORT PX_PHYSX_CHARACTER_API physx::PxControllerManager* PX_CALL_CONV PxCreateControllerManager(physx::PxScene& scene, bool lockingEnabled = false);
 
 /** @} */
 #endif //PX_PHYSICS_CCT_MANAGER

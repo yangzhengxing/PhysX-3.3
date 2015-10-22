@@ -77,11 +77,15 @@ void Sc::ActorCore::reinsertShapes()
 	ShapeIterator shapeIterator;
 	shapeIterator.init(*mSim);
 
+	ShapeSim* nonNullSim = NULL;
 	ShapeSim* sim=NULL;
 	while(NULL != (sim = shapeIterator.getNext()) )
+	{
+		nonNullSim = sim;
 		sim->reinsertBroadPhase();
+	}
 
 	//Reset the PxsRigidBody's aabbMgr id.
-	if(bodySim && sim)
-		bodySim->getLowLevelBody().setAABBMgrId(sim->getAABBMgrId());
+	if(bodySim && nonNullSim)
+		bodySim->getLowLevelBody().setAABBMgrId(nonNullSim->getAABBMgrId());
 }

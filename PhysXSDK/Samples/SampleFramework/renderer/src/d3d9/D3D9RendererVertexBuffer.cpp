@@ -132,7 +132,7 @@ D3D9RendererVertexBuffer::~D3D9RendererVertexBuffer(void)
 {
 	if(m_d3dVertexBuffer)
 	{
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if(m_interopContext && m_registeredInCUDA)
 		{
 			m_registeredInCUDA = !m_interopContext->unregisterResourceInCuda(m_InteropHandle);
@@ -216,7 +216,7 @@ void D3D9RendererVertexBuffer::unbind(PxU32 streamID)
 
 void D3D9RendererVertexBuffer::onDeviceLost(void)
 {
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 	if(m_interopContext && m_registeredInCUDA)
 	{
 		m_interopContext->unregisterResourceInCuda(m_InteropHandle);
@@ -250,7 +250,7 @@ void D3D9RendererVertexBuffer::onDeviceReset(void)
 	{
 		m_d3dDevice.CreateVertexBuffer(m_bufferSize, m_usage, 0, m_pool, &m_d3dVertexBuffer, 0);
 		RENDERER_ASSERT(m_d3dVertexBuffer, "Failed to create Direct3D9 Vertex Buffer.");
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if(m_interopContext && m_d3dVertexBuffer && m_mustBeRegisteredInCUDA)
 		{
 			RENDERER_ASSERT(m_deferredUnlock == false, "Deferred VB Unlock must be disabled when CUDA Interop is in use.")

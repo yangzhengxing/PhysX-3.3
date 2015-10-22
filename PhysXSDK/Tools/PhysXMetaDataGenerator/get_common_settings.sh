@@ -58,9 +58,9 @@ COMMON_FLAGS="-fms-extensions -w -boilerplate-file $BOILERPLATE_FILE"
 LINUX_DEFINES="-x c++-header -DNDEBUG -std=c++0x"
 OSX_DEFINES="-x c++-header -DNDEBUG -std=c++0x"
 
-export OSX_EXE="$EXTERNALS/externals/clang/3.3.2/osx/bin/clang"
+export OSX_EXE="$EXTERNALS/externals/clang/3.3.3/osx/bin/clang"
 
-export LINUX_EXE="$EXTERNALS/externals/clang/3.3.2/linux32/bin/clang"
+export LINUX_EXE="$EXTERNALS/externals/clang/3.3.3/linux32/bin/clang"
 
 
 

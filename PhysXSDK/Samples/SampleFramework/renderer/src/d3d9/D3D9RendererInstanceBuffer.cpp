@@ -131,7 +131,7 @@ RendererInstanceBuffer(desc)
 D3D9RendererInstanceBuffer::~D3D9RendererInstanceBuffer(void)
 {
 #if RENDERER_INSTANCING
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 	if(m_interopContext && m_registeredInCUDA)
 	{
 		PX_ASSERT(m_d3dVertexBuffer);
@@ -210,7 +210,7 @@ void D3D9RendererInstanceBuffer::onDeviceLost(void)
 {
 #if RENDERER_INSTANCING
 
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 	if(m_interopContext && m_registeredInCUDA)
 	{
 		PX_ASSERT(m_d3dVertexBuffer);
@@ -236,7 +236,7 @@ void D3D9RendererInstanceBuffer::onDeviceReset(void)
 		m_d3dDevice.CreateVertexBuffer(m_bufferSize, m_usage, 0, m_pool, &m_d3dVertexBuffer, 0);
 		RENDERER_ASSERT(m_d3dVertexBuffer, "Failed to create Direct3D9 Vertex Buffer.");
 
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if(m_interopContext && m_d3dVertexBuffer && m_mustBeRegisteredInCUDA)
 		{
 			m_registeredInCUDA = m_interopContext->registerResourceInCudaD3D(m_InteropHandle, m_d3dVertexBuffer);

@@ -65,20 +65,14 @@ SampleFramework-MT_debug_common_cflags    += -MMD
 SampleFramework-MT_debug_common_cflags    += $(addprefix -D, $(SampleFramework-MT_debug_defines))
 SampleFramework-MT_debug_common_cflags    += $(addprefix -I, $(SampleFramework-MT_debug_hpaths))
 SampleFramework-MT_debug_common_cflags  += -m64
+SampleFramework-MT_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleFramework-MT_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleFramework-MT_debug_common_cflags  += -Wno-long-long
+SampleFramework-MT_debug_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleFramework-MT_debug_common_cflags  += -Wno-unused-parameter
+SampleFramework-MT_debug_common_cflags  += -g3 -gdwarf-2
 SampleFramework-MT_debug_cflags	:= $(SampleFramework-MT_debug_common_cflags)
-SampleFramework-MT_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleFramework-MT_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleFramework-MT_debug_cflags  += -Wno-long-long
-SampleFramework-MT_debug_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleFramework-MT_debug_cflags  += -Wno-unused-parameter
-SampleFramework-MT_debug_cflags  += -g3 -gdwarf-2
 SampleFramework-MT_debug_cppflags	:= $(SampleFramework-MT_debug_common_cflags)
-SampleFramework-MT_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleFramework-MT_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleFramework-MT_debug_cppflags  += -Wno-long-long
-SampleFramework-MT_debug_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleFramework-MT_debug_cppflags  += -Wno-unused-parameter
-SampleFramework-MT_debug_cppflags  += -g3 -gdwarf-2
 SampleFramework-MT_debug_lflags    := $(SampleFramework-MT_custom_lflags)
 SampleFramework-MT_debug_lflags    += $(addprefix -L, $(SampleFramework-MT_debug_lpaths))
 SampleFramework-MT_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SampleFramework-MT_debug_libraries)) -Wl,--end-group
@@ -161,20 +155,14 @@ SampleFramework-MT_release_common_cflags    += -MMD
 SampleFramework-MT_release_common_cflags    += $(addprefix -D, $(SampleFramework-MT_release_defines))
 SampleFramework-MT_release_common_cflags    += $(addprefix -I, $(SampleFramework-MT_release_hpaths))
 SampleFramework-MT_release_common_cflags  += -m64
+SampleFramework-MT_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleFramework-MT_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleFramework-MT_release_common_cflags  += -Wno-long-long
+SampleFramework-MT_release_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleFramework-MT_release_common_cflags  += -Wno-unused-parameter
+SampleFramework-MT_release_common_cflags  += -O3 -fno-strict-aliasing
 SampleFramework-MT_release_cflags	:= $(SampleFramework-MT_release_common_cflags)
-SampleFramework-MT_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleFramework-MT_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleFramework-MT_release_cflags  += -Wno-long-long
-SampleFramework-MT_release_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleFramework-MT_release_cflags  += -Wno-unused-parameter
-SampleFramework-MT_release_cflags  += -O3 -fno-strict-aliasing
 SampleFramework-MT_release_cppflags	:= $(SampleFramework-MT_release_common_cflags)
-SampleFramework-MT_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleFramework-MT_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleFramework-MT_release_cppflags  += -Wno-long-long
-SampleFramework-MT_release_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleFramework-MT_release_cppflags  += -Wno-unused-parameter
-SampleFramework-MT_release_cppflags  += -O3 -fno-strict-aliasing
 SampleFramework-MT_release_lflags    := $(SampleFramework-MT_custom_lflags)
 SampleFramework-MT_release_lflags    += $(addprefix -L, $(SampleFramework-MT_release_lpaths))
 SampleFramework-MT_release_lflags    += -Wl,--start-group $(addprefix -l, $(SampleFramework-MT_release_libraries)) -Wl,--end-group
@@ -259,20 +247,14 @@ SampleFramework-MT_checked_common_cflags    += -MMD
 SampleFramework-MT_checked_common_cflags    += $(addprefix -D, $(SampleFramework-MT_checked_defines))
 SampleFramework-MT_checked_common_cflags    += $(addprefix -I, $(SampleFramework-MT_checked_hpaths))
 SampleFramework-MT_checked_common_cflags  += -m64
+SampleFramework-MT_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleFramework-MT_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleFramework-MT_checked_common_cflags  += -Wno-long-long
+SampleFramework-MT_checked_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleFramework-MT_checked_common_cflags  += -Wno-unused-parameter
+SampleFramework-MT_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SampleFramework-MT_checked_cflags	:= $(SampleFramework-MT_checked_common_cflags)
-SampleFramework-MT_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleFramework-MT_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleFramework-MT_checked_cflags  += -Wno-long-long
-SampleFramework-MT_checked_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleFramework-MT_checked_cflags  += -Wno-unused-parameter
-SampleFramework-MT_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SampleFramework-MT_checked_cppflags	:= $(SampleFramework-MT_checked_common_cflags)
-SampleFramework-MT_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleFramework-MT_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleFramework-MT_checked_cppflags  += -Wno-long-long
-SampleFramework-MT_checked_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleFramework-MT_checked_cppflags  += -Wno-unused-parameter
-SampleFramework-MT_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SampleFramework-MT_checked_lflags    := $(SampleFramework-MT_custom_lflags)
 SampleFramework-MT_checked_lflags    += $(addprefix -L, $(SampleFramework-MT_checked_lpaths))
 SampleFramework-MT_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SampleFramework-MT_checked_libraries)) -Wl,--end-group
@@ -357,20 +339,14 @@ SampleFramework-MT_profile_common_cflags    += -MMD
 SampleFramework-MT_profile_common_cflags    += $(addprefix -D, $(SampleFramework-MT_profile_defines))
 SampleFramework-MT_profile_common_cflags    += $(addprefix -I, $(SampleFramework-MT_profile_hpaths))
 SampleFramework-MT_profile_common_cflags  += -m64
+SampleFramework-MT_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleFramework-MT_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleFramework-MT_profile_common_cflags  += -Wno-long-long
+SampleFramework-MT_profile_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleFramework-MT_profile_common_cflags  += -Wno-unused-parameter
+SampleFramework-MT_profile_common_cflags  += -O3 -fno-strict-aliasing
 SampleFramework-MT_profile_cflags	:= $(SampleFramework-MT_profile_common_cflags)
-SampleFramework-MT_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleFramework-MT_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleFramework-MT_profile_cflags  += -Wno-long-long
-SampleFramework-MT_profile_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleFramework-MT_profile_cflags  += -Wno-unused-parameter
-SampleFramework-MT_profile_cflags  += -O3 -fno-strict-aliasing
 SampleFramework-MT_profile_cppflags	:= $(SampleFramework-MT_profile_common_cflags)
-SampleFramework-MT_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleFramework-MT_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleFramework-MT_profile_cppflags  += -Wno-long-long
-SampleFramework-MT_profile_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleFramework-MT_profile_cppflags  += -Wno-unused-parameter
-SampleFramework-MT_profile_cppflags  += -O3 -fno-strict-aliasing
 SampleFramework-MT_profile_lflags    := $(SampleFramework-MT_custom_lflags)
 SampleFramework-MT_profile_lflags    += $(addprefix -L, $(SampleFramework-MT_profile_lpaths))
 SampleFramework-MT_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SampleFramework-MT_profile_libraries)) -Wl,--end-group

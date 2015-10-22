@@ -90,7 +90,16 @@ void Controller::onRelease(const PxBase* observed, void* /*userData*/, PxDeletio
 	PX_ASSERT(deletionEvent == PxDeletionEventFlag::eUSER_RELEASE);  // the only type we registered for
 	PX_UNUSED(deletionEvent);
 
-	mCctModule.onRelease(*observed);
+	if(mManager && mManager->mLockingEnabled)
+	{
+		mWriteLock.lock();
+		mCctModule.onRelease(*observed);
+		mWriteLock.unlock();
+	}
+	else
+	{
+		mCctModule.onRelease(*observed);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,8 +107,17 @@ void Controller::onRelease(const PxBase* observed, void* /*userData*/, PxDeletio
 void Controller::onOriginShift(const PxVec3& shift)
 {
 	mPosition -= shift;
-
-	mCctModule.onOriginShift(shift);
+	
+	if (mManager && mManager->mLockingEnabled)
+	{
+		mWriteLock.lock();
+		mCctModule.onOriginShift(shift);	
+		mWriteLock.unlock();
+	}
+	else
+	{
+		mCctModule.onOriginShift(shift);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,6 +155,10 @@ void Controller::releaseInternal()
 
 void Controller::getInternalState(PxControllerState& state) const
 {
+	if(mManager->mLockingEnabled)
+	{
+		mWriteLock.lock();
+	}
 	state.deltaXP				= mDeltaXP;
 	state.touchedShape			= mCctModule.mTouchedShape;
 	state.touchedActor			= const_cast<PxRigidActor*>(mCctModule.mTouchedActor);
@@ -145,6 +167,11 @@ void Controller::getInternalState(PxControllerState& state) const
 	state.standOnObstacle		= (mCctModule.mFlags & STF_TOUCH_OBSTACLE)!=0;
 	state.isMovingUp			= (mCctModule.mFlags & STF_IS_MOVING_UP)!=0;
 	state.collisionFlags		= mCollisionFlags;
+
+	if (mManager->mLockingEnabled)
+	{
+		mWriteLock.unlock();
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

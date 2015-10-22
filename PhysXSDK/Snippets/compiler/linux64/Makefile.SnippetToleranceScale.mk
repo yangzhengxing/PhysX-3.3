@@ -63,20 +63,14 @@ SnippetToleranceScale_debug_common_cflags    += -MMD
 SnippetToleranceScale_debug_common_cflags    += $(addprefix -D, $(SnippetToleranceScale_debug_defines))
 SnippetToleranceScale_debug_common_cflags    += $(addprefix -I, $(SnippetToleranceScale_debug_hpaths))
 SnippetToleranceScale_debug_common_cflags  += -m64
+SnippetToleranceScale_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetToleranceScale_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetToleranceScale_debug_common_cflags  += -Wno-long-long
+SnippetToleranceScale_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetToleranceScale_debug_common_cflags  += -Wno-unused-parameter
+SnippetToleranceScale_debug_common_cflags  += -g3 -gdwarf-2
 SnippetToleranceScale_debug_cflags	:= $(SnippetToleranceScale_debug_common_cflags)
-SnippetToleranceScale_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetToleranceScale_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetToleranceScale_debug_cflags  += -Wno-long-long
-SnippetToleranceScale_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetToleranceScale_debug_cflags  += -Wno-unused-parameter
-SnippetToleranceScale_debug_cflags  += -g3 -gdwarf-2
 SnippetToleranceScale_debug_cppflags	:= $(SnippetToleranceScale_debug_common_cflags)
-SnippetToleranceScale_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetToleranceScale_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetToleranceScale_debug_cppflags  += -Wno-long-long
-SnippetToleranceScale_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetToleranceScale_debug_cppflags  += -Wno-unused-parameter
-SnippetToleranceScale_debug_cppflags  += -g3 -gdwarf-2
 SnippetToleranceScale_debug_lflags    := $(SnippetToleranceScale_custom_lflags)
 SnippetToleranceScale_debug_lflags    += $(addprefix -L, $(SnippetToleranceScale_debug_lpaths))
 SnippetToleranceScale_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetToleranceScale_debug_libraries)) -Wl,--end-group
@@ -175,20 +169,14 @@ SnippetToleranceScale_checked_common_cflags    += -MMD
 SnippetToleranceScale_checked_common_cflags    += $(addprefix -D, $(SnippetToleranceScale_checked_defines))
 SnippetToleranceScale_checked_common_cflags    += $(addprefix -I, $(SnippetToleranceScale_checked_hpaths))
 SnippetToleranceScale_checked_common_cflags  += -m64
+SnippetToleranceScale_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetToleranceScale_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetToleranceScale_checked_common_cflags  += -Wno-long-long
+SnippetToleranceScale_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetToleranceScale_checked_common_cflags  += -Wno-unused-parameter
+SnippetToleranceScale_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetToleranceScale_checked_cflags	:= $(SnippetToleranceScale_checked_common_cflags)
-SnippetToleranceScale_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetToleranceScale_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetToleranceScale_checked_cflags  += -Wno-long-long
-SnippetToleranceScale_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetToleranceScale_checked_cflags  += -Wno-unused-parameter
-SnippetToleranceScale_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetToleranceScale_checked_cppflags	:= $(SnippetToleranceScale_checked_common_cflags)
-SnippetToleranceScale_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetToleranceScale_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetToleranceScale_checked_cppflags  += -Wno-long-long
-SnippetToleranceScale_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetToleranceScale_checked_cppflags  += -Wno-unused-parameter
-SnippetToleranceScale_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetToleranceScale_checked_lflags    := $(SnippetToleranceScale_custom_lflags)
 SnippetToleranceScale_checked_lflags    += $(addprefix -L, $(SnippetToleranceScale_checked_lpaths))
 SnippetToleranceScale_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetToleranceScale_checked_libraries)) -Wl,--end-group
@@ -287,20 +275,14 @@ SnippetToleranceScale_profile_common_cflags    += -MMD
 SnippetToleranceScale_profile_common_cflags    += $(addprefix -D, $(SnippetToleranceScale_profile_defines))
 SnippetToleranceScale_profile_common_cflags    += $(addprefix -I, $(SnippetToleranceScale_profile_hpaths))
 SnippetToleranceScale_profile_common_cflags  += -m64
+SnippetToleranceScale_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetToleranceScale_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetToleranceScale_profile_common_cflags  += -Wno-long-long
+SnippetToleranceScale_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetToleranceScale_profile_common_cflags  += -Wno-unused-parameter
+SnippetToleranceScale_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetToleranceScale_profile_cflags	:= $(SnippetToleranceScale_profile_common_cflags)
-SnippetToleranceScale_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetToleranceScale_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetToleranceScale_profile_cflags  += -Wno-long-long
-SnippetToleranceScale_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetToleranceScale_profile_cflags  += -Wno-unused-parameter
-SnippetToleranceScale_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetToleranceScale_profile_cppflags	:= $(SnippetToleranceScale_profile_common_cflags)
-SnippetToleranceScale_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetToleranceScale_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetToleranceScale_profile_cppflags  += -Wno-long-long
-SnippetToleranceScale_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetToleranceScale_profile_cppflags  += -Wno-unused-parameter
-SnippetToleranceScale_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetToleranceScale_profile_lflags    := $(SnippetToleranceScale_custom_lflags)
 SnippetToleranceScale_profile_lflags    += $(addprefix -L, $(SnippetToleranceScale_profile_lpaths))
 SnippetToleranceScale_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetToleranceScale_profile_libraries)) -Wl,--end-group
@@ -397,20 +379,14 @@ SnippetToleranceScale_release_common_cflags    += -MMD
 SnippetToleranceScale_release_common_cflags    += $(addprefix -D, $(SnippetToleranceScale_release_defines))
 SnippetToleranceScale_release_common_cflags    += $(addprefix -I, $(SnippetToleranceScale_release_hpaths))
 SnippetToleranceScale_release_common_cflags  += -m64
+SnippetToleranceScale_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetToleranceScale_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetToleranceScale_release_common_cflags  += -Wno-long-long
+SnippetToleranceScale_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetToleranceScale_release_common_cflags  += -Wno-unused-parameter
+SnippetToleranceScale_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetToleranceScale_release_cflags	:= $(SnippetToleranceScale_release_common_cflags)
-SnippetToleranceScale_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetToleranceScale_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetToleranceScale_release_cflags  += -Wno-long-long
-SnippetToleranceScale_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetToleranceScale_release_cflags  += -Wno-unused-parameter
-SnippetToleranceScale_release_cflags  += -O3 -fno-strict-aliasing
 SnippetToleranceScale_release_cppflags	:= $(SnippetToleranceScale_release_common_cflags)
-SnippetToleranceScale_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetToleranceScale_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetToleranceScale_release_cppflags  += -Wno-long-long
-SnippetToleranceScale_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetToleranceScale_release_cppflags  += -Wno-unused-parameter
-SnippetToleranceScale_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetToleranceScale_release_lflags    := $(SnippetToleranceScale_custom_lflags)
 SnippetToleranceScale_release_lflags    += $(addprefix -L, $(SnippetToleranceScale_release_lpaths))
 SnippetToleranceScale_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetToleranceScale_release_libraries)) -Wl,--end-group

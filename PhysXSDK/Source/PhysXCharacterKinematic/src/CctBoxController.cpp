@@ -12,6 +12,7 @@
 
 #include "PxController.h"
 #include "CctBoxController.h"
+#include "CctCharacterControllerManager.h"
 #include "PxBoxGeometry.h"
 #include "PxRigidDynamic.h"
 #include "PxShape.h"
@@ -53,7 +54,17 @@ BoxController::~BoxController()
 
 void BoxController::invalidateCache()
 {
-	mCctModule.voidTestCache();
+	if (mManager->mLockingEnabled)
+	{
+		mWriteLock.lock();
+		mCctModule.voidTestCache();
+		mWriteLock.unlock();
+	}
+	else
+	{
+		mCctModule.voidTestCache();
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -131,7 +131,7 @@ D3D11RendererInstanceBuffer::~D3D11RendererInstanceBuffer(void)
 {
 	if (m_d3dInstanceBuffer)
 	{
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if (m_interopContext && m_registeredInCUDA)
 		{
 			m_registeredInCUDA = !m_interopContext->unregisterResourceInCuda(m_InteropHandle);
@@ -227,7 +227,7 @@ void D3D11RendererInstanceBuffer::unbind(PxU32 streamID) const
 
 void D3D11RendererInstanceBuffer::onDeviceLost(void)
 {
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 	if (m_interopContext && m_registeredInCUDA)
 	{
 		PX_ASSERT(m_d3dInstanceBuffer);
@@ -249,7 +249,7 @@ void D3D11RendererInstanceBuffer::onDeviceReset(void)
 	{
 		m_d3dDevice.CreateBuffer(&m_d3dBufferDesc, NULL, &m_d3dInstanceBuffer);
 		RENDERER_ASSERT(m_d3dInstanceBuffer, "Failed to create DIRECT3D11 Vertex Buffer.");
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if (m_interopContext && m_d3dInstanceBuffer && m_mustBeRegisteredInCUDA)
 		{
 			m_registeredInCUDA = m_interopContext->registerResourceInCudaD3D(m_InteropHandle, m_d3dInstanceBuffer);

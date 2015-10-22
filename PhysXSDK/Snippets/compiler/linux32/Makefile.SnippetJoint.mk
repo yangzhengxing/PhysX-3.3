@@ -64,20 +64,14 @@ SnippetJoint_debug_common_cflags    += -MMD
 SnippetJoint_debug_common_cflags    += $(addprefix -D, $(SnippetJoint_debug_defines))
 SnippetJoint_debug_common_cflags    += $(addprefix -I, $(SnippetJoint_debug_hpaths))
 SnippetJoint_debug_common_cflags  += -m32
+SnippetJoint_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetJoint_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetJoint_debug_common_cflags  += -Wno-long-long
+SnippetJoint_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetJoint_debug_common_cflags  += -Wno-unused-parameter
+SnippetJoint_debug_common_cflags  += -g3 -gdwarf-2
 SnippetJoint_debug_cflags	:= $(SnippetJoint_debug_common_cflags)
-SnippetJoint_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetJoint_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetJoint_debug_cflags  += -Wno-long-long
-SnippetJoint_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetJoint_debug_cflags  += -Wno-unused-parameter
-SnippetJoint_debug_cflags  += -g3 -gdwarf-2
 SnippetJoint_debug_cppflags	:= $(SnippetJoint_debug_common_cflags)
-SnippetJoint_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetJoint_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetJoint_debug_cppflags  += -Wno-long-long
-SnippetJoint_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetJoint_debug_cppflags  += -Wno-unused-parameter
-SnippetJoint_debug_cppflags  += -g3 -gdwarf-2
 SnippetJoint_debug_lflags    := $(SnippetJoint_custom_lflags)
 SnippetJoint_debug_lflags    += $(addprefix -L, $(SnippetJoint_debug_lpaths))
 SnippetJoint_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetJoint_debug_libraries)) -Wl,--end-group
@@ -176,20 +170,14 @@ SnippetJoint_checked_common_cflags    += -MMD
 SnippetJoint_checked_common_cflags    += $(addprefix -D, $(SnippetJoint_checked_defines))
 SnippetJoint_checked_common_cflags    += $(addprefix -I, $(SnippetJoint_checked_hpaths))
 SnippetJoint_checked_common_cflags  += -m32
+SnippetJoint_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetJoint_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetJoint_checked_common_cflags  += -Wno-long-long
+SnippetJoint_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetJoint_checked_common_cflags  += -Wno-unused-parameter
+SnippetJoint_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetJoint_checked_cflags	:= $(SnippetJoint_checked_common_cflags)
-SnippetJoint_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetJoint_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetJoint_checked_cflags  += -Wno-long-long
-SnippetJoint_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetJoint_checked_cflags  += -Wno-unused-parameter
-SnippetJoint_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetJoint_checked_cppflags	:= $(SnippetJoint_checked_common_cflags)
-SnippetJoint_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetJoint_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetJoint_checked_cppflags  += -Wno-long-long
-SnippetJoint_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetJoint_checked_cppflags  += -Wno-unused-parameter
-SnippetJoint_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetJoint_checked_lflags    := $(SnippetJoint_custom_lflags)
 SnippetJoint_checked_lflags    += $(addprefix -L, $(SnippetJoint_checked_lpaths))
 SnippetJoint_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetJoint_checked_libraries)) -Wl,--end-group
@@ -288,20 +276,14 @@ SnippetJoint_profile_common_cflags    += -MMD
 SnippetJoint_profile_common_cflags    += $(addprefix -D, $(SnippetJoint_profile_defines))
 SnippetJoint_profile_common_cflags    += $(addprefix -I, $(SnippetJoint_profile_hpaths))
 SnippetJoint_profile_common_cflags  += -m32
+SnippetJoint_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetJoint_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetJoint_profile_common_cflags  += -Wno-long-long
+SnippetJoint_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetJoint_profile_common_cflags  += -Wno-unused-parameter
+SnippetJoint_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetJoint_profile_cflags	:= $(SnippetJoint_profile_common_cflags)
-SnippetJoint_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetJoint_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetJoint_profile_cflags  += -Wno-long-long
-SnippetJoint_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetJoint_profile_cflags  += -Wno-unused-parameter
-SnippetJoint_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetJoint_profile_cppflags	:= $(SnippetJoint_profile_common_cflags)
-SnippetJoint_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetJoint_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetJoint_profile_cppflags  += -Wno-long-long
-SnippetJoint_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetJoint_profile_cppflags  += -Wno-unused-parameter
-SnippetJoint_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetJoint_profile_lflags    := $(SnippetJoint_custom_lflags)
 SnippetJoint_profile_lflags    += $(addprefix -L, $(SnippetJoint_profile_lpaths))
 SnippetJoint_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetJoint_profile_libraries)) -Wl,--end-group
@@ -398,20 +380,14 @@ SnippetJoint_release_common_cflags    += -MMD
 SnippetJoint_release_common_cflags    += $(addprefix -D, $(SnippetJoint_release_defines))
 SnippetJoint_release_common_cflags    += $(addprefix -I, $(SnippetJoint_release_hpaths))
 SnippetJoint_release_common_cflags  += -m32
+SnippetJoint_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetJoint_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetJoint_release_common_cflags  += -Wno-long-long
+SnippetJoint_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetJoint_release_common_cflags  += -Wno-unused-parameter
+SnippetJoint_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetJoint_release_cflags	:= $(SnippetJoint_release_common_cflags)
-SnippetJoint_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetJoint_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetJoint_release_cflags  += -Wno-long-long
-SnippetJoint_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetJoint_release_cflags  += -Wno-unused-parameter
-SnippetJoint_release_cflags  += -O3 -fno-strict-aliasing
 SnippetJoint_release_cppflags	:= $(SnippetJoint_release_common_cflags)
-SnippetJoint_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetJoint_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetJoint_release_cppflags  += -Wno-long-long
-SnippetJoint_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetJoint_release_cppflags  += -Wno-unused-parameter
-SnippetJoint_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetJoint_release_lflags    := $(SnippetJoint_custom_lflags)
 SnippetJoint_release_lflags    += $(addprefix -L, $(SnippetJoint_release_lpaths))
 SnippetJoint_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetJoint_release_libraries)) -Wl,--end-group

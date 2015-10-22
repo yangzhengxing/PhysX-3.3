@@ -20,7 +20,6 @@
 //Remove this define when all platforms use simd solver.
 #define PX_SUPPORT_SIMD
 
-
 /////////////////////////////////////////////////////////////////////
 ////FUNCTIONS USED ONLY FOR ASSERTS IN VECTORISED IMPLEMENTATIONS
 /////////////////////////////////////////////////////////////////////
@@ -1554,8 +1553,17 @@ PX_FORCE_INLINE PxU32 V3InBounds(const Vec3V a, const Vec3V bounds)
 }
 
 
-
-
+PX_FORCE_INLINE void V3Transpose(Vec3V& col0, Vec3V& col1, Vec3V& col2)
+{
+	const Vec3V col3 = _mm_setzero_ps();
+	Vec3V tmp0 = _mm_unpacklo_ps(col0, col1);
+	Vec3V tmp2 = _mm_unpacklo_ps(col2, col3);
+	Vec3V tmp1 = _mm_unpackhi_ps(col0, col1);
+	Vec3V tmp3 = _mm_unpackhi_ps(col2, col3);
+	col0 = _mm_movelh_ps(tmp0, tmp2);
+	col1 = _mm_movehl_ps(tmp2, tmp0);
+	col2 = _mm_movelh_ps(tmp1, tmp3);
+}
 
 //////////////////////////////////
 //VEC4V
@@ -2094,6 +2102,17 @@ PX_FORCE_INLINE Vec4V V4Cos(const Vec4V a)
 	
 }
 
+PX_FORCE_INLINE void V4Transpose(Vec4V& col0, Vec4V& col1, Vec4V& col2, Vec4V& col3)
+{
+	Vec4V tmp0 = _mm_unpacklo_ps(col0, col1);
+	Vec4V tmp2 = _mm_unpacklo_ps(col2, col3);
+	Vec4V tmp1 = _mm_unpackhi_ps(col0, col1);
+	Vec4V tmp3 = _mm_unpackhi_ps(col2, col3);
+	col0 = _mm_movelh_ps(tmp0, tmp2);
+	col1 = _mm_movehl_ps(tmp2, tmp0);
+	col2 = _mm_movelh_ps(tmp1, tmp3);
+	col3 = _mm_movehl_ps(tmp3, tmp1);
+}
 
 //////////////////////////////////
 //BoolV
@@ -2354,6 +2373,10 @@ PX_FORCE_INLINE PxU32 BAllEq(const BoolV a, const BoolV b)
 	return internalWindowsSimd::BAllTrue4_R(bTest);
 }
 
+PX_FORCE_INLINE PxU32 BGetBitMask(const BoolV a)
+{
+	return PxU32(_mm_movemask_ps(a));
+}
 
 //////////////////////////////////
 //MAT33V
@@ -2373,10 +2396,11 @@ PX_FORCE_INLINE Vec3V M33MulV3(const Mat33V& a, const Vec3V b)
 
 PX_FORCE_INLINE Vec3V M33TrnspsMulV3(const Mat33V& a, const Vec3V b)
 {
-	const FloatV x=V3Dot(a.col0,b);
-	const FloatV y=V3Dot(a.col1,b);
-	const FloatV z=V3Dot(a.col2,b);
-	return V3Merge(x,y,z);
+	Vec3V v0 = V3Mul(a.col0, b);
+	Vec3V v1 = V3Mul(a.col1, b);
+	Vec3V v2 = V3Mul(a.col2, b);
+	V3Transpose(v0, v1, v2);
+	return V3Add(V3Add(v0, v1), v2);
 }
 
 PX_FORCE_INLINE Vec3V M33MulV3AddV3(const Mat33V& A, const Vec3V b, const Vec3V c)
@@ -2449,18 +2473,12 @@ PX_FORCE_INLINE Mat33V M33Inverse(const Mat33V& a)
 	);
 }
 
-
-
 PX_FORCE_INLINE Mat33V M33Trnsps(const Mat33V& a)
 {
-	return Mat33V
-	(
-	V3Merge(V3GetX(a.col0),V3GetX(a.col1),V3GetX(a.col2)),
-	V3Merge(V3GetY(a.col0),V3GetY(a.col1),V3GetY(a.col2)),
-	V3Merge(V3GetZ(a.col0),V3GetZ(a.col1),V3GetZ(a.col2))
-	);
+	Vec3V col0 = a.col0, col1 = a.col1, col2 = a.col2;
+	V3Transpose(col0, col1, col2);
+	return Mat33V(col0, col1, col2);
 }
-
 
 PX_FORCE_INLINE Mat33V M33Identity()
 {
@@ -2513,10 +2531,11 @@ PX_FORCE_INLINE Vec3V M34Mul33V3(const Mat34V& a, const Vec3V b)
 
 PX_FORCE_INLINE Vec3V M34TrnspsMul33V3(const Mat34V& a, const Vec3V b)
 {
-	const FloatV x=V3Dot(a.col0,b);
-	const FloatV y=V3Dot(a.col1,b);
-	const FloatV z=V3Dot(a.col2,b);
-	return V3Merge(x,y,z);
+	Vec3V v0 = V3Mul(a.col0, b);
+	Vec3V v1 = V3Mul(a.col1, b);
+	Vec3V v2 = V3Mul(a.col2, b);
+	V3Transpose(v0, v1, v2);
+	return V3Add(V3Add(v0, v1), v2);
 }
 
 PX_FORCE_INLINE Mat34V M34MulM34(const Mat34V& a, const Mat34V& b)
@@ -2569,16 +2588,10 @@ PX_FORCE_INLINE Mat34V M34Inverse(const Mat34V& a)
 
 PX_FORCE_INLINE Mat33V M34Trnsps33(const Mat34V& a)
 {
-	return Mat33V
-	(
-	V3Merge(V3GetX(a.col0),V3GetX(a.col1),V3GetX(a.col2)),
-	V3Merge(V3GetY(a.col0),V3GetY(a.col1),V3GetY(a.col2)),
-	V3Merge(V3GetZ(a.col0),V3GetZ(a.col1),V3GetZ(a.col2))
-	);
+	Vec3V col0 = a.col0, col1 = a.col1, col2 = a.col2;
+	V3Transpose(col0, col1, col2);
+	return Mat33V(col0, col1, col2);
 }
-
-
-
 
 //////////////////////////////////
 //MAT44V
@@ -2602,14 +2615,12 @@ PX_FORCE_INLINE Vec4V M44MulV4(const Mat44V& a, const Vec4V b)
 
 PX_FORCE_INLINE Vec4V M44TrnspsMulV4(const Mat44V& a, const Vec4V b) 
 {
-	PX_ALIGN(16, FloatV dotProdArray[4])=
-	{
-		V4Dot(a.col0,b),
-		V4Dot(a.col1,b),
-		V4Dot(a.col2,b),
-		V4Dot(a.col3,b)
-	};
-	return V4Merge(dotProdArray);
+	Vec4V v0 = V4Mul(a.col0, b);
+	Vec4V v1 = V4Mul(a.col1, b);
+	Vec4V v2 = V4Mul(a.col2, b);
+	Vec4V v3 = V4Mul(a.col3, b);
+	V4Transpose(v0, v1, v2, v3);
+	return V4Add(V4Add(v0, v1), V4Add(v2, v3));
 }
 
 PX_FORCE_INLINE Mat44V M44MulM44(const Mat44V& a, const Mat44V& b)
@@ -2624,11 +2635,9 @@ PX_FORCE_INLINE Mat44V M44Add(const Mat44V& a, const Mat44V& b)
 
 PX_FORCE_INLINE Mat44V M44Trnsps(const Mat44V& a)
 {
-	const Vec4V v0 = _mm_unpacklo_ps(a.col0, a.col2);
-	const Vec4V v1 = _mm_unpackhi_ps(a.col0, a.col2);
-	const Vec4V v2 = _mm_unpacklo_ps(a.col1, a.col3);
-	const Vec4V v3 = _mm_unpackhi_ps(a.col1, a.col3);
-	return Mat44V( _mm_unpacklo_ps(v0, v2),_mm_unpackhi_ps(v0, v2),_mm_unpacklo_ps(v1, v3),_mm_unpackhi_ps(v1, v3));
+	Vec4V col0 = a.col0, col1 = a.col1, col2 = a.col2, col3 = a.col3;
+	V4Transpose(col0, col1, col2, col3);
+	return Mat44V(col0, col1, col2, col3);
 }
 
 PX_FORCE_INLINE Mat44V M44Inverse(const Mat44V& a)

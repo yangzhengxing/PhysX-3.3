@@ -582,6 +582,9 @@ PX_FORCE_INLINE Vec3V V3Perm_0Z_Zero_1X(const Vec3V v0, const Vec3V v1);
 //(v1.y, v0.x, 0)
 PX_FORCE_INLINE Vec3V V3Perm_1Y_0X_Zero(const Vec3V v0, const Vec3V v1); 
 
+// Transpose 3 Vec3Vs inplace. Sets the w component to zero
+// [ x0, y0, z0, w0] [ x1, y1, z1, w1]  [ x2, y2, z2, w2]  -> [x0 x1 x2 0] [y0 y1 y2 0] [z0 z1 z2 0]
+PX_FORCE_INLINE void V3Transpose(Vec3V& col0, Vec3V& col1, Vec3V& col2);
 
 //////////////////////////////////////////////////////////////////
 //Math operations on Vec4V
@@ -771,6 +774,11 @@ PX_FORCE_INLINE Vec4V V4Perm_YWYW(const Vec4V v);
 //V3Perm<1,0,3,2> is equal to V4Perm_YXWZ
 template<PxU8 x, PxU8 y, PxU8 z, PxU8 w> PX_FORCE_INLINE Vec4V V4Perm(const Vec4V a);
 
+// Transpose 4 Vec4Vs inplace. 
+// [ x0, y0, z0, w0] [ x1, y1, z1, w1] [ x2, y2, z2, w2] [ x3, y3, z3, w3] ->
+// [ x0, x1, x2, x3] [ y0, y1, y2, y3] [ z0, z1, z2, z3] [ w0, w1, w2, w3]
+PX_FORCE_INLINE void V4Transpose(Vec4V& col0, Vec4V& col1, Vec4V& col2, Vec4V& col3);
+
 //q = cos(a/2) + u*sin(a/2) 
 PX_FORCE_INLINE QuatV QuatV_From_RotationAxisAngle(const Vec3V u, const FloatV a);
 // convert q to a unit quaternion
@@ -901,6 +909,12 @@ PX_FORCE_INLINE BoolV BAnyTrue3(const BoolV a);
 //Return 1 if all components equal, zero otherwise.
 PX_FORCE_INLINE PxU32 BAllEq(const BoolV a, const BoolV b);
 
+/// Get BoolV as bits set in an PxU32. A bit in the output is set if the element is 'true' in the input. 
+/// There is a bit for each element in a, with element 0s value held in bit0, element 1 in bit 1s and so forth.
+/// If nothing is true in the input it will return 0, and if all are true if will return 0xf.
+/// NOTE! That performance of the function varies considerably by platform, thus it is recommended to use
+/// where your algorithm really needs a BoolV in an integer variable.
+PX_FORCE_INLINE PxU32 BGetBitMask(const BoolV a);
 
 //VecI32V stuff
 

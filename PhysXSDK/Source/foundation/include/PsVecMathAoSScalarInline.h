@@ -300,6 +300,8 @@ PX_FORCE_INLINE void V3StoreU(const Vec3V a, PxVec3& f)
 	f=PxVec3(a.x,a.y,a.z);
 }
 
+
+
 //////////////////////////
 //FLOATV
 //////////////////////////
@@ -895,7 +897,12 @@ PX_FORCE_INLINE PxU32 V3InBounds(const Vec3V a, const Vec3V bounds)
 	return V3InBounds(a, V3Neg(bounds), bounds);
 }
 
-
+PX_FORCE_INLINE void V3Transpose(Vec3V& col0, Vec3V& col1, Vec3V& col2)
+{
+	const PxF32 t01 = col0.y, t02 = col0.z, t12 = col1.z;
+	col0.y = col1.x;	col0.z = col2.x;	col1.z = col2.y;	
+	col1.x = t01;		col2.x = t02;		col2.y = t12;
+}
 
 
 /////////////////////////
@@ -1274,6 +1281,19 @@ PX_FORCE_INLINE PxU32 V4AllEq(const Vec4V a, const Vec4V b)
 	return ((a.x == b.x) & (a.y == b.y) & (a.z == b.z) & (a.w == b.w)) ? 1 : 0;
 }
 
+PX_FORCE_INLINE void V4Transpose(Vec4V& col0, Vec4V& col1, Vec4V& col2, Vec4V& col3)
+{
+	const PxF32 t01 = col0.y, t02 = col0.z, t03 = col0.w;
+	const PxF32               t12 = col1.z, t13 = col1.w;
+	const PxF32                             t23 = col2.w;
+	col0.y = col1.x;	col0.z = col2.x;	col0.w = col3.x;
+	col1.z = col2.y;	col1.w = col3.y;
+	col2.w = col3.z;
+	col1.x = t01;		col2.x = t02;		col3.x = t03;
+	col2.y = t12;		col3.y = t13;
+	col3.z = t23;
+}
+
 PX_FORCE_INLINE BoolV BFFFF() 
 {
 	return BoolV(0, 0, 0, 0); 
@@ -1435,6 +1455,10 @@ PX_FORCE_INLINE BoolV BAnyTrue3(const BoolV a)
 	return (a.ux | a.uy | a.uz) ? BTTTT() : BFFFF();
 }
 
+PX_FORCE_INLINE PxU32 BGetBitMask(const BoolV a)
+{
+	return (a.ux & 1) | (a.uy & 2) | (a.uz & 4) | (a.uw & 8);
+}
 
 //////////////////////////////////
 //MAT33V

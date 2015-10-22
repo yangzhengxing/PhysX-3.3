@@ -71,20 +71,14 @@ SnippetVehicleTank_debug_common_cflags    += -MMD
 SnippetVehicleTank_debug_common_cflags    += $(addprefix -D, $(SnippetVehicleTank_debug_defines))
 SnippetVehicleTank_debug_common_cflags    += $(addprefix -I, $(SnippetVehicleTank_debug_hpaths))
 SnippetVehicleTank_debug_common_cflags  += -m32
+SnippetVehicleTank_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleTank_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleTank_debug_common_cflags  += -Wno-long-long
+SnippetVehicleTank_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleTank_debug_common_cflags  += -Wno-unused-parameter
+SnippetVehicleTank_debug_common_cflags  += -g3 -gdwarf-2
 SnippetVehicleTank_debug_cflags	:= $(SnippetVehicleTank_debug_common_cflags)
-SnippetVehicleTank_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleTank_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleTank_debug_cflags  += -Wno-long-long
-SnippetVehicleTank_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleTank_debug_cflags  += -Wno-unused-parameter
-SnippetVehicleTank_debug_cflags  += -g3 -gdwarf-2
 SnippetVehicleTank_debug_cppflags	:= $(SnippetVehicleTank_debug_common_cflags)
-SnippetVehicleTank_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleTank_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleTank_debug_cppflags  += -Wno-long-long
-SnippetVehicleTank_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleTank_debug_cppflags  += -Wno-unused-parameter
-SnippetVehicleTank_debug_cppflags  += -g3 -gdwarf-2
 SnippetVehicleTank_debug_lflags    := $(SnippetVehicleTank_custom_lflags)
 SnippetVehicleTank_debug_lflags    += $(addprefix -L, $(SnippetVehicleTank_debug_lpaths))
 SnippetVehicleTank_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleTank_debug_libraries)) -Wl,--end-group
@@ -183,20 +177,14 @@ SnippetVehicleTank_checked_common_cflags    += -MMD
 SnippetVehicleTank_checked_common_cflags    += $(addprefix -D, $(SnippetVehicleTank_checked_defines))
 SnippetVehicleTank_checked_common_cflags    += $(addprefix -I, $(SnippetVehicleTank_checked_hpaths))
 SnippetVehicleTank_checked_common_cflags  += -m32
+SnippetVehicleTank_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleTank_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleTank_checked_common_cflags  += -Wno-long-long
+SnippetVehicleTank_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleTank_checked_common_cflags  += -Wno-unused-parameter
+SnippetVehicleTank_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetVehicleTank_checked_cflags	:= $(SnippetVehicleTank_checked_common_cflags)
-SnippetVehicleTank_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleTank_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleTank_checked_cflags  += -Wno-long-long
-SnippetVehicleTank_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleTank_checked_cflags  += -Wno-unused-parameter
-SnippetVehicleTank_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetVehicleTank_checked_cppflags	:= $(SnippetVehicleTank_checked_common_cflags)
-SnippetVehicleTank_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleTank_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleTank_checked_cppflags  += -Wno-long-long
-SnippetVehicleTank_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleTank_checked_cppflags  += -Wno-unused-parameter
-SnippetVehicleTank_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetVehicleTank_checked_lflags    := $(SnippetVehicleTank_custom_lflags)
 SnippetVehicleTank_checked_lflags    += $(addprefix -L, $(SnippetVehicleTank_checked_lpaths))
 SnippetVehicleTank_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleTank_checked_libraries)) -Wl,--end-group
@@ -295,20 +283,14 @@ SnippetVehicleTank_profile_common_cflags    += -MMD
 SnippetVehicleTank_profile_common_cflags    += $(addprefix -D, $(SnippetVehicleTank_profile_defines))
 SnippetVehicleTank_profile_common_cflags    += $(addprefix -I, $(SnippetVehicleTank_profile_hpaths))
 SnippetVehicleTank_profile_common_cflags  += -m32
+SnippetVehicleTank_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleTank_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleTank_profile_common_cflags  += -Wno-long-long
+SnippetVehicleTank_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleTank_profile_common_cflags  += -Wno-unused-parameter
+SnippetVehicleTank_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleTank_profile_cflags	:= $(SnippetVehicleTank_profile_common_cflags)
-SnippetVehicleTank_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleTank_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleTank_profile_cflags  += -Wno-long-long
-SnippetVehicleTank_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleTank_profile_cflags  += -Wno-unused-parameter
-SnippetVehicleTank_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleTank_profile_cppflags	:= $(SnippetVehicleTank_profile_common_cflags)
-SnippetVehicleTank_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleTank_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleTank_profile_cppflags  += -Wno-long-long
-SnippetVehicleTank_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleTank_profile_cppflags  += -Wno-unused-parameter
-SnippetVehicleTank_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetVehicleTank_profile_lflags    := $(SnippetVehicleTank_custom_lflags)
 SnippetVehicleTank_profile_lflags    += $(addprefix -L, $(SnippetVehicleTank_profile_lpaths))
 SnippetVehicleTank_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleTank_profile_libraries)) -Wl,--end-group
@@ -405,20 +387,14 @@ SnippetVehicleTank_release_common_cflags    += -MMD
 SnippetVehicleTank_release_common_cflags    += $(addprefix -D, $(SnippetVehicleTank_release_defines))
 SnippetVehicleTank_release_common_cflags    += $(addprefix -I, $(SnippetVehicleTank_release_hpaths))
 SnippetVehicleTank_release_common_cflags  += -m32
+SnippetVehicleTank_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleTank_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleTank_release_common_cflags  += -Wno-long-long
+SnippetVehicleTank_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleTank_release_common_cflags  += -Wno-unused-parameter
+SnippetVehicleTank_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleTank_release_cflags	:= $(SnippetVehicleTank_release_common_cflags)
-SnippetVehicleTank_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleTank_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleTank_release_cflags  += -Wno-long-long
-SnippetVehicleTank_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleTank_release_cflags  += -Wno-unused-parameter
-SnippetVehicleTank_release_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleTank_release_cppflags	:= $(SnippetVehicleTank_release_common_cflags)
-SnippetVehicleTank_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleTank_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleTank_release_cppflags  += -Wno-long-long
-SnippetVehicleTank_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleTank_release_cppflags  += -Wno-unused-parameter
-SnippetVehicleTank_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetVehicleTank_release_lflags    := $(SnippetVehicleTank_custom_lflags)
 SnippetVehicleTank_release_lflags    += $(addprefix -L, $(SnippetVehicleTank_release_lpaths))
 SnippetVehicleTank_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleTank_release_libraries)) -Wl,--end-group

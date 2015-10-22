@@ -206,7 +206,7 @@ bool setupFinalizeExtSolverConstraintsCoulomb(PxcNpWorkUnit& n,
 
 		const PxVec3 t0Fallback1(0.f, -normal.z, normal.y);
 		const PxVec3 t0Fallback2(-normal.y, normal.x, 0.f) ;
-		const PxVec3 tFallback1 = orthoThreshold > abs(normal.x) ? t0Fallback1 : t0Fallback2;
+		const PxVec3 tFallback1 = orthoThreshold > PxAbs(normal.x) ? t0Fallback1 : t0Fallback2;
 		const PxVec3 vrel = b0.getLinVel() - b1.getLinVel();
 		const PxVec3 t0_ = vrel - normal * (normal.dot(vrel));
 		const PxReal sqDist = t0_.dot(t0_);

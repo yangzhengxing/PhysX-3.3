@@ -575,7 +575,7 @@ The tree is initially built by the first commit. Once a tree is built, committin
 of objects in the grid, cause it to be rebuilt.
 
 In addition, a new tree is incrementally built during *fetchResults()*, over a number of frames controlled by *PxScene*'s
-*dynamicTreeRebuiltRateHint* attribute. When the build starts, it includes all of the objects in the current tree and grid.
+*dynamicTreeRebuildRateHint* attribute. When the build starts, it includes all of the objects in the current tree and grid.
 When it finishes, some frames later, the new tree is refitted in accordance with any AABB changes or removals since the build started,
 and then replaces the current tree. Any objects that were added since the start of the build remain in the grid.
 

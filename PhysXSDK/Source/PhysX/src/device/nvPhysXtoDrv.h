@@ -27,8 +27,8 @@ namespace physx
 #define NvPhysXToDrv_SectionName "PH71828182845_" 
 
 // Vista apps cannot create stuff in Global\\ namespace when NOT elevated, so use local scope
-#define NvPhysXToDrv_Build_SectionName(PID, buf) sprintf(buf, NvPhysXToDrv_SectionName "%x", PID) 
-#define NvPhysXToDrv_Build_SectionNameXP(PID, buf) sprintf(buf, "Global\\" NvPhysXToDrv_SectionName "%x", PID) 
+#define NvPhysXToDrv_Build_SectionName(PID, buf) sprintf(buf, NvPhysXToDrv_SectionName "%x", static_cast<unsigned int>(PID)) 
+#define NvPhysXToDrv_Build_SectionNameXP(PID, buf) sprintf(buf, "Global\\" NvPhysXToDrv_SectionName "%x", static_cast<unsigned int>(PID)) 
 
 typedef struct NvPhysXToDrv_Header_ 
 { 

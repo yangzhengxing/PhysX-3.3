@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup Label="ProjectConfigurations">
-	<ProjectConfiguration Include="debug|x64">
+		<ProjectConfiguration Include="debug|x64">
 			<Configuration>debug</Configuration>
 			<Platform>x64</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="checked|x64">
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="checked|x64">
 			<Configuration>checked</Configuration>
 			<Platform>x64</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="profile|x64">
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="profile|x64">
 			<Configuration>profile</Configuration>
 			<Platform>x64</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="release|x64">
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="release|x64">
 			<Configuration>release</Configuration>
 			<Platform>x64</Platform>
-	</ProjectConfiguration>
+		</ProjectConfiguration>
 	</ItemGroup>
 	<PropertyGroup Label="Globals">
-		<ApplicationEnvironment>title</ApplicationEnvironment>
-		<!-- - - - -->
-		<PlatformToolset>v110</PlatformToolset>
-		<MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+		<ProjectGuid>{2A1F82AF-85E5-26A0-BFE0-1F8D0006DA7A}</ProjectGuid>
+		<RootNamespace>LowLevel</RootNamespace>
 	</PropertyGroup>
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
@@ -75,7 +73,7 @@
 			<BasicRuntimeChecks>UninitializedLocalUsageCheck</BasicRuntimeChecks>
 			<AdditionalOptions>/MP /Wall /wd4514 /wd4820 /wd4127 /wd4710 /wd4711 /d2Zi+</AdditionalOptions>
 			<Optimization>Disabled</Optimization>
-			<AdditionalIncludeDirectories>./../../../externals/nvToolsExt/1/include;./../../../externals/nvToolsExt/1/include/stdint;./../../../Include/foundation;./../../foundation/include;./../../../Include/physxprofilesdk;./../../../Include/physxvisualdebuggersdk;./../../../Include/common;./../../../Include/geometry;./../../../Include/pxtask;./../../../Include;./../../Common/src;./../../Common/src/windows;./../../PhysXProfile/src;./../../PhysXProfile/include;./../../GeomUtils/headers;./../../GeomUtils/src/contact;./../../GeomUtils/src/common;./../../GeomUtils/src/convex;./../../GeomUtils/src/distance;./../../GeomUtils/src/gjk;./../../GeomUtils/src/intersection;./../../GeomUtils/src/mesh;./../../GeomUtils/src/hf;./../../GeomUtils/src/pcm;./../../GeomUtils/src;./../../LowLevel/API/include;./../../LowLevel/common/include;./../../LowLevel/common/include/collision;./../../LowLevel/common/include/pipeline;./../../LowLevel/common/include/pipeline/windows;./../../LowLevel/common/include/math;./../../LowLevel/common/include/utils;./../../LowLevel/software/include;./../../LowLevel/software/include/windows;./../../PhysXGpu/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../../externals/nvToolsExt/1/include;./../../../externals/nvToolsExt/1/include/stdint;./../../PhysXGpu/include;./../../../Include/foundation;./../../foundation/include;./../../../Include/physxprofilesdk;./../../../Include/physxvisualdebuggersdk;./../../../Include/common;./../../../Include/geometry;./../../../Include/pxtask;./../../../Include;./../../Common/src;./../../Common/src/windows;./../../PhysXProfile/src;./../../PhysXProfile/include;./../../GeomUtils/headers;./../../GeomUtils/src/contact;./../../GeomUtils/src/common;./../../GeomUtils/src/convex;./../../GeomUtils/src/distance;./../../GeomUtils/src/gjk;./../../GeomUtils/src/intersection;./../../GeomUtils/src/mesh;./../../GeomUtils/src/hf;./../../GeomUtils/src/pcm;./../../GeomUtils/src;./../../LowLevel/API/include;./../../LowLevel/common/include;./../../LowLevel/common/include/collision;./../../LowLevel/common/include/pipeline;./../../LowLevel/common/include/pipeline/windows;./../../LowLevel/common/include/math;./../../LowLevel/common/include/utils;./../../LowLevel/software/include;./../../LowLevel/software/include/windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_PHYSX_STATIC_LIB;_DEBUG;PX_DEBUG;PX_CHECKED;PX_SUPPORT_VISUAL_DEBUGGER;PX_NVTX;PX_PHYSX_DLL_NAME_POSTFIX=DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
@@ -116,7 +114,7 @@
 			<FloatingPointModel>Fast</FloatingPointModel>
 			<AdditionalOptions>/MP /Wall /wd4514 /wd4820 /wd4127 /wd4710 /wd4711 /d2Zi+</AdditionalOptions>
 			<Optimization>Full</Optimization>
-			<AdditionalIncludeDirectories>./../../../externals/nvToolsExt/1/include;./../../../externals/nvToolsExt/1/include/stdint;./../../../Include/foundation;./../../foundation/include;./../../../Include/physxprofilesdk;./../../../Include/physxvisualdebuggersdk;./../../../Include/common;./../../../Include/geometry;./../../../Include/pxtask;./../../../Include;./../../Common/src;./../../Common/src/windows;./../../PhysXProfile/src;./../../PhysXProfile/include;./../../GeomUtils/headers;./../../GeomUtils/src/contact;./../../GeomUtils/src/common;./../../GeomUtils/src/convex;./../../GeomUtils/src/distance;./../../GeomUtils/src/gjk;./../../GeomUtils/src/intersection;./../../GeomUtils/src/mesh;./../../GeomUtils/src/hf;./../../GeomUtils/src/pcm;./../../GeomUtils/src;./../../LowLevel/API/include;./../../LowLevel/common/include;./../../LowLevel/common/include/collision;./../../LowLevel/common/include/pipeline;./../../LowLevel/common/include/pipeline/windows;./../../LowLevel/common/include/math;./../../LowLevel/common/include/utils;./../../LowLevel/software/include;./../../LowLevel/software/include/windows;./../../PhysXGpu/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../../externals/nvToolsExt/1/include;./../../../externals/nvToolsExt/1/include/stdint;./../../PhysXGpu/include;./../../../Include/foundation;./../../foundation/include;./../../../Include/physxprofilesdk;./../../../Include/physxvisualdebuggersdk;./../../../Include/common;./../../../Include/geometry;./../../../Include/pxtask;./../../../Include;./../../Common/src;./../../Common/src/windows;./../../PhysXProfile/src;./../../PhysXProfile/include;./../../GeomUtils/headers;./../../GeomUtils/src/contact;./../../GeomUtils/src/common;./../../GeomUtils/src/convex;./../../GeomUtils/src/distance;./../../GeomUtils/src/gjk;./../../GeomUtils/src/intersection;./../../GeomUtils/src/mesh;./../../GeomUtils/src/hf;./../../GeomUtils/src/pcm;./../../GeomUtils/src;./../../LowLevel/API/include;./../../LowLevel/common/include;./../../LowLevel/common/include/collision;./../../LowLevel/common/include/pipeline;./../../LowLevel/common/include/pipeline/windows;./../../LowLevel/common/include/math;./../../LowLevel/common/include/utils;./../../LowLevel/software/include;./../../LowLevel/software/include/windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_PHYSX_STATIC_LIB;NDEBUG;PX_CHECKED;PX_SUPPORT_VISUAL_DEBUGGER;PX_NVTX;PX_PHYSX_DLL_NAME_POSTFIX=CHECKED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
@@ -157,7 +155,7 @@
 			<FloatingPointModel>Fast</FloatingPointModel>
 			<AdditionalOptions>/MP /Wall /wd4514 /wd4820 /wd4127 /wd4710 /wd4711 /d2Zi+</AdditionalOptions>
 			<Optimization>Full</Optimization>
-			<AdditionalIncludeDirectories>./../../../externals/nvToolsExt/1/include;./../../../externals/nvToolsExt/1/include/stdint;./../../../Include/foundation;./../../foundation/include;./../../../Include/physxprofilesdk;./../../../Include/physxvisualdebuggersdk;./../../../Include/common;./../../../Include/geometry;./../../../Include/pxtask;./../../../Include;./../../Common/src;./../../Common/src/windows;./../../PhysXProfile/src;./../../PhysXProfile/include;./../../GeomUtils/headers;./../../GeomUtils/src/contact;./../../GeomUtils/src/common;./../../GeomUtils/src/convex;./../../GeomUtils/src/distance;./../../GeomUtils/src/gjk;./../../GeomUtils/src/intersection;./../../GeomUtils/src/mesh;./../../GeomUtils/src/hf;./../../GeomUtils/src/pcm;./../../GeomUtils/src;./../../LowLevel/API/include;./../../LowLevel/common/include;./../../LowLevel/common/include/collision;./../../LowLevel/common/include/pipeline;./../../LowLevel/common/include/pipeline/windows;./../../LowLevel/common/include/math;./../../LowLevel/common/include/utils;./../../LowLevel/software/include;./../../LowLevel/software/include/windows;./../../PhysXGpu/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../../externals/nvToolsExt/1/include;./../../../externals/nvToolsExt/1/include/stdint;./../../PhysXGpu/include;./../../../Include/foundation;./../../foundation/include;./../../../Include/physxprofilesdk;./../../../Include/physxvisualdebuggersdk;./../../../Include/common;./../../../Include/geometry;./../../../Include/pxtask;./../../../Include;./../../Common/src;./../../Common/src/windows;./../../PhysXProfile/src;./../../PhysXProfile/include;./../../GeomUtils/headers;./../../GeomUtils/src/contact;./../../GeomUtils/src/common;./../../GeomUtils/src/convex;./../../GeomUtils/src/distance;./../../GeomUtils/src/gjk;./../../GeomUtils/src/intersection;./../../GeomUtils/src/mesh;./../../GeomUtils/src/hf;./../../GeomUtils/src/pcm;./../../GeomUtils/src;./../../LowLevel/API/include;./../../LowLevel/common/include;./../../LowLevel/common/include/collision;./../../LowLevel/common/include/pipeline;./../../LowLevel/common/include/pipeline/windows;./../../LowLevel/common/include/math;./../../LowLevel/common/include/utils;./../../LowLevel/software/include;./../../LowLevel/software/include/windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_PHYSX_STATIC_LIB;NDEBUG;PX_PROFILE;PX_SUPPORT_VISUAL_DEBUGGER;PX_NVTX;PX_PHYSX_DLL_NAME_POSTFIX=PROFILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
@@ -199,7 +197,7 @@
 			<FloatingPointModel>Fast</FloatingPointModel>
 			<AdditionalOptions>/MP /Wall /wd4514 /wd4820 /wd4127 /wd4710 /wd4711 /d2Zi+</AdditionalOptions>
 			<Optimization>Full</Optimization>
-			<AdditionalIncludeDirectories>./../../../externals/nvToolsExt/1/include;./../../../externals/nvToolsExt/1/include/stdint;./../../../Include/foundation;./../../foundation/include;./../../../Include/physxprofilesdk;./../../../Include/physxvisualdebuggersdk;./../../../Include/common;./../../../Include/geometry;./../../../Include/pxtask;./../../../Include;./../../Common/src;./../../Common/src/windows;./../../PhysXProfile/src;./../../PhysXProfile/include;./../../GeomUtils/headers;./../../GeomUtils/src/contact;./../../GeomUtils/src/common;./../../GeomUtils/src/convex;./../../GeomUtils/src/distance;./../../GeomUtils/src/gjk;./../../GeomUtils/src/intersection;./../../GeomUtils/src/mesh;./../../GeomUtils/src/hf;./../../GeomUtils/src/pcm;./../../GeomUtils/src;./../../LowLevel/API/include;./../../LowLevel/common/include;./../../LowLevel/common/include/collision;./../../LowLevel/common/include/pipeline;./../../LowLevel/common/include/pipeline/windows;./../../LowLevel/common/include/math;./../../LowLevel/common/include/utils;./../../LowLevel/software/include;./../../LowLevel/software/include/windows;./../../PhysXGpu/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../../externals/nvToolsExt/1/include;./../../../externals/nvToolsExt/1/include/stdint;./../../PhysXGpu/include;./../../../Include/foundation;./../../foundation/include;./../../../Include/physxprofilesdk;./../../../Include/physxvisualdebuggersdk;./../../../Include/common;./../../../Include/geometry;./../../../Include/pxtask;./../../../Include;./../../Common/src;./../../Common/src/windows;./../../PhysXProfile/src;./../../PhysXProfile/include;./../../GeomUtils/headers;./../../GeomUtils/src/contact;./../../GeomUtils/src/common;./../../GeomUtils/src/convex;./../../GeomUtils/src/distance;./../../GeomUtils/src/gjk;./../../GeomUtils/src/intersection;./../../GeomUtils/src/mesh;./../../GeomUtils/src/hf;./../../GeomUtils/src/pcm;./../../GeomUtils/src;./../../LowLevel/API/include;./../../LowLevel/common/include;./../../LowLevel/common/include/collision;./../../LowLevel/common/include/pipeline;./../../LowLevel/common/include/pipeline/windows;./../../LowLevel/common/include/math;./../../LowLevel/common/include/utils;./../../LowLevel/software/include;./../../LowLevel/software/include/windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_PHYSX_STATIC_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>

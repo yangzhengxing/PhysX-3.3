@@ -262,9 +262,8 @@ void NpArticulationLink::setGlobalPose(const PxTransform& pose, bool autowake)
 	NP_WRITE_CHECK(scene);
 	
 #ifdef PX_CHECKED
-	NpScene* ownerScene = NpActor::getOwnerScene(*this);
-	if(ownerScene)
-		ownerScene->checkPositionSanity(*this, pose, "PxArticulationLink::setGlobalPose");
+	if(scene)
+		scene->checkPositionSanity(*this, pose, "PxArticulationLink::setGlobalPose");
 #endif
 
 	PxTransform body2World = pose * getScbBodyFast().getBody2Actor();

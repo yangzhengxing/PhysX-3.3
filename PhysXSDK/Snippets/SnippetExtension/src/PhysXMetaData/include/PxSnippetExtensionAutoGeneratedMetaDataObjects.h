@@ -51,7 +51,7 @@
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (CustomPulleyJoint*)NULL );
+			return inOperator( reinterpret_cast<CustomPulleyJoint*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )

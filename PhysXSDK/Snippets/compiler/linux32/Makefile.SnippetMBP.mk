@@ -64,20 +64,14 @@ SnippetMBP_debug_common_cflags    += -MMD
 SnippetMBP_debug_common_cflags    += $(addprefix -D, $(SnippetMBP_debug_defines))
 SnippetMBP_debug_common_cflags    += $(addprefix -I, $(SnippetMBP_debug_hpaths))
 SnippetMBP_debug_common_cflags  += -m32
+SnippetMBP_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetMBP_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetMBP_debug_common_cflags  += -Wno-long-long
+SnippetMBP_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetMBP_debug_common_cflags  += -Wno-unused-parameter
+SnippetMBP_debug_common_cflags  += -g3 -gdwarf-2
 SnippetMBP_debug_cflags	:= $(SnippetMBP_debug_common_cflags)
-SnippetMBP_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMBP_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMBP_debug_cflags  += -Wno-long-long
-SnippetMBP_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMBP_debug_cflags  += -Wno-unused-parameter
-SnippetMBP_debug_cflags  += -g3 -gdwarf-2
 SnippetMBP_debug_cppflags	:= $(SnippetMBP_debug_common_cflags)
-SnippetMBP_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMBP_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMBP_debug_cppflags  += -Wno-long-long
-SnippetMBP_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMBP_debug_cppflags  += -Wno-unused-parameter
-SnippetMBP_debug_cppflags  += -g3 -gdwarf-2
 SnippetMBP_debug_lflags    := $(SnippetMBP_custom_lflags)
 SnippetMBP_debug_lflags    += $(addprefix -L, $(SnippetMBP_debug_lpaths))
 SnippetMBP_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetMBP_debug_libraries)) -Wl,--end-group
@@ -176,20 +170,14 @@ SnippetMBP_checked_common_cflags    += -MMD
 SnippetMBP_checked_common_cflags    += $(addprefix -D, $(SnippetMBP_checked_defines))
 SnippetMBP_checked_common_cflags    += $(addprefix -I, $(SnippetMBP_checked_hpaths))
 SnippetMBP_checked_common_cflags  += -m32
+SnippetMBP_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetMBP_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetMBP_checked_common_cflags  += -Wno-long-long
+SnippetMBP_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetMBP_checked_common_cflags  += -Wno-unused-parameter
+SnippetMBP_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetMBP_checked_cflags	:= $(SnippetMBP_checked_common_cflags)
-SnippetMBP_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMBP_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMBP_checked_cflags  += -Wno-long-long
-SnippetMBP_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMBP_checked_cflags  += -Wno-unused-parameter
-SnippetMBP_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetMBP_checked_cppflags	:= $(SnippetMBP_checked_common_cflags)
-SnippetMBP_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMBP_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMBP_checked_cppflags  += -Wno-long-long
-SnippetMBP_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMBP_checked_cppflags  += -Wno-unused-parameter
-SnippetMBP_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetMBP_checked_lflags    := $(SnippetMBP_custom_lflags)
 SnippetMBP_checked_lflags    += $(addprefix -L, $(SnippetMBP_checked_lpaths))
 SnippetMBP_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetMBP_checked_libraries)) -Wl,--end-group
@@ -288,20 +276,14 @@ SnippetMBP_profile_common_cflags    += -MMD
 SnippetMBP_profile_common_cflags    += $(addprefix -D, $(SnippetMBP_profile_defines))
 SnippetMBP_profile_common_cflags    += $(addprefix -I, $(SnippetMBP_profile_hpaths))
 SnippetMBP_profile_common_cflags  += -m32
+SnippetMBP_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetMBP_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetMBP_profile_common_cflags  += -Wno-long-long
+SnippetMBP_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetMBP_profile_common_cflags  += -Wno-unused-parameter
+SnippetMBP_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetMBP_profile_cflags	:= $(SnippetMBP_profile_common_cflags)
-SnippetMBP_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMBP_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMBP_profile_cflags  += -Wno-long-long
-SnippetMBP_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMBP_profile_cflags  += -Wno-unused-parameter
-SnippetMBP_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetMBP_profile_cppflags	:= $(SnippetMBP_profile_common_cflags)
-SnippetMBP_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMBP_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMBP_profile_cppflags  += -Wno-long-long
-SnippetMBP_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMBP_profile_cppflags  += -Wno-unused-parameter
-SnippetMBP_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetMBP_profile_lflags    := $(SnippetMBP_custom_lflags)
 SnippetMBP_profile_lflags    += $(addprefix -L, $(SnippetMBP_profile_lpaths))
 SnippetMBP_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetMBP_profile_libraries)) -Wl,--end-group
@@ -398,20 +380,14 @@ SnippetMBP_release_common_cflags    += -MMD
 SnippetMBP_release_common_cflags    += $(addprefix -D, $(SnippetMBP_release_defines))
 SnippetMBP_release_common_cflags    += $(addprefix -I, $(SnippetMBP_release_hpaths))
 SnippetMBP_release_common_cflags  += -m32
+SnippetMBP_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetMBP_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetMBP_release_common_cflags  += -Wno-long-long
+SnippetMBP_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetMBP_release_common_cflags  += -Wno-unused-parameter
+SnippetMBP_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetMBP_release_cflags	:= $(SnippetMBP_release_common_cflags)
-SnippetMBP_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMBP_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMBP_release_cflags  += -Wno-long-long
-SnippetMBP_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMBP_release_cflags  += -Wno-unused-parameter
-SnippetMBP_release_cflags  += -O3 -fno-strict-aliasing
 SnippetMBP_release_cppflags	:= $(SnippetMBP_release_common_cflags)
-SnippetMBP_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMBP_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMBP_release_cppflags  += -Wno-long-long
-SnippetMBP_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMBP_release_cppflags  += -Wno-unused-parameter
-SnippetMBP_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetMBP_release_lflags    := $(SnippetMBP_custom_lflags)
 SnippetMBP_release_lflags    += $(addprefix -L, $(SnippetMBP_release_lpaths))
 SnippetMBP_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetMBP_release_libraries)) -Wl,--end-group

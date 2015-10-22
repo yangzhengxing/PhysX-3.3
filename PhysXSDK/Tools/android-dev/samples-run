@@ -13,9 +13,6 @@ parseArgs $@
 saveArgs
 
 executable=Samples$suffix
-if [[ $ANDROID_CONFIG == *_neon ]]; then
-	executable=SamplesNeon$suffix
-fi
 echo Executable is $executable, debug=$debug
 
 # wait until device is ready

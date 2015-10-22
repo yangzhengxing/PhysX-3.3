@@ -63,20 +63,14 @@ SnippetStepper_debug_common_cflags    += -MMD
 SnippetStepper_debug_common_cflags    += $(addprefix -D, $(SnippetStepper_debug_defines))
 SnippetStepper_debug_common_cflags    += $(addprefix -I, $(SnippetStepper_debug_hpaths))
 SnippetStepper_debug_common_cflags  += -m64
+SnippetStepper_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetStepper_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetStepper_debug_common_cflags  += -Wno-long-long
+SnippetStepper_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetStepper_debug_common_cflags  += -Wno-unused-parameter
+SnippetStepper_debug_common_cflags  += -g3 -gdwarf-2
 SnippetStepper_debug_cflags	:= $(SnippetStepper_debug_common_cflags)
-SnippetStepper_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetStepper_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetStepper_debug_cflags  += -Wno-long-long
-SnippetStepper_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetStepper_debug_cflags  += -Wno-unused-parameter
-SnippetStepper_debug_cflags  += -g3 -gdwarf-2
 SnippetStepper_debug_cppflags	:= $(SnippetStepper_debug_common_cflags)
-SnippetStepper_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetStepper_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetStepper_debug_cppflags  += -Wno-long-long
-SnippetStepper_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetStepper_debug_cppflags  += -Wno-unused-parameter
-SnippetStepper_debug_cppflags  += -g3 -gdwarf-2
 SnippetStepper_debug_lflags    := $(SnippetStepper_custom_lflags)
 SnippetStepper_debug_lflags    += $(addprefix -L, $(SnippetStepper_debug_lpaths))
 SnippetStepper_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetStepper_debug_libraries)) -Wl,--end-group
@@ -175,20 +169,14 @@ SnippetStepper_checked_common_cflags    += -MMD
 SnippetStepper_checked_common_cflags    += $(addprefix -D, $(SnippetStepper_checked_defines))
 SnippetStepper_checked_common_cflags    += $(addprefix -I, $(SnippetStepper_checked_hpaths))
 SnippetStepper_checked_common_cflags  += -m64
+SnippetStepper_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetStepper_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetStepper_checked_common_cflags  += -Wno-long-long
+SnippetStepper_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetStepper_checked_common_cflags  += -Wno-unused-parameter
+SnippetStepper_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetStepper_checked_cflags	:= $(SnippetStepper_checked_common_cflags)
-SnippetStepper_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetStepper_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetStepper_checked_cflags  += -Wno-long-long
-SnippetStepper_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetStepper_checked_cflags  += -Wno-unused-parameter
-SnippetStepper_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetStepper_checked_cppflags	:= $(SnippetStepper_checked_common_cflags)
-SnippetStepper_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetStepper_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetStepper_checked_cppflags  += -Wno-long-long
-SnippetStepper_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetStepper_checked_cppflags  += -Wno-unused-parameter
-SnippetStepper_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetStepper_checked_lflags    := $(SnippetStepper_custom_lflags)
 SnippetStepper_checked_lflags    += $(addprefix -L, $(SnippetStepper_checked_lpaths))
 SnippetStepper_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetStepper_checked_libraries)) -Wl,--end-group
@@ -287,20 +275,14 @@ SnippetStepper_profile_common_cflags    += -MMD
 SnippetStepper_profile_common_cflags    += $(addprefix -D, $(SnippetStepper_profile_defines))
 SnippetStepper_profile_common_cflags    += $(addprefix -I, $(SnippetStepper_profile_hpaths))
 SnippetStepper_profile_common_cflags  += -m64
+SnippetStepper_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetStepper_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetStepper_profile_common_cflags  += -Wno-long-long
+SnippetStepper_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetStepper_profile_common_cflags  += -Wno-unused-parameter
+SnippetStepper_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetStepper_profile_cflags	:= $(SnippetStepper_profile_common_cflags)
-SnippetStepper_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetStepper_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetStepper_profile_cflags  += -Wno-long-long
-SnippetStepper_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetStepper_profile_cflags  += -Wno-unused-parameter
-SnippetStepper_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetStepper_profile_cppflags	:= $(SnippetStepper_profile_common_cflags)
-SnippetStepper_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetStepper_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetStepper_profile_cppflags  += -Wno-long-long
-SnippetStepper_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetStepper_profile_cppflags  += -Wno-unused-parameter
-SnippetStepper_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetStepper_profile_lflags    := $(SnippetStepper_custom_lflags)
 SnippetStepper_profile_lflags    += $(addprefix -L, $(SnippetStepper_profile_lpaths))
 SnippetStepper_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetStepper_profile_libraries)) -Wl,--end-group
@@ -397,20 +379,14 @@ SnippetStepper_release_common_cflags    += -MMD
 SnippetStepper_release_common_cflags    += $(addprefix -D, $(SnippetStepper_release_defines))
 SnippetStepper_release_common_cflags    += $(addprefix -I, $(SnippetStepper_release_hpaths))
 SnippetStepper_release_common_cflags  += -m64
+SnippetStepper_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetStepper_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetStepper_release_common_cflags  += -Wno-long-long
+SnippetStepper_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetStepper_release_common_cflags  += -Wno-unused-parameter
+SnippetStepper_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetStepper_release_cflags	:= $(SnippetStepper_release_common_cflags)
-SnippetStepper_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetStepper_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetStepper_release_cflags  += -Wno-long-long
-SnippetStepper_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetStepper_release_cflags  += -Wno-unused-parameter
-SnippetStepper_release_cflags  += -O3 -fno-strict-aliasing
 SnippetStepper_release_cppflags	:= $(SnippetStepper_release_common_cflags)
-SnippetStepper_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetStepper_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetStepper_release_cppflags  += -Wno-long-long
-SnippetStepper_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetStepper_release_cppflags  += -Wno-unused-parameter
-SnippetStepper_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetStepper_release_lflags    := $(SnippetStepper_custom_lflags)
 SnippetStepper_release_lflags    += $(addprefix -L, $(SnippetStepper_release_lpaths))
 SnippetStepper_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetStepper_release_libraries)) -Wl,--end-group

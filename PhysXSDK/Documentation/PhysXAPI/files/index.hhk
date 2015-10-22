@@ -191,7 +191,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#ga749a16c7bcdb8341d346abe43c023c12"><param name="Name" value="PxControllerDesc"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#ga4d9c61bca1db393947c1594c9dabb5ea"><param name="Name" value="PxControllerFlag"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#ga3a1d44bf6de773165bd09af397916070"><param name="Name" value="PxControllerFlags"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#gac665a6d24d6e1b231b65028fff30729b"><param name="Name" value="PxCreateControllerManager"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#ga4a13c0d87b6c72ec7bf5e701157c358b"><param name="Name" value="PxCreateControllerManager"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#gafbd2fb84a13cdeb156b671e895d165b9"><param name="Name" value="PxExtended"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#gab0c940a0ad16419cb3800692ac9bffca"><param name="Name" value="PxExtendedAbs"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#gaf2f271a2e1d38f619d345bd89f737412"><param name="Name" value="setToDefault"></OBJECT>
@@ -6242,7 +6242,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="PxControllerManager_8h.html"><param name="Name" value="PxControllerManager.h"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="PxControllerManager_8h.html#ga2404e3aa455180820b7fa4900d75f18e"><param name="Name" value="PxControllerDebugRenderFlags"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="PxControllerManager_8h.html#gac665a6d24d6e1b231b65028fff30729b"><param name="Name" value="PxCreateControllerManager"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="PxControllerManager_8h.html#ga4a13c0d87b6c72ec7bf5e701157c358b"><param name="Name" value="PxCreateControllerManager"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classPxControllerManager.html"><param name="Name" value="PxControllerManager"></OBJECT>
   <UL>
@@ -6447,10 +6447,10 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__common.html#gaa3979f24ebe59e173e262c7155b1a489"><param name="Name" value="common"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__common.html#gaa3979f24ebe59e173e262c7155b1a489"><param name="Name" value="PxCollection.h"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#gac665a6d24d6e1b231b65028fff30729b"><param name="Name" value="PxCreateControllerManager"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#ga4a13c0d87b6c72ec7bf5e701157c358b"><param name="Name" value="PxCreateControllerManager"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#gac665a6d24d6e1b231b65028fff30729b"><param name="Name" value="character"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#gac665a6d24d6e1b231b65028fff30729b"><param name="Name" value="PxControllerManager.h"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#ga4a13c0d87b6c72ec7bf5e701157c358b"><param name="Name" value="character"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__character.html#ga4a13c0d87b6c72ec7bf5e701157c358b"><param name="Name" value="PxControllerManager.h"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__cooking.html#gaf772f72cf46b9a2326d4562f7cae620b"><param name="Name" value="PxCreateCooking"></OBJECT>
   <UL>

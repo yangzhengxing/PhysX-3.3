@@ -143,6 +143,7 @@ LowLevel_c_release_dep      = $(addprefix $(DEPSDIR)/LowLevel/release/, $(subst 
 LowLevel_release_dep      = $(LowLevel_cpp_release_dep) $(LowLevel_cc_release_dep) $(LowLevel_c_release_dep)
 -include $(LowLevel_release_dep)
 LowLevel_debug_hpaths    := 
+LowLevel_debug_hpaths    += ./../../PhysXGpu/include
 LowLevel_debug_hpaths    += ./../../../Include/foundation
 LowLevel_debug_hpaths    += ./../../foundation/include
 LowLevel_debug_hpaths    += ./../../../Include/physxprofilesdk
@@ -175,7 +176,6 @@ LowLevel_debug_hpaths    += ./../../LowLevel/common/include/math
 LowLevel_debug_hpaths    += ./../../LowLevel/common/include/utils
 LowLevel_debug_hpaths    += ./../../LowLevel/software/include
 LowLevel_debug_hpaths    += ./../../LowLevel/software/include/unix
-LowLevel_debug_hpaths    += ./../../PhysXGpu/include
 LowLevel_debug_lpaths    := 
 LowLevel_debug_defines   := $(LowLevel_custom_defines)
 LowLevel_debug_defines   += PX_PHYSX_STATIC_LIB
@@ -189,20 +189,14 @@ LowLevel_debug_common_cflags    += -MMD
 LowLevel_debug_common_cflags    += $(addprefix -D, $(LowLevel_debug_defines))
 LowLevel_debug_common_cflags    += $(addprefix -I, $(LowLevel_debug_hpaths))
 LowLevel_debug_common_cflags  += -m32
+LowLevel_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+LowLevel_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+LowLevel_debug_common_cflags  += -Wno-long-long
+LowLevel_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+LowLevel_debug_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+LowLevel_debug_common_cflags  += -g3 -gdwarf-2
 LowLevel_debug_cflags	:= $(LowLevel_debug_common_cflags)
-LowLevel_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevel_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevel_debug_cflags  += -Wno-long-long
-LowLevel_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevel_debug_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevel_debug_cflags  += -g3 -gdwarf-2
 LowLevel_debug_cppflags	:= $(LowLevel_debug_common_cflags)
-LowLevel_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevel_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevel_debug_cppflags  += -Wno-long-long
-LowLevel_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevel_debug_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevel_debug_cppflags  += -g3 -gdwarf-2
 LowLevel_debug_lflags    := $(LowLevel_custom_lflags)
 LowLevel_debug_lflags    += $(addprefix -L, $(LowLevel_debug_lpaths))
 LowLevel_debug_lflags    += -Wl,--start-group $(addprefix -l, $(LowLevel_debug_libraries)) -Wl,--end-group
@@ -263,6 +257,7 @@ $(LowLevel_debug_c_o): $(LowLevel_debug_objsdir)/%.o:
 	  rm -f $(LowLevel_debug_DEPDIR).d
 
 LowLevel_checked_hpaths    := 
+LowLevel_checked_hpaths    += ./../../PhysXGpu/include
 LowLevel_checked_hpaths    += ./../../../Include/foundation
 LowLevel_checked_hpaths    += ./../../foundation/include
 LowLevel_checked_hpaths    += ./../../../Include/physxprofilesdk
@@ -295,7 +290,6 @@ LowLevel_checked_hpaths    += ./../../LowLevel/common/include/math
 LowLevel_checked_hpaths    += ./../../LowLevel/common/include/utils
 LowLevel_checked_hpaths    += ./../../LowLevel/software/include
 LowLevel_checked_hpaths    += ./../../LowLevel/software/include/unix
-LowLevel_checked_hpaths    += ./../../PhysXGpu/include
 LowLevel_checked_lpaths    := 
 LowLevel_checked_defines   := $(LowLevel_custom_defines)
 LowLevel_checked_defines   += PX_PHYSX_STATIC_LIB
@@ -308,20 +302,14 @@ LowLevel_checked_common_cflags    += -MMD
 LowLevel_checked_common_cflags    += $(addprefix -D, $(LowLevel_checked_defines))
 LowLevel_checked_common_cflags    += $(addprefix -I, $(LowLevel_checked_hpaths))
 LowLevel_checked_common_cflags  += -m32
+LowLevel_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+LowLevel_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+LowLevel_checked_common_cflags  += -Wno-long-long
+LowLevel_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+LowLevel_checked_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+LowLevel_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 LowLevel_checked_cflags	:= $(LowLevel_checked_common_cflags)
-LowLevel_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevel_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevel_checked_cflags  += -Wno-long-long
-LowLevel_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevel_checked_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevel_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 LowLevel_checked_cppflags	:= $(LowLevel_checked_common_cflags)
-LowLevel_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevel_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevel_checked_cppflags  += -Wno-long-long
-LowLevel_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevel_checked_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevel_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 LowLevel_checked_lflags    := $(LowLevel_custom_lflags)
 LowLevel_checked_lflags    += $(addprefix -L, $(LowLevel_checked_lpaths))
 LowLevel_checked_lflags    += -Wl,--start-group $(addprefix -l, $(LowLevel_checked_libraries)) -Wl,--end-group
@@ -382,6 +370,7 @@ $(LowLevel_checked_c_o): $(LowLevel_checked_objsdir)/%.o:
 	  rm -f $(LowLevel_checked_DEPDIR).d
 
 LowLevel_profile_hpaths    := 
+LowLevel_profile_hpaths    += ./../../PhysXGpu/include
 LowLevel_profile_hpaths    += ./../../../Include/foundation
 LowLevel_profile_hpaths    += ./../../foundation/include
 LowLevel_profile_hpaths    += ./../../../Include/physxprofilesdk
@@ -414,7 +403,6 @@ LowLevel_profile_hpaths    += ./../../LowLevel/common/include/math
 LowLevel_profile_hpaths    += ./../../LowLevel/common/include/utils
 LowLevel_profile_hpaths    += ./../../LowLevel/software/include
 LowLevel_profile_hpaths    += ./../../LowLevel/software/include/unix
-LowLevel_profile_hpaths    += ./../../PhysXGpu/include
 LowLevel_profile_lpaths    := 
 LowLevel_profile_defines   := $(LowLevel_custom_defines)
 LowLevel_profile_defines   += PX_PHYSX_STATIC_LIB
@@ -427,20 +415,14 @@ LowLevel_profile_common_cflags    += -MMD
 LowLevel_profile_common_cflags    += $(addprefix -D, $(LowLevel_profile_defines))
 LowLevel_profile_common_cflags    += $(addprefix -I, $(LowLevel_profile_hpaths))
 LowLevel_profile_common_cflags  += -m32
+LowLevel_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+LowLevel_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+LowLevel_profile_common_cflags  += -Wno-long-long
+LowLevel_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+LowLevel_profile_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+LowLevel_profile_common_cflags  += -O3 -fno-strict-aliasing
 LowLevel_profile_cflags	:= $(LowLevel_profile_common_cflags)
-LowLevel_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevel_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevel_profile_cflags  += -Wno-long-long
-LowLevel_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevel_profile_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevel_profile_cflags  += -O3 -fno-strict-aliasing
 LowLevel_profile_cppflags	:= $(LowLevel_profile_common_cflags)
-LowLevel_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevel_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevel_profile_cppflags  += -Wno-long-long
-LowLevel_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevel_profile_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevel_profile_cppflags  += -O3 -fno-strict-aliasing
 LowLevel_profile_lflags    := $(LowLevel_custom_lflags)
 LowLevel_profile_lflags    += $(addprefix -L, $(LowLevel_profile_lpaths))
 LowLevel_profile_lflags    += -Wl,--start-group $(addprefix -l, $(LowLevel_profile_libraries)) -Wl,--end-group
@@ -501,6 +483,7 @@ $(LowLevel_profile_c_o): $(LowLevel_profile_objsdir)/%.o:
 	  rm -f $(LowLevel_profile_DEPDIR).d
 
 LowLevel_release_hpaths    := 
+LowLevel_release_hpaths    += ./../../PhysXGpu/include
 LowLevel_release_hpaths    += ./../../../Include/foundation
 LowLevel_release_hpaths    += ./../../foundation/include
 LowLevel_release_hpaths    += ./../../../Include/physxprofilesdk
@@ -533,7 +516,6 @@ LowLevel_release_hpaths    += ./../../LowLevel/common/include/math
 LowLevel_release_hpaths    += ./../../LowLevel/common/include/utils
 LowLevel_release_hpaths    += ./../../LowLevel/software/include
 LowLevel_release_hpaths    += ./../../LowLevel/software/include/unix
-LowLevel_release_hpaths    += ./../../PhysXGpu/include
 LowLevel_release_lpaths    := 
 LowLevel_release_defines   := $(LowLevel_custom_defines)
 LowLevel_release_defines   += PX_PHYSX_STATIC_LIB
@@ -544,20 +526,14 @@ LowLevel_release_common_cflags    += -MMD
 LowLevel_release_common_cflags    += $(addprefix -D, $(LowLevel_release_defines))
 LowLevel_release_common_cflags    += $(addprefix -I, $(LowLevel_release_hpaths))
 LowLevel_release_common_cflags  += -m32
+LowLevel_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+LowLevel_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+LowLevel_release_common_cflags  += -Wno-long-long
+LowLevel_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+LowLevel_release_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+LowLevel_release_common_cflags  += -O3 -fno-strict-aliasing
 LowLevel_release_cflags	:= $(LowLevel_release_common_cflags)
-LowLevel_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevel_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevel_release_cflags  += -Wno-long-long
-LowLevel_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevel_release_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevel_release_cflags  += -O3 -fno-strict-aliasing
 LowLevel_release_cppflags	:= $(LowLevel_release_common_cflags)
-LowLevel_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-LowLevel_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-LowLevel_release_cppflags  += -Wno-long-long
-LowLevel_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-LowLevel_release_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-LowLevel_release_cppflags  += -O3 -fno-strict-aliasing
 LowLevel_release_lflags    := $(LowLevel_custom_lflags)
 LowLevel_release_lflags    += $(addprefix -L, $(LowLevel_release_lpaths))
 LowLevel_release_lflags    += -Wl,--start-group $(addprefix -l, $(LowLevel_release_libraries)) -Wl,--end-group

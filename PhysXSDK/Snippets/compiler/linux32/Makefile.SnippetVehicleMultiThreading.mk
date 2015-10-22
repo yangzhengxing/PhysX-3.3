@@ -70,20 +70,14 @@ SnippetVehicleMultiThreading_debug_common_cflags    += -MMD
 SnippetVehicleMultiThreading_debug_common_cflags    += $(addprefix -D, $(SnippetVehicleMultiThreading_debug_defines))
 SnippetVehicleMultiThreading_debug_common_cflags    += $(addprefix -I, $(SnippetVehicleMultiThreading_debug_hpaths))
 SnippetVehicleMultiThreading_debug_common_cflags  += -m32
+SnippetVehicleMultiThreading_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleMultiThreading_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleMultiThreading_debug_common_cflags  += -Wno-long-long
+SnippetVehicleMultiThreading_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleMultiThreading_debug_common_cflags  += -Wno-unused-parameter
+SnippetVehicleMultiThreading_debug_common_cflags  += -g3 -gdwarf-2
 SnippetVehicleMultiThreading_debug_cflags	:= $(SnippetVehicleMultiThreading_debug_common_cflags)
-SnippetVehicleMultiThreading_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleMultiThreading_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleMultiThreading_debug_cflags  += -Wno-long-long
-SnippetVehicleMultiThreading_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleMultiThreading_debug_cflags  += -Wno-unused-parameter
-SnippetVehicleMultiThreading_debug_cflags  += -g3 -gdwarf-2
 SnippetVehicleMultiThreading_debug_cppflags	:= $(SnippetVehicleMultiThreading_debug_common_cflags)
-SnippetVehicleMultiThreading_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleMultiThreading_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleMultiThreading_debug_cppflags  += -Wno-long-long
-SnippetVehicleMultiThreading_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleMultiThreading_debug_cppflags  += -Wno-unused-parameter
-SnippetVehicleMultiThreading_debug_cppflags  += -g3 -gdwarf-2
 SnippetVehicleMultiThreading_debug_lflags    := $(SnippetVehicleMultiThreading_custom_lflags)
 SnippetVehicleMultiThreading_debug_lflags    += $(addprefix -L, $(SnippetVehicleMultiThreading_debug_lpaths))
 SnippetVehicleMultiThreading_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleMultiThreading_debug_libraries)) -Wl,--end-group
@@ -182,20 +176,14 @@ SnippetVehicleMultiThreading_checked_common_cflags    += -MMD
 SnippetVehicleMultiThreading_checked_common_cflags    += $(addprefix -D, $(SnippetVehicleMultiThreading_checked_defines))
 SnippetVehicleMultiThreading_checked_common_cflags    += $(addprefix -I, $(SnippetVehicleMultiThreading_checked_hpaths))
 SnippetVehicleMultiThreading_checked_common_cflags  += -m32
+SnippetVehicleMultiThreading_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleMultiThreading_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleMultiThreading_checked_common_cflags  += -Wno-long-long
+SnippetVehicleMultiThreading_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleMultiThreading_checked_common_cflags  += -Wno-unused-parameter
+SnippetVehicleMultiThreading_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetVehicleMultiThreading_checked_cflags	:= $(SnippetVehicleMultiThreading_checked_common_cflags)
-SnippetVehicleMultiThreading_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleMultiThreading_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleMultiThreading_checked_cflags  += -Wno-long-long
-SnippetVehicleMultiThreading_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleMultiThreading_checked_cflags  += -Wno-unused-parameter
-SnippetVehicleMultiThreading_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetVehicleMultiThreading_checked_cppflags	:= $(SnippetVehicleMultiThreading_checked_common_cflags)
-SnippetVehicleMultiThreading_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleMultiThreading_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleMultiThreading_checked_cppflags  += -Wno-long-long
-SnippetVehicleMultiThreading_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleMultiThreading_checked_cppflags  += -Wno-unused-parameter
-SnippetVehicleMultiThreading_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetVehicleMultiThreading_checked_lflags    := $(SnippetVehicleMultiThreading_custom_lflags)
 SnippetVehicleMultiThreading_checked_lflags    += $(addprefix -L, $(SnippetVehicleMultiThreading_checked_lpaths))
 SnippetVehicleMultiThreading_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleMultiThreading_checked_libraries)) -Wl,--end-group
@@ -294,20 +282,14 @@ SnippetVehicleMultiThreading_profile_common_cflags    += -MMD
 SnippetVehicleMultiThreading_profile_common_cflags    += $(addprefix -D, $(SnippetVehicleMultiThreading_profile_defines))
 SnippetVehicleMultiThreading_profile_common_cflags    += $(addprefix -I, $(SnippetVehicleMultiThreading_profile_hpaths))
 SnippetVehicleMultiThreading_profile_common_cflags  += -m32
+SnippetVehicleMultiThreading_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleMultiThreading_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleMultiThreading_profile_common_cflags  += -Wno-long-long
+SnippetVehicleMultiThreading_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleMultiThreading_profile_common_cflags  += -Wno-unused-parameter
+SnippetVehicleMultiThreading_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleMultiThreading_profile_cflags	:= $(SnippetVehicleMultiThreading_profile_common_cflags)
-SnippetVehicleMultiThreading_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleMultiThreading_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleMultiThreading_profile_cflags  += -Wno-long-long
-SnippetVehicleMultiThreading_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleMultiThreading_profile_cflags  += -Wno-unused-parameter
-SnippetVehicleMultiThreading_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleMultiThreading_profile_cppflags	:= $(SnippetVehicleMultiThreading_profile_common_cflags)
-SnippetVehicleMultiThreading_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleMultiThreading_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleMultiThreading_profile_cppflags  += -Wno-long-long
-SnippetVehicleMultiThreading_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleMultiThreading_profile_cppflags  += -Wno-unused-parameter
-SnippetVehicleMultiThreading_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetVehicleMultiThreading_profile_lflags    := $(SnippetVehicleMultiThreading_custom_lflags)
 SnippetVehicleMultiThreading_profile_lflags    += $(addprefix -L, $(SnippetVehicleMultiThreading_profile_lpaths))
 SnippetVehicleMultiThreading_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleMultiThreading_profile_libraries)) -Wl,--end-group
@@ -404,20 +386,14 @@ SnippetVehicleMultiThreading_release_common_cflags    += -MMD
 SnippetVehicleMultiThreading_release_common_cflags    += $(addprefix -D, $(SnippetVehicleMultiThreading_release_defines))
 SnippetVehicleMultiThreading_release_common_cflags    += $(addprefix -I, $(SnippetVehicleMultiThreading_release_hpaths))
 SnippetVehicleMultiThreading_release_common_cflags  += -m32
+SnippetVehicleMultiThreading_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleMultiThreading_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleMultiThreading_release_common_cflags  += -Wno-long-long
+SnippetVehicleMultiThreading_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleMultiThreading_release_common_cflags  += -Wno-unused-parameter
+SnippetVehicleMultiThreading_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleMultiThreading_release_cflags	:= $(SnippetVehicleMultiThreading_release_common_cflags)
-SnippetVehicleMultiThreading_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleMultiThreading_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleMultiThreading_release_cflags  += -Wno-long-long
-SnippetVehicleMultiThreading_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleMultiThreading_release_cflags  += -Wno-unused-parameter
-SnippetVehicleMultiThreading_release_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleMultiThreading_release_cppflags	:= $(SnippetVehicleMultiThreading_release_common_cflags)
-SnippetVehicleMultiThreading_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleMultiThreading_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleMultiThreading_release_cppflags  += -Wno-long-long
-SnippetVehicleMultiThreading_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleMultiThreading_release_cppflags  += -Wno-unused-parameter
-SnippetVehicleMultiThreading_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetVehicleMultiThreading_release_lflags    := $(SnippetVehicleMultiThreading_custom_lflags)
 SnippetVehicleMultiThreading_release_lflags    += $(addprefix -L, $(SnippetVehicleMultiThreading_release_lpaths))
 SnippetVehicleMultiThreading_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleMultiThreading_release_libraries)) -Wl,--end-group

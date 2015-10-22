@@ -87,7 +87,7 @@ PvdRuntime_debug_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-math -
 PvdRuntime_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PvdRuntime_debug_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 PvdRuntime_debug_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PvdRuntime_debug_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PvdRuntime_debug_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PvdRuntime_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PvdRuntime_debug_cflags  += -Wno-unused-parameter
 PvdRuntime_debug_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -98,7 +98,7 @@ PvdRuntime_debug_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-math
 PvdRuntime_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PvdRuntime_debug_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 PvdRuntime_debug_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PvdRuntime_debug_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PvdRuntime_debug_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PvdRuntime_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PvdRuntime_debug_cppflags  += -Wno-unused-parameter
 PvdRuntime_debug_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -220,7 +220,7 @@ PvdRuntime_checked_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-math
 PvdRuntime_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PvdRuntime_checked_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 PvdRuntime_checked_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PvdRuntime_checked_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PvdRuntime_checked_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PvdRuntime_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PvdRuntime_checked_cflags  += -Wno-unused-parameter
 PvdRuntime_checked_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -231,7 +231,7 @@ PvdRuntime_checked_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-ma
 PvdRuntime_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PvdRuntime_checked_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 PvdRuntime_checked_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PvdRuntime_checked_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PvdRuntime_checked_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PvdRuntime_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PvdRuntime_checked_cppflags  += -Wno-unused-parameter
 PvdRuntime_checked_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -353,7 +353,7 @@ PvdRuntime_profile_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-math
 PvdRuntime_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PvdRuntime_profile_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 PvdRuntime_profile_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PvdRuntime_profile_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PvdRuntime_profile_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PvdRuntime_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PvdRuntime_profile_cflags  += -Wno-unused-parameter
 PvdRuntime_profile_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -364,7 +364,7 @@ PvdRuntime_profile_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-ma
 PvdRuntime_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PvdRuntime_profile_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 PvdRuntime_profile_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PvdRuntime_profile_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PvdRuntime_profile_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PvdRuntime_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PvdRuntime_profile_cppflags  += -Wno-unused-parameter
 PvdRuntime_profile_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -484,7 +484,7 @@ PvdRuntime_release_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-math
 PvdRuntime_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PvdRuntime_release_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 PvdRuntime_release_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PvdRuntime_release_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PvdRuntime_release_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PvdRuntime_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PvdRuntime_release_cflags  += -Wno-unused-parameter
 PvdRuntime_release_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -495,7 +495,7 @@ PvdRuntime_release_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-ma
 PvdRuntime_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PvdRuntime_release_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 PvdRuntime_release_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PvdRuntime_release_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PvdRuntime_release_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PvdRuntime_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PvdRuntime_release_cppflags  += -Wno-unused-parameter
 PvdRuntime_release_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast

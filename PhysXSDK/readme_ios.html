@@ -34,23 +34,15 @@ content="text/html; charset=iso-8859-1">
 		<li>In order to build and run release mode you need to select "Edit Scheme..." and change the "Build Configuration" to "release". Additionally, after building, you need to manually choose the "Executable" under ".../Bin/ios/SNIPPET_EXE_NAME". See "Known XCode issues" below.</li>
 	</ul>
 
-	<h4>Rebuilding XML Serialization Metadata:</h4>
-	<ul>
-		<li>Physics and Extensions: run "./Tools/PhysXMetaDataGenerator/PxPhysicsWithExtensions/runClang_ios.sh"</li>
-		<li>Vehicle: run "./Tools/PhysXMetaDataGenerator/PxVehicleExtension/runClang_ios.sh"</li>
-		<li>Snippet Extension: run "./Tools/PhysXMetaDataGenerator/PxSnippetExtension/runClang_ios.sh"</li>
-		<li>Please consult the PhysX Guide for additional information.</li>
-	</ul>
-		
 	<h4>Notes:</h4>
 	<ul>
 		<li>No support for building the SDK or Snippets with makefiles currently</li>
 		<li>No rendering support for Snippets</li>
 		<li>Current xcode projects target:</li>
 		<ul>	
-		 	<li>XCode version: 5.0|5.0.1|6.2</li>
-		 	<li>Apple clang version 5.0|6.0</li>
-		 	<li>OS: iPhoneOS 5.1|7|8.2</li>
+		 	<li>XCode version: 6.3</li>
+		 	<li>Apple clang version 6.1</li>
+		 	<li>OS: iPhoneOS 8.3</li>
 		 	<li>platform: armv7|arm64</li>
 		</ul>
 		<li>Building for the simulator is currently not supported</li>

@@ -1538,8 +1538,8 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">constantBlock</td><td>the constant data block </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">bodyAToWorld</td><td>The world transform of the first constrained body (the identity if the body is NULL) </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">bodyBToWorld</td><td>The world transform of the second constrained body (the identity if the body is NULL) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">bodyAToWorld</td><td>The center of mass frame of the first constrained body (the identity if the actor is static or a NULL pointer was provided for it) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">bodyBToWorld</td><td>The center of mass frame of the second constrained body (the identity if the actor is static or a NULL pointer was provided for it) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">true</td><td>if the constraint should be projected by moving the second body towards the first, false if the converse </td></tr>
   </table>
   </dd>
@@ -1562,12 +1562,12 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">constraints</td><td>an array of solver constraint rows to be filled in </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">bodyAWorldOffset</td><td>the origin point (offset from the position vector of bodyA) at which the constraint is resolved. This value does not affect how constraints are solved, only the constraint force reported. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">bodyAWorldOffset</td><td>the origin point (offset from the position vector of bodyA's center of mass) at which the constraint is resolved. This value does not affect how constraints are solved, only the constraint force reported. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">maxConstraints</td><td>the size of the constraint buffer. At most this many constraints rows may be written </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">invMassScale</td><td>the inverse mass and inertia scales for the constraint </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">constantBlock</td><td>the constant data block </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bodyAToWorld</td><td>The world transform of the first constrained body (the identity transform if the first actor is static, or if a NULL actor pointer was provided for it) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bodyBToWorld</td><td>The world transform of the second constrained body (the identity transform if the second actor is static, or if a NULL actor pointer was provided for it)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bodyAToWorld</td><td>The center of mass frame of the first constrained body (the identity transform if the first actor is static, or if a NULL actor pointer was provided for it) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bodyBToWorld</td><td>The center of mass frame of the second constrained body (the identity transform if the second actor is static, or if a NULL actor pointer was provided for it)</td></tr>
   </table>
   </dd>
 </dl>
@@ -1590,8 +1590,8 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">out</td><td>the render buffer to render to </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">constantBlock</td><td>the constant data block </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">body0Transform</td><td>The world transform of the first constrained body (the identity if the body is NULL) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">body1Transform</td><td>The world transform of the second constrained body (the identity if the body is NULL) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">body0Transform</td><td>The center of mass frame of the first constrained body (the identity if the actor is static, or a NULL pointer was provided for it) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">body1Transform</td><td>The center of mass frame of the second constrained body (the identity if the actor is static, or a NULL pointer was provided for it) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">frameScale</td><td>the visualization scale for the constraint frames </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">limitScale</td><td>the visualization scale for the constraint limits </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">flags</td><td>the visualization flags</td></tr>

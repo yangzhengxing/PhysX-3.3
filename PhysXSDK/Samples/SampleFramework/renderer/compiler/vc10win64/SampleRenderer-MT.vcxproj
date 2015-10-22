@@ -19,6 +19,8 @@
 		</ProjectConfiguration>
 	</ItemGroup>
 	<PropertyGroup Label="Globals">
+		<ProjectGuid>{67A61354-2C14-B851-8530-DDD43BDC1D9C}</ProjectGuid>
+		<RootNamespace>SampleRenderer-MT</RootNamespace>
 	</PropertyGroup>
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">

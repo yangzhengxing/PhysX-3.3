@@ -64,20 +64,14 @@ SnippetSerialization_debug_common_cflags    += -MMD
 SnippetSerialization_debug_common_cflags    += $(addprefix -D, $(SnippetSerialization_debug_defines))
 SnippetSerialization_debug_common_cflags    += $(addprefix -I, $(SnippetSerialization_debug_hpaths))
 SnippetSerialization_debug_common_cflags  += -m64
+SnippetSerialization_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetSerialization_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetSerialization_debug_common_cflags  += -Wno-long-long
+SnippetSerialization_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetSerialization_debug_common_cflags  += -Wno-unused-parameter
+SnippetSerialization_debug_common_cflags  += -g3 -gdwarf-2
 SnippetSerialization_debug_cflags	:= $(SnippetSerialization_debug_common_cflags)
-SnippetSerialization_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetSerialization_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetSerialization_debug_cflags  += -Wno-long-long
-SnippetSerialization_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetSerialization_debug_cflags  += -Wno-unused-parameter
-SnippetSerialization_debug_cflags  += -g3 -gdwarf-2
 SnippetSerialization_debug_cppflags	:= $(SnippetSerialization_debug_common_cflags)
-SnippetSerialization_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetSerialization_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetSerialization_debug_cppflags  += -Wno-long-long
-SnippetSerialization_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetSerialization_debug_cppflags  += -Wno-unused-parameter
-SnippetSerialization_debug_cppflags  += -g3 -gdwarf-2
 SnippetSerialization_debug_lflags    := $(SnippetSerialization_custom_lflags)
 SnippetSerialization_debug_lflags    += $(addprefix -L, $(SnippetSerialization_debug_lpaths))
 SnippetSerialization_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetSerialization_debug_libraries)) -Wl,--end-group
@@ -176,20 +170,14 @@ SnippetSerialization_checked_common_cflags    += -MMD
 SnippetSerialization_checked_common_cflags    += $(addprefix -D, $(SnippetSerialization_checked_defines))
 SnippetSerialization_checked_common_cflags    += $(addprefix -I, $(SnippetSerialization_checked_hpaths))
 SnippetSerialization_checked_common_cflags  += -m64
+SnippetSerialization_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetSerialization_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetSerialization_checked_common_cflags  += -Wno-long-long
+SnippetSerialization_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetSerialization_checked_common_cflags  += -Wno-unused-parameter
+SnippetSerialization_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetSerialization_checked_cflags	:= $(SnippetSerialization_checked_common_cflags)
-SnippetSerialization_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetSerialization_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetSerialization_checked_cflags  += -Wno-long-long
-SnippetSerialization_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetSerialization_checked_cflags  += -Wno-unused-parameter
-SnippetSerialization_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetSerialization_checked_cppflags	:= $(SnippetSerialization_checked_common_cflags)
-SnippetSerialization_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetSerialization_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetSerialization_checked_cppflags  += -Wno-long-long
-SnippetSerialization_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetSerialization_checked_cppflags  += -Wno-unused-parameter
-SnippetSerialization_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetSerialization_checked_lflags    := $(SnippetSerialization_custom_lflags)
 SnippetSerialization_checked_lflags    += $(addprefix -L, $(SnippetSerialization_checked_lpaths))
 SnippetSerialization_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetSerialization_checked_libraries)) -Wl,--end-group
@@ -288,20 +276,14 @@ SnippetSerialization_profile_common_cflags    += -MMD
 SnippetSerialization_profile_common_cflags    += $(addprefix -D, $(SnippetSerialization_profile_defines))
 SnippetSerialization_profile_common_cflags    += $(addprefix -I, $(SnippetSerialization_profile_hpaths))
 SnippetSerialization_profile_common_cflags  += -m64
+SnippetSerialization_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetSerialization_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetSerialization_profile_common_cflags  += -Wno-long-long
+SnippetSerialization_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetSerialization_profile_common_cflags  += -Wno-unused-parameter
+SnippetSerialization_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetSerialization_profile_cflags	:= $(SnippetSerialization_profile_common_cflags)
-SnippetSerialization_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetSerialization_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetSerialization_profile_cflags  += -Wno-long-long
-SnippetSerialization_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetSerialization_profile_cflags  += -Wno-unused-parameter
-SnippetSerialization_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetSerialization_profile_cppflags	:= $(SnippetSerialization_profile_common_cflags)
-SnippetSerialization_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetSerialization_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetSerialization_profile_cppflags  += -Wno-long-long
-SnippetSerialization_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetSerialization_profile_cppflags  += -Wno-unused-parameter
-SnippetSerialization_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetSerialization_profile_lflags    := $(SnippetSerialization_custom_lflags)
 SnippetSerialization_profile_lflags    += $(addprefix -L, $(SnippetSerialization_profile_lpaths))
 SnippetSerialization_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetSerialization_profile_libraries)) -Wl,--end-group
@@ -398,20 +380,14 @@ SnippetSerialization_release_common_cflags    += -MMD
 SnippetSerialization_release_common_cflags    += $(addprefix -D, $(SnippetSerialization_release_defines))
 SnippetSerialization_release_common_cflags    += $(addprefix -I, $(SnippetSerialization_release_hpaths))
 SnippetSerialization_release_common_cflags  += -m64
+SnippetSerialization_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetSerialization_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetSerialization_release_common_cflags  += -Wno-long-long
+SnippetSerialization_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetSerialization_release_common_cflags  += -Wno-unused-parameter
+SnippetSerialization_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetSerialization_release_cflags	:= $(SnippetSerialization_release_common_cflags)
-SnippetSerialization_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetSerialization_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetSerialization_release_cflags  += -Wno-long-long
-SnippetSerialization_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetSerialization_release_cflags  += -Wno-unused-parameter
-SnippetSerialization_release_cflags  += -O3 -fno-strict-aliasing
 SnippetSerialization_release_cppflags	:= $(SnippetSerialization_release_common_cflags)
-SnippetSerialization_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetSerialization_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetSerialization_release_cppflags  += -Wno-long-long
-SnippetSerialization_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetSerialization_release_cppflags  += -Wno-unused-parameter
-SnippetSerialization_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetSerialization_release_lflags    := $(SnippetSerialization_custom_lflags)
 SnippetSerialization_release_lflags    += $(addprefix -L, $(SnippetSerialization_release_lpaths))
 SnippetSerialization_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetSerialization_release_libraries)) -Wl,--end-group

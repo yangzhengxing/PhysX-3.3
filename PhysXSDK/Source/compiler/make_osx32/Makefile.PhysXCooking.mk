@@ -84,7 +84,7 @@ PhysXCooking_release_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-ma
 PhysXCooking_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PhysXCooking_release_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 PhysXCooking_release_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PhysXCooking_release_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PhysXCooking_release_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PhysXCooking_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PhysXCooking_release_cflags  += -Wno-unused-parameter
 PhysXCooking_release_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -95,7 +95,7 @@ PhysXCooking_release_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-
 PhysXCooking_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PhysXCooking_release_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 PhysXCooking_release_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PhysXCooking_release_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PhysXCooking_release_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PhysXCooking_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PhysXCooking_release_cppflags  += -Wno-unused-parameter
 PhysXCooking_release_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -207,7 +207,7 @@ PhysXCooking_debug_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-math
 PhysXCooking_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PhysXCooking_debug_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 PhysXCooking_debug_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PhysXCooking_debug_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PhysXCooking_debug_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PhysXCooking_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PhysXCooking_debug_cflags  += -Wno-unused-parameter
 PhysXCooking_debug_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -218,7 +218,7 @@ PhysXCooking_debug_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-ma
 PhysXCooking_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PhysXCooking_debug_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 PhysXCooking_debug_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PhysXCooking_debug_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PhysXCooking_debug_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PhysXCooking_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PhysXCooking_debug_cppflags  += -Wno-unused-parameter
 PhysXCooking_debug_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -329,7 +329,7 @@ PhysXCooking_checked_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-ma
 PhysXCooking_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PhysXCooking_checked_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 PhysXCooking_checked_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PhysXCooking_checked_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PhysXCooking_checked_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PhysXCooking_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PhysXCooking_checked_cflags  += -Wno-unused-parameter
 PhysXCooking_checked_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -340,7 +340,7 @@ PhysXCooking_checked_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-
 PhysXCooking_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PhysXCooking_checked_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 PhysXCooking_checked_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PhysXCooking_checked_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PhysXCooking_checked_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PhysXCooking_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PhysXCooking_checked_cppflags  += -Wno-unused-parameter
 PhysXCooking_checked_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -451,7 +451,7 @@ PhysXCooking_profile_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-ma
 PhysXCooking_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PhysXCooking_profile_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 PhysXCooking_profile_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PhysXCooking_profile_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PhysXCooking_profile_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PhysXCooking_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PhysXCooking_profile_cflags  += -Wno-unused-parameter
 PhysXCooking_profile_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -462,7 +462,7 @@ PhysXCooking_profile_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ffast-
 PhysXCooking_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 PhysXCooking_profile_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 PhysXCooking_profile_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-PhysXCooking_profile_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+PhysXCooking_profile_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 PhysXCooking_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 PhysXCooking_profile_cppflags  += -Wno-unused-parameter
 PhysXCooking_profile_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast

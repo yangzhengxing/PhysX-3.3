@@ -17,7 +17,7 @@
 
 namespace physx { namespace debugger {
 
-#if defined(PX_VC11) || defined(PX_VC12)
+#if defined(PX_VC11) || defined(PX_VC12) || defined(PX_VC14)
 #pragma warning(push)
 #pragma warning(disable: 4435)	// 'class1' : Object layout under /vd2 will change due to virtual base 'class2'
 #endif

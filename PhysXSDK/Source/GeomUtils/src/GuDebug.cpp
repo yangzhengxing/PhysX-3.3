@@ -246,7 +246,7 @@ void Gu::Debug::visualize(const PxHeightFieldGeometry& hfGeometry,
 	const Gu::HeightField* heightfield = static_cast<const Gu::HeightField*>(hfGeometry.heightField);
 	const bool cscale = !!(mask & ((PxU64)1 << PxVisualizationParameter::eCULL_BOX));
 
-	PxDebugColor::Enum colors[] = 
+	const PxDebugColor::Enum colors[] = 
 	{
 		PxDebugColor::eARGB_BLACK,		
 		PxDebugColor::eARGB_RED,		
@@ -261,8 +261,7 @@ void Gu::Debug::visualize(const PxHeightFieldGeometry& hfGeometry,
 		PxDebugColor::eARGB_DARKGREEN,	
 		PxDebugColor::eARGB_DARKBLUE,	
 	};
-	PxU32 colorCount = sizeof(colors)/sizeof(PxDebugColor);
-
+	const PxU32 colorCount = sizeof(colors)/sizeof(PxDebugColor::Enum);
 
 	if (mask & ((PxU64)1 << PxVisualizationParameter::eCOLLISION_SHAPES))
 	{

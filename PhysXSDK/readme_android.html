@@ -14,8 +14,7 @@ content="text/html; charset=iso-8859-1">
 
 	<h4>Platform Requirements:</h4>
 	<ul>
-		<li>Android API level 8 (FROYO) for the PhysX SDK.</li>
-		<li>Android API level 9 (GINGERBREAD) for the graphical samples.</li>
+		<li>Android API level 16 (JELLY_BEAN).</li>
 	</ul>
 
 	<h4>Location of Binaries:</h4>
@@ -54,27 +53,19 @@ content="text/html; charset=iso-8859-1">
 		</ul>
 		<li>Run the Makefiles from within MinGW - MSYS.</li>
 		<ul>
-			<li>e.g. for building the release build of the Samples, "cd ./Samples/compiler/android9[_neon]/" and run "make release".</li>
+			<li>e.g. for building the release build of the Samples, "cd ./Samples/compiler/android16/" and run "make release".</li>
 			<li>Build configs separately! "make all" is likely to run out of heap memory (msys). See rebase woraround in known issues section.</li>
 			<li>Cygwin should work as well after fixing the line endings (d2u). And after correcting the drive letters of absolute paths!</li>
 		</ul>
 	</ul>
 	
-	<h4>Rebuilding Serialization Metadata:</h4>
-	<ul>
-		<li>Physics and Extensions: run "./Tools/PhysXMetaDataGenerator/PxPhysicsWithExtensions/runClang_android.bat"</li>
-		<li>Vehicle: run "./Tools/PhysXMetaDataGenerator/PxVehicleExtension/runClang_android.bat"</li>
-		<li>Snippet Extension: run "./Tools/PhysXMetaDataGenerator/PxSnippetExtension/runClang_android.bat"</li>
-		<li>Please consult the PhysX Guide for additional information.</li>
-	</ul>
-
 	<h4>Helper Scripts to build, deploy and run the SDK libraries, Samples and Snippets (Tools/android-dev).</h4>
 		Prerequisite environement variables
 		<ul>
-			<li>ANDROID_CONFIG: {android9, android9_neon} </li>
+			<li>ANDROID_CONFIG: {android16, android16_hardfp} </li>
 			<li>MAKE_THREADS: {number of parallel make jobs; adjust this to your CPU} </li>
 			<li>JAVA_HOME: Absolute Path to JDK </li>
-			<br><i>Example:</i> export ANDROID_CONFIG=android9; export MAKE_THREADS=4; export JAVA_HOME=$PWD/../../externals/jdk
+			<br><i>Example:</i> export ANDROID_CONFIG=android16; export MAKE_THREADS=4; export JAVA_HOME=$PWD/../../externals/jdk
 		</ul>
 		SDK
 		<ul>

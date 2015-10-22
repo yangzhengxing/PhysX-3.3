@@ -64,20 +64,14 @@ SnippetContactReportCCD_debug_common_cflags    += -MMD
 SnippetContactReportCCD_debug_common_cflags    += $(addprefix -D, $(SnippetContactReportCCD_debug_defines))
 SnippetContactReportCCD_debug_common_cflags    += $(addprefix -I, $(SnippetContactReportCCD_debug_hpaths))
 SnippetContactReportCCD_debug_common_cflags  += -m64
+SnippetContactReportCCD_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetContactReportCCD_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetContactReportCCD_debug_common_cflags  += -Wno-long-long
+SnippetContactReportCCD_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetContactReportCCD_debug_common_cflags  += -Wno-unused-parameter
+SnippetContactReportCCD_debug_common_cflags  += -g3 -gdwarf-2
 SnippetContactReportCCD_debug_cflags	:= $(SnippetContactReportCCD_debug_common_cflags)
-SnippetContactReportCCD_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetContactReportCCD_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetContactReportCCD_debug_cflags  += -Wno-long-long
-SnippetContactReportCCD_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetContactReportCCD_debug_cflags  += -Wno-unused-parameter
-SnippetContactReportCCD_debug_cflags  += -g3 -gdwarf-2
 SnippetContactReportCCD_debug_cppflags	:= $(SnippetContactReportCCD_debug_common_cflags)
-SnippetContactReportCCD_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetContactReportCCD_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetContactReportCCD_debug_cppflags  += -Wno-long-long
-SnippetContactReportCCD_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetContactReportCCD_debug_cppflags  += -Wno-unused-parameter
-SnippetContactReportCCD_debug_cppflags  += -g3 -gdwarf-2
 SnippetContactReportCCD_debug_lflags    := $(SnippetContactReportCCD_custom_lflags)
 SnippetContactReportCCD_debug_lflags    += $(addprefix -L, $(SnippetContactReportCCD_debug_lpaths))
 SnippetContactReportCCD_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetContactReportCCD_debug_libraries)) -Wl,--end-group
@@ -176,20 +170,14 @@ SnippetContactReportCCD_checked_common_cflags    += -MMD
 SnippetContactReportCCD_checked_common_cflags    += $(addprefix -D, $(SnippetContactReportCCD_checked_defines))
 SnippetContactReportCCD_checked_common_cflags    += $(addprefix -I, $(SnippetContactReportCCD_checked_hpaths))
 SnippetContactReportCCD_checked_common_cflags  += -m64
+SnippetContactReportCCD_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetContactReportCCD_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetContactReportCCD_checked_common_cflags  += -Wno-long-long
+SnippetContactReportCCD_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetContactReportCCD_checked_common_cflags  += -Wno-unused-parameter
+SnippetContactReportCCD_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetContactReportCCD_checked_cflags	:= $(SnippetContactReportCCD_checked_common_cflags)
-SnippetContactReportCCD_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetContactReportCCD_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetContactReportCCD_checked_cflags  += -Wno-long-long
-SnippetContactReportCCD_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetContactReportCCD_checked_cflags  += -Wno-unused-parameter
-SnippetContactReportCCD_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetContactReportCCD_checked_cppflags	:= $(SnippetContactReportCCD_checked_common_cflags)
-SnippetContactReportCCD_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetContactReportCCD_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetContactReportCCD_checked_cppflags  += -Wno-long-long
-SnippetContactReportCCD_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetContactReportCCD_checked_cppflags  += -Wno-unused-parameter
-SnippetContactReportCCD_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetContactReportCCD_checked_lflags    := $(SnippetContactReportCCD_custom_lflags)
 SnippetContactReportCCD_checked_lflags    += $(addprefix -L, $(SnippetContactReportCCD_checked_lpaths))
 SnippetContactReportCCD_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetContactReportCCD_checked_libraries)) -Wl,--end-group
@@ -288,20 +276,14 @@ SnippetContactReportCCD_profile_common_cflags    += -MMD
 SnippetContactReportCCD_profile_common_cflags    += $(addprefix -D, $(SnippetContactReportCCD_profile_defines))
 SnippetContactReportCCD_profile_common_cflags    += $(addprefix -I, $(SnippetContactReportCCD_profile_hpaths))
 SnippetContactReportCCD_profile_common_cflags  += -m64
+SnippetContactReportCCD_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetContactReportCCD_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetContactReportCCD_profile_common_cflags  += -Wno-long-long
+SnippetContactReportCCD_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetContactReportCCD_profile_common_cflags  += -Wno-unused-parameter
+SnippetContactReportCCD_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetContactReportCCD_profile_cflags	:= $(SnippetContactReportCCD_profile_common_cflags)
-SnippetContactReportCCD_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetContactReportCCD_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetContactReportCCD_profile_cflags  += -Wno-long-long
-SnippetContactReportCCD_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetContactReportCCD_profile_cflags  += -Wno-unused-parameter
-SnippetContactReportCCD_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetContactReportCCD_profile_cppflags	:= $(SnippetContactReportCCD_profile_common_cflags)
-SnippetContactReportCCD_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetContactReportCCD_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetContactReportCCD_profile_cppflags  += -Wno-long-long
-SnippetContactReportCCD_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetContactReportCCD_profile_cppflags  += -Wno-unused-parameter
-SnippetContactReportCCD_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetContactReportCCD_profile_lflags    := $(SnippetContactReportCCD_custom_lflags)
 SnippetContactReportCCD_profile_lflags    += $(addprefix -L, $(SnippetContactReportCCD_profile_lpaths))
 SnippetContactReportCCD_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetContactReportCCD_profile_libraries)) -Wl,--end-group
@@ -398,20 +380,14 @@ SnippetContactReportCCD_release_common_cflags    += -MMD
 SnippetContactReportCCD_release_common_cflags    += $(addprefix -D, $(SnippetContactReportCCD_release_defines))
 SnippetContactReportCCD_release_common_cflags    += $(addprefix -I, $(SnippetContactReportCCD_release_hpaths))
 SnippetContactReportCCD_release_common_cflags  += -m64
+SnippetContactReportCCD_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetContactReportCCD_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetContactReportCCD_release_common_cflags  += -Wno-long-long
+SnippetContactReportCCD_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetContactReportCCD_release_common_cflags  += -Wno-unused-parameter
+SnippetContactReportCCD_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetContactReportCCD_release_cflags	:= $(SnippetContactReportCCD_release_common_cflags)
-SnippetContactReportCCD_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetContactReportCCD_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetContactReportCCD_release_cflags  += -Wno-long-long
-SnippetContactReportCCD_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetContactReportCCD_release_cflags  += -Wno-unused-parameter
-SnippetContactReportCCD_release_cflags  += -O3 -fno-strict-aliasing
 SnippetContactReportCCD_release_cppflags	:= $(SnippetContactReportCCD_release_common_cflags)
-SnippetContactReportCCD_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetContactReportCCD_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetContactReportCCD_release_cppflags  += -Wno-long-long
-SnippetContactReportCCD_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetContactReportCCD_release_cppflags  += -Wno-unused-parameter
-SnippetContactReportCCD_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetContactReportCCD_release_lflags    := $(SnippetContactReportCCD_custom_lflags)
 SnippetContactReportCCD_release_lflags    += $(addprefix -L, $(SnippetContactReportCCD_release_lpaths))
 SnippetContactReportCCD_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetContactReportCCD_release_libraries)) -Wl,--end-group
