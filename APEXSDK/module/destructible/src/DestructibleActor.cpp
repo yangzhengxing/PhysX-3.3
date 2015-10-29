@@ -2546,6 +2546,18 @@ void DestructibleActor::setActorObjDescFlags(NiApexPhysXObjectDesc* actorObjDesc
 	actorObjDesc->setUserDefinedFlag(PhysXActorFlags::IS_SLEEPING, true);
 }
 
+void DestructibleActor::setGlobalPose(const physx::PxMat44& pose)
+{
+	if (!isChunkDestroyed(0) && getDynamic(0))
+	{
+		setChunkPose(0, pose);
+	}
+	else
+	{
+		setGlobalPoseForStaticChunks(pose);
+	}
+}
+
 void DestructibleActor::setGlobalPoseForStaticChunks(const physx::PxMat44& pose)
 {
 	if (mStructure != NULL && mStructure->actorForStaticChunks != NULL)
@@ -2718,19 +2730,18 @@ bool DestructibleActor::setChunkPhysXActorAwakeState(physx::PxU32 chunkIndex, bo
 		return false;
 	}
 
-	NxScene* scene = actor->getScene();
-	if (scene == NULL)
-	{
 #if NX_SDK_VERSION_MAJOR == 3
+	if (actor->getScene() == NULL)
+	{
 		// defer
 		if (mDestructibleScene != NULL)
 		{
-			mDestructibleScene->addForceToAddActorsMap(actor, ActorForceAtPosition(physx::PxVec3(0.0f), physx::PxVec3(0.0f), physx::PxForceMode::eFORCE, awake));
+			mDestructibleScene->addForceToAddActorsMap(actor, ActorForceAtPosition(physx::PxVec3(0.0f), physx::PxVec3(0.0f), physx::PxForceMode::eFORCE, awake, false));
 			return true;
 		}
-#endif
 		return false;
 	}
+#endif
 
 	// Actor has a scene, set sleep state now
 	if (awake)
@@ -2745,6 +2756,76 @@ bool DestructibleActor::setChunkPhysXActorAwakeState(physx::PxU32 chunkIndex, bo
 		((PxRigidDynamic*)actor)->putToSleep();
 #endif
 	}
+
+	return true;
+}
+
+bool DestructibleActor::addForce(PxU32 chunkIndex, const PxVec3& force, physx::PxForceMode::Enum mode, const PxVec3* position, bool wakeup)
+{
+	NxActor* actor = getChunkActor(chunkIndex);
+	if (actor == NULL)
+	{
+		return false;
+	}
+
+#if NX_SDK_VERSION_MAJOR == 3
+	if (actor->getScene() == NULL)
+	{
+		// defer
+		if (mDestructibleScene != NULL)
+		{
+			if (position)
+			{
+				mDestructibleScene->addForceToAddActorsMap(actor, ActorForceAtPosition(force, *position, mode, wakeup, true));
+			}
+			else
+			{
+				mDestructibleScene->addForceToAddActorsMap(actor, ActorForceAtPosition(force, PxVec3(0.0f), mode, wakeup, false));
+			}
+			return true;
+		}
+		return false;
+	}
+#endif
+
+	// Actor has a scene, add force now
+#if NX_SDK_VERSION_MAJOR == 2
+	NxVec3 nxforce(force.x, force.y, force.z);
+	NxVec3 nxposition(0.0f, 0.0f, 0.0f);
+	if (position)
+	{
+		nxposition = NxVec3(position->x, position->y, position->z);
+	}
+	NxForceMode nxmode = NX_FORCE;
+	switch (mode)
+	{
+	case physx::PxForceMode::eFORCE : nxmode = NX_FORCE;				break;
+	case physx::PxForceMode::eIMPULSE : nxmode = NX_IMPULSE;			break;
+	case physx::PxForceMode::eVELOCITY_CHANGE : nxmode = NX_VELOCITY_CHANGE;	break;
+	case physx::PxForceMode::eACCELERATION : nxmode = NX_ACCELERATION;		break;
+	}
+	if (position)
+	{
+		actor->addForceAtPos(nxforce, nxposition, nxmode, wakeup);
+	}
+	else
+	{
+		actor->addForce(nxforce, nxmode, wakeup);
+	}
+#elif NX_SDK_VERSION_MAJOR == 3
+	PxRigidBody* rigidBody = actor->isRigidBody();
+	if (rigidBody)
+	{
+		if (position)
+		{
+			PxRigidBodyExt::addForceAtPos(*rigidBody, force, *position, mode, wakeup);
+		}
+		else
+		{
+			rigidBody->addForce(force, mode, wakeup);
+		}
+	}
+#endif
 
 	return true;
 }
@@ -2872,9 +2953,9 @@ bool DestructibleActor::releaseChunkEventBuffer(bool clearBuffer /* = true */)
 
 // PhysX actor buffer API
 #if NX_SDK_VERSION_MAJOR == 2
-bool DestructibleActor::acquirePhysXActorBuffer(NxActor**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags, bool eliminateRedundantActors)
+bool DestructibleActor::acquirePhysXActorBuffer(NxActor**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags)
 #elif NX_SDK_VERSION_MAJOR == 3
-bool DestructibleActor::acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags, bool eliminateRedundantActors)
+bool DestructibleActor::acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags)
 #endif
 {
 	mPhysXActorBufferLock.lock();
@@ -2882,6 +2963,12 @@ bool DestructibleActor::acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer,
 	mPhysXActorBufferAcquired = true;
 	// Clear buffer, just in case
 	mPhysXActorBuffer.reset();
+
+	const bool eliminateRedundantActors = (flags & NxDestructiblePhysXActorQueryFlags::AllowRedundancy) == 0;
+
+#if NX_SDK_VERSION_MAJOR == 3
+	const bool onlyAllowActorsInScene = (flags & NxDestructiblePhysXActorQueryFlags::AllowActorsNotInScenes) == 0;
+#endif
 
 	// Fill the actor buffer
 	for (physx::PxU32 actorNum = 0; actorNum < mReferencingActors.size(); ++actorNum)
@@ -2891,7 +2978,7 @@ bool DestructibleActor::acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer,
 #if NX_SDK_VERSION_MAJOR == 3
 			// don't return actors that have not yet been added to the scene
 			// to prevent errors in actor functions that require a scene
-			|| actor->getScene() == NULL
+			|| ((actor->getScene() == NULL) && onlyAllowActorsInScene)
 #endif
 		)
 		{

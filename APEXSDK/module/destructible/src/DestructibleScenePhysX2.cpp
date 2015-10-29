@@ -632,20 +632,17 @@ bool DestructibleScene::appendShapes(DestructibleStructure::Chunk& chunk, bool d
 	forSubtree(chunk, chunkOp, true);
 
 	// Update the mass
-	physx::PxF32 mass = unscaleMass(actor->getMass());
-	mass += destructible->getChunkMass(chunk.indexInAsset);
-	if (actor->getNbShapes() > 0)
 	{
 		NiApexPhysXObjectDesc* actorObjDesc = (NiApexPhysXObjectDesc*)mModule->mSdk->getPhysXObjectInfo(actor);
 		const uintptr_t cindex = (uintptr_t)actorObjDesc->userData;
 		if (cindex != 0)
 		{
+			// In the FIFO, trigger mass update
+			PX_ASSERT(mActorFIFO[(physx::PxU32)~cindex].actor == actor);
+			ActorFIFOEntry& FIFOEntry = mActorFIFO[(physx::PxU32)~cindex];
+			FIFOEntry.unscaledMass += destructible->getChunkMass(chunk.indexInAsset);
 			if (!actor->readBodyFlag(NX_BF_KINEMATIC))
 			{
-				// In the FIFO, trigger mass update
-				PX_ASSERT(mActorFIFO[(physx::PxU32)~cindex].actor == actor);
-				ActorFIFOEntry& FIFOEntry = mActorFIFO[(physx::PxU32)~cindex];
-				FIFOEntry.unscaledMass = mass;
 				FIFOEntry.flags |= ActorFIFOEntry::MassUpdateNeeded;
 			}
 		}

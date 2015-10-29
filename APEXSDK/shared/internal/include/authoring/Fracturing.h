@@ -524,8 +524,8 @@ public:
 	physx::PxU32 addMaterialFrame();
 	void clear(bool keepRoot = false);
 	void set(const NxExplicitHierarchicalMesh& mesh);
-	bool calculatePartBSP(physx::PxU32 partIndex, physx::PxU32 randomSeed, physx::PxU32 microgridSize, IProgressListener* progressListener = NULL, volatile bool* cancel = NULL);
-	void calculateMeshBSP(physx::PxU32 randomSeed, IProgressListener* progressListener = NULL, const physx::PxU32* microgridSize = NULL);
+	bool calculatePartBSP(physx::PxU32 partIndex, physx::PxU32 randomSeed, physx::PxU32 microgridSize, NxBSPOpenMode::Enum meshMode, IProgressListener* progressListener = NULL, volatile bool* cancel = NULL);
+	void calculateMeshBSP(physx::PxU32 randomSeed, IProgressListener* progressListener = NULL, const physx::PxU32* microgridSize = NULL, NxBSPOpenMode::Enum meshMode = physx::NxBSPOpenMode::Automatic);
 	void replaceInteriorSubmeshes(physx::PxU32 partIndex, physx::PxU32 frameCount, physx::PxU32* frameIndices, physx::PxU32 submeshIndex);
 	void visualize(NxApexRenderDebug& debugRender, physx::PxU32 flags, physx::PxU32 index = 0) const;
 	void release();

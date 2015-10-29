@@ -1190,7 +1190,6 @@ void DestructibleScene::tasked_beforeTick(physx::PxF32 elapsedTime)
 					entry.actor->updateMassFromShapes(0.0f, scaleMass(entry.unscaledMass));
 				}
 				entry.flags &= ~(physx::PxU32)ActorFIFOEntry::MassUpdateNeeded;
-				entry.unscaledMass = 0.0f;
 			}
 			if (useHardSleeping && entry.actor->isSleeping())
 			{
@@ -1278,7 +1277,11 @@ void DestructibleScene::tasked_beforeTick(physx::PxF32 elapsedTime)
 		}
 	}
 #if APEX_RUNTIME_FRACTURE
-	getDestructibleRTScene()->preSim(elapsedTime);
+	physx::fracture::SimScene* simScene = getDestructibleRTScene(false);
+	if (simScene != NULL)
+	{
+		simScene->preSim(elapsedTime);
+	}
 #endif
 
 	if (mApexScene->isFinalStep())
@@ -1288,7 +1291,7 @@ void DestructibleScene::tasked_beforeTick(physx::PxF32 elapsedTime)
 			PX_PROFILER_PERF_SCOPE("DestructibleChunkReport");
 			if (mModule->m_chunkStateEventCallbackSchedule == NxDestructibleCallbackSchedule::BeforeTick)
 			{
-				for (PxU32 actorWithChunkStateEventIndex = 0; actorWithChunkStateEventIndex < mActorsWithChunkStateEvents.size(); ++actorWithChunkStateEventIndex)
+				for (PxU32 actorWithChunkStateEventIndex = mActorsWithChunkStateEvents.size(); actorWithChunkStateEventIndex--;)
 				{
 					NxApexChunkStateEventData data;
 					DestructibleActor* dactor = mActorsWithChunkStateEvents[actorWithChunkStateEventIndex];
@@ -1604,7 +1607,7 @@ void DestructibleScene::fetchResults()
 			// Chunk state notifies
 			if (mModule->m_chunkStateEventCallbackSchedule == NxDestructibleCallbackSchedule::FetchResults)
 			{
-				for (PxU32 actorWithChunkStateEventIndex = 0; actorWithChunkStateEventIndex < mActorsWithChunkStateEvents.size(); ++actorWithChunkStateEventIndex)
+				for (PxU32 actorWithChunkStateEventIndex = mActorsWithChunkStateEvents.size(); actorWithChunkStateEventIndex--;)
 				{
 					NxApexChunkStateEventData data;
 					DestructibleActor* dactor = mActorsWithChunkStateEvents[actorWithChunkStateEventIndex];
@@ -1660,7 +1663,11 @@ void DestructibleScene::fetchResults()
 #endif
 
 #if APEX_RUNTIME_FRACTURE
-	getDestructibleRTScene()->postSim(PX_MAX_F32);
+	physx::fracture::SimScene* simScene = getDestructibleRTScene(false);
+	if (simScene != NULL)
+	{
+		simScene->postSim(PX_MAX_F32);
+	}
 #endif
 
 	swapDamageBuffers();
@@ -2505,14 +2512,6 @@ bool DestructibleScene::scheduleChunkShapesForDelete(DestructibleStructure::Chun
 		--mTotalChunkCount;
 	}
 
-	// Update the mass
-	physx::PxF32 mass = unscaleMass(actor->getMass());
-	mass -= destructible->getChunkMass(chunk.indexInAsset);
-	if (mass <= 0.0f)
-	{
-		mass = 1.0f;	// This should only occur if the last shape is deleted.  In this case, the mass won't matter.
-	}
-
 	physx::Array<NxShape*>&	shapes = destructible->getStructure()->getChunkShapes(chunk);
 	for (physx::PxU32 i = 0; i < shapes.size(); ++i)
 	{
@@ -2588,7 +2587,11 @@ bool DestructibleScene::scheduleChunkShapesForDelete(DestructibleStructure::Chun
 			{
 				PX_ASSERT(mActorFIFO[(physx::PxU32)~cindex].actor == NULL || mActorFIFO[(physx::PxU32)~cindex].actor == actor);
 				ActorFIFOEntry& FIFOEntry = mActorFIFO[(physx::PxU32)~cindex];
-				FIFOEntry.unscaledMass = mass;
+				FIFOEntry.unscaledMass -= destructible->getChunkMass(chunk.indexInAsset);
+				if (FIFOEntry.unscaledMass <= 0.0f)
+				{
+					FIFOEntry.unscaledMass = 1.0f;	// This should only occur if the last shape is deleted.  In this case, the mass won't matter.
+				}
 				FIFOEntry.flags |= ActorFIFOEntry::MassUpdateNeeded;
 			}
 		}
@@ -3377,7 +3380,6 @@ void DestructibleScene::generateFractureProfilesInDamageBuffer(physx::NxRingBuff
 			PxOverlapBuffer ovBuffer(&mOverlapHits[0], MAX_SHAPE_COUNT);
 			mPhysXScene->lockRead();
 			mPhysXScene->overlap(sphere, PxTransform(damageEvent.position), ovBuffer);
-			mPhysXScene->unlockRead();
 			PxU32	nbHits	= ovBuffer.getNbAnyHits();
 			//nbHits	= nbHits >= 0 ? nbHits : MAX_SHAPE_COUNT; //Ivan: it is always true and should be removed
 
@@ -3410,6 +3412,8 @@ void DestructibleScene::generateFractureProfilesInDamageBuffer(physx::NxRingBuff
 					}
 				}
 			}
+
+			mPhysXScene->unlockRead();
 #endif
 		}
 		else
@@ -3568,7 +3572,7 @@ NxApexSceneStats* DestructibleScene::getStats()
 						physx::PxRigidDynamic** buffer;
 				#endif
 				unsigned bufferSize;
-				if (a->acquirePhysXActorBuffer(buffer, bufferSize, NxDestructiblePhysXActorQueryFlags::Dynamic, true))
+				if (a->acquirePhysXActorBuffer(buffer, bufferSize, NxDestructiblePhysXActorQueryFlags::Dynamic))
 				{
 					totalDynamicIslandCount += bufferSize;
 					a->releasePhysXActorBuffer();

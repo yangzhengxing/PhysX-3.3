@@ -1197,7 +1197,7 @@ void DestructibleStructure::crumbleChunk(const FractureEvent& fractureEvent, Chu
 
 	dscene->getChunkReportData(chunk, NxApexChunkFlag::DESTROYED_CRUMBLED);
 
-	PX_ASSERT(chunk.reportID < dscene->mDamageEventReportData.size() || chunk.reportID == DestructibleScene::InvalidReportID);
+	PX_ASSERT(chunk.reportID < dscene->mChunkReportHandles.size() || chunk.reportID == DestructibleScene::InvalidReportID);
 	if (chunk.reportID < dscene->mChunkReportHandles.size())
 	{
 		IntPair& handle = dscene->mChunkReportHandles[chunk.reportID];
@@ -1397,6 +1397,13 @@ void DestructibleStructure::separateUnsupportedIslands()
 			const physx::PxU32 chunkIndex = island.indices[i];
 			Chunk& chunk = chunks[chunkIndex];
 			island.flags |= chunk.flags & ChunkExternallySupported;
+			DestructibleActor* dactor = dscene->mDestructibles.direct(chunk.destructibleID);
+			const physx::PxU32 visibleAssetIndex = chunk.visibleAncestorIndex >= 0 ? (physx::PxU32)chunk.visibleAncestorIndex - dactor->getFirstChunkIndex() : chunk.indexInAsset;
+			DestructibleAssetParametersNS::Chunk_Type& source = dactor->getAsset()->mParams->chunks.buf[visibleAssetIndex];
+			if (source.flags & (DestructibleAsset::UnfracturableChunk | DestructibleAsset::DescendantUnfractureable))
+			{
+				island.flags |= ChunkExternallySupported;
+			}
 			const physx::PxU32 firstOverlapIndex = firstOverlapIndices[chunkIndex];
 			const physx::PxU32 stopOverlapIndex = firstOverlapIndices[chunkIndex + 1];
 			for (physx::PxU32 j = firstOverlapIndex; j < stopOverlapIndex; ++j)
@@ -2610,7 +2617,7 @@ void DestructibleStructure::addChunkImpluseForceAtPos(Chunk& chunk, const physx:
 		}
 		else // the actor hasn't been added to the scene yet, so store the forces to apply later.
 		{
-			ActorForceAtPosition forceToAdd(impulse, position, PxForceMode::eIMPULSE, wakeup);
+			ActorForceAtPosition forceToAdd(impulse, position, PxForceMode::eIMPULSE, wakeup, true);
 			dscene->addForceToAddActorsMap(actor, forceToAdd);
 		}
 #endif

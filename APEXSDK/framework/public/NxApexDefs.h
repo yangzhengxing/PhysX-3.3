@@ -63,7 +63,7 @@
 #endif
 
 #if defined(PX_WINDOWS)
-#define APEX_USE_PARTICLES 1
+#define APEX_USE_PARTICLES 0
 #else
 #define APEX_USE_PARTICLES 0
 #endif

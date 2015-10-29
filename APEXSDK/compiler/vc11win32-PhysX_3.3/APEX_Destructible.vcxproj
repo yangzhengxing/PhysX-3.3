@@ -1,5 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project
+    DefaultTargets="Build"
+    ToolsVersion="4.0"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="debug|Win32">
       <Configuration>debug</Configuration>
@@ -19,46 +22,74 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ApplicationEnvironment>title</ApplicationEnvironment>
-    <!-- - - - -->
-    <PlatformToolset>v110</PlatformToolset>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ProjectGuid>{777EFDFD-2EF5-4F0E-2222-6F9A226C5709}</ProjectGuid>
+    <RootNamespace>APEX_Destructible</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'" Label="Configuration">
+  <PropertyGroup
+      Condition="'$(Configuration)|$(Platform)'=='debug|Win32'"
+      Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='checked|Win32'" Label="Configuration">
+  <PropertyGroup
+      Condition="'$(Configuration)|$(Platform)'=='checked|Win32'"
+      Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'" Label="Configuration">
+  <PropertyGroup
+      Condition="'$(Configuration)|$(Platform)'=='release|Win32'"
+      Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='profile|Win32'" Label="Configuration">
+  <PropertyGroup
+      Condition="'$(Configuration)|$(Platform)'=='profile|Win32'"
+      Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  <ImportGroup Label="ExtensionSettings"></ImportGroup>
+  <ImportGroup
+      Label="PropertySheets"
+      Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
+    <Import
+        Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+        Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
+        Label="LocalAppDataPlatform"
+    />
     <Import Project="./nxpath.vsprops" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  <ImportGroup
+      Label="PropertySheets"
+      Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">
+    <Import
+        Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+        Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
+        Label="LocalAppDataPlatform"
+    />
     <Import Project="./nxpath.vsprops" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  <ImportGroup
+      Label="PropertySheets"
+      Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
+    <Import
+        Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+        Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
+        Label="LocalAppDataPlatform"
+    />
     <Import Project="./nxpath.vsprops" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  <ImportGroup
+      Label="PropertySheets"
+      Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">
+    <Import
+        Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
+        Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
+        Label="LocalAppDataPlatform"
+    />
     <Import Project="./nxpath.vsprops" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
@@ -67,8 +98,8 @@
     <TargetExt>.dll</TargetExt>
     <TargetName>$(ProjectName)DEBUG_x86</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRules />
-    <CodeAnalysisRuleAssemblies />
+    <CodeAnalysisRules/>
+    <CodeAnalysisRuleAssemblies/>
     <SkipCopyingSymbolsToOutputDirectory>true</SkipCopyingSymbolsToOutputDirectory>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
@@ -87,8 +118,7 @@
       <WarningLevel>Level4</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>
-      </PrecompiledHeaderFile>
+      <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -102,10 +132,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
-    <ResourceCompile>
-    </ResourceCompile>
-    <ProjectReference>
-    </ProjectReference>
+    <ResourceCompile></ResourceCompile>
+    <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">
     <OutDir>./../../bin/vc11win32-PhysX_3.3\</OutDir>
@@ -113,8 +141,8 @@
     <TargetExt>.dll</TargetExt>
     <TargetName>$(ProjectName)CHECKED_x86</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRules />
-    <CodeAnalysisRuleAssemblies />
+    <CodeAnalysisRules/>
+    <CodeAnalysisRuleAssemblies/>
     <SkipCopyingSymbolsToOutputDirectory>true</SkipCopyingSymbolsToOutputDirectory>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">
@@ -132,8 +160,7 @@
       <WarningLevel>Level4</WarningLevel>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>
-      </PrecompiledHeaderFile>
+      <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -147,10 +174,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
-    <ResourceCompile>
-    </ResourceCompile>
-    <ProjectReference>
-    </ProjectReference>
+    <ResourceCompile></ResourceCompile>
+    <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
     <OutDir>./../../bin/vc11win32-PhysX_3.3\</OutDir>
@@ -158,8 +183,8 @@
     <TargetExt>.dll</TargetExt>
     <TargetName>$(ProjectName)_x86</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRules />
-    <CodeAnalysisRuleAssemblies />
+    <CodeAnalysisRules/>
+    <CodeAnalysisRuleAssemblies/>
     <SkipCopyingSymbolsToOutputDirectory>true</SkipCopyingSymbolsToOutputDirectory>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
@@ -177,8 +202,7 @@
       <WarningLevel>Level4</WarningLevel>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>
-      </PrecompiledHeaderFile>
+      <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -192,10 +216,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
-    <ResourceCompile>
-    </ResourceCompile>
-    <ProjectReference>
-    </ProjectReference>
+    <ResourceCompile></ResourceCompile>
+    <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">
     <OutDir>./../../bin/vc11win32-PhysX_3.3\</OutDir>
@@ -203,8 +225,8 @@
     <TargetExt>.dll</TargetExt>
     <TargetName>$(ProjectName)PROFILE_x86</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRules />
-    <CodeAnalysisRuleAssemblies />
+    <CodeAnalysisRules/>
+    <CodeAnalysisRuleAssemblies/>
     <SkipCopyingSymbolsToOutputDirectory>true</SkipCopyingSymbolsToOutputDirectory>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">
@@ -222,8 +244,7 @@
       <WarningLevel>Level4</WarningLevel>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>
-      </PrecompiledHeaderFile>
+      <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -237,297 +258,160 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
-    <ResourceCompile>
-    </ResourceCompile>
-    <ProjectReference>
-    </ProjectReference>
+    <ResourceCompile></ResourceCompile>
+    <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\resource\apex.rc">
-    </ResourceCompile>
+    <ResourceCompile Include="..\resource\apex.rc"></ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\module\destructible\src\CachedOverlaps.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleActor.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleActorChunks.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleActorJoint.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleActorParam.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleActorState.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleAsset.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleAssetCollisionDataSet.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleAssetParameters.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleDebugRenderParams.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleModuleParameters.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructiblePreview.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructiblePreviewParam.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleRenderable.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleScene.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleScenePhysX2.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleScenePhysX3.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleSceneSyncParams.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleStructure.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\DestructibleStructureStressSolver.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\MeshCookedCollisionStream.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\MeshCookedCollisionStreamsAtScale.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\ModuleDestructible.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\SurfaceTraceParameters.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\src\SurfaceTraceSetParameters.cpp">
-    </ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\CachedOverlaps.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleActor.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleActorChunks.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleActorJoint.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleActorParam.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleActorState.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleAsset.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleAssetCollisionDataSet.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleAssetParameters.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleDebugRenderParams.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleModuleParameters.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructiblePreview.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructiblePreviewParam.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleRenderable.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleScene.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleScenePhysX2.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleScenePhysX3.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleSceneSyncParams.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleStructure.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\DestructibleStructureStressSolver.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\MeshCookedCollisionStream.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\MeshCookedCollisionStreamsAtScale.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\ModuleDestructible.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\SurfaceTraceParameters.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\src\SurfaceTraceSetParameters.cpp"></ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\ActorBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\CompoundBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\CompoundCreatorBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\CompoundGeometryBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\ConvexBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\Delaunay2dBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\Delaunay3dBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\FracturePatternBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\IceBoxPruningBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\IceRevisitedRadixBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\IslandDetectorBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\MeshBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\MeshClipperBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\PolygonTriangulatorBase.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Core\SimSceneBase.cpp">
-    </ClCompile>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\ActorBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\CompoundBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\CompoundCreatorBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\CompoundGeometryBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\ConvexBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\Delaunay2dBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\Delaunay3dBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\FracturePatternBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\IceBoxPruningBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\IceRevisitedRadixBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\IslandDetectorBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\MeshBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\MeshClipperBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\PolygonTriangulatorBase.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Core\SimSceneBase.h">
-    </ClInclude>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\ActorBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\CompoundBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\CompoundCreatorBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\CompoundGeometryBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\ConvexBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\Delaunay2dBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\Delaunay3dBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\FracturePatternBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\IceBoxPruningBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\IceRevisitedRadixBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\IslandDetectorBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\MeshBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\MeshClipperBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\PolygonTriangulatorBase.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Core\SimSceneBase.cpp"></ClCompile>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\ActorBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\CompoundBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\CompoundCreatorBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\CompoundGeometryBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\ConvexBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\Delaunay2dBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\Delaunay3dBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\FracturePatternBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\IceBoxPruningBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\IceRevisitedRadixBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\IslandDetectorBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\MeshBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\MeshClipperBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\PolygonTriangulatorBase.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Core\SimSceneBase.h"></ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\module\destructible\fracture\Actor.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Compound.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\CompoundCreator.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\CompoundGeometry.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Convex.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Delaunay2d.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Delaunay3d.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\FracturePattern.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\IceBoxPruning.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\IceRevisitedRadix.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\IslandDetector.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Mesh.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\MeshClipper.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\PolygonTriangulator.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\Renderable.cpp">
-    </ClCompile>
-    <ClCompile Include="..\..\module\destructible\fracture\SimScene.cpp">
-    </ClCompile>
-    <ClInclude Include="..\..\module\destructible\fracture\Actor.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Compound.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\CompoundCreator.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\CompoundGeometry.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Convex.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Delaunay2d.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Delaunay3d.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\FracturePattern.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\IceBoxPruning.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\IceRevisitedRadix.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\IslandDetector.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Mesh.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\MeshClipper.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\PolygonTriangulator.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\Renderable.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\RTdef.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\fracture\SimScene.h">
-    </ClInclude>
+    <ClCompile Include="..\..\module\destructible\fracture\Actor.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Compound.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\CompoundCreator.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\CompoundGeometry.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Convex.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Delaunay2d.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Delaunay3d.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\FracturePattern.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\IceBoxPruning.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\IceRevisitedRadix.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\IslandDetector.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Mesh.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\MeshClipper.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\PolygonTriangulator.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\Renderable.cpp"></ClCompile>
+    <ClCompile Include="..\..\module\destructible\fracture\SimScene.cpp"></ClCompile>
+    <ClInclude Include="..\..\module\destructible\fracture\Actor.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Compound.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\CompoundCreator.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\CompoundGeometry.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Convex.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Delaunay2d.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Delaunay3d.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\FracturePattern.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\IceBoxPruning.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\IceRevisitedRadix.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\IslandDetector.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Mesh.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\MeshClipper.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\PolygonTriangulator.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\Renderable.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\RTdef.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\fracture\SimScene.h"></ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\module\destructible\include\CachedOverlaps.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleActor.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleActorChunks.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleActorJoint.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleActorJointProxy.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleActorParam.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleActorProxy.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleActorState.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleActorUtils.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleAsset.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleAssetCollisionDataSet.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleAssetParameters.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleAssetProxy.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleDebugRenderParams.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleHelpers.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleModuleParameters.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleParamClasses.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructiblePreview.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructiblePreviewParam.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructiblePreviewProxy.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleRenderable.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleScene.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleStructure.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\DestructibleStructureStressSolver.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\MeshCookedCollisionStream.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\MeshCookedCollisionStreamsAtScale.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\MinPhysxSdkVersion.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\ModuleDestructible.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\ModuleEventDefs.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\ModulePerfScope.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\PhysX3ClassWrapper.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\SurfaceTraceParameters.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\include\SurfaceTraceSetParameters.h">
-    </ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\CachedOverlaps.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleActor.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleActorChunks.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleActorJoint.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleActorJointProxy.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleActorParam.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleActorProxy.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleActorState.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleActorUtils.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleAsset.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleAssetCollisionDataSet.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleAssetParameters.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleAssetProxy.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleDebugRenderParams.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleHelpers.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleModuleParameters.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleParamClasses.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructiblePreview.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructiblePreviewParam.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructiblePreviewProxy.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleRenderable.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleScene.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleStructure.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\DestructibleStructureStressSolver.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\MeshCookedCollisionStream.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\MeshCookedCollisionStreamsAtScale.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\MinPhysxSdkVersion.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\ModuleDestructible.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\ModuleEventDefs.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\ModulePerfScope.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\PhysX3ClassWrapper.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\SurfaceTraceParameters.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\include\SurfaceTraceSetParameters.h"></ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\module\destructible\public\NxDestructibleActor.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\public\NxDestructibleActorJoint.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\public\NxDestructibleAsset.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\public\NxDestructiblePreview.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\public\NxDestructibleRenderable.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\public\NxExplicitHierarchicalMesh.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\public\NxFractureTools.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\public\NxFractureToolsStructs.h">
-    </ClInclude>
-    <ClInclude Include="..\..\module\destructible\public\NxModuleDestructible.h">
-    </ClInclude>
+    <ClInclude Include="..\..\module\destructible\public\NxDestructibleActor.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\public\NxDestructibleActorJoint.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\public\NxDestructibleAsset.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\public\NxDestructiblePreview.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\public\NxDestructibleRenderable.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\public\NxExplicitHierarchicalMesh.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\public\NxFractureTools.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\public\NxFractureToolsStructs.h"></ClInclude>
+    <ClInclude Include="..\..\module\destructible\public\NxModuleDestructible.h"></ClInclude>
+  </ItemGroup>
+  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\module\common\src\ModuleProfileCommon.cpp"></ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\module\common\include\ModuleProfileCommon.h"></ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\module\common\src\ModuleProfileCommon.cpp">
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\module\common\include\ModuleProfileCommon.h">
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
+  <ItemGroup></ItemGroup>
   <ItemGroup>
     <ProjectReference Include="./ApexCommon.vcxproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -539,6 +423,5 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets"></ImportGroup>
 </Project>

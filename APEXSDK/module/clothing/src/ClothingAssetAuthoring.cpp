@@ -2550,7 +2550,7 @@ void ClothingAssetAuthoring::updateMappingAuthoring(ClothingGraphicalLodParamete
 					if (hasMaxDistance && getClosestVertex(renderMeshAssetOrig, pMesh.pPosition[vertexIndex], submeshIndex, graphicalVertexIndex, MAX_DISTANCE_NAME, ignoreUnusedVertices))
 					{
 						const NxVertexFormat& vf = renderMeshAssetCopy->getSubmesh(submeshIndex).getVertexBuffer().getFormat();
-						const PxU32 graphicalMaxDistanceIndex = (physx::PxU32)vf.getBufferIndexFromID(vf.getID(MAX_DISTANCE_NAME));
+						const PxU32 graphicalMaxDistanceIndex = (PxU32)vf.getBufferIndexFromID(vf.getID(MAX_DISTANCE_NAME));
 						NxRenderDataFormat::Enum outFormat = vf.getBufferFormat(graphicalMaxDistanceIndex);
 						const PxF32* graphicalMaxDistance = reinterpret_cast<const PxF32*>(renderMeshAssetCopy->getSubmesh(submeshIndex).getVertexBuffer().getBuffer(graphicalMaxDistanceIndex));
 

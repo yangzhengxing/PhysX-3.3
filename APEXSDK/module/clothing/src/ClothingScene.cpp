@@ -419,12 +419,15 @@ void ClothingScene::setModulePhysXScene(PxScene* newPhysXScene)
 		if (mGpuFactory.factory != NULL && oldPhysXScene != NULL)
 		{
 			mSimulationTask->clearGpuSolver();
+			if (newPhysXScene != NULL)
+			{
 #if NX_SDK_VERSION_MAJOR == 2
-			mModule->releaseClothFactory(mApexScene->getTaskManager()->getGpuDispatcher()->getCudaContextManager());
+				mModule->releaseClothFactory(mApexScene->getTaskManager()->getGpuDispatcher()->getCudaContextManager());
 #elif NX_SDK_VERSION_MAJOR == 3
-			PX_ASSERT(mApexScene->getTaskManager() == oldPhysXScene->getTaskManager());
-			mModule->releaseClothFactory(oldPhysXScene->getTaskManager()->getGpuDispatcher()->getCudaContextManager());
+				PX_ASSERT(mApexScene->getTaskManager() == oldPhysXScene->getTaskManager());
+				mModule->releaseClothFactory(oldPhysXScene->getTaskManager()->getGpuDispatcher()->getCudaContextManager());
 #endif
+			}
 			mGpuFactory.clear();
 		}
 	}
@@ -788,11 +791,10 @@ void ClothingScene::destroy()
 	}
 
 	{
-		if (mCpuFactory.factory != NULL)
-		{
-			mModule->releaseClothFactory(NULL);
-			mCpuFactory.clear();
-		}
+	if (mCpuFactory.factory != NULL)
+	{
+		mCpuFactory.clear();
+	}
 
 #ifdef PX_WINDOWS
 		PX_ASSERT(mGpuFactory.factory == NULL);

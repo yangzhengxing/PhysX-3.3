@@ -420,11 +420,12 @@ public:
 		physx::PxU32 siteCount,
 		physx::PxU32* randomSeed,
 		physx::PxU32* microgridSize,
+		NxBSPOpenMode::Enum meshMode,
 		physx::IProgressListener& progressListener,
 		physx::PxU32 chunkIndex = 0xFFFFFFFF
 	)
 	{
-		return ::FractureTools::createVoronoiSitesInsideMesh(hMesh, siteBuffer, siteChunkIndices, siteCount, randomSeed, microgridSize, progressListener, chunkIndex);
+		return ::FractureTools::createVoronoiSitesInsideMesh(hMesh, siteBuffer, siteChunkIndices, siteCount, randomSeed, microgridSize, meshMode, progressListener, chunkIndex);
 	}
 
 	virtual physx::PxU32	createScatterMeshSites

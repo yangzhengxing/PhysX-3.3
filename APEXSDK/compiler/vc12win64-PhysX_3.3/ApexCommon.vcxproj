@@ -483,21 +483,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\windows\PsWindowsAoS.h">
+    <ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\windows\PsWindowsAoS.h">
     </ClInclude>
-    <ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\windows\PsWindowsInlineAoS.h">
+    <ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\windows\PsWindowsInlineAoS.h">
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsVecMath.h">
+    <ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsVecMath.h">
     </ClInclude>
-    <ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsAoS.h">
+    <ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsAoS.h">
     </ClInclude>
-    <ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsInlineAoS.h">
+    <ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsInlineAoS.h">
     </ClInclude>
-    <ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsVecMathAoSScalar.h">
+    <ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsVecMathAoSScalar.h">
     </ClInclude>
-    <ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsVecMathAoSScalarInline.h">
+    <ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsVecMathAoSScalarInline.h">
     </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

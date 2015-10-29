@@ -33,6 +33,8 @@
 #include "NiApexRenderDebug.h"
 #include "PsSort.h"
 
+#define INCREMENTAL_GSA	0
+
 /////////////////////////////////////////////////////////////////////////////
 
 #if NX_SDK_VERSION_MAJOR == 2
@@ -58,6 +60,7 @@ gDefaultBuildParameters;
 
 static bool gIslandGeneration = false;
 static unsigned gMicrogridSize = 65536;
+static NxBSPOpenMode::Enum gMeshMode = NxBSPOpenMode::Automatic;
 static int	gVerbosity = 0;
 
 
@@ -189,10 +192,12 @@ public:
 		current = current->getAdj(1);
 	}
 
-	ApexCSG::GSA::Plane<3, ApexCSG::Real>	plane() const
+	ApexCSG::Plane	plane() const
 	{
 		const physx::PxPlane& midPlane = current->plane;
-		return ApexCSG::GSA::Plane<3, ApexCSG::Real>(ApexCSG::GSA::col4((ApexCSG::Real)midPlane.n.x, (ApexCSG::Real)midPlane.n.y, (ApexCSG::Real)midPlane.n.z, (ApexCSG::Real)midPlane.d));
+		ApexCSG::Plane plane(ApexCSG::Dir((ApexCSG::Real)midPlane.n.x, (ApexCSG::Real)midPlane.n.y, (ApexCSG::Real)midPlane.n.z), (ApexCSG::Real)midPlane.d);
+		plane.normalize();
+		return plane;
 	}
 
 private:
@@ -200,28 +205,22 @@ private:
 	ReciprocalSitePairLink* stop;
 };
 
-class SiteMidPlaneIntersection : public ApexCSG::GSA::StaticConvexPolyhedron<SiteMidPlaneIterator, SiteMidPlaneIteratorInit, ApexCSG::Real>, public ApexCSG::GSA::GSA<3, ApexCSG::Real>
+class SiteMidPlaneIntersection : public ApexCSG::GSA::StaticConvexPolyhedron<SiteMidPlaneIterator, SiteMidPlaneIteratorInit>
 {
 public:
-	SiteMidPlaneIntersection()
-	{
-		init(100);
-		set_shapes(this);
-	}
-
 	void	setPlanes(ReciprocalSitePairLink* first, ReciprocalSitePairLink* stop)
 	{
 		m_initValues.first = first;
 		m_initValues.stop = stop;
-		set_shapes(this);
 	}
 
 	void	replacePlanes(ReciprocalSitePairLink* first, ReciprocalSitePairLink* stop, const physx::PxPlane& oldFlipPlane, const physx::PxPlane& newFlipPlane)
 	{
 		m_initValues.first = first;
 		m_initValues.stop = stop;
-		const ApexCSG::GSA::Plane<3, ApexCSG::Real> oldFlipGSAPlane = ApexCSG::GSA::col4((ApexCSG::Real)oldFlipPlane.n.x, (ApexCSG::Real)oldFlipPlane.n.y, (ApexCSG::Real)oldFlipPlane.n.z, (ApexCSG::Real)oldFlipPlane.d);
-		const ApexCSG::GSA::Plane<3, ApexCSG::Real> newFlipGSAPlane = ApexCSG::GSA::col4((ApexCSG::Real)newFlipPlane.n.x, (ApexCSG::Real)newFlipPlane.n.y, (ApexCSG::Real)newFlipPlane.n.z, (ApexCSG::Real)newFlipPlane.d);
+#if INCREMENTAL_GSA
+		const ApexCSG::Plane oldFlipGSAPlane = ApexCSG::Plane(ApexCSG::Dir((ApexCSG::Real)oldFlipPlane.n.x, (ApexCSG::Real)oldFlipPlane.n.y, (ApexCSG::Real)oldFlipPlane.n.z), (ApexCSG::Real)oldFlipPlane.d);
+		const ApexCSG::Plane newFlipGSAPlane = ApexCSG::Plane(ApexCSG::Dir((ApexCSG::Real)newFlipPlane.n.x, (ApexCSG::Real)newFlipPlane.n.y, (ApexCSG::Real)newFlipPlane.n.z), (ApexCSG::Real)newFlipPlane.d);
 		for (int i = 0; i < 4; ++i)
 		{
 			if (m_S(0,i) == oldFlipGSAPlane(0) && m_S(1,i) == oldFlipGSAPlane(1) && m_S(2,i) == oldFlipGSAPlane(2) && m_S(3,i) == oldFlipGSAPlane(3))
@@ -233,6 +232,10 @@ public:
 				m_S.setCol(i, -newFlipGSAPlane);
 			}
 		}
+#else
+		(void)oldFlipPlane;
+		(void)newFlipPlane;
+#endif
 	}
 
 	void	resetPlanes()
@@ -409,7 +412,7 @@ void VoronoiCellPlaneIterator::prepareOutput()
 		if (firstGSAUse)
 		{
 			m_test.setPlanes(m_startPair, stopPair);
-#if 0	// Set to 1 to enable incremental GSA
+#if INCREMENTAL_GSA
 			firstGSAUse = false;
 #endif
 		}
@@ -418,7 +421,7 @@ void VoronoiCellPlaneIterator::prepareOutput()
 			m_test.replacePlanes(m_startPair, stopPair, lastPlane, testPlanePair->plane);
 		}
 		lastPlane = testPlanePair->plane;
-		const bool keep = m_test.intersect();
+		const bool keep = (1 == ApexCSG::GSA::vs3d_test(m_test));
 		testPlanePair->plane = physx::PxPlane(-testPlanePair->plane.n, -testPlanePair->plane.d);	// Flip back
 		if (keep)
 		{
@@ -3214,7 +3217,7 @@ static bool buildExplicitHierarchicalMeshFromApexAssetsInternal(physx::ExplicitH
 	// Create chunks
 	if (destructibleAsset != NULL)
 	{
-		physx::Array<bool> hasChildren(destructibleAsset->getChunkCount(), false);
+		physx::Array<bool> hasRootChildren(destructibleAsset->getChunkCount(), false);
 		for (physx::PxU32 chunkIndex = 0; chunkIndex < destructibleAsset->getChunkCount(); ++chunkIndex)
 		{
 			const physx::PxU32 newChunkIndex = hMesh.addChunk();
@@ -3226,13 +3229,13 @@ static bool buildExplicitHierarchicalMeshFromApexAssetsInternal(physx::ExplicitH
 			chunk->mPartIndex = (physx::PxI32)destructibleAsset->getPartIndex(chunkIndex);
 			chunk->mInstancedPositionOffset = destructibleAsset->getChunkPositionOffset(chunkIndex);
 			chunk->mInstancedUVOffset = destructibleAsset->getChunkUVOffset(chunkIndex);
-			if (chunk->mParentIndex >= 0 && chunk->mParentIndex < (physx::PxI32)destructibleAsset->getChunkCount())
-			{
-				hasChildren[(physx::PxU32)chunk->mParentIndex] = true;
-			}
-			if (destructibleAsset->getChunkDepth(chunkIndex) < maxRootDepth)
+			if (destructibleAsset->getChunkDepth(chunkIndex) <= maxRootDepth)
 			{
 				chunk->mPrivateFlags |= ExplicitHierarchicalMesh::Chunk::Root;	// We will assume every chunk is a root chunk
+				if (chunk->mParentIndex >= 0 && chunk->mParentIndex < (physx::PxI32)destructibleAsset->getChunkCount())
+				{
+					hasRootChildren[(physx::PxU32)chunk->mParentIndex] = true;
+				}
 			}
 		}
 
@@ -3240,7 +3243,7 @@ static bool buildExplicitHierarchicalMeshFromApexAssetsInternal(physx::ExplicitH
 		for (physx::PxU32 chunkIndex = 0; chunkIndex < destructibleAsset->getChunkCount(); ++chunkIndex)
 		{
 			ExplicitHierarchicalMesh::Chunk* chunk = hMesh.mChunks[chunkIndex];
-			if (chunk->isRootChunk() && !hasChildren[chunkIndex])
+			if (chunk->isRootChunk() && !hasRootChildren[chunkIndex])
 			{
 				chunk->mPrivateFlags |= ExplicitHierarchicalMesh::Chunk::RootLeaf;
 			}
@@ -3486,7 +3489,7 @@ static bool splitMeshInternal
 		{
 			outputMessage("Building mesh BSP...");
 			progressListener.setProgress(0);
-			if (hMesh.calculatePartBSP(partIndex, randomSeed, meshProcessingParams.microgridSize, &progressListener, cancel))
+			if (hMesh.calculatePartBSP(partIndex, randomSeed, meshProcessingParams.microgridSize, meshProcessingParams.meshMode, &progressListener, cancel))
 			{
 				outputMessage("Mesh BSP completed.");
 			}
@@ -3587,7 +3590,7 @@ static bool splitMeshInternal
 			{
 				outputMessage("Building core mesh BSP...");
 				progressListener.setProgress(0);
-				if(tempCoreMesh.calculatePartBSP(partIndex, randomSeed, meshProcessingParams.microgridSize, &progressListener, cancel)) 
+				if(tempCoreMesh.calculatePartBSP(partIndex, randomSeed, meshProcessingParams.microgridSize, meshProcessingParams.meshMode, &progressListener, cancel)) 
 				{
 					outputMessage("Core mesh BSP completed.");
 				}
@@ -3859,7 +3862,7 @@ static bool splitChunkInternal
 		}
 		outputMessage("Building mesh BSP...");
 		progressListener.setProgress(0);
-		hMesh.calculatePartBSP(partIndex, seed, meshProcessingParams.microgridSize, &progressListener);
+		hMesh.calculatePartBSP(partIndex, seed, meshProcessingParams.microgridSize, meshProcessingParams.meshMode, &progressListener);
 		outputMessage("Mesh BSP completed.");
 		userRnd.m_rnd.setSeed(seed);
 	}
@@ -3920,6 +3923,7 @@ static physx::PxU32 createVoronoiSitesInsideMeshInternal
 	physx::PxU32 siteCount,
 	physx::PxU32* randomSeed,
 	physx::PxU32* microgridSize,
+	NxBSPOpenMode::Enum meshMode,
 	physx::IProgressListener& progressListener
 )
 {
@@ -3943,7 +3947,7 @@ static physx::PxU32 createVoronoiSitesInsideMeshInternal
 			{
 				outputMessage("Warning: no random seed given in createVoronoiSitesInsideMeshInternal but BSP must be built.  Using seed = 0.", physx::PxErrorCode::eDEBUG_WARNING);
 			}
-			hMesh.calculatePartBSP(partIndex, (randomSeed != NULL ? *randomSeed : 0), microgridSizeToUse, &progressListener);
+			hMesh.calculatePartBSP(partIndex, (randomSeed != NULL ? *randomSeed : 0), microgridSizeToUse, meshMode, &progressListener);
 			outputMessage("Mesh BSP completed.");
 			if (randomSeed != NULL)
 			{
@@ -4700,7 +4704,7 @@ static bool createFaceCutouts
 			case NxFractureCutoutDesc::VoronoiFractureCutoutChunks:
 				{
 					// Voronoi split
-					cutoutVoronoiDesc.siteCount = createVoronoiSitesInsideMeshInternal(hMesh, &chunkIndex, 1, voronoiDesc.siteCount > 0 ? &perChunkSites[0] : NULL, NULL, voronoiDesc.siteCount, NULL, &gMicrogridSize, progressListener );
+					cutoutVoronoiDesc.siteCount = createVoronoiSitesInsideMeshInternal(hMesh, &chunkIndex, 1, voronoiDesc.siteCount > 0 ? &perChunkSites[0] : NULL, NULL, voronoiDesc.siteCount, NULL, &gMicrogridSize, gMeshMode, progressListener );
 					canceled = !voronoiSplitChunkInternal(hMesh, chunkIndex, *hMesh.mParts[(physx::PxU32)chunk->mPartIndex]->mMeshBSP, cutoutVoronoiDesc, collisionDesc, localProgressListener, cancel);
 				}
 				break;
@@ -4987,7 +4991,7 @@ bool createChippedMesh
 	{
 		outputMessage("Building mesh BSP...");
 		progressListener.setProgress(0);
-		hMesh.calculateMeshBSP(randomSeed, &progressListener, &meshProcessingParams.microgridSize);
+		hMesh.calculateMeshBSP(randomSeed, &progressListener, &meshProcessingParams.microgridSize, meshProcessingParams.meshMode);
 		outputMessage("Mesh BSP completed.");
 		userRnd.m_rnd.setSeed(randomSeed);
 	}
@@ -5394,6 +5398,7 @@ physx::PxU32 createVoronoiSitesInsideMesh
 	physx::PxU32 siteCount,
 	physx::PxU32* randomSeed,
 	physx::PxU32* microgridSize,
+	NxBSPOpenMode::Enum meshMode,
 	physx::IProgressListener& progressListener,
 	physx::PxU32 chunkIndex
 )
@@ -5420,11 +5425,13 @@ physx::PxU32 createVoronoiSitesInsideMesh
 
 		if (chunkList.size() > 0)
 		{
-			return createVoronoiSitesInsideMeshInternal(hMesh, &chunkList[0], chunkList.size(), siteBuffer, siteChunkIndices, siteCount, randomSeed, microgridSize, progressListener);
+			return createVoronoiSitesInsideMeshInternal(hMesh, &chunkList[0], chunkList.size(), siteBuffer, siteChunkIndices, siteCount, randomSeed, microgridSize, meshMode, progressListener);
 		}
+
+		return 0;	// This means we didn't find a root leaf chunk
 	}
 
-	return createVoronoiSitesInsideMeshInternal(hMesh, &chunkIndex, 1, siteBuffer, siteChunkIndices, siteCount, randomSeed, microgridSize, progressListener);
+	return createVoronoiSitesInsideMeshInternal(hMesh, &chunkIndex, 1, siteBuffer, siteChunkIndices, siteCount, randomSeed, microgridSize, meshMode, progressListener);
 }
 
 // Defining these structs here, so as not to offend gnu's sensibilities
@@ -6998,7 +7005,7 @@ static void buildCollisionGeometryForPartInternal(physx::Array<physx::PartConvex
 	buildCollisionGeometry(volumes, desc, vertices.begin(), vertices.size(), sizeof(physx::PxVec3), indices, vertices.size());
 }
 
-bool ExplicitHierarchicalMesh::calculatePartBSP(physx::PxU32 partIndex, physx::PxU32 randomSeed, physx::PxU32 microgridSize, IProgressListener* progressListener, volatile bool* cancel)
+bool ExplicitHierarchicalMesh::calculatePartBSP(physx::PxU32 partIndex, physx::PxU32 randomSeed, physx::PxU32 microgridSize, NxBSPOpenMode::Enum meshMode, IProgressListener* progressListener, volatile bool* cancel)
 {
 	if (partIndex >= mParts.size())
 	{
@@ -7019,6 +7026,11 @@ bool ExplicitHierarchicalMesh::calculatePartBSP(physx::PxU32 partIndex, physx::P
 	}
 
 	// Check for open mesh
+	if (meshMode == NxBSPOpenMode::Closed)
+	{
+		return true;
+	}
+
 	for (physx::PxU32 chunkIndex = 0; chunkIndex < chunkCount(); ++chunkIndex)
 	{
 		// Find a chunk which uses this part
@@ -7028,7 +7040,7 @@ bool ExplicitHierarchicalMesh::calculatePartBSP(physx::PxU32 partIndex, physx::P
 			if (mChunks[chunkIndex]->isRootChunk())
 			{
 				physx::PxF32 area, volume;
-				if (!mParts[partIndex]->mMeshBSP->getSurfaceAreaAndVolume(area, volume, true))
+				if (meshMode == NxBSPOpenMode::Open || !mParts[partIndex]->mMeshBSP->getSurfaceAreaAndVolume(area, volume, true))
 				{
 					// Mark the mesh as open
 					mParts[partIndex]->mFlags |= Part::MeshOpen;
@@ -7091,7 +7103,7 @@ void ExplicitHierarchicalMesh::replaceInteriorSubmeshes(physx::PxU32 partIndex, 
 	part->mMeshBSP->replaceInteriorSubmeshes(frameCount, frameIndices, submeshIndex);
 }
 
-void ExplicitHierarchicalMesh::calculateMeshBSP(physx::PxU32 randomSeed, IProgressListener* progressListener, const physx::PxU32* microgridSize)
+void ExplicitHierarchicalMesh::calculateMeshBSP(physx::PxU32 randomSeed, IProgressListener* progressListener, const physx::PxU32* microgridSize, NxBSPOpenMode::Enum meshMode)
 {
 	if (partCount() == 0)
 	{
@@ -7123,7 +7135,7 @@ void ExplicitHierarchicalMesh::calculateMeshBSP(physx::PxU32 randomSeed, IProgre
 		if (mChunks[chunkIndex]->isRootLeafChunk())
 		{
 			physx::PxU32 chunkPartIndex = (physx::PxU32)*partIndex(chunkIndex);
-			calculatePartBSP(chunkPartIndex, randomSeed, microgridSizeToUse, &progress);
+			calculatePartBSP(chunkPartIndex, randomSeed, microgridSizeToUse, meshMode, &progress);
 			progress.completeSubtask();
 		}
 	}

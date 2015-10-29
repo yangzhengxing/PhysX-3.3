@@ -695,11 +695,24 @@ NiApexPhysXObjectDesc* 	ApexSDK::createObjectDesc(const NxApexActor* apexActor, 
 		if (size == 0)  // special initial case, reserve entry 0
 		{
 			size = 1;
+			mPhysXObjDescs.resize(size + mBatchSeedSize);
 		}
-
+		else
 		{
 			PX_PROFILER_PERF_DSCOPE("objDescsResize",size + mBatchSeedSize);
+
+			// Instead of doing a straight resize of mPhysXObjDescs the array is resized by swapping. Doing so removes the potential 
+			// copying/reallocating of the arrays held in ApexPhysXObjectDesc elements which is costly performance wise.
+			physx::Array<ApexPhysXObjectDesc> swapArray;
+			swapArray.swap(mPhysXObjDescs);
+
 			mPhysXObjDescs.resize(size + mBatchSeedSize);
+			ApexPhysXObjectDesc* src = swapArray.begin();
+			ApexPhysXObjectDesc* dst = mPhysXObjDescs.begin();
+			for (physx::PxU32 i = 0; i < size; i++)
+			{
+				src[i].swap(dst[i]);
+			}
 		}
 
 		for (physx::PxU32 i = size ; i < size + mBatchSeedSize ; i++)

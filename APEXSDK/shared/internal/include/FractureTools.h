@@ -119,6 +119,7 @@ bool	createVoronoiSplitMesh
 	randomSeed: pointer to a seed for the random number generator, to ensure reproducibility.  If NULL, the random number generator will not be re-seeded.
 	microgridSize: pointer to a grid size used for BSP creation.  If NULL, the default settings will be used.
 	progressListener: The user must instantiate an IProgressListener, so that this function may report progress of this operation
+	meshMode: Open mesh handling.  Modes: Automatic, Closed, Open (see NxBSPOpenMode)
 	chunkIndex: If this is a valid index, the voronoi sites will only be created within the volume of the indexed chunk.  Otherwise,
 		the sites will be created within each of the root-level chunks.  Default value is an invalid index.
 
@@ -132,6 +133,7 @@ physx::PxU32	createVoronoiSitesInsideMesh
 	physx::PxU32 siteCount,
 	physx::PxU32* randomSeed,
 	physx::PxU32* microgridSize,
+	physx::apex::NxBSPOpenMode::Enum meshMode,
 	physx::IProgressListener& progressListener,
 	physx::PxU32 chunkIndex = 0xFFFFFFFF
 );

@@ -221,7 +221,7 @@ struct NxDestructibleChunkEvent
 
 
 /**
-	Chunk state event data pushed to the user, if the user requests it via NxModuleDestructible::setChunkReportSendChunkStateEvents.
+	Chunk state event data pushed to the user, if the user requests it via NxModuleDestructible::scheduleChunkStateEventCallback.
 */
 struct NxApexChunkStateEventData
 {
@@ -259,9 +259,12 @@ public:
 	/**
 		User implementation of NxUserChunkReport must overload this function.
 		This function gets called when chunk visibility changes occur, if the user has selected
-		this option via NxModuleDestructible::setChunkReportSendChunkStateEvents.
+		this option via NxModuleDestructible::scheduleChunkStateEventCallback.
 		See the definition of NxApexChunkStateEventData for the information provided
 		to the function.
+
+		*Please note* the user must also set the NxParameterized actor parameter 'createChunkEvents' to true,
+		on individual destructible actors, to receive state change events from that actor.
 	*/
 	virtual void	onStateChangeNotify(const physx::NxApexChunkStateEventData& visibilityEvent) = 0;
 
@@ -647,7 +650,7 @@ public:
 		Set whether or not the NxUserChunkReport::onStateChangeNotify interface will be used to deliver visibility
 		change data to the user.
 
-		Default = false.
+		Default = NxDestructibleCallbackSchedule::Disabled.
 	*/
 	virtual void							scheduleChunkStateEventCallback(NxDestructibleCallbackSchedule::Enum chunkStateEventCallbackSchedule) = 0;
 

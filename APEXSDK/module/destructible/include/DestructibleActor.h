@@ -168,6 +168,7 @@ public:
 	void					enableHardSleeping();
 	void					disableHardSleeping(bool wake);
 	bool					setChunkPhysXActorAwakeState(physx::PxU32 chunkIndex, bool awake);
+	bool					addForce(PxU32 chunkIndex, const PxVec3& force, physx::PxForceMode::Enum mode, const PxVec3* position = NULL, bool wakeup = true);
 
 	void					setLODWeights(physx::PxF32 maxDistance, physx::PxF32 distanceWeight, physx::PxF32 maxAge, physx::PxF32 ageWeight, physx::PxF32 bias);
 	const DestructibleActorParamNS::LODWeights_Type& getLODWeights(){ return reinterpret_cast<DestructibleActorParamNS::LODWeights_Type&>(mState->internalLODWeights); }
@@ -185,6 +186,7 @@ public:
 	}
 #endif
 
+	void					setGlobalPose(const physx::PxMat44& pose);
 	void					setGlobalPoseForStaticChunks(const physx::PxMat44& pose);
 	bool					getGlobalPoseForStaticChunks(physx::PxMat44& pose) const;
 
@@ -209,9 +211,9 @@ public:
 
 	// PhysX actor buffer API
 #if NX_SDK_VERSION_MAJOR == 2
-	bool					acquirePhysXActorBuffer(NxActor**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags, bool eliminateRedundantActors);
+	bool					acquirePhysXActorBuffer(NxActor**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags);
 #elif NX_SDK_VERSION_MAJOR == 3
-	bool					acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags, bool eliminateRedundantActors);
+	bool					acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags);
 #endif
 	bool					releasePhysXActorBuffer();
 

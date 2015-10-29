@@ -14,6 +14,7 @@
 
 #include "NxApexPhysXObjectDesc.h"
 
+
 namespace physx
 {
 namespace apex
@@ -82,6 +83,16 @@ public:
 	const NxApexActor*	getApexActor(physx::PxU32 i) const
 	{
 		return mApexActors[i];
+	}
+
+
+	void swap(NiApexPhysXObjectDesc& rhs)
+	{
+		mApexActors.swap(rhs.mApexActors);
+		shdfnd::swap(mPhysXObject, rhs.mPhysXObject);
+
+		shdfnd::swap(userData, rhs.userData);
+		shdfnd::swap(mFlags, rhs.mFlags);
 	}
 
 	/**

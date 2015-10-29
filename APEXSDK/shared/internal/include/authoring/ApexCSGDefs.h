@@ -253,11 +253,10 @@ struct Triangle
 
 	void	calculateQuantities()
 	{
-		const Pos center = (vertices[0] + vertices[1] + vertices[2])/(Real)3;
-		const Dir relV0 = Dir(vertices[0] - center);
-		const Dir relV1 = Dir(vertices[1] - center);
-		const Dir relV2 = Dir(vertices[2] - center);
-		normal = (relV0^relV1) + (relV1^relV2) + (relV2^relV0);
+		const Dir e0 = Dir(vertices[1] - vertices[0]);
+		const Dir e1 = Dir(vertices[2] - vertices[1]);
+		const Dir e2 = Dir(vertices[0] - vertices[2]);
+		normal = (e0^e1) + (e1^e2) + (e2^e0);
 		area = (Real)0.5 * normal.normalize();
 	}
 
@@ -854,55 +853,38 @@ public:
 		};
 	};
 
-	class Halfspace : public ApexCSG::GSA::GSA<3, Real>::ConvexShape
+	class Halfspace : public GSA::VS3D_Halfspace_Set
 	{
 	public:
-							Halfspace(const ApexCSG::GSA::Plane<3, Real>& plane) : m_plane(plane) {}
+							Halfspace(const Plane plane) : m_plane(plane) {}
 
-		virtual	unsigned	initialize_tangent_planes(ApexCSG::GSA::Plane<3, Real>* planes, unsigned plane_count) const;
-		virtual	void		intersect_line(ApexCSG::GSA::GSA<3, Real>::LineIntersect& in, ApexCSG::GSA::GSA<3, Real>::LineIntersect& ex, const ApexCSG::GSA::Pos<3, Real>& orig, const ApexCSG::GSA::Dir<3, Real>& dir, Real time) const;
-		virtual ApexCSG::GSA::Dir<3, Real>	get_linear_velocity() const
-		{
-			return ApexCSG::GSA::Dir<3, Real>();
-		}
+			virtual	Real	farthest_halfspace(Real plane[4], const Real point[3])
+			{
+				for (int i = 0; i < 4; ++i) plane[i] = m_plane[i];
+				return plane[0]*point[0] + plane[1]*point[1] + plane[2]*point[2] + plane[3];
+			}
+
+			Halfspace&	operator = (const Halfspace& halfspace) { m_plane = halfspace.m_plane; return *this; }
 
 	private:
-		Halfspace& operator=(const Halfspace&);
-		const ApexCSG::GSA::Plane<3, Real>	m_plane;
+		Plane	m_plane;
 	};
 
-	class RegionShape : public ApexCSG::GSA::GSA<3, Real>::ConvexShape, public ApexCSG::GSA::GSA<3, Real>
+	class RegionShape : public GSA::VS3D_Halfspace_Set
 	{
 	public:
-		RegionShape(const ApexCSG::GSA::Plane<3, Real>* planes, Real skinWidth = (Real)0) : ApexCSG::GSA::GSA<3, Real>(), m_planes(planes), m_leaf(NULL), m_nonempty(true), m_skinWidth(skinWidth)
-		{
-			init(100);
-		}
+		RegionShape(const Plane* planes, Real skinWidth = (Real)0) : m_planes(planes), m_leaf(NULL), m_nonempty(true), m_skinWidth(skinWidth) {}
 
-		virtual	unsigned	initialize_tangent_planes(ApexCSG::GSA::Plane<3, Real>* planes, unsigned plane_count) const;
-		virtual	void		intersect_line(ApexCSG::GSA::GSA<3, Real>::LineIntersect& in, ApexCSG::GSA::GSA<3, Real>::LineIntersect& ex, const ApexCSG::GSA::Pos<3, Real>& orig, const ApexCSG::GSA::Dir<3, Real>& dir, Real time) const;
-		virtual ApexCSG::GSA::Dir<3, Real>	get_linear_velocity() const
-		{
-			return ApexCSG::GSA::Dir<3, Real>();
-		}
+		virtual	Real	farthest_halfspace(Real plane[4], const Real point[3]);
 
-		void		set_leaf(const BSP::Node* leaf, bool forceInit = false)
+		void		set_leaf(const BSP::Node* leaf)
 		{
-			const bool init = forceInit || (m_leaf == NULL && leaf != NULL);
 			m_leaf = leaf;
-			if (init)
-			{
-				set_shapes(this);
-			}
-			else
-			{
-				m_shape[0] = this;
-			}
 		}
 
 		void		calculate()
 		{
-			m_nonempty = intersect();
+			m_nonempty = (1 == GSA::vs3d_test(*this));
 		}
 
 		bool		is_nonempty() const
@@ -910,18 +892,20 @@ public:
 			return m_nonempty;
 		}
 
-		bool		intersects_halfspace(const ApexCSG::GSA::Plane<3, Real>& plane)
+#if 0
+		bool		intersects_halfspace(const Plane* plane)
 		{
 			Halfspace halfspace(plane);
 			set_shapes(this, &halfspace);
 			return intersect();
 		}
+#endif
 
 	private:
-		const ApexCSG::GSA::Plane<3, Real>*	m_planes;
-		const BSP::Node*					m_leaf;
-		bool								m_nonempty;
-		Real								m_skinWidth;
+		const Plane*		m_planes;
+		const BSP::Node*	m_leaf;
+		bool				m_nonempty;
+		Real				m_skinWidth;
 	};
 
 private:

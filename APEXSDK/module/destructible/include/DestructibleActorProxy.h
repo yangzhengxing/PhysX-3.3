@@ -143,13 +143,13 @@ public:
 	}
 
 #if NX_SDK_VERSION_MAJOR == 2
-	virtual bool					acquirePhysXActorBuffer(NxActor**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags = NxDestructiblePhysXActorQueryFlags::All, bool eliminateRedundantActors = true)
+	virtual bool					acquirePhysXActorBuffer(NxActor**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags = NxDestructiblePhysXActorQueryFlags::AllStates)
 #elif NX_SDK_VERSION_MAJOR == 3
-	virtual bool					acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags = NxDestructiblePhysXActorQueryFlags::All, bool eliminateRedundantActors = true)
+	virtual bool					acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags = NxDestructiblePhysXActorQueryFlags::AllStates)
 #endif
 	{
 		NX_READ_ZONE();
-		return impl.acquirePhysXActorBuffer(buffer, bufferSize, flags, eliminateRedundantActors);
+		return impl.acquirePhysXActorBuffer(buffer, bufferSize, flags);
 	}
 
 	virtual bool					releasePhysXActorBuffer()
@@ -265,7 +265,7 @@ public:
 	virtual void			setGlobalPose(const physx::PxMat44& pose)
 	{
 		NX_WRITE_ZONE();
-		impl.setGlobalPoseForStaticChunks(pose);
+		impl.setGlobalPose(pose);
 	}
 
 	virtual bool			getGlobalPose(physx::PxMat44& pose)
@@ -318,6 +318,12 @@ public:
 	{
 		NX_WRITE_ZONE();
 		return impl.setChunkPhysXActorAwakeState(chunkIndex, awake);
+	}
+
+	virtual bool addForce(PxU32 chunkIndex, const PxVec3& force, physx::PxForceMode::Enum mode, const PxVec3* position = NULL, bool wakeup = true)
+	{
+		NX_WRITE_ZONE();
+		return impl.addForce(chunkIndex, force, mode, position, wakeup);
 	}
 
 #if NX_SDK_VERSION_MAJOR == 2

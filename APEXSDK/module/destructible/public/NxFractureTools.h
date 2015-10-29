@@ -114,6 +114,7 @@ public:
 		\param siteCount			the number of points to write into siteBuffer
 		\param randomSeed			pointer to a seed for the random number generator, to ensure reproducibility.  If NULL, the random number generator will not be re-seeded.
 		\param microgridSize		pointer to a grid size used for BSP creation.  If NULL, the default settings will be used.
+		\param meshMode				Open mesh handling.  Modes: Automatic, Closed, Open (see NxBSPOpenMode)
 		\param progressListener		The user must instantiate an IProgressListener, so that this function may report progress of this operation
 		\param chunkIndex			If this is a valid index, the voronoi sites will only be created within the volume of the indexed chunk.  Otherwise,
 										the sites will be created within each of the root-level chunks.  Default value is an invalid index.
@@ -128,6 +129,7 @@ public:
 		physx::PxU32 siteCount,
 		physx::PxU32* randomSeed,
 		physx::PxU32* microgridSize,
+		NxBSPOpenMode::Enum meshMode,
 		physx::IProgressListener& progressListener,
 		physx::PxU32 chunkIndex = 0xFFFFFFFF
 	) = 0;

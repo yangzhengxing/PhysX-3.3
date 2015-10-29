@@ -21,6 +21,9 @@
 
 #include "foundation/PxErrorCallback.h"
 
+#define USE_CLUSTERING	0
+
+
 #ifndef WITHOUT_APEX_AUTHORING
 
 using namespace physx;
@@ -193,16 +196,124 @@ cmpPointToPlane(const Pos& pos, const Plane& plane, Real tol)
 	return dist < -tol ? -1 : (dist < tol ? 0 : 1);
 }
 
-struct IndexedPxReal
+template<typename T>
+struct IndexedValue
 {
-	physx::PxF32	value;
+	T				value;
 	physx::PxU32	index;
 
-	static	int	cmpDecreasing(const void* a, const void* b)
+	static	int	cmpIncreasing(const void* a, const void* b)
 	{
-		return ((IndexedPxReal*)a)->value == ((IndexedPxReal*)b)->value ? 0 : (((IndexedPxReal*)a)->value < ((IndexedPxReal*)b)->value ? 1 : -1);
+		return ((IndexedValue*)a)->value == ((IndexedValue*)b)->value ? 0 : (((IndexedValue*)a)->value < ((IndexedValue*)b)->value ? -1 : 1);
 	}
 };
+
+
+#if USE_CLUSTERING
+/*
+	Clustering
+*/
+static void cluster(physx::Array< IndexedValue<Real> >& values, Real spacing)
+{
+	if (values.size() < 2 || spacing < (Real)0)
+	{
+		return; // No work needs to be done
+	}
+
+	physx::PxU32 valuesInPlay = values.size();
+
+	// Sort values
+	qsort(values.begin(), valuesInPlay, sizeof(IndexedValue<Real>), IndexedValue<Real>::cmpIncreasing);
+
+	physx::Array< IndexedValue<Real> > tmp;
+	tmp.reserve(valuesInPlay);
+
+	do
+	{
+		// Now search for the longest run of values within the given spacing
+
+		// Find first run
+		physx::PxU32 start = 0;
+		physx::PxU32 stop = start;
+		while (++stop < valuesInPlay)
+		{
+			if (values[stop].value - values[start].value > spacing)
+			{
+				break;
+			}
+		}
+
+		physx::PxU32 bestStart = start;
+		physx::PxU32 bestStop = stop;
+
+		// Now see if it can be improved
+		while (stop < valuesInPlay)
+		{
+			physx::PxU32 nextStart = start;	// Bring the start up until the values are in range
+			while (++nextStart < stop)
+			{
+				if (values[stop].value - values[nextStart].value <= spacing)
+				{
+					break;
+				}
+			}
+
+			physx::PxU32 nextStop = stop;	// Push the stop back to find the length of the run
+			while (++nextStop < valuesInPlay)
+			{
+				if (values[nextStop].value - values[nextStart].value > spacing)
+				{
+					break;
+				}
+			}
+
+			// Record this interval if it's the best
+			if (nextStop - nextStart > bestStop - bestStart)
+			{
+				bestStart = start;
+				bestStop = stop;
+			}
+
+			start = nextStart;
+			stop = nextStop;
+		}
+
+		// If the longest run is 1 (no more clusters to collapse), we're done
+		const physx::PxU32 length = bestStop - bestStart;
+		if (length < 2)
+		{
+			break;
+		}
+
+		// Collapse the longest run to its mean value and store in tmp
+		Real meanValue = (Real)0;
+		for (physx::PxU32 i = bestStart; i < bestStop;  ++i)
+		{
+			meanValue += values[i].value;
+		}
+		meanValue /= (bestStop - bestStart);
+		for (physx::PxU32 i = bestStop; i-- > bestStart;)
+		{
+			IndexedValue<Real>& val = tmp.insert();
+			val.index = values[i].index;
+			val.value = meanValue;
+		}
+
+		// Compact array
+		for (physx::PxU32 i = bestStop; i < valuesInPlay; ++i)
+		{
+			values[i-length] = values[i];
+		}
+		valuesInPlay -= length;
+	} while (valuesInPlay > 0);
+
+	for (physx::PxU32 i = 0; i < tmp.size(); ++i)
+	{
+		values[valuesInPlay++] = tmp[i];
+	}
+}
+#endif	// USE_CLUSTERING
+
 
 PX_INLINE LinkedVertex*
 clipPolygonByPlane(LinkedVertex* poly, const Plane& plane, Pool<LinkedVertex>& pool, Real tol)
@@ -399,34 +510,6 @@ clipTriangleToLeaf(physx::Array<Triangle>* clippedMesh, Real& clippedTriangleAre
 }
 
 PX_INLINE bool
-intersectPlanes(ApexCSG::GSA::Pos<3, Real>& pos, ApexCSG::GSA::Dir<3, Real>& dir, const ApexCSG::GSA::Plane<3, Real>& plane0, const ApexCSG::GSA::Plane<3, Real>& plane1)
-{
-	const ApexCSG::GSA::Dir<3, Real> n0 = plane0.normal();
-	const ApexCSG::GSA::Dir<3, Real> n1 = plane1.normal();
-
-	dir = n0^n1;
-
-	if(dir.normalize() < ApexCSG::GSA::gsa_eps<Real>())
-	{
-		return false;
-	}
-
-	pos = ApexCSG::GSA::Pos<3, Real>();
-
-	for (int iter = 3; iter--;)
-	{
-		// Project onto plane0:
-		pos = plane0.project(pos);
-
-		// Raycast to plane1:
-		const ApexCSG::GSA::Dir<3, Real> b = dir^n0;
-		pos -= ((pos|plane1)/(b|plane1))*b;
-	}
-
-	return true;
-}
-
-PX_INLINE bool
 intersectPlanes(Pos& pos, Dir& dir, const Plane& plane0, const Plane& plane1)
 {
 	const Dir n0 = plane0.normal();
@@ -602,10 +685,9 @@ public:
 		++current;
 	}
 
-	ApexCSG::GSA::Plane<3, Real>	plane() const
+	Plane	plane() const
 	{
-		const Plane& currentPlane = *current;
-		return ApexCSG::GSA::Plane<3, Real>(ApexCSG::GSA::col4(currentPlane[0], currentPlane[1], currentPlane[2], currentPlane[3]));
+		return *current;
 	}
 
 private:
@@ -613,23 +695,15 @@ private:
 	Plane* stop;
 };
 
-class HalfspaceIntersection : public ApexCSG::GSA::StaticConvexPolyhedron<PlaneIterator, PlaneIteratorInit, Real>, public ApexCSG::GSA::GSA<3, Real>
+class HalfspaceIntersection : public ApexCSG::GSA::StaticConvexPolyhedron<PlaneIterator, PlaneIteratorInit>
 {
 public:
-	HalfspaceIntersection()
-	{
-		init(100);
-		set_shapes(this);
-	}
-
 	void	setPlanes(Plane* first, physx::PxU32 count)
 	{
 		m_initValues.first = first;
 		m_initValues.stop = first + count;
-		set_shapes(this);
 	}
 };
-
 
 
 /* BSP */
@@ -717,7 +791,8 @@ BSP::fromMesh(const physx::NxExplicitRenderTriangle* mesh, physx::PxU32 triangle
 	const Vec4Real scale((Real)1/recipScale[0], (Real)1/recipScale[1], (Real)1/recipScale[2], (Real)1);
 	const Pos center = m_meshBounds.getCenter();
 	const Real gridSize = (Real)params.snapGridSize;
-	const Real recipGridSize = params.snapGridSize > 0 ? (Real)1/params.snapGridSize : (Real)0;
+	const Real recipGridSize = params.snapGridSize > 0 ? (Real)1/gridSize : (Real)0;
+#if 0
 	for (physx::PxU32 i = 0; i < m_mesh.size(); ++i)
 	{
 		Triangle& tri = m_mesh[i];
@@ -736,6 +811,62 @@ BSP::fromMesh(const physx::NxExplicitRenderTriangle* mesh, physx::PxU32 triangle
 		}
 		tri.calculateQuantities();
 	}
+#else
+	// Rescale
+	for (physx::PxU32 i = 0; i < m_mesh.size(); ++i)
+	{
+		Triangle& tri = m_mesh[i];
+		for (physx::PxU32 j = 0; j < 3; ++j)
+		{
+			Pos& pos = tri.vertices[j];
+			pos = (pos - center) * scale;
+		}
+	}
+
+	// Align vertices
+	if (params.snapGridSize > 0)
+	{
+		physx::Array< IndexedValue<Real> > snapValues[3];	// x, y, and z
+		snapValues[0].resize(3*m_mesh.size());
+		snapValues[1].resize(3*m_mesh.size());
+		snapValues[2].resize(3*m_mesh.size());
+		for (physx::PxU32 i = 0; i < m_mesh.size(); ++i)
+		{
+			Triangle& tri = m_mesh[i];
+			for (physx::PxU32 j = 0; j < 3; ++j)
+			{
+				const Pos& pos = tri.vertices[j];
+				for (int e = 0; e < 3; ++e)
+				{
+					const physx::PxU32 index = i*3+j;
+					IndexedValue<Real>& v = snapValues[e][index];
+					v.index = index;
+					v.value = pos[e];
+				}
+			}
+		}
+
+		for (int e = 0; e < 3; ++e)
+		{
+#if USE_CLUSTERING
+			cluster(snapValues[e], recipGridSize);
+#endif
+			for (physx::PxU32 valueNum = 0; valueNum < snapValues[e].size(); ++valueNum)
+			{
+				const physx::PxU32 index = snapValues[e][valueNum].index;
+				const physx::PxU32 i = index/3;
+				const physx::PxU32 j = index-3*i;
+				m_mesh[i].vertices[j][e] = recipGridSize*floor(gridSize * snapValues[e][valueNum].value + (Real)0.5);
+			}
+		}
+	}
+
+	// Cache triangle quantities
+	for (physx::PxU32 i = 0; i < m_mesh.size(); ++i)
+	{
+		m_mesh[i].calculateQuantities();
+	}
+#endif
 
 	// Initialize surface stack with surfaces formed from mesh triangles
 	physx::Array<Surface> surfaceStack;
@@ -760,6 +891,7 @@ BSP::fromMesh(const physx::NxExplicitRenderTriangle* mesh, physx::PxU32 triangle
 		Real surfaceTotalTriangleArea = tri.area;
 		Plane& plane = m_planes.insert();
 		plane.set(tri.normal, (tri.vertices[0] + tri.vertices[1] + tri.vertices[2])/(Real)3);
+		plane.normalize();
 		// See if any of the remaining triangles can fit on this surface.
 		for (physx::PxU32 testTriangleIndex = triangleIndex; testTriangleIndex < m_mesh.size(); ++testTriangleIndex)
 		{
@@ -772,8 +904,20 @@ BSP::fromMesh(const physx::NxExplicitRenderTriangle* mesh, physx::PxU32 triangle
 				// This triangle fits.  Move it next to others in the surface.
 				if (testTriangleIndex != triangleIndex)
 				{
+#if 0				// Slower, but keeps the remaining triangles in their original order
+					Triangle moveTri = m_mesh[testTriangleIndex];
+					Interpolator moveInt = m_frames[testTriangleIndex];
+					for (physx::PxU32 i = testTriangleIndex; i-- > triangleIndex;)
+					{
+						m_mesh[i+1] = m_mesh[i];
+						m_frames[i+1] = m_frames[i];
+					}
+					m_mesh[triangleIndex] = moveTri;
+					m_frames[triangleIndex] = moveInt;
+#else
 					physx::swap(m_mesh[triangleIndex], m_mesh[testTriangleIndex]);
 					physx::swap(m_frames[triangleIndex], m_frames[testTriangleIndex]);
+#endif
 				}
 				Triangle& newTri = m_mesh[triangleIndex];
 				// Add in the new normal, properly weighted
@@ -894,6 +1038,7 @@ BSP::fromConvexPolyhedron(const physx::PxPlane* poly, physx::PxU32 polySize, con
 			m_planes[planeIndex][i] = (Real)poly[planeIndex].n[i];
 		}
 		m_planes[planeIndex][3] = (Real)poly[planeIndex].d;
+		m_planes[planeIndex].normalize();
 	}
 
 	// Build the tree.
@@ -917,10 +1062,10 @@ BSP::fromConvexPolyhedron(const physx::PxPlane* poly, physx::PxU32 polySize, con
 	}
 
 	// See if the planes bound a non-empty set
-	RegionShape regionShape((const ApexCSG::GSA::Plane<3, Real> *)m_planes.begin());
+	RegionShape regionShape(m_planes.begin());
 	regionShape.set_leaf(node);
 	regionShape.calculate();
-	if (!regionShape.intersect())
+	if (!regionShape.is_nonempty())
 	{
 		clear();
 		Region leafData;
@@ -1675,7 +1820,7 @@ BSP::transform(const Mat4Real& tm, bool transformFrames)
 {
 	// Build cofactor matrix for transformation of normals
 	const Mat4Real cofTM = tm.cof34();
-	const Mat4Real invTransposeTM = cofTM * ((Real)1 / cofTM[3][3]);
+	const Mat4Real invTransposeTM = cofTM/cofTM[3][3];
 
 	// Transform mesh
 	for (physx::PxU32 i = 0; i < m_mesh.size(); ++i)
@@ -1715,7 +1860,7 @@ BSP::transform(const Mat4Real& tm, bool transformFrames)
 	}
 
 	// Adjust sizes
-	const Real scale = physx::PxPow((PxReal) cofTM[3][3], (PxReal)0.33333333333333333);
+	const Real scale = physx::PxPow((PxReal) tm.det3(), (PxReal)0.33333333333333333);
 	m_meshSize *= scale;
 	m_combiningMeshSize *= scale;
 }
@@ -2344,16 +2489,16 @@ void BSP::visualizeNode(NxApexRenderDebug& debugRender, physx::PxU32 flags, cons
 				for (SurfaceIt i(node); i.valid(); i.inc())
 				{
 					const physx::PxU32 planeIndex_i = i.surface()->planeIndex;
-					const ApexCSG::GSA::Plane<3, Real>& plane_i = *(const ApexCSG::GSA::Plane<3, Real>*)(m_planes.begin() + planeIndex_i);
+					const Plane& plane_i = m_planes[planeIndex_i];
 					SurfaceIt j = i;
 					j.inc();
 					for (; j.valid(); j.inc())
 					{
 						const physx::PxU32 planeIndex_j = j.surface()->planeIndex;
-						const ApexCSG::GSA::Plane<3, Real>& plane_j = *(const ApexCSG::GSA::Plane<3, Real>*)(m_planes.begin() + planeIndex_j);
+						const Plane& plane_j = m_planes[planeIndex_j];
 						// Find potential edge from intersection if plane_i and plane_j
-						ApexCSG::GSA::Pos<3, Real> orig;
-						ApexCSG::GSA::Dir<3, Real> edgeDir;
+						Pos orig;
+						Dir edgeDir;
 						if (intersectPlanes(orig, edgeDir, plane_i, plane_j))
 						{
 							Real minS = -clampSize;
@@ -2366,10 +2511,10 @@ void BSP::visualizeNode(NxApexRenderDebug& debugRender, physx::PxU32 flags, cons
 								{
 									continue;
 								}
-								const ApexCSG::GSA::Plane<3, Real>& plane_k = (k.side() ? (Real)1 : -(Real)1)*(*(const ApexCSG::GSA::Plane<3, Real>*)(m_planes.begin() + planeIndex_k));
+								const Plane& plane_k = (k.side() ? (Real)1 : -(Real)1)*m_planes[planeIndex_k];
 								const Real num = -(orig|plane_k);
 								const Real den = edgeDir|plane_k;
-								if (physx::PxAbs(den) > ApexCSG::GSA::gsa_eps<Real>())
+								if (physx::PxAbs(den) > 10*EPS_REAL)
 								{
 									const Real s = num/den;
 									if (den > (Real)0)
@@ -2387,7 +2532,7 @@ void BSP::visualizeNode(NxApexRenderDebug& debugRender, physx::PxU32 flags, cons
 									}
 								}
 								else
-								if (num < -ApexCSG::GSA::gsa_eps<Real>())
+								if (num < -10*EPS_REAL)
 								{
 									intersectionFound = false;
 									break;
@@ -2395,11 +2540,11 @@ void BSP::visualizeNode(NxApexRenderDebug& debugRender, physx::PxU32 flags, cons
 							}
 							if (intersectionFound)
 							{
-								const ApexCSG::GSA::Pos<3, Real> e0 = orig + minS * edgeDir;
-								const ApexCSG::GSA::Pos<3, Real> e1 = orig + maxS * edgeDir;
+								const Pos e0 = orig + minS * edgeDir;
+								const Pos e1 = orig + maxS * edgeDir;
 								physx::PxVec3 p0, p1;
-								PxVec3FromArray(p0, &e0(0));
-								PxVec3FromArray(p1, &e1(0));
+								PxVec3FromArray(p0, &e0[0]);
+								PxVec3FromArray(p1, &e1[0]);
 								debugRender.debugLine(BSPToMeshTM.transform(p0), BSPToMeshTM.transform(p1));
 							}
 						}
@@ -2595,7 +2740,7 @@ BSP::combineTrees(Node* root, const Node* combineRoot, physx::PxU32 triangleInde
 	physx::Array<CombineTreesFrame> stack;
 	stack.reserve(m_planes.size());	// To avoid reallocations
 
-	RegionShape regionShape((const ApexCSG::GSA::Plane<3, Real> *)m_planes.begin(), (Real)0.0001*m_meshSize);
+	RegionShape regionShape((const Plane*)m_planes.begin(), (Real)0.0001*m_meshSize);
 
 	CombineTreesFrame localFrame;
 	localFrame.node = root;
@@ -2639,7 +2784,7 @@ BSP::combineTrees(Node* root, const Node* combineRoot, physx::PxU32 triangleInde
 					Node* child = m_memCache->m_nodePool.borrow();
 					child->setLeafData(oldRegion);
 					localFrame.node->setChild(index, child);
-					regionShape.set_leaf(child, true);
+					regionShape.set_leaf(child);
 					regionShape.calculate();
 					intersects[index] = regionShape.is_nonempty();
 				}
@@ -2741,8 +2886,9 @@ BSP::findInsideLeafNeighbors(physx::Array<IntPair>& neighbors, Node* root) const
 			{
 				planes[planeIndex] *= -(Real)1;	// Invert
 				test.setPlanes(planes.begin(), planes.size());
-				const bool necessary = test.intersect();
-				const bool testError = (test.state() & ApexCSG::GSA::GSA_State::Error_Flag) != 0;
+				const int result = GSA::vs3d_test(test);
+				const bool necessary = 1 == result;
+				const bool testError = result < 0;
 				planes[planeIndex] *= -(Real)1;	// Restore
 				if (!necessary && !testError)
 				{
@@ -2776,7 +2922,7 @@ BSP::findInsideLeafNeighbors(physx::Array<IntPair>& neighbors, Node* root) const
 							planes.pushBack(m_planes[node->getBranchData()->planeIndex]);
 							planes.back()[3] -= tol;
 							test.setPlanes(planes.begin(), planes.size());
-							up = !test.intersect();	// Skip subtree if there is no intersection at this branch
+							up = 0 == GSA::vs3d_test(test);	// Skip subtree if there is no intersection at this branch
 							node = node->getChild(1);
 						}
 					}
@@ -2787,7 +2933,7 @@ BSP::findInsideLeafNeighbors(physx::Array<IntPair>& neighbors, Node* root) const
 						{
 							planes.pushBack(-m_planes[node->getBranchData()->planeIndex]);
 							planes.back()[3] -= tol;
-							up = !test.intersect();	// Skip subtree if there is no intersection at this branch
+							up = 0 == GSA::vs3d_test(test);	// Skip subtree if there is no intersection at this branch
 							node = node->getChild(0);
 						}
 						else
@@ -3038,153 +3184,31 @@ BSP::buildTree(Node* node, physx::Array<Surface>& surfaceStack, physx::PxU32 sta
 
 /* For GSA */
 
-unsigned
-BSP::Halfspace::initialize_tangent_planes(ApexCSG::GSA::Plane<3, Real>* planes, unsigned plane_count) const
+Real
+BSP::RegionShape::farthest_halfspace(Real plane[4], const Real point[3])
 {
-	if (plane_count)
+	Plane& halfspace = *(Plane*)plane;
+	halfspace = Plane(Dir((Real)0), -(Real)1);
+	Real greatest_s = -MAX_REAL;
+
+	if (m_leaf && m_planes)
 	{
-		*planes = m_plane;
-		return 1;
-	}
-
-	return 0;
-}
-
-void
-BSP::Halfspace::intersect_line(ApexCSG::GSA::GSA<3, Real>::LineIntersect& in, ApexCSG::GSA::GSA<3, Real>::LineIntersect& ex, const ApexCSG::GSA::Pos<3, Real>& orig, const ApexCSG::GSA::Dir<3, Real>& dir, Real time) const
-{
-	(void)time;	// Not used
-	in.m_plane.set(ApexCSG::GSA::Dir<3, Real>(), 0.0f);
-	ex.m_plane.set(ApexCSG::GSA::Dir<3, Real>(), 0.0f);
-	in.m_s = -ApexCSG::GSA::max_real<Real>();
-	ex.m_s = ApexCSG::GSA::max_real<Real>();
-
-	const Real num = -(m_plane | orig);
-	const Real den = (m_plane | dir);
-	if (physx::PxAbs(den) > ApexCSG::GSA::gsa_eps<Real>())
-	{
-		const Real s = num / den;
-		if (den > (Real)0)
+		for (SurfaceIt it(m_leaf); it.valid(); it.inc())
 		{
-			// Exit
-			in.m_s = -ApexCSG::GSA::max_real<Real>();
-			ex.m_s = s;
-			ex.m_plane = m_plane;
-		}
-		else
-		{
-			// Entrance
-			in.m_s = s;
-			ex.m_s = ApexCSG::GSA::max_real<Real>();
-			in.m_plane = m_plane;
-		}
-	}
-	else
-	if (num < ApexCSG::GSA::gsa_eps<Real>())
-	{
-		// Parallel and coincident or outside
-		in.m_plane = m_plane;
-		ex.m_plane = m_plane;
-		if (num < -ApexCSG::GSA::gsa_eps<Real>())
-		{
-			const Real s = num / ApexCSG::GSA::eps_real<Real>();
-			in.m_s = -s;
-			ex.m_s = s;
-		}
-	}
-}
-
-unsigned
-BSP::RegionShape::initialize_tangent_planes(ApexCSG::GSA::Plane<3, Real>* planes, unsigned plane_count) const
-{
-	if (m_planes == NULL)
-	{
-		return 0;
-	}
-	unsigned nPlanes = 0;
-	for (SurfaceIt it(m_leaf); it.valid(); it.inc())
-	{
-		if (nPlanes >= plane_count)
-		{
-			break;
-		}
-		const Real sign = it.side() ? (Real)1 : -(Real)1;
-		planes[nPlanes] = sign * (*(const ApexCSG::GSA::Plane<3, Real>*)(m_planes + it.surface()->planeIndex));
-		planes[nPlanes](3) -= m_skinWidth;
-		++nPlanes;
-	}
-	return nPlanes;
-}
-
-void
-BSP::RegionShape::intersect_line(ApexCSG::GSA::GSA<3, Real>::LineIntersect& in, ApexCSG::GSA::GSA<3, Real>::LineIntersect& ex, const ApexCSG::GSA::Pos<3, Real>& orig, const ApexCSG::GSA::Dir<3, Real>& dir, Real time) const
-{
-	if (m_planes == NULL)
-	{
-		return;
-	}
-	(void)time;	// Not used
-	Real in_num = -1.0f;
-	Real in_den = 0.0f;
-	Real ex_num = 1.0f;
-	Real ex_den = 0.0f;
-	in.m_plane.set(ApexCSG::GSA::Dir<3, Real>(), 0.0f);
-	ex.m_plane.set(ApexCSG::GSA::Dir<3, Real>(), 0.0f);
-
-	for (SurfaceIt it(m_leaf); it.valid(); it.inc())
-	{
-		const Real sign = it.side() ? (Real)1 : -(Real)1;
-		ApexCSG::GSA::Plane<3, Real> plane = sign * (*(const ApexCSG::GSA::Plane<3, Real>*)(m_planes + it.surface()->planeIndex));
-		plane(3) -= m_skinWidth;
-		const Real num = -(plane | orig);
-		const Real den = (plane | dir);
-		if (den > ApexCSG::GSA::gsa_eps<Real>())
-		{
-			// Exit
-			if (num * ex_den < ex_num * den)	// num/den < ex_num/ex_den
+			const Real sign = it.side() ? (Real)1 : -(Real)1;
+			Plane test = sign * m_planes[it.surface()->planeIndex];
+			test[3] -= m_skinWidth;
+			const Real s = point[0]*test[0] + point[1]*test[1] + point[2]*test[2] + test[3];
+			if (s > greatest_s)
 			{
-				ex_num = num;
-				ex_den = den;
-				ex.m_plane = plane;
-			}
-		}
-		else if (den < -ApexCSG::GSA::gsa_eps<Real>())
-		{
-			// Entrance
-			if (num * in_den < in_num * den)	// num/den > in_num/in_den
-			{
-				in_num = -num;
-				in_den = -den;
-				in.m_plane = plane;
-			}
-		}
-		else if (num < ApexCSG::GSA::gsa_eps<Real>())
-		{
-			// Parallel and coincident or outside
-			if (in_den == 0.0f)
-			{
-				in.m_plane = plane;
-			}
-			if (ex_den == 0.0f)
-			{
-				ex.m_plane = plane;
-			}
-			if (num < -ApexCSG::GSA::gsa_eps<Real>())
-			{
-				// Outside
-				if (ex_den > ApexCSG::GSA::eps_real<Real>() || num < ex_num)
-				{
-					in_num = -num;
-					ex_num = num;
-					in_den = ex_den = ApexCSG::GSA::eps_real<Real>();
-					in.m_plane = ex.m_plane = plane;
-				}
+				greatest_s = s;
+				halfspace = test;
 			}
 		}
 	}
 
-	in.m_s = in_den > 0.0f ? in_num / in_den : -ApexCSG::GSA::max_real<Real>();
-	ex.m_s = ex_den > 0.0f ? ex_num / ex_den : ApexCSG::GSA::max_real<Real>();
+	// Return results
+	return greatest_s;
 }
 
 

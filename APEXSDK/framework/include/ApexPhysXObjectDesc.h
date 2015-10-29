@@ -23,6 +23,7 @@ namespace apex
 class ApexPhysXObjectDesc : public NiApexPhysXObjectDesc
 {
 public:
+	typedef NiApexPhysXObjectDesc Parent;
 	ApexPhysXObjectDesc() : mNext(0), mPrev(0)
 	{
 		mFlags = 0;
@@ -45,6 +46,13 @@ public:
 		mNext = desc.mNext;
 		mPrev = desc.mPrev;
 		return *this;
+	}
+
+	void swap(ApexPhysXObjectDesc& rhs)
+	{
+		Parent::swap(rhs);
+		shdfnd::swap(mNext, rhs.mNext);
+		shdfnd::swap(mPrev, rhs.mPrev);
 	}
 
 	static physx::PxU16 makeHash(size_t hashable);

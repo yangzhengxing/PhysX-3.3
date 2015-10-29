@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
-		<Filter Include="include"><!--  -->
+		<Filter Include="include">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="include\windows"><!--  -->
+		<Filter Include="include\windows">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -277,7 +277,7 @@
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="src"><!--  -->
+		<Filter Include="src">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -382,7 +382,7 @@
 		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="param"><!--  -->
+		<Filter Include="param">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -397,35 +397,35 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="SIMD"><!--  -->
+		<Filter Include="SIMD">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="SIMD\windows"><!--  -->
+		<Filter Include="SIMD\windows">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\windows\PsWindowsAoS.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\windows\PsWindowsAoS.h">
 			<Filter>SIMD\windows</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\windows\PsWindowsInlineAoS.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\windows\PsWindowsInlineAoS.h">
 			<Filter>SIMD\windows</Filter>
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
-		<ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsVecMath.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsVecMath.h">
 			<Filter>SIMD</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsAoS.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsAoS.h">
 			<Filter>SIMD</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsInlineAoS.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsInlineAoS.h">
 			<Filter>SIMD</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsVecMathAoSScalar.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsVecMathAoSScalar.h">
 			<Filter>SIMD</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Source\foundation\include\PsVecMathAoSScalarInline.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Source\foundation\include\PsVecMathAoSScalarInline.h">
 			<Filter>SIMD</Filter>
 		</ClInclude>
 	</ItemGroup>

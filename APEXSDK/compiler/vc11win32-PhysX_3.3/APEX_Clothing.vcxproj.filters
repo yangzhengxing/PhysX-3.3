@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
-		<Filter Include="resource"><!--  -->
+		<Filter Include="resource">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -10,11 +10,11 @@
 		</ResourceCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Clothing"><!--  -->
+		<Filter Include="Clothing">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Clothing\src"><!--  -->
+		<Filter Include="Clothing\src">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -110,7 +110,7 @@
 		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Clothing\include"><!--  -->
+		<Filter Include="Clothing\include">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -239,7 +239,7 @@
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Clothing\public"><!--  -->
+		<Filter Include="Clothing\public">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -277,11 +277,11 @@
 	<ItemGroup>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Module Common"><!--  -->
+		<Filter Include="Module Common">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Module Common\src"><!--  -->
+		<Filter Include="Module Common\src">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -290,7 +290,7 @@
 		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Module Common\include"><!--  -->
+		<Filter Include="Module Common\include">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -301,15 +301,15 @@
 	<ItemGroup>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="embedded"><!--  -->
+		<Filter Include="embedded">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="embedded\LowLevelCloth"><!--  -->
+		<Filter Include="embedded\LowLevelCloth">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="embedded\LowLevelCloth\include"><!--  -->
+		<Filter Include="embedded\LowLevelCloth\include">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -336,7 +336,7 @@
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="embedded\LowLevelCloth\src"><!--  -->
+		<Filter Include="embedded\LowLevelCloth\src">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -502,7 +502,7 @@
 		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="embedded avx"><!-- avx -->
+		<Filter Include="embedded avx">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>

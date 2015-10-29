@@ -563,7 +563,7 @@ public:
 		Fills the specified array and parameters with texture-compatible information. 
 
 		The corresponding texture aligns with the displacement UVs generated as fracturing occurs
-		when displacement maps are enabled, with RGB data corresponding to XYZ offsets, repectively.
+		when displacement maps are enabled, with RGB data corresponding to XYZ offsets, respectively.
 	*/
 	virtual void getData(physx::PxU32& width, physx::PxU32& height, physx::PxU32& depth, physx::PxU32& size, unsigned char const** ppData) const = 0;
 
@@ -572,11 +572,31 @@ public:
 
 
 /**
+	Handling of open meshes.
+
+	NxBSPMode::Automatic causes the mesh to be analyzed to determine if it's open or closed
+	NxBSPOpenMode::Closed means the mesh should be closed and interior faces are created when the mesh is split
+	NxBSPOpenMode::Open means the mesh should be open and no interior faces are created when it is split
+*/
+struct NxBSPOpenMode
+{
+	enum Enum
+	{
+		Automatic,
+		Closed,
+		Open,
+
+		BSPOpenModeCount
+	};
+};
+
+
+/**
 	NxExplicitHierarchicalMesh
 
 	An interface to a representation of a render mesh that is used for authoring.
 
-	The "hierarchical" nature of this mesh is represtented by extra parent/child relations
+	The "hierarchical" nature of this mesh is represented by extra parent/child relations
 	among the parts that will become the parts of an NxRenderMeshAsset.
  */
 class NxExplicitHierarchicalMesh
@@ -768,7 +788,7 @@ public:
 
 	/**
 		The parent index of the chunk indexed by chunkIndex.
-		Depth 0 parts have no parents, snd for those parts this function returns -1.
+		Depth 0 parts have no parents, and for those parts this function returns -1.
 	*/
 	virtual physx::PxI32*				parentIndex(physx::PxU32 chunkIndex) = 0;
 
@@ -868,7 +888,7 @@ public:
 	virtual physx::PxU32				submeshCount() const = 0;
 
 	/**
-		The submeshData indexded by submeshIndex.  See NxExplicitSubmeshData.
+		The submeshData indexed by submeshIndex.  See NxExplicitSubmeshData.
 	*/
 	virtual NxExplicitSubmeshData*		submeshData(physx::PxU32 submeshIndex) = 0;
 
@@ -908,9 +928,10 @@ public:
 		This is used by authoring tools to perform CSG operations.  If the user instantiates
 		IProgressListener, they may pass it in to report progress of this operation.
 		If microgridSize is not NULL, *microgridSize is used in the BSP calculation.  Otherwise the
+		meshMode is used to determine if the mesh is open or closed.  See NxMeshProcessingParameters::MeshMode
 		default parameters are used.
 	*/
-	virtual void						calculateMeshBSP(physx::PxU32 randomSeed, IProgressListener* progressListener = NULL, const physx::PxU32* microgridSize = NULL) = 0;
+	virtual void						calculateMeshBSP(physx::PxU32 randomSeed, IProgressListener* progressListener = NULL, const physx::PxU32* microgridSize = NULL, NxBSPOpenMode::Enum meshMode = NxBSPOpenMode::Automatic) = 0;
 
 	/**
 		Utility to replace the submesh on a set of interior triangles.
