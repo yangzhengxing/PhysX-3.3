@@ -423,7 +423,7 @@ PX_INLINE PxU32 Gu::HeightField::getEdgeTriangleIndices(PxU32 edgeIndex, PxU32 t
 						triangleIndices[count++] = ((cell - mData.columns) << 1);
 					else 
 						triangleIndices[count++] = ((cell - mData.columns) << 1) + 1;*/
-					triangleIndices[count++] = ((cell - mData.columns) << 1) + isZerothVertexShared(cell - mData.columns);
+					triangleIndices[count++] = ((cell - mData.columns) << 1) + 1 - isZerothVertexShared(cell - mData.columns);
 				}
 				if (row < mData.rows - 1)
 				{
@@ -473,7 +473,7 @@ PX_INLINE PxU32 Gu::HeightField::getEdgeTriangleIndices(PxU32 edgeIndex, PxU32 t
 						triangleIndices[count++] = ((cell - mData.columns) << 1);
 					else 
 						triangleIndices[count++] = ((cell - mData.columns) << 1) + 1;*/
-					triangleIndices[count++] = ((cell - mData.columns) << 1) + isZerothVertexShared(cell - mData.columns);
+					triangleIndices[count++] = ((cell - mData.columns) << 1) + 1 - isZerothVertexShared(cell - mData.columns);
 				}
 				if (row < mData.rows - 1)
 				{

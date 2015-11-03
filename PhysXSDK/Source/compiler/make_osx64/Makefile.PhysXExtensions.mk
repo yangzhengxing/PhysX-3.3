@@ -112,7 +112,7 @@ PhysXExtensions_debug_hpaths    += ./../../PvdRuntime/src
 PhysXExtensions_debug_hpaths    += ./../../PhysXVisualDebuggerSDK
 PhysXExtensions_debug_lpaths    := 
 PhysXExtensions_debug_defines   := $(PhysXExtensions_custom_defines)
-PhysXExtensions_debug_defines   += PX_BUILD_NUMBER=20085719
+PhysXExtensions_debug_defines   += PX_BUILD_NUMBER=20127726
 PhysXExtensions_debug_defines   += PX_PHYSX_STATIC_LIB
 PhysXExtensions_debug_defines   += _DEBUG
 PhysXExtensions_debug_defines   += PX_DEBUG
@@ -238,7 +238,7 @@ PhysXExtensions_checked_hpaths    += ./../../PvdRuntime/src
 PhysXExtensions_checked_hpaths    += ./../../PhysXVisualDebuggerSDK
 PhysXExtensions_checked_lpaths    := 
 PhysXExtensions_checked_defines   := $(PhysXExtensions_custom_defines)
-PhysXExtensions_checked_defines   += PX_BUILD_NUMBER=20085719
+PhysXExtensions_checked_defines   += PX_BUILD_NUMBER=20127726
 PhysXExtensions_checked_defines   += PX_PHYSX_STATIC_LIB
 PhysXExtensions_checked_defines   += NDEBUG
 PhysXExtensions_checked_defines   += PX_CHECKED
@@ -363,7 +363,7 @@ PhysXExtensions_profile_hpaths    += ./../../PvdRuntime/src
 PhysXExtensions_profile_hpaths    += ./../../PhysXVisualDebuggerSDK
 PhysXExtensions_profile_lpaths    := 
 PhysXExtensions_profile_defines   := $(PhysXExtensions_custom_defines)
-PhysXExtensions_profile_defines   += PX_BUILD_NUMBER=20085719
+PhysXExtensions_profile_defines   += PX_BUILD_NUMBER=20127726
 PhysXExtensions_profile_defines   += PX_PHYSX_STATIC_LIB
 PhysXExtensions_profile_defines   += NDEBUG
 PhysXExtensions_profile_defines   += PX_PROFILE
@@ -488,7 +488,7 @@ PhysXExtensions_release_hpaths    += ./../../PvdRuntime/src
 PhysXExtensions_release_hpaths    += ./../../PhysXVisualDebuggerSDK
 PhysXExtensions_release_lpaths    := 
 PhysXExtensions_release_defines   := $(PhysXExtensions_custom_defines)
-PhysXExtensions_release_defines   += PX_BUILD_NUMBER=20085719
+PhysXExtensions_release_defines   += PX_BUILD_NUMBER=20127726
 PhysXExtensions_release_defines   += PX_PHYSX_STATIC_LIB
 PhysXExtensions_release_defines   += NDEBUG
 PhysXExtensions_release_libraries := 

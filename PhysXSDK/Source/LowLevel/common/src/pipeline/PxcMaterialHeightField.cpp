@@ -172,6 +172,7 @@ bool physx::PxcGetMaterialShapeHeightField(const PxsShapeCore* shape0, const Pxs
 			//contact.featureIndex0 = shape0->materialIndex;
 			const PxU32 localMaterialIndex = GetMaterialIndex(hf, contact.internalFaceIndex1);
 			//contact.featureIndex1 = materialIndices[localMaterialIndex];
+			PX_ASSERT(localMaterialIndex<hfGeom.materials.numIndices);
 			materialInfo[i].mMaterialIndex1 = materialIndices[localMaterialIndex];
 		}
 	}
