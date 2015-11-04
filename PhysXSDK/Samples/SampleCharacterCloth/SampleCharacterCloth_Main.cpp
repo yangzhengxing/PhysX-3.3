@@ -362,12 +362,13 @@ void SampleCharacterCloth::resetScene()
 ///////////////////////////////////////////////////////////////////////////////
 void SampleCharacterCloth::onShutdown()
 {
+	mScene->fetchResults(true);
 	{
 		PxSceneWriteLock scopedLock(*mScene);
 		DELETESINGLE(mCCTCamera);
 		SAFE_RELEASE(mControllerManager);
 	}
-	PhysXSample::onShutdown();
+	PhysXSample::onShutdown();	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
