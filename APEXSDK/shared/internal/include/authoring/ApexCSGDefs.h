@@ -638,17 +638,17 @@ public:
 		{
 			return NULL;
 		}
-		BSPLink* adj = static_cast<BSPLink*>(getAdj(which));
-		return adj->isBSP() ? adj : NULL;
+		BSPLink* adjLink = static_cast<BSPLink*>(getAdj(which));
+		return adjLink->isBSP() ? adjLink : NULL;
 	}
 
 	void			removeBSPLink()
 	{
-		BSPLink* adj = static_cast<BSPLink*>(getAdj(1));
+		BSPLink* adjLink = static_cast<BSPLink*>(getAdj(1));
 		remove();
-		if (!adj->isBSP() && adj->isSolitary())
+		if (!adjLink->isBSP() && adjLink->isSolitary())
 		{
-			delete adj;
+			delete adjLink;
 		}
 	}
 };

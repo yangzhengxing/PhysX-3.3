@@ -78,7 +78,7 @@ inline MiF32 fmi_computePlane(const MiF32 *A,const MiF32 *B,const MiF32 *C,MiF32
 	MiF32 vw_y = vz * wx - vx * wz;
 	MiF32 vw_z = vx * wy - vy * wx;
 
-	MiF32 mag = sqrt((vw_x * vw_x) + (vw_y * vw_y) + (vw_z * vw_z));
+	MiF32 mag = static_cast<MiF32>(sqrt((vw_x * vw_x) + (vw_y * vw_y) + (vw_z * vw_z)));
 
 	if ( mag < 0.000001f )
 	{

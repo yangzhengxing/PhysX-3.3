@@ -269,7 +269,7 @@ public:
 		PxF32 yProj = cp.dot(e.yAxis);
 		PxF32 zProj = cp.dot(e.zAxis);
 
-		return sqrt(SQR(xProj) + SQR(yProj) + SQR(zProj));
+		return sqrtf(SQR(xProj) + SQR(yProj) + SQR(zProj));
 	}
 
 

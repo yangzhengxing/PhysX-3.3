@@ -1,6 +1,6 @@
 /*!
 **
-** Copyright (c) 2014 by John W. Ratcliff mailto:jratcliffscarab@gmail.com
+** Copyright (c) 2015 by John W. Ratcliff mailto:jratcliffscarab@gmail.com
 **
 **
 ** The MIT license:
@@ -87,7 +87,7 @@ static float fm_computePlane(const float *A,const float *B,const float *C,float 
 	float vw_y = vz * wx - vx * wz;
 	float vw_z = vx * wy - vy * wx;
 
-	float mag = ::sqrt((vw_x * vw_x) + (vw_y * vw_y) + (vw_z * vw_z));
+	float mag = ::sqrtf((vw_x * vw_x) + (vw_y * vw_y) + (vw_z * vw_z));
 
 	if ( mag < 0.000001f )
 	{
@@ -338,7 +338,7 @@ public:
 		m_afSubd[2] = 0;
 		if (fM02 != (Type)0.0)
 		{
-			Type fLength = ::sqrt(fM01*fM01+fM02*fM02);
+			Type fLength = static_cast<Type>(::sqrt(fM01*fM01+fM02*fM02));
 			Type fInvLength = ((Type)1.0)/fLength;
 			fM01 *= fInvLength;
 			fM02 *= fInvLength;
@@ -389,7 +389,7 @@ public:
 				int32_t i2;
 				for (i2 = i0; i2 <= (3-2); i2++)
 				{
-					Type fTmp = fabs(m_afDiag[i2]) + fabs(m_afDiag[i2+1]);
+					Type fTmp = static_cast<Type>(fabs(m_afDiag[i2]) + fabs(m_afDiag[i2+1]));
 					if ( fabs(m_afSubd[i2]) + fTmp == fTmp )
 						break;
 				}
@@ -399,7 +399,7 @@ public:
 				}
 
 				Type fG = (m_afDiag[i0+1] - m_afDiag[i0])/(((Type)2.0) * m_afSubd[i0]);
-				Type fR = ::sqrt(fG*fG+(Type)1.0);
+				Type fR = static_cast<Type>(::sqrt(fG*fG+(Type)1.0));
 				if (fG < (Type)0.0)
 				{
 					fG = m_afDiag[i2]-m_afDiag[i0]+m_afSubd[i0]/(fG-fR);
@@ -416,7 +416,7 @@ public:
 					if (fabs(fF) >= fabs(fG))
 					{
 						fCos = fG/fF;
-						fR = ::sqrt(fCos*fCos+(Type)1.0);
+						fR = static_cast<Type>(::sqrt(fCos*fCos+(Type)1.0));
 						m_afSubd[i3+1] = fF*fR;
 						fSin = ((Type)1.0)/fR;
 						fCos *= fSin;
@@ -424,7 +424,7 @@ public:
 					else
 					{
 						fSin = fF/fG;
-						fR = ::sqrt(fSin*fSin+(Type)1.0);
+						fR = static_cast<Type>(::sqrt(fSin*fSin+(Type)1.0));
 						m_afSubd[i3+1] = fG*fR;
 						fCos = ((Type)1.0)/fR;
 						fSin *= fCos;
@@ -719,7 +719,7 @@ static void fm_rotationArc(const float *v0,const float *v1,float *quat)
 	}
 	else
 	{
-		float s = ::sqrt((1+d)*2);
+		float s = ::sqrtf((1+d)*2);
 		float recip = 1.0f / s;
 
 		quat[0] = cross[0] * recip;
@@ -743,13 +743,13 @@ static void fm_eulerToQuat(float roll,float pitch,float yaw,float *quat) // conv
 	pitch *= 0.5f;
 	yaw   *= 0.5f;
 
-	float cr = ::cos(roll);
-	float cp = ::cos(pitch);
-	float cy = ::cos(yaw);
+	float cr = ::cosf(roll);
+	float cp = ::cosf(pitch);
+	float cy = ::cosf(yaw);
 
-	float sr = ::sin(roll);
-	float sp = ::sin(pitch);
-	float sy = ::sin(yaw);
+	float sr = ::sinf(roll);
+	float sp = ::sinf(pitch);
+	float sy = ::sinf(yaw);
 
 	float cpcy = cp * cy;
 	float spsy = sp * sy;
@@ -2584,7 +2584,7 @@ Output, float ENORM0_3D, the Euclidean norm of (P1-P0).
 {
   float value;
 
-  value = ::sqrt (
+  value = ::sqrtf (
     ( x1 - x0 ) * ( x1 - x0 ) + 
     ( y1 - y0 ) * ( y1 - y0 ) + 
     ( z1 - z0 ) * ( z1 - z0 ) );
@@ -2652,7 +2652,7 @@ static float triangle_area_3d ( float x1, float y1, float z1, float x2,float y2,
     b = y3 - y1 - alpha * ( y2 - y1 );
     c = z3 - z1 - alpha * ( z2 - z1 );
 
-    height = ::sqrt ( a * a + b * b + c * c );
+    height = ::sqrtf ( a * a + b * b + c * c );
 
   }
 

@@ -38,10 +38,12 @@
 #include <time.h>
 #include <sys/types.h>
 #include <sys/timeb.h>
-#include <hash_map>
 #include <map>
 #include <vector>
 #include <windows.h>
+
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+#include <hash_map>
 
 #pragma warning(disable:4100 4996 4267 4239)
 

@@ -106,10 +106,10 @@ void Delaunay3d::delaunayTetrahedralization()
 	mTetras.clear();
 	float a = 3.0f * bounds.getDimensions().magnitude();
 	float x  = 0.5f * a;
-	float y0 = x / sqrt(3.0f);
-	float y1 = x * sqrt(3.0f) - y0;
-	float z0 = 0.25f * sqrt(6.0f) * a;
-	float z1 = a * sqrt(6.0f) / 3.0f - z0;
+	float y0 = x / sqrtf(3.0f);
+	float y1 = x * sqrtf(3.0f) - y0;
+	float z0 = 0.25f * sqrtf(6.0f) * a;
+	float z1 = a * sqrtf(6.0f) / 3.0f - z0;
 
 	PxVec3 center = bounds.getCenter();
 

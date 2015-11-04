@@ -497,7 +497,7 @@ void boundsCalculateOverlaps(physx::Array<IntPair>& overlaps, Bounds3Axes axesTo
 			if (min >= max)
 			{
 				const physx::PxF32 mid = 0.5f * (min + max);
-				physx::PxF32 pad = 0.000001f * fabs(mid);
+				physx::PxF32 pad = 0.000001f * fabsf(mid);
 				min = mid - pad;
 				max = mid + pad;
 			}

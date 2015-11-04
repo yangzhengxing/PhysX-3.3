@@ -3561,7 +3561,7 @@ static bool splitMeshInternal
 
 		for (physx::PxU32 i = 0; i < tempCoreMesh.chunkCount(); ++i)
 		{
-			if (tempCoreMesh.mChunks[i]->isRootChunk())
+			if (!tempCoreMesh.mChunks[i]->isRootChunk())
 			{
 				continue;
 			}
@@ -3631,7 +3631,7 @@ static bool splitMeshInternal
 		bool partModified = false;
 		for (physx::PxU32 i = 0; i < tempCoreMesh.chunkCount(); ++i)
 		{
-			if (!tempCoreMesh.mChunks[chunkIndex]->isRootLeafChunk())
+			if (!tempCoreMesh.mChunks[i]->isRootLeafChunk())
 			{
 				continue;
 			}
@@ -6957,6 +6957,7 @@ void ExplicitHierarchicalMesh::set(const NxExplicitHierarchicalMesh& mesh)
 		mChunks[i]->mPartIndex = m.mChunks[i]->mPartIndex;
 		mChunks[i]->mInstancedPositionOffset = m.mChunks[i]->mInstancedPositionOffset;
 		mChunks[i]->mInstancedUVOffset = m.mChunks[i]->mInstancedUVOffset;
+		mChunks[i]->mPrivateFlags = m.mChunks[i]->mPrivateFlags;
 	}
 	mSubmeshData = m.mSubmeshData;
 	mMaterialFrames = m.mMaterialFrames;

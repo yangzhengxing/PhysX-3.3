@@ -3377,7 +3377,7 @@ bool ClothingAssetAuthoring::generateImmediateClothMap(const NxAbstractMeshDescr
 
 			if (optimalMatch == -1 || minDistanceSquared > epsilon || physx::PxAbs(maxDot) < maxDotMinimum)
 			{
-				notFoundError += sqrt(minDistanceSquared);
+				notFoundError += sqrtf(minDistanceSquared);
 				maxDotError += physx::PxAbs(maxDot);
 
 				if (physx::PxAbs(maxDot) < maxDotMinimum && minDistanceSquared <= epsilon)

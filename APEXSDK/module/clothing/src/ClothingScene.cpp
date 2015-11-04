@@ -796,7 +796,7 @@ void ClothingScene::destroy()
 		mCpuFactory.clear();
 	}
 
-#ifdef PX_WINDOWS
+#if defined(PX_WINDOWS) && APEX_CUDA_SUPPORT
 		PX_ASSERT(mGpuFactory.factory == NULL);
 
 		NiApexSDK* apexSdk = NiGetApexSDK();
@@ -850,6 +850,7 @@ ClothFactory ClothingScene::getClothFactory(bool& useCuda)
 				contextManager = gpuDispatcher->getCudaContextManager();
 			}
 
+#if APEX_CUDA_SUPPORT
 			if (contextManager != NULL)
 			{
 				mGpuFactory = mModule->createClothFactory(contextManager);
@@ -859,6 +860,7 @@ ClothFactory ClothingScene::getClothFactory(bool& useCuda)
 					mPhysXGpuIndicator = apexSdk->registerPhysXIndicatorGpuClient();
 				}
 			}
+#endif
 		}
 
 		//APEX_DEBUG_INFO("Gpu Factory %p", mGpuFactory);

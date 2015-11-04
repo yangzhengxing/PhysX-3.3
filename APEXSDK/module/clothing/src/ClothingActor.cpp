@@ -5061,7 +5061,7 @@ void ClothingActor::visualizeBackstopPrecise(NiApexRenderDebug& renderDebug, PxF
 			up *= shortestEdgeLength;
 
 			const PxF32 r = collisionSphereRadius;
-			const PxF32 back = r - sqrt(r * r - shortestEdgeLength * shortestEdgeLength);
+			const PxF32 back = r - sqrtf(r * r - shortestEdgeLength * shortestEdgeLength);
 
 			// move the verts a bit back such that they are on the sphere
 			centerToSim *= back;

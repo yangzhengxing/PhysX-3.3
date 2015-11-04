@@ -83,7 +83,7 @@ void IslandDetector::createConnectivity(const shdfnd::Array<Convex*> &convexes, 
 			face.globalNr = globalNr-1;
 			float d = planes[j].d;
 			d = d + c->getMaterialOffset().dot(planes[j].n);	// transform to global
-			face.orderVal = fabs(d);
+			face.orderVal = fabsf(d);
 			mFaces.pushBack(face);
 		}
 	}
@@ -126,7 +126,7 @@ void IslandDetector::createConnectivity(const shdfnd::Array<Convex*> &convexes, 
 				touching(convexes[(physx::PxU32)fi.convexNr], fi.faceNr, convexes[(physx::PxU32)fj.convexNr], eps) ||
 				touching(convexes[(physx::PxU32)fj.convexNr], fj.faceNr, convexes[(physx::PxU32)fi.convexNr], eps))
 			{
-				n.area = 0.5f*( fabs(faceArea(convexes[(physx::PxU32)fi.convexNr], fi.faceNr)) + fabs(faceArea(convexes[(physx::PxU32)fj.convexNr], fj.faceNr)));
+				n.area = 0.5f*( fabsf(faceArea(convexes[(physx::PxU32)fi.convexNr], fi.faceNr)) + fabsf(faceArea(convexes[(physx::PxU32)fj.convexNr], fj.faceNr)));
 				if (computeFaceCoverage) {
 					float area = faceIntersectionArea(convexes[(physx::PxU32)fi.convexNr], fi.faceNr, convexes[(physx::PxU32)fj.convexNr], fj.faceNr);
 					mFaceCoverage[(physx::PxU32)fi.globalNr] += area;

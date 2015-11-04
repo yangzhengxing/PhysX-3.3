@@ -77,7 +77,7 @@ public:
 
 	// from NxParameterized::SerializationCallback
 
-	void					preSerialize(void* userData);
+	void					preSerialize(void* userData_);
 
 	void					setParams(VertexBufferParameters* param);
 	VertexBufferParameters* getParams()
