@@ -13,7 +13,7 @@ To build PhysX and APEX SDKs:
 (1) Build PhysX SDK by opening one of the solutions found under PhysX\PhysXSDK\Source\compiler. 
 Supported platforms: Windows, Linux, OSX, Android,iOS
 
-(2) Build APEX SDK by opening one of the solutions found under PhysX\APEXSDK\compiler. Supported platform: Windows.
+(2) Build APEX SDK by opening one of the solutions found under PhysX\APEXSDK\compiler. Supported platform: Windows, Linux, Android
 ________________________________________________________________________________________________
 To build PhysX Snippets: open one of the solutions found under \PhysXSDK\Snippets\compiler.
 To build PhysX Samples: open one of the solutions found under \PhysXSDK\Samples\compiler.
