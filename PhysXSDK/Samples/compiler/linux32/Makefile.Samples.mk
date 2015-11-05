@@ -143,12 +143,10 @@ Samples_debug_common_cflags    += -MMD
 Samples_debug_common_cflags    += $(addprefix -D, $(Samples_debug_defines))
 Samples_debug_common_cflags    += $(addprefix -I, $(Samples_debug_hpaths))
 Samples_debug_common_cflags  += -m32
+Samples_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+Samples_debug_common_cflags  += -g3 -gdwarf-2
 Samples_debug_cflags	:= $(Samples_debug_common_cflags)
-Samples_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-Samples_debug_cflags  += -g3 -gdwarf-2
 Samples_debug_cppflags	:= $(Samples_debug_common_cflags)
-Samples_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-Samples_debug_cppflags  += -g3 -gdwarf-2
 Samples_debug_lflags    := $(Samples_custom_lflags)
 Samples_debug_lflags    += $(addprefix -L, $(Samples_debug_lpaths))
 Samples_debug_lflags    += -Wl,--start-group $(addprefix -l, $(Samples_debug_libraries)) -Wl,--end-group
@@ -282,12 +280,10 @@ Samples_checked_common_cflags    += -MMD
 Samples_checked_common_cflags    += $(addprefix -D, $(Samples_checked_defines))
 Samples_checked_common_cflags    += $(addprefix -I, $(Samples_checked_hpaths))
 Samples_checked_common_cflags  += -m32
+Samples_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+Samples_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 Samples_checked_cflags	:= $(Samples_checked_common_cflags)
-Samples_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-Samples_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 Samples_checked_cppflags	:= $(Samples_checked_common_cflags)
-Samples_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-Samples_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 Samples_checked_lflags    := $(Samples_custom_lflags)
 Samples_checked_lflags    += $(addprefix -L, $(Samples_checked_lpaths))
 Samples_checked_lflags    += -Wl,--start-group $(addprefix -l, $(Samples_checked_libraries)) -Wl,--end-group
@@ -421,12 +417,10 @@ Samples_profile_common_cflags    += -MMD
 Samples_profile_common_cflags    += $(addprefix -D, $(Samples_profile_defines))
 Samples_profile_common_cflags    += $(addprefix -I, $(Samples_profile_hpaths))
 Samples_profile_common_cflags  += -m32
+Samples_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+Samples_profile_common_cflags  += -O3 -fno-strict-aliasing
 Samples_profile_cflags	:= $(Samples_profile_common_cflags)
-Samples_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-Samples_profile_cflags  += -O3 -fno-strict-aliasing
 Samples_profile_cppflags	:= $(Samples_profile_common_cflags)
-Samples_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-Samples_profile_cppflags  += -O3 -fno-strict-aliasing
 Samples_profile_lflags    := $(Samples_custom_lflags)
 Samples_profile_lflags    += $(addprefix -L, $(Samples_profile_lpaths))
 Samples_profile_lflags    += -Wl,--start-group $(addprefix -l, $(Samples_profile_libraries)) -Wl,--end-group
@@ -558,12 +552,10 @@ Samples_release_common_cflags    += -MMD
 Samples_release_common_cflags    += $(addprefix -D, $(Samples_release_defines))
 Samples_release_common_cflags    += $(addprefix -I, $(Samples_release_hpaths))
 Samples_release_common_cflags  += -m32
+Samples_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+Samples_release_common_cflags  += -O3 -fno-strict-aliasing
 Samples_release_cflags	:= $(Samples_release_common_cflags)
-Samples_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-Samples_release_cflags  += -O3 -fno-strict-aliasing
 Samples_release_cppflags	:= $(Samples_release_common_cflags)
-Samples_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-Samples_release_cppflags  += -O3 -fno-strict-aliasing
 Samples_release_lflags    := $(Samples_custom_lflags)
 Samples_release_lflags    += $(addprefix -L, $(Samples_release_lpaths))
 Samples_release_lflags    += -Wl,--start-group $(addprefix -l, $(Samples_release_libraries)) -Wl,--end-group

@@ -152,6 +152,7 @@ void cleanupPhysics(bool interactive)
 	PxProfileZoneManager* profileZoneManager = gPhysics->getProfileZoneManager();
 	if(gConnection != NULL)
 		gConnection->release();
+	PxCloseExtensions();
 	gPhysics->release();	
 	profileZoneManager->release();
 	gFoundation->release();

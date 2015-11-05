@@ -80,20 +80,14 @@ PhysXCooking_release_common_cflags    += -MMD
 PhysXCooking_release_common_cflags    += $(addprefix -D, $(PhysXCooking_release_defines))
 PhysXCooking_release_common_cflags    += $(addprefix -I, $(PhysXCooking_release_hpaths))
 PhysXCooking_release_common_cflags  += -m64
+PhysXCooking_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PhysXCooking_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PhysXCooking_release_common_cflags  += -Wno-long-long
+PhysXCooking_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PhysXCooking_release_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PhysXCooking_release_common_cflags  += -O3 -fno-strict-aliasing
 PhysXCooking_release_cflags	:= $(PhysXCooking_release_common_cflags)
-PhysXCooking_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCooking_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCooking_release_cflags  += -Wno-long-long
-PhysXCooking_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCooking_release_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCooking_release_cflags  += -O3 -fno-strict-aliasing
 PhysXCooking_release_cppflags	:= $(PhysXCooking_release_common_cflags)
-PhysXCooking_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCooking_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCooking_release_cppflags  += -Wno-long-long
-PhysXCooking_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCooking_release_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCooking_release_cppflags  += -O3 -fno-strict-aliasing
 PhysXCooking_release_lflags    := $(PhysXCooking_custom_lflags)
 PhysXCooking_release_lflags    += $(addprefix -L, $(PhysXCooking_release_lpaths))
 PhysXCooking_release_lflags    += -Wl,--start-group $(addprefix -l, $(PhysXCooking_release_libraries)) -Wl,--end-group
@@ -200,20 +194,14 @@ PhysXCooking_debug_common_cflags    += -MMD
 PhysXCooking_debug_common_cflags    += $(addprefix -D, $(PhysXCooking_debug_defines))
 PhysXCooking_debug_common_cflags    += $(addprefix -I, $(PhysXCooking_debug_hpaths))
 PhysXCooking_debug_common_cflags  += -m64
+PhysXCooking_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PhysXCooking_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PhysXCooking_debug_common_cflags  += -Wno-long-long
+PhysXCooking_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PhysXCooking_debug_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PhysXCooking_debug_common_cflags  += -g3 -gdwarf-2
 PhysXCooking_debug_cflags	:= $(PhysXCooking_debug_common_cflags)
-PhysXCooking_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCooking_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCooking_debug_cflags  += -Wno-long-long
-PhysXCooking_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCooking_debug_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCooking_debug_cflags  += -g3 -gdwarf-2
 PhysXCooking_debug_cppflags	:= $(PhysXCooking_debug_common_cflags)
-PhysXCooking_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCooking_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCooking_debug_cppflags  += -Wno-long-long
-PhysXCooking_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCooking_debug_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCooking_debug_cppflags  += -g3 -gdwarf-2
 PhysXCooking_debug_lflags    := $(PhysXCooking_custom_lflags)
 PhysXCooking_debug_lflags    += $(addprefix -L, $(PhysXCooking_debug_lpaths))
 PhysXCooking_debug_lflags    += -Wl,--start-group $(addprefix -l, $(PhysXCooking_debug_libraries)) -Wl,--end-group
@@ -319,20 +307,14 @@ PhysXCooking_checked_common_cflags    += -MMD
 PhysXCooking_checked_common_cflags    += $(addprefix -D, $(PhysXCooking_checked_defines))
 PhysXCooking_checked_common_cflags    += $(addprefix -I, $(PhysXCooking_checked_hpaths))
 PhysXCooking_checked_common_cflags  += -m64
+PhysXCooking_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PhysXCooking_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PhysXCooking_checked_common_cflags  += -Wno-long-long
+PhysXCooking_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PhysXCooking_checked_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PhysXCooking_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PhysXCooking_checked_cflags	:= $(PhysXCooking_checked_common_cflags)
-PhysXCooking_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCooking_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCooking_checked_cflags  += -Wno-long-long
-PhysXCooking_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCooking_checked_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCooking_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PhysXCooking_checked_cppflags	:= $(PhysXCooking_checked_common_cflags)
-PhysXCooking_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCooking_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCooking_checked_cppflags  += -Wno-long-long
-PhysXCooking_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCooking_checked_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCooking_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PhysXCooking_checked_lflags    := $(PhysXCooking_custom_lflags)
 PhysXCooking_checked_lflags    += $(addprefix -L, $(PhysXCooking_checked_lpaths))
 PhysXCooking_checked_lflags    += -Wl,--start-group $(addprefix -l, $(PhysXCooking_checked_libraries)) -Wl,--end-group
@@ -438,20 +420,14 @@ PhysXCooking_profile_common_cflags    += -MMD
 PhysXCooking_profile_common_cflags    += $(addprefix -D, $(PhysXCooking_profile_defines))
 PhysXCooking_profile_common_cflags    += $(addprefix -I, $(PhysXCooking_profile_hpaths))
 PhysXCooking_profile_common_cflags  += -m64
+PhysXCooking_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PhysXCooking_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PhysXCooking_profile_common_cflags  += -Wno-long-long
+PhysXCooking_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PhysXCooking_profile_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PhysXCooking_profile_common_cflags  += -O3 -fno-strict-aliasing
 PhysXCooking_profile_cflags	:= $(PhysXCooking_profile_common_cflags)
-PhysXCooking_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCooking_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCooking_profile_cflags  += -Wno-long-long
-PhysXCooking_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCooking_profile_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCooking_profile_cflags  += -O3 -fno-strict-aliasing
 PhysXCooking_profile_cppflags	:= $(PhysXCooking_profile_common_cflags)
-PhysXCooking_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCooking_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCooking_profile_cppflags  += -Wno-long-long
-PhysXCooking_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCooking_profile_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCooking_profile_cppflags  += -O3 -fno-strict-aliasing
 PhysXCooking_profile_lflags    := $(PhysXCooking_custom_lflags)
 PhysXCooking_profile_lflags    += $(addprefix -L, $(PhysXCooking_profile_lpaths))
 PhysXCooking_profile_lflags    += -Wl,--start-group $(addprefix -l, $(PhysXCooking_profile_libraries)) -Wl,--end-group

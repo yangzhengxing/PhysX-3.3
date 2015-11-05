@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup Label="ProjectConfigurations">
-	<ProjectConfiguration Include="debug|x64">
+		<ProjectConfiguration Include="debug|x64">
 			<Configuration>debug</Configuration>
 			<Platform>x64</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="checked|x64">
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="checked|x64">
 			<Configuration>checked</Configuration>
 			<Platform>x64</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="profile|x64">
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="profile|x64">
 			<Configuration>profile</Configuration>
 			<Platform>x64</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="release|x64">
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="release|x64">
 			<Configuration>release</Configuration>
 			<Platform>x64</Platform>
-	</ProjectConfiguration>
+		</ProjectConfiguration>
 	</ItemGroup>
 	<PropertyGroup Label="Globals">
-		<ApplicationEnvironment>title</ApplicationEnvironment>
-		<!-- - - - -->
-		<PlatformToolset>v110</PlatformToolset>
-		<MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+		<ProjectGuid>{FC0C1E74-2BE0-A8BC-4F0C-82D0F2EAB9A4}</ProjectGuid>
+		<RootNamespace>PhysX</RootNamespace>
 	</PropertyGroup>
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
@@ -87,7 +85,7 @@
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/DELAYLOAD:nvcuda.dll /MAP /MACHINE:x64 /DELAYLOAD:PhysX3CommonDEBUG_x64.dll /DEBUG</AdditionalOptions>
+			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:PhysX3CommonDEBUG_x64.dll /DEBUG</AdditionalOptions>
 			<AdditionalDependencies>./../../../externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc11win64/PhysX3GpuDEBUG_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)PhysX3DEBUG_x64.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -132,7 +130,7 @@
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/DELAYLOAD:nvcuda.dll /MAP /MACHINE:x64 /DELAYLOAD:PhysX3CommonCHECKED_x64.dll</AdditionalOptions>
+			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:PhysX3CommonCHECKED_x64.dll</AdditionalOptions>
 			<AdditionalDependencies>./../../../externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc11win64/PhysX3GpuCHECKED_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)PhysX3CHECKED_x64.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -177,7 +175,7 @@
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/DELAYLOAD:nvcuda.dll /MAP /MACHINE:x64 /DELAYLOAD:PhysX3CommonPROFILE_x64.dll /INCREMENTAL:NO /DEBUG</AdditionalOptions>
+			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:PhysX3CommonPROFILE_x64.dll /INCREMENTAL:NO /DEBUG</AdditionalOptions>
 			<AdditionalDependencies>./../../../externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc11win64/PhysX3GpuPROFILE_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)PhysX3PROFILE_x64.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -222,7 +220,7 @@
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/DELAYLOAD:nvcuda.dll /MAP /MACHINE:x64 /DELAYLOAD:PhysX3Common_x64.dll /INCREMENTAL:NO</AdditionalOptions>
+			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:PhysX3Common_x64.dll /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>./../../../externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc11win64/PhysX3Gpu_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)PhysX3_x64.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -237,6 +235,14 @@
 		<ProjectReference>
 		</ProjectReference>
 	</ItemDefinitionGroup>
+	<ItemGroup>
+		<ResourceCompile Include="..\resource_x64\PhysX3.rc">
+		</ResourceCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="..\..\PhysX\src\windows\NpWindowsDelayLoadHook.cpp">
+		</ClCompile>
+	</ItemGroup>
 	<ItemGroup>
 		<ClInclude Include="..\..\PhysX\src\gpu\NpPhysicsGpu.h">
 		</ClInclude>
@@ -258,10 +264,6 @@
 		</ClInclude>
 		<ClInclude Include="..\..\PhysX\src\device\PhysXIndicator.h">
 		</ClInclude>
-	</ItemGroup>
-	<ItemGroup>
-		<ClCompile Include="..\..\PhysX\src\windows\NpWindowsDelayLoadHook.cpp">
-		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
 		<ClInclude Include="..\..\PhysX\src\particles\NpParticleBaseTemplate.h">
@@ -572,10 +574,6 @@
 		</ClInclude>
 		<ClInclude Include="..\..\..\Include\PxVolumeCache.h">
 		</ClInclude>
-	</ItemGroup>
-	<ItemGroup>
-		<ResourceCompile Include="..\resource_x64\PhysX3.rc">
-		</ResourceCompile>
 	</ItemGroup>
 	<ItemGroup>
 		<ClInclude Include="..\..\PhysXMetaData\core\include\PvdMetaDataDefineProperties.h">

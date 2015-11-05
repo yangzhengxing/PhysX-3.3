@@ -63,20 +63,14 @@ SnippetCloth_debug_common_cflags    += -MMD
 SnippetCloth_debug_common_cflags    += $(addprefix -D, $(SnippetCloth_debug_defines))
 SnippetCloth_debug_common_cflags    += $(addprefix -I, $(SnippetCloth_debug_hpaths))
 SnippetCloth_debug_common_cflags  += -m32
+SnippetCloth_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetCloth_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetCloth_debug_common_cflags  += -Wno-long-long
+SnippetCloth_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetCloth_debug_common_cflags  += -Wno-unused-parameter
+SnippetCloth_debug_common_cflags  += -g3 -gdwarf-2
 SnippetCloth_debug_cflags	:= $(SnippetCloth_debug_common_cflags)
-SnippetCloth_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetCloth_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetCloth_debug_cflags  += -Wno-long-long
-SnippetCloth_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetCloth_debug_cflags  += -Wno-unused-parameter
-SnippetCloth_debug_cflags  += -g3 -gdwarf-2
 SnippetCloth_debug_cppflags	:= $(SnippetCloth_debug_common_cflags)
-SnippetCloth_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetCloth_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetCloth_debug_cppflags  += -Wno-long-long
-SnippetCloth_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetCloth_debug_cppflags  += -Wno-unused-parameter
-SnippetCloth_debug_cppflags  += -g3 -gdwarf-2
 SnippetCloth_debug_lflags    := $(SnippetCloth_custom_lflags)
 SnippetCloth_debug_lflags    += $(addprefix -L, $(SnippetCloth_debug_lpaths))
 SnippetCloth_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetCloth_debug_libraries)) -Wl,--end-group
@@ -175,20 +169,14 @@ SnippetCloth_checked_common_cflags    += -MMD
 SnippetCloth_checked_common_cflags    += $(addprefix -D, $(SnippetCloth_checked_defines))
 SnippetCloth_checked_common_cflags    += $(addprefix -I, $(SnippetCloth_checked_hpaths))
 SnippetCloth_checked_common_cflags  += -m32
+SnippetCloth_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetCloth_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetCloth_checked_common_cflags  += -Wno-long-long
+SnippetCloth_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetCloth_checked_common_cflags  += -Wno-unused-parameter
+SnippetCloth_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetCloth_checked_cflags	:= $(SnippetCloth_checked_common_cflags)
-SnippetCloth_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetCloth_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetCloth_checked_cflags  += -Wno-long-long
-SnippetCloth_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetCloth_checked_cflags  += -Wno-unused-parameter
-SnippetCloth_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetCloth_checked_cppflags	:= $(SnippetCloth_checked_common_cflags)
-SnippetCloth_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetCloth_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetCloth_checked_cppflags  += -Wno-long-long
-SnippetCloth_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetCloth_checked_cppflags  += -Wno-unused-parameter
-SnippetCloth_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetCloth_checked_lflags    := $(SnippetCloth_custom_lflags)
 SnippetCloth_checked_lflags    += $(addprefix -L, $(SnippetCloth_checked_lpaths))
 SnippetCloth_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetCloth_checked_libraries)) -Wl,--end-group
@@ -287,20 +275,14 @@ SnippetCloth_profile_common_cflags    += -MMD
 SnippetCloth_profile_common_cflags    += $(addprefix -D, $(SnippetCloth_profile_defines))
 SnippetCloth_profile_common_cflags    += $(addprefix -I, $(SnippetCloth_profile_hpaths))
 SnippetCloth_profile_common_cflags  += -m32
+SnippetCloth_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetCloth_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetCloth_profile_common_cflags  += -Wno-long-long
+SnippetCloth_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetCloth_profile_common_cflags  += -Wno-unused-parameter
+SnippetCloth_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetCloth_profile_cflags	:= $(SnippetCloth_profile_common_cflags)
-SnippetCloth_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetCloth_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetCloth_profile_cflags  += -Wno-long-long
-SnippetCloth_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetCloth_profile_cflags  += -Wno-unused-parameter
-SnippetCloth_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetCloth_profile_cppflags	:= $(SnippetCloth_profile_common_cflags)
-SnippetCloth_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetCloth_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetCloth_profile_cppflags  += -Wno-long-long
-SnippetCloth_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetCloth_profile_cppflags  += -Wno-unused-parameter
-SnippetCloth_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetCloth_profile_lflags    := $(SnippetCloth_custom_lflags)
 SnippetCloth_profile_lflags    += $(addprefix -L, $(SnippetCloth_profile_lpaths))
 SnippetCloth_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetCloth_profile_libraries)) -Wl,--end-group
@@ -397,20 +379,14 @@ SnippetCloth_release_common_cflags    += -MMD
 SnippetCloth_release_common_cflags    += $(addprefix -D, $(SnippetCloth_release_defines))
 SnippetCloth_release_common_cflags    += $(addprefix -I, $(SnippetCloth_release_hpaths))
 SnippetCloth_release_common_cflags  += -m32
+SnippetCloth_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetCloth_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetCloth_release_common_cflags  += -Wno-long-long
+SnippetCloth_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetCloth_release_common_cflags  += -Wno-unused-parameter
+SnippetCloth_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetCloth_release_cflags	:= $(SnippetCloth_release_common_cflags)
-SnippetCloth_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetCloth_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetCloth_release_cflags  += -Wno-long-long
-SnippetCloth_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetCloth_release_cflags  += -Wno-unused-parameter
-SnippetCloth_release_cflags  += -O3 -fno-strict-aliasing
 SnippetCloth_release_cppflags	:= $(SnippetCloth_release_common_cflags)
-SnippetCloth_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetCloth_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetCloth_release_cppflags  += -Wno-long-long
-SnippetCloth_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetCloth_release_cppflags  += -Wno-unused-parameter
-SnippetCloth_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetCloth_release_lflags    := $(SnippetCloth_custom_lflags)
 SnippetCloth_release_lflags    += $(addprefix -L, $(SnippetCloth_release_lpaths))
 SnippetCloth_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetCloth_release_libraries)) -Wl,--end-group

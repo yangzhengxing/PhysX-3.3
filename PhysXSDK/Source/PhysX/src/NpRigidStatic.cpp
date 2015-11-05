@@ -147,6 +147,7 @@ void NpRigidStatic::switchFromNoSim()
 	getScbRigidStaticFast().switchFromNoSim(false);
 }
 
+#ifdef PX_CHECKED
 bool NpRigidStatic::checkConstraintValidity() const
 {
 	// Perhaps NpConnectorConstIterator would be worth it...
@@ -159,6 +160,7 @@ bool NpRigidStatic::checkConstraintValidity() const
 	}
 	return true;
 }
+#endif
 
 #if PX_ENABLE_DEBUG_VISUALIZATION
 #include "GuDebug.h"

@@ -111,96 +111,96 @@
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\windows\PxWindowsIntrinsics.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\windows\PxWindowsIntrinsics.h">
 			<Filter>Shared::foundation\windows</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\windows\PxWindowsString.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\windows\PxWindowsString.h">
 			<Filter>Shared::foundation\windows</Filter>
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\Px.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\Px.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxAllocatorCallback.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxAllocatorCallback.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxAssert.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxAssert.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxBitAndData.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxBitAndData.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxBounds3.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxBounds3.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxBroadcastingAllocator.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxBroadcastingAllocator.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxErrorCallback.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxErrorCallback.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxErrors.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxErrors.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxFlags.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxFlags.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxFoundation.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxFoundation.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxIntrinsics.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxIntrinsics.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxIO.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxIO.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxMat33.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxMat33.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxMat44.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxMat44.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxMath.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxMath.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxMemory.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxMemory.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxPlane.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxPlane.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxPreprocessor.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxPreprocessor.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxQuat.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxQuat.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxSimpleTypes.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxSimpleTypes.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxStrideIterator.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxStrideIterator.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxString.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxString.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxTransform.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxTransform.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxUnionCast.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxUnionCast.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxVec2.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxVec2.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxVec3.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxVec3.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxVec4.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxVec4.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\PhysXSDK33\Include\foundation\PxVersionNumber.h">
+		<ClInclude Include="..\..\..\..\..\PhysXSDK\3.3\RELEASE\3.3.4\Include\foundation\PxVersionNumber.h">
 			<Filter>Shared::foundation</Filter>
 		</ClInclude>
 	</ItemGroup>
@@ -365,6 +365,15 @@
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
+		<Filter Include="Shared::general::pxiostream\public"><!--  -->
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="..\..\shared\general\PxIOStream\public\PxFileBuf.h">
+			<Filter>Shared::general::pxiostream\public</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
 	</ItemGroup>
 	<ItemGroup>
 		<Filter Include="Shared::general::fastxml"><!--  -->
@@ -434,6 +443,27 @@
 	<ItemGroup>
 		<ClInclude Include="..\..\shared\general\renderdebug\include\InternalRenderDebug.h">
 			<Filter>Shared::general::renderdebug\include</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<Filter Include="Shared::general::renderdebug\public"><!--  -->
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="..\..\shared\general\renderdebug\public\PxFileRenderDebug.h">
+			<Filter>Shared::general::renderdebug\public</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\shared\general\renderdebug\public\PxPanel2d.h">
+			<Filter>Shared::general::renderdebug\public</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\shared\general\renderdebug\public\PxProcessRenderDebug.h">
+			<Filter>Shared::general::renderdebug\public</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\shared\general\renderdebug\public\PxRenderDebug.h">
+			<Filter>Shared::general::renderdebug\public</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\shared\general\renderdebug\public\PxRenderDebugData.h">
+			<Filter>Shared::general::renderdebug\public</Filter>
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>

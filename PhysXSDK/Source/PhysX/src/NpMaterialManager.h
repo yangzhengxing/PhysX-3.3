@@ -175,11 +175,11 @@ namespace physx
 		NpMaterialHandleManager	mHandleManager;
 		NpMaterial**			mMaterials;
 		PxU32					mMaxMaterials;
+		
 	};
 
 	class NpMaterialManagerIterator
 	{
-	
 	public:
 		NpMaterialManagerIterator(const NpMaterialManager& manager) : mManager(manager), mIndex(0)
 		{

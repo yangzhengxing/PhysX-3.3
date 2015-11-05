@@ -289,7 +289,7 @@ namespace Gu
 		//normal is in shape space, need to transform the vertex space
 		const Vec3V n = M33TrnspsMulV3(map->vertex2Shape, normal);
 		const Vec3V nnormal = V3Neg(n);
-		const Vec3V planeN =  V3LoadU(polyData.mPolygons[0].mPlane.n);
+		const Vec3V planeN =  Vec3V_From_Vec4V(V4LoadU(&polyData.mPolygons[0].mPlane.n.x));
 		FloatV minProj = V3Dot(n, planeN);
 
 		const FloatV zero = FZero();
@@ -298,8 +298,8 @@ namespace Gu
 
 		for(PxU32 i=1; i< polyData.mNbPolygons; ++i)
 		{
-			Vec3V planeN = V3LoadU(polyData.mPolygons[i].mPlane.n);
-			const FloatV proj = V3Dot(n, planeN);
+			Vec3V planeNi = V3LoadU(polyData.mPolygons[i].mPlane.n);
+			const FloatV proj = V3Dot(n, planeNi);
 			if(FAllGrtr(minProj, proj))
 			{
 				minProj = proj;
@@ -384,8 +384,8 @@ namespace Gu
 
 		for(PxU32 i=1; i< polyData.mNbPolygons; ++i)
 		{
-			Vec3V planeN = V3LoadU(polyData.mPolygons[i].mPlane.n);
-			const FloatV proj = V3Dot(n, planeN);
+			Vec3V planeNi = V3LoadU(polyData.mPolygons[i].mPlane.n);
+			const FloatV proj = V3Dot(n, planeNi);
 			if(FAllGrtr(minProj, proj))
 			{
 				minProj = proj;

@@ -165,7 +165,7 @@ struct SubSortQuick
 
 	// implements the sorting/splitting procedure
 	void sort4(
-		PxU32* PX_RESTRICT permute, PxU32 clusterSize, // beginning and size of current recursively processed cluster
+		PxU32* PX_RESTRICT permute, const PxU32 clusterSize, // beginning and size of current recursively processed cluster
 		Array<RTreeNodeNQ>& resultTree, PxU32& maxLevels,
 		PxBounds3V& subTreeBound, PxU32 level = 0)
 	{
@@ -177,7 +177,7 @@ struct SubSortQuick
 		PX_ASSERT(permute + clusterSize <= permuteEnd);
 		PX_ASSERT(maxBoundsPerLeafPage >= RT_PAGESIZE-1);
 
-		PxU32 cluster4 = PxMax<PxU32>(clusterSize/RT_PAGESIZE, 1);
+		const PxU32 cluster4 = PxMax<PxU32>(clusterSize/RT_PAGESIZE, 1);
 
 		PX_ASSERT(clusterSize > 0);
 		// find min and max world bound for current cluster
@@ -192,7 +192,7 @@ struct SubSortQuick
 		V3StoreA(V3Sub(mx, mn), *(PxVec3*)maxElem); // compute the dimensions and store into a scalar maxElem array
 
 		// split along the longest axis
-		PxU32 maxDiagElement = PxU32(maxElem[0] > maxElem[1] && maxElem[0] > maxElem[2] ? 0 : (maxElem[1] > maxElem[2] ? 1 : 2));
+		const PxU32 maxDiagElement = PxU32(maxElem[0] > maxElem[1] && maxElem[0] > maxElem[2] ? 0 : (maxElem[1] > maxElem[2] ? 1 : 2));
 		BoundsLTE cmpLte(maxDiagElement, boundCenters.begin());
 
 		PxU32 startNodeIndex = resultTree.size();
@@ -204,7 +204,7 @@ struct SubSortQuick
 		for (PxU32 i = 0; i < RT_PAGESIZE; i++)
 		{
 			// split off cluster4 count nodes out of the entire cluster for each i
-			PxU32 clusterOffset = cluster4*i;
+			const PxU32 clusterOffset = cluster4*i;
 			PxU32 count1; // cluster4 or leftover depending on whether it's the last cluster
 			if (i < RT_PAGESIZE-1)
 			{
@@ -233,7 +233,7 @@ struct SubSortQuick
 			totalCount += count1; // accumulate total node count
 			if (count1 <= maxBoundsPerLeafPage) // terminal page according to specified maxBoundsPerLeafPage
 			{
-				if (totalCount <= clusterSize)
+				if (count1 && totalCount <= clusterSize)
 				{
 					// this will be true most of the time except when the total number of triangles in the mesh is < PAGESIZE
 					curNode.leafCount = (PxI32)count1;

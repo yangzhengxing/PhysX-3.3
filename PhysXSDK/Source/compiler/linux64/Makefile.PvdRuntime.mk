@@ -82,20 +82,14 @@ PvdRuntime_debug_common_cflags    += -MMD
 PvdRuntime_debug_common_cflags    += $(addprefix -D, $(PvdRuntime_debug_defines))
 PvdRuntime_debug_common_cflags    += $(addprefix -I, $(PvdRuntime_debug_hpaths))
 PvdRuntime_debug_common_cflags  += -m64
+PvdRuntime_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PvdRuntime_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PvdRuntime_debug_common_cflags  += -Wno-long-long
+PvdRuntime_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PvdRuntime_debug_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PvdRuntime_debug_common_cflags  += -g3 -gdwarf-2
 PvdRuntime_debug_cflags	:= $(PvdRuntime_debug_common_cflags)
-PvdRuntime_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PvdRuntime_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PvdRuntime_debug_cflags  += -Wno-long-long
-PvdRuntime_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PvdRuntime_debug_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PvdRuntime_debug_cflags  += -g3 -gdwarf-2
 PvdRuntime_debug_cppflags	:= $(PvdRuntime_debug_common_cflags)
-PvdRuntime_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PvdRuntime_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PvdRuntime_debug_cppflags  += -Wno-long-long
-PvdRuntime_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PvdRuntime_debug_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PvdRuntime_debug_cppflags  += -g3 -gdwarf-2
 PvdRuntime_debug_lflags    := $(PvdRuntime_custom_lflags)
 PvdRuntime_debug_lflags    += $(addprefix -L, $(PvdRuntime_debug_lpaths))
 PvdRuntime_debug_lflags    += -Wl,--start-group $(addprefix -l, $(PvdRuntime_debug_libraries)) -Wl,--end-group
@@ -211,20 +205,14 @@ PvdRuntime_checked_common_cflags    += -MMD
 PvdRuntime_checked_common_cflags    += $(addprefix -D, $(PvdRuntime_checked_defines))
 PvdRuntime_checked_common_cflags    += $(addprefix -I, $(PvdRuntime_checked_hpaths))
 PvdRuntime_checked_common_cflags  += -m64
+PvdRuntime_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PvdRuntime_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PvdRuntime_checked_common_cflags  += -Wno-long-long
+PvdRuntime_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PvdRuntime_checked_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PvdRuntime_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PvdRuntime_checked_cflags	:= $(PvdRuntime_checked_common_cflags)
-PvdRuntime_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PvdRuntime_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PvdRuntime_checked_cflags  += -Wno-long-long
-PvdRuntime_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PvdRuntime_checked_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PvdRuntime_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PvdRuntime_checked_cppflags	:= $(PvdRuntime_checked_common_cflags)
-PvdRuntime_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PvdRuntime_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PvdRuntime_checked_cppflags  += -Wno-long-long
-PvdRuntime_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PvdRuntime_checked_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PvdRuntime_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PvdRuntime_checked_lflags    := $(PvdRuntime_custom_lflags)
 PvdRuntime_checked_lflags    += $(addprefix -L, $(PvdRuntime_checked_lpaths))
 PvdRuntime_checked_lflags    += -Wl,--start-group $(addprefix -l, $(PvdRuntime_checked_libraries)) -Wl,--end-group
@@ -340,20 +328,14 @@ PvdRuntime_profile_common_cflags    += -MMD
 PvdRuntime_profile_common_cflags    += $(addprefix -D, $(PvdRuntime_profile_defines))
 PvdRuntime_profile_common_cflags    += $(addprefix -I, $(PvdRuntime_profile_hpaths))
 PvdRuntime_profile_common_cflags  += -m64
+PvdRuntime_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PvdRuntime_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PvdRuntime_profile_common_cflags  += -Wno-long-long
+PvdRuntime_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PvdRuntime_profile_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PvdRuntime_profile_common_cflags  += -O3 -fno-strict-aliasing
 PvdRuntime_profile_cflags	:= $(PvdRuntime_profile_common_cflags)
-PvdRuntime_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PvdRuntime_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PvdRuntime_profile_cflags  += -Wno-long-long
-PvdRuntime_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PvdRuntime_profile_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PvdRuntime_profile_cflags  += -O3 -fno-strict-aliasing
 PvdRuntime_profile_cppflags	:= $(PvdRuntime_profile_common_cflags)
-PvdRuntime_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PvdRuntime_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PvdRuntime_profile_cppflags  += -Wno-long-long
-PvdRuntime_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PvdRuntime_profile_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PvdRuntime_profile_cppflags  += -O3 -fno-strict-aliasing
 PvdRuntime_profile_lflags    := $(PvdRuntime_custom_lflags)
 PvdRuntime_profile_lflags    += $(addprefix -L, $(PvdRuntime_profile_lpaths))
 PvdRuntime_profile_lflags    += -Wl,--start-group $(addprefix -l, $(PvdRuntime_profile_libraries)) -Wl,--end-group
@@ -467,20 +449,14 @@ PvdRuntime_release_common_cflags    += -MMD
 PvdRuntime_release_common_cflags    += $(addprefix -D, $(PvdRuntime_release_defines))
 PvdRuntime_release_common_cflags    += $(addprefix -I, $(PvdRuntime_release_hpaths))
 PvdRuntime_release_common_cflags  += -m64
+PvdRuntime_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PvdRuntime_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PvdRuntime_release_common_cflags  += -Wno-long-long
+PvdRuntime_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PvdRuntime_release_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PvdRuntime_release_common_cflags  += -O3 -fno-strict-aliasing
 PvdRuntime_release_cflags	:= $(PvdRuntime_release_common_cflags)
-PvdRuntime_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PvdRuntime_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PvdRuntime_release_cflags  += -Wno-long-long
-PvdRuntime_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PvdRuntime_release_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PvdRuntime_release_cflags  += -O3 -fno-strict-aliasing
 PvdRuntime_release_cppflags	:= $(PvdRuntime_release_common_cflags)
-PvdRuntime_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PvdRuntime_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PvdRuntime_release_cppflags  += -Wno-long-long
-PvdRuntime_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PvdRuntime_release_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PvdRuntime_release_cppflags  += -O3 -fno-strict-aliasing
 PvdRuntime_release_lflags    := $(PvdRuntime_custom_lflags)
 PvdRuntime_release_lflags    += $(addprefix -L, $(PvdRuntime_release_lpaths))
 PvdRuntime_release_lflags    += -Wl,--start-group $(addprefix -l, $(PvdRuntime_release_libraries)) -Wl,--end-group

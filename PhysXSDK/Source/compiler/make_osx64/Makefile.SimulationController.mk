@@ -131,7 +131,7 @@ SimulationController_debug_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -ff
 SimulationController_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 SimulationController_debug_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 SimulationController_debug_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-SimulationController_debug_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+SimulationController_debug_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 SimulationController_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 SimulationController_debug_cflags  += -Wno-unused-parameter
 SimulationController_debug_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -142,7 +142,7 @@ SimulationController_debug_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2 -
 SimulationController_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 SimulationController_debug_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 SimulationController_debug_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-SimulationController_debug_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+SimulationController_debug_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 SimulationController_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 SimulationController_debug_cppflags  += -Wno-unused-parameter
 SimulationController_debug_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -262,7 +262,7 @@ SimulationController_checked_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -
 SimulationController_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 SimulationController_checked_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 SimulationController_checked_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-SimulationController_checked_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+SimulationController_checked_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 SimulationController_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 SimulationController_checked_cflags  += -Wno-unused-parameter
 SimulationController_checked_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -273,7 +273,7 @@ SimulationController_checked_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2
 SimulationController_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 SimulationController_checked_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 SimulationController_checked_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-SimulationController_checked_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+SimulationController_checked_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 SimulationController_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 SimulationController_checked_cppflags  += -Wno-unused-parameter
 SimulationController_checked_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -393,7 +393,7 @@ SimulationController_profile_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -
 SimulationController_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 SimulationController_profile_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 SimulationController_profile_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-SimulationController_profile_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+SimulationController_profile_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 SimulationController_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 SimulationController_profile_cflags  += -Wno-unused-parameter
 SimulationController_profile_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -404,7 +404,7 @@ SimulationController_profile_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2
 SimulationController_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 SimulationController_profile_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 SimulationController_profile_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-SimulationController_profile_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+SimulationController_profile_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 SimulationController_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 SimulationController_profile_cppflags  += -Wno-unused-parameter
 SimulationController_profile_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -522,7 +522,7 @@ SimulationController_release_cflags  += -pipe -mmacosx-version-min=10.5 -msse2 -
 SimulationController_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 SimulationController_release_cflags  += -Wno-pedantic -Wno-unknown-warning-option
 SimulationController_release_cflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-SimulationController_release_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+SimulationController_release_cflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 SimulationController_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 SimulationController_release_cflags  += -Wno-unused-parameter
 SimulationController_release_cflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast
@@ -533,7 +533,7 @@ SimulationController_release_cppflags  += -pipe -mmacosx-version-min=10.5 -msse2
 SimulationController_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -Weverything
 SimulationController_release_cppflags  += -Wno-pedantic -Wno-unknown-warning-option
 SimulationController_release_cppflags  += -Wno-long-long -Wno-newline-eof -Wno-extended-offsetof
-SimulationController_release_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded
+SimulationController_release_cppflags  += -Wno-float-equal -Wno-documentation-deprecated-sync -Wno-conversion -Wno-weak-vtables -Wno-unreachable-code -Wno-format-nonliteral -Wno-cast-align -Wno-documentation -Wno-covered-switch-default -Wno-documentation-unknown-command -Wno-padded -Wno-old-style-cast
 SimulationController_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof
 SimulationController_release_cppflags  += -Wno-unused-parameter
 SimulationController_release_cppflags  += -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-template-vtables -Wno-shift-sign-overflow -Wno-missing-noreturn -Wno-missing-variable-declarations -Wno-switch-enum -Wno-undef -Wno-unused-macros -Wno-c99-extensions -Wno-missing-prototypes -Wno-shadow -Wno-unused-member-function -Wno-used-but-marked-unused -Wno-header-hygiene -Wno-variadic-macros -Wno-old-style-cast

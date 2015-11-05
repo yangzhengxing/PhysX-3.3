@@ -52,18 +52,20 @@
 
 // We require at least Visual Studio 2010 w/ SP1 to compile
 #if defined(_MSC_VER)
-#	if _MSC_VER >= 1800
-	PX_COMPILE_TIME_ASSERT(_MSC_FULL_VER >= 180000000);
+#	if _MSC_VER >= 1900
+PX_COMPILE_TIME_ASSERT(_MSC_FULL_VER >= 190000000);
+#	elif _MSC_VER >= 1800
+PX_COMPILE_TIME_ASSERT(_MSC_FULL_VER >= 180000000);
 #	elif _MSC_VER >= 1700
-	PX_COMPILE_TIME_ASSERT(_MSC_FULL_VER >= 170000000);
+PX_COMPILE_TIME_ASSERT(_MSC_FULL_VER >= 170000000);
 #	elif _MSC_VER >= 1600
-	PX_COMPILE_TIME_ASSERT(_MSC_FULL_VER >= 160040219);
+PX_COMPILE_TIME_ASSERT(_MSC_FULL_VER >= 160040219);
 #	endif
 
-#	if _MSC_VER > 1800
+#	if _MSC_VER > 1900
 	#pragma message("Detected compiler newer than Visual Studio 2013, please update min version checking in ApexSDK.cpp")
-	PX_COMPILE_TIME_ASSERT(_MSC_VER <= 1800);
-#	endif
+	PX_COMPILE_TIME_ASSERT(_MSC_VER <= 1900);
+	#	endif
 #endif
 
 #endif //defined(PX_WINDOWS)
@@ -318,7 +320,7 @@ ApexSDK::~ApexSDK()
 
 int ApexSDK::getSuggestedCudaDeviceOrdinal()
 {
-#if defined(PX_WINDOWS) && !defined(PX_WINMODERN)
+#if defined(PX_WINDOWS) && !defined(PX_WINMODERN) && PX_SUPPORT_GPU_PHYSX == 1
 	return physx::PxGetSuggestedCudaDeviceOrdinal(*getErrorCallback());
 #else
 	return -1;
@@ -695,11 +697,24 @@ NiApexPhysXObjectDesc* 	ApexSDK::createObjectDesc(const NxApexActor* apexActor, 
 		if (size == 0)  // special initial case, reserve entry 0
 		{
 			size = 1;
+			mPhysXObjDescs.resize(size + mBatchSeedSize);
 		}
-
+		else
 		{
 			PX_PROFILER_PERF_DSCOPE("objDescsResize",size + mBatchSeedSize);
+
+			// Instead of doing a straight resize of mPhysXObjDescs the array is resized by swapping. Doing so removes the potential 
+			// copying/reallocating of the arrays held in ApexPhysXObjectDesc elements which is costly performance wise.
+			physx::Array<ApexPhysXObjectDesc> swapArray;
+			swapArray.swap(mPhysXObjDescs);
+
 			mPhysXObjDescs.resize(size + mBatchSeedSize);
+			ApexPhysXObjectDesc* src = swapArray.begin();
+			ApexPhysXObjectDesc* dst = mPhysXObjDescs.begin();
+			for (physx::PxU32 i = 0; i < size; i++)
+			{
+				src[i].swap(dst[i]);
+			}
 		}
 
 		for (physx::PxU32 i = size ; i < size + mBatchSeedSize ; i++)

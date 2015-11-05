@@ -62,11 +62,11 @@ static int fopen_s(FILE ** stream, const char * filename, const char * mode)
 }
 #endif
 
-#define TGA_FOPEN_S(fops, stream, filename, mode) (fops ? fops->m_fopen_s(stream, filename, mode) : fopen_s((FILE**)stream, filename, mode))
-#define TGA_FREAD(fops, ptr, size, count, stream) (fops ? fops->m_fread(ptr, size, count, stream) : fread(ptr, size, count, (FILE*)stream))
-#define TGA_FWRITE(fops, ptr, size, count, stream) (fops ? fops->m_fwrite(ptr, size ,count, stream) : fwrite(ptr, size, count, (FILE*)stream))
-#define TGA_FEOF(fops, stream) (fops ? fops->m_feof(stream) : feof((FILE *)stream))
-#define TGA_FCLOSE(fops, stream) (fops ? fops->m_fclose(stream) : fclose((FILE *)stream))
+#define TGA_FOPEN_S(fops, stream, filename, mode) (fops ? fops->m_fopen_s(stream, filename, mode) : fopen_s(reinterpret_cast<FILE**>(stream), filename, mode))
+#define TGA_FREAD(fops, ptr, size, count, stream) (fops ? fops->m_fread(ptr, size, count, stream) : fread(ptr, size, count, reinterpret_cast<FILE*>(stream)))
+#define TGA_FWRITE(fops, ptr, size, count, stream) (fops ? fops->m_fwrite(ptr, size ,count, stream) : fwrite(ptr, size, count, reinterpret_cast<FILE*>(stream)))
+#define TGA_FEOF(fops, stream) (fops ? fops->m_feof(stream) : feof(reinterpret_cast<FILE*>(stream)))
+#define TGA_FCLOSE(fops, stream) (fops ? fops->m_fclose(stream) : fclose(reinterpret_cast<FILE*>(stream)))
 
 /* helpers */
 static tga_result tga_read_rle(tga_image *dest, TGA_FP *fp, tgaFileOperations* fops);
@@ -267,24 +267,24 @@ tga_result tga_read_from_FILE(tga_image *dest, TGA_FP *fp, tgaFileOperations* fo
 
     if (dest->image_id_length > 0)
     {
-        dest->image_id = (uint8_t*)malloc(dest->image_id_length);
+        dest->image_id = reinterpret_cast<uint8_t*>(malloc(dest->image_id_length));
         if (dest->image_id == NULL) BARF(TGAERR_NO_MEM);
         READ(dest->image_id, dest->image_id_length);
     }
 
     if (dest->color_map_type == TGA_COLOR_MAP_PRESENT)
     {
-        dest->color_map_data = (uint8_t*)malloc(
+        dest->color_map_data = reinterpret_cast<uint8_t*>(malloc(
             (dest->color_map_origin + dest->color_map_length) *
-            dest->color_map_depth / 8);
+            dest->color_map_depth / 8));
         if (dest->color_map_data == NULL) BARF(TGAERR_NO_MEM);
         READ(dest->color_map_data +
             (dest->color_map_origin * dest->color_map_depth / 8),
             dest->color_map_length * dest->color_map_depth / 8);
     }
 
-    dest->image_data = (uint8_t*) malloc(
-        dest->width * dest->height * dest->pixel_depth / 8);
+    dest->image_data = reinterpret_cast<uint8_t*>(malloc(
+        dest->width * dest->height * dest->pixel_depth / 8));
     if (dest->image_data == NULL)
             BARF(TGAERR_NO_MEM);
 
@@ -699,7 +699,7 @@ tga_result tga_flip_horiz(tga_image *img)
     int r_to_l;
 
     if (!SANE_DEPTH(img->pixel_depth)) return TGAERR_PIXEL_DEPTH;
-    bpp = (size_t)(img->pixel_depth / 8); /* bytes per pixel */
+    bpp = size_t(img->pixel_depth / 8); /* bytes per pixel */
 
     for (row=0; row<img->height; row++)
     {
@@ -746,7 +746,7 @@ tga_result tga_flip_vert(tga_image *img)
     int t_to_b;
 
     if (!SANE_DEPTH(img->pixel_depth)) return TGAERR_PIXEL_DEPTH;
-    bpp = (size_t)(img->pixel_depth / 8);   /* bytes per pixel */
+    bpp = size_t(img->pixel_depth / 8);   /* bytes per pixel */
     line = bpp * img->width;                /* bytes per line */
 
     for (col=0; col<img->width; col++)
@@ -799,7 +799,7 @@ tga_result tga_color_unmap(tga_image *img)
 
     tmp = realloc(img->image_data, img->width * img->height * bpp);
     if (tmp == NULL) return TGAERR_NO_MEM;
-    img->image_data = (uint8_t*) tmp;
+    img->image_data = reinterpret_cast<uint8_t*>(tmp);
 
     for (pos = img->width * img->height - 1; pos >= 0; pos--)
     {
@@ -809,7 +809,7 @@ tga_result tga_color_unmap(tga_image *img)
         if (c_index >= img->color_map_origin + img->color_map_length)
             return TGAERR_INDEX_RANGE;
 
-        memcpy(img->image_data + (pos*bpp), c_bgr, (size_t)bpp);
+        memcpy(img->image_data + (pos*bpp), c_bgr, size_t(bpp));
     }
 
     /* clean up */
@@ -870,13 +870,13 @@ tga_result tga_unpack_pixel(const uint8_t *src, const uint8_t bits,
 
     case 16:
         {
-            uint16_t src16 = (uint16_t)(src[1] << 8) | (uint16_t)src[0];
+            uint16_t src16 = uint16_t(src[1] << 8) | uint16_t(src[0]);
 
             #define FIVE_BITS (BIT(0)|BIT(1)|BIT(2)|BIT(3)|BIT(4))
-            if (b) *b = (uint8_t)(((src16      ) & FIVE_BITS) << 3);
-            if (g) *g = (uint8_t)(((src16 >>  5) & FIVE_BITS) << 3);
-            if (r) *r = (uint8_t)(((src16 >> 10) & FIVE_BITS) << 3);
-            if (a) *a = (uint8_t)( (src16 & BIT(15)) ? 255 : 0 );
+            if (b) *b = uint8_t(((src16      ) & FIVE_BITS) << 3);
+            if (g) *g = uint8_t(((src16 >>  5) & FIVE_BITS) << 3);
+            if (r) *r = uint8_t(((src16 >> 10) & FIVE_BITS) << 3);
+            if (a) *a = uint8_t( (src16 & BIT(15)) ? 255 : 0 );
             #undef FIVE_BITS
             break;
         }
@@ -923,14 +923,14 @@ tga_result tga_pack_pixel(uint8_t *dest, const uint8_t bits,
             uint16_t tmp;
 
             #define FIVE_BITS (BIT(0)|BIT(1)|BIT(2)|BIT(3)|BIT(4))
-            tmp  =  (uint16_t)((b >> 3) & FIVE_BITS);
+            tmp  =  uint16_t((b >> 3) & FIVE_BITS);
             tmp |= ((g >> 3) & FIVE_BITS) << 5;
             tmp |= ((r >> 3) & FIVE_BITS) << 10;
             if (a > 127) tmp |= BIT(15);
             #undef FIVE_BITS
 
-            dest[0] = (uint8_t) (tmp & 0x00FF);
-            dest[1] = (uint8_t)((tmp & 0xFF00) >> 8);
+            dest[0] = uint8_t(tmp & 0x00FF);
+            dest[1] = uint8_t((tmp & 0xFF00) >> 8);
             break;
         }
 
@@ -968,16 +968,16 @@ tga_result tga_desaturate(tga_image *img, const int cr, const int cg,
         uint8_t b=0, g=0, r=0;
         (void)tga_unpack_pixel(src, img->pixel_depth, &b, &g, &r, NULL);
 
-        *dest = (uint8_t)( ( (int)b * cb +
-                             (int)g * cg +
-                             (int)r * cr ) / dv );
+        *dest = uint8_t( ( int(b) * cb +
+                             int(g) * cg +
+                             int(r) * cr ) / dv );
         dest++;
     }
 
     /* shrink */
-    tmp = (uint8_t*)realloc(img->image_data, img->width * img->height);
+    tmp = reinterpret_cast<uint8_t*>(realloc(img->image_data, img->width * img->height));
     if (tmp == NULL) return TGAERR_NO_MEM;
-    img->image_data = (uint8_t*)tmp;
+    img->image_data = reinterpret_cast<uint8_t*>(tmp);
 
     img->pixel_depth = 8;
     img->image_type = TGA_IMAGE_TYPE_MONO;
@@ -1031,8 +1031,8 @@ tga_result tga_convert_depth(tga_image *img, const uint8_t bits)
     src_bpp = img->pixel_depth / 8;
     dest_bpp = bits / 8;
 
-    src_size  = (size_t)( img->width * img->height * src_bpp );
-    dest_size = (size_t)( img->width * img->height * dest_bpp );
+    src_size  = size_t( img->width * img->height * src_bpp );
+    dest_size = size_t( img->width * img->height * dest_bpp );
 
     if (src_size > dest_size)
     {
@@ -1053,7 +1053,7 @@ tga_result tga_convert_depth(tga_image *img, const uint8_t bits)
         /* shrink */
         tmp = realloc(img->image_data, img->width * img->height * dest_bpp);
         if (tmp == NULL) return TGAERR_NO_MEM;
-        img->image_data = (uint8_t*)tmp;
+        img->image_data = reinterpret_cast<uint8_t*>(tmp);
     }
     else
     {
@@ -1061,7 +1061,7 @@ tga_result tga_convert_depth(tga_image *img, const uint8_t bits)
         void *tmp = realloc(img->image_data,
             img->width * img->height * dest_bpp);
         if (tmp == NULL) return TGAERR_NO_MEM;
-        img->image_data = (uint8_t*) tmp;
+        img->image_data = reinterpret_cast<uint8_t*>(tmp);
 
         /* convert backwards */
         dest = img->image_data + (img->width*img->height - 1) * dest_bpp;

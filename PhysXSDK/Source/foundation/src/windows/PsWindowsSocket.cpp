@@ -21,8 +21,6 @@
 #include <Winsock2.h>
 #pragma comment( lib, "Ws2_32" )
 
-#pragma warning(disable:4127) // Disable the nag warning 'conditional expression is constant'
-
 namespace physx
 {
 namespace shdfnd
@@ -128,10 +126,6 @@ bool SocketImpl::flush()
 	return true;
 };
 
-#if defined(PX_VC11) || defined(PX_VC12)
-#pragma warning(push)
-#pragma warning( disable : 4548 ) //for FD_SET on vc11 only
-#endif
 bool SocketImpl::connect(const char* host, PxU16 port, PxU32 timeout)
 {
 	if(!mSocketLayerIntialized)
@@ -168,8 +162,11 @@ bool SocketImpl::connect(const char* host, PxU16 port, PxU32 timeout)
 	fd_set exceptfs;
 	FD_ZERO(&writefs);
 	FD_ZERO(&exceptfs);
+#pragma warning(push)
+#pragma warning(disable : 4127 4548)
 	FD_SET(mSocket, &writefs);
 	FD_SET(mSocket, &exceptfs);
+#pragma warning(pop)
 	timeval timeout_;
 	timeout_.tv_sec = long(timeout / 1000);
 	timeout_.tv_usec = long(((timeout % 1000) * 1000));
@@ -188,9 +185,6 @@ bool SocketImpl::connect(const char* host, PxU16 port, PxU32 timeout)
 	mHost = host;
 	return true;
 }
-#if defined(PX_VC11) || defined(PX_VC12)
-#pragma warning(pop)
-#endif
 
 bool	SocketImpl::listen(PxU16 port, Socket::Connection *callback)
 {

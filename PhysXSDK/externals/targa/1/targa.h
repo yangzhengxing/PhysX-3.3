@@ -83,10 +83,10 @@ typedef struct
      * bit  5       - set if image is stored top-to-bottom
      * bits 6,7     - unused (must be set to zero)
      */
-    #define TGA_ATTRIB_BITS (uint8_t)(BIT(0)|BIT(1)|BIT(2)|BIT(3))
-    #define TGA_R_TO_L_BIT  (uint8_t)BIT(4)
-    #define TGA_T_TO_B_BIT  (uint8_t)BIT(5)
-    #define TGA_UNUSED_BITS (uint8_t)(BIT(6)|BIT(7))
+    #define TGA_ATTRIB_BITS uint8_t(BIT(0)|BIT(1)|BIT(2)|BIT(3))
+    #define TGA_R_TO_L_BIT  uint8_t(BIT(4))
+    #define TGA_T_TO_B_BIT  uint8_t(BIT(5))
+    #define TGA_UNUSED_BITS uint8_t(BIT(6)|BIT(7))
     /* Note: right-to-left order is not honored by some Targa readers */
 
     uint8_t *image_id;

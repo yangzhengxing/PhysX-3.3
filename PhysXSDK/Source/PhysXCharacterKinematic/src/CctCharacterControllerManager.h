@@ -34,7 +34,7 @@ namespace Cct
 	class CharacterControllerManager : public PxControllerManager   , public Ps::UserAllocated
 	{
 	public:
-														CharacterControllerManager(PxScene& scene);
+														CharacterControllerManager(PxScene& scene, bool lockingEnabled = false);
 		virtual											~CharacterControllerManager();
 
 		// PxControllerManager
@@ -59,7 +59,7 @@ namespace Cct
 		virtual			void							setOverlapRecoveryModule(bool flag);
 		virtual			void							setPreciseSweeps(bool flag);
 		virtual			void							setPreventVerticalSlidingAgainstCeiling(bool flag);
-		virtual			void							shiftOrigin(const PxVec3& shift);
+		virtual			void							shiftOrigin(const PxVec3& shift);		
 		//~PxControllerManager
 
 		// ObstacleContextNotifications
@@ -94,6 +94,8 @@ namespace Cct
 						bool							mOverlapRecovery;
 						bool							mPreciseSweeps;
 						bool							mPreventVerticalSlidingAgainstCeiling;
+
+						bool							mLockingEnabled;
 	protected:
 		CharacterControllerManager &operator=(const CharacterControllerManager &);
 	};

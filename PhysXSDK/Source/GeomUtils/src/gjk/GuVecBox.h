@@ -351,21 +351,10 @@ namespace Gu
 			return V3Sel(con, extents, V3Neg(extents));
 		}  
 
-		PX_FORCE_INLINE void getIndex(const Ps::aos::BoolV con, PxI32& index)const
-		{
+		PX_FORCE_INLINE void getIndex(const Ps::aos::BoolV con, PxI32& index)const 
+		{ 
 			using namespace Ps::aos;
-			const VecI32V v = VecI32V_From_BoolV(con);
-			const VecI32V vAllOne = VecI32V_One();
-			const VecShiftV vOne = VecI32V_PrepareShift(vAllOne);
-			const VecShiftV vTwo = VecI32V_PrepareShift(VecI32V_Two());
-			const VecI32V temp = VecI32V_And(v, vAllOne);
-			const VecI32V x = VecI32V_GetX(temp);
-			const VecI32V y = VecI32V_GetY(temp);
-			const VecI32V z = VecI32V_GetZ(temp);
-			const VecI32V shiftY = VecI32V_LeftShift(y, vOne);
-			const VecI32V shiftZ = VecI32V_LeftShift(z, vTwo);
-			const VecI32V t = VecI32V_Or(x, VecI32V_Or(shiftY, shiftZ));
-			PxI32_From_VecI32V(t, &index);
+			index = (PxI32)BGetBitMask(con) & 0x7; 
 		}
 
 		PX_FORCE_INLINE Ps::aos::Vec3V supportSweepRelative(const Ps::aos::Vec3VArg dir, const Ps::aos::PsMatTransformV& aToB)const  

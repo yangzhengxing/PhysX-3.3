@@ -880,8 +880,7 @@ namespace physx
 			const Vec3V triNormal = localTriangle.normal();
 			patchNormal = triNormal;
 
-			const Vec3V n = M33TrnspsMulV3(polyMap->vertex2Shape, triNormal);
-			const Gu::HullPolygonData* referencePolygon = &polyData.mPolygons[getPolygonIndex(polyData, polyMap, n)];
+			const Gu::HullPolygonData* referencePolygon = &polyData.mPolygons[getPolygonIndex(polyData, polyMap, triNormal)];
 			generatedTriangleContacts(localTriangle, triangleIndex, triFlags, polyData, *referencePolygon, polyMap, manifoldContacts, numContacts, contactDist, triNormal);
 			
 		}

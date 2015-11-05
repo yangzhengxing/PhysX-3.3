@@ -102,20 +102,14 @@ SampleRenderer-MT_debug_common_cflags    += -MMD
 SampleRenderer-MT_debug_common_cflags    += $(addprefix -D, $(SampleRenderer-MT_debug_defines))
 SampleRenderer-MT_debug_common_cflags    += $(addprefix -I, $(SampleRenderer-MT_debug_hpaths))
 SampleRenderer-MT_debug_common_cflags  += -m64
+SampleRenderer-MT_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleRenderer-MT_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleRenderer-MT_debug_common_cflags  += -Wno-long-long
+SampleRenderer-MT_debug_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleRenderer-MT_debug_common_cflags  += -Wno-unused-parameter
+SampleRenderer-MT_debug_common_cflags  += -g3 -gdwarf-2
 SampleRenderer-MT_debug_cflags	:= $(SampleRenderer-MT_debug_common_cflags)
-SampleRenderer-MT_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleRenderer-MT_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleRenderer-MT_debug_cflags  += -Wno-long-long
-SampleRenderer-MT_debug_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleRenderer-MT_debug_cflags  += -Wno-unused-parameter
-SampleRenderer-MT_debug_cflags  += -g3 -gdwarf-2
 SampleRenderer-MT_debug_cppflags	:= $(SampleRenderer-MT_debug_common_cflags)
-SampleRenderer-MT_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleRenderer-MT_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleRenderer-MT_debug_cppflags  += -Wno-long-long
-SampleRenderer-MT_debug_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleRenderer-MT_debug_cppflags  += -Wno-unused-parameter
-SampleRenderer-MT_debug_cppflags  += -g3 -gdwarf-2
 SampleRenderer-MT_debug_lflags    := $(SampleRenderer-MT_custom_lflags)
 SampleRenderer-MT_debug_lflags    += $(addprefix -L, $(SampleRenderer-MT_debug_lpaths))
 SampleRenderer-MT_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SampleRenderer-MT_debug_libraries)) -Wl,--end-group
@@ -196,20 +190,14 @@ SampleRenderer-MT_release_common_cflags    += -MMD
 SampleRenderer-MT_release_common_cflags    += $(addprefix -D, $(SampleRenderer-MT_release_defines))
 SampleRenderer-MT_release_common_cflags    += $(addprefix -I, $(SampleRenderer-MT_release_hpaths))
 SampleRenderer-MT_release_common_cflags  += -m64
+SampleRenderer-MT_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleRenderer-MT_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleRenderer-MT_release_common_cflags  += -Wno-long-long
+SampleRenderer-MT_release_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleRenderer-MT_release_common_cflags  += -Wno-unused-parameter
+SampleRenderer-MT_release_common_cflags  += -O3 -fno-strict-aliasing
 SampleRenderer-MT_release_cflags	:= $(SampleRenderer-MT_release_common_cflags)
-SampleRenderer-MT_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleRenderer-MT_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleRenderer-MT_release_cflags  += -Wno-long-long
-SampleRenderer-MT_release_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleRenderer-MT_release_cflags  += -Wno-unused-parameter
-SampleRenderer-MT_release_cflags  += -O3 -fno-strict-aliasing
 SampleRenderer-MT_release_cppflags	:= $(SampleRenderer-MT_release_common_cflags)
-SampleRenderer-MT_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleRenderer-MT_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleRenderer-MT_release_cppflags  += -Wno-long-long
-SampleRenderer-MT_release_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleRenderer-MT_release_cppflags  += -Wno-unused-parameter
-SampleRenderer-MT_release_cppflags  += -O3 -fno-strict-aliasing
 SampleRenderer-MT_release_lflags    := $(SampleRenderer-MT_custom_lflags)
 SampleRenderer-MT_release_lflags    += $(addprefix -L, $(SampleRenderer-MT_release_lpaths))
 SampleRenderer-MT_release_lflags    += -Wl,--start-group $(addprefix -l, $(SampleRenderer-MT_release_libraries)) -Wl,--end-group
@@ -292,20 +280,14 @@ SampleRenderer-MT_checked_common_cflags    += -MMD
 SampleRenderer-MT_checked_common_cflags    += $(addprefix -D, $(SampleRenderer-MT_checked_defines))
 SampleRenderer-MT_checked_common_cflags    += $(addprefix -I, $(SampleRenderer-MT_checked_hpaths))
 SampleRenderer-MT_checked_common_cflags  += -m64
+SampleRenderer-MT_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleRenderer-MT_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleRenderer-MT_checked_common_cflags  += -Wno-long-long
+SampleRenderer-MT_checked_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleRenderer-MT_checked_common_cflags  += -Wno-unused-parameter
+SampleRenderer-MT_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SampleRenderer-MT_checked_cflags	:= $(SampleRenderer-MT_checked_common_cflags)
-SampleRenderer-MT_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleRenderer-MT_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleRenderer-MT_checked_cflags  += -Wno-long-long
-SampleRenderer-MT_checked_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleRenderer-MT_checked_cflags  += -Wno-unused-parameter
-SampleRenderer-MT_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SampleRenderer-MT_checked_cppflags	:= $(SampleRenderer-MT_checked_common_cflags)
-SampleRenderer-MT_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleRenderer-MT_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleRenderer-MT_checked_cppflags  += -Wno-long-long
-SampleRenderer-MT_checked_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleRenderer-MT_checked_cppflags  += -Wno-unused-parameter
-SampleRenderer-MT_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SampleRenderer-MT_checked_lflags    := $(SampleRenderer-MT_custom_lflags)
 SampleRenderer-MT_checked_lflags    += $(addprefix -L, $(SampleRenderer-MT_checked_lpaths))
 SampleRenderer-MT_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SampleRenderer-MT_checked_libraries)) -Wl,--end-group
@@ -388,20 +370,14 @@ SampleRenderer-MT_profile_common_cflags    += -MMD
 SampleRenderer-MT_profile_common_cflags    += $(addprefix -D, $(SampleRenderer-MT_profile_defines))
 SampleRenderer-MT_profile_common_cflags    += $(addprefix -I, $(SampleRenderer-MT_profile_hpaths))
 SampleRenderer-MT_profile_common_cflags  += -m64
+SampleRenderer-MT_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleRenderer-MT_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleRenderer-MT_profile_common_cflags  += -Wno-long-long
+SampleRenderer-MT_profile_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleRenderer-MT_profile_common_cflags  += -Wno-unused-parameter
+SampleRenderer-MT_profile_common_cflags  += -O3 -fno-strict-aliasing
 SampleRenderer-MT_profile_cflags	:= $(SampleRenderer-MT_profile_common_cflags)
-SampleRenderer-MT_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleRenderer-MT_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleRenderer-MT_profile_cflags  += -Wno-long-long
-SampleRenderer-MT_profile_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleRenderer-MT_profile_cflags  += -Wno-unused-parameter
-SampleRenderer-MT_profile_cflags  += -O3 -fno-strict-aliasing
 SampleRenderer-MT_profile_cppflags	:= $(SampleRenderer-MT_profile_common_cflags)
-SampleRenderer-MT_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleRenderer-MT_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleRenderer-MT_profile_cppflags  += -Wno-long-long
-SampleRenderer-MT_profile_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleRenderer-MT_profile_cppflags  += -Wno-unused-parameter
-SampleRenderer-MT_profile_cppflags  += -O3 -fno-strict-aliasing
 SampleRenderer-MT_profile_lflags    := $(SampleRenderer-MT_custom_lflags)
 SampleRenderer-MT_profile_lflags    += $(addprefix -L, $(SampleRenderer-MT_profile_lpaths))
 SampleRenderer-MT_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SampleRenderer-MT_profile_libraries)) -Wl,--end-group

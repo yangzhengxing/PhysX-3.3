@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
-		<Filter Include="resource"><!--  -->
+		<Filter Include="resource">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -10,11 +10,11 @@
 		</ResourceCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Destructible"><!--  -->
+		<Filter Include="Destructible">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Destructible\src"><!--  -->
+		<Filter Include="Destructible\src">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -95,11 +95,11 @@
 		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Destructible\fracture"><!--  -->
+		<Filter Include="Destructible\fracture">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Destructible\fracture\Core"><!--  -->
+		<Filter Include="Destructible\fracture\Core">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -296,7 +296,7 @@
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Destructible\include"><!--  -->
+		<Filter Include="Destructible\include">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -401,7 +401,7 @@
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Destructible\public"><!--  -->
+		<Filter Include="Destructible\public">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -436,11 +436,11 @@
 	<ItemGroup>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Module Common"><!--  -->
+		<Filter Include="Module Common">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Module Common\src"><!--  -->
+		<Filter Include="Module Common\src">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -449,7 +449,7 @@
 		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="Module Common\include"><!--  -->
+		<Filter Include="Module Common\include">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>

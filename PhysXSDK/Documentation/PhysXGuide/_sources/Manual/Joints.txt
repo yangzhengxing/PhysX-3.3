@@ -305,6 +305,8 @@ Three of the joints from PhysX 2 that have been removed from PhysX 3 can be impl
     d6joint->setMotion(PxD6Axis::eSWING1, PxD6Motion::eFREE);
     d6joint->setMotion(PxD6Axis::eSWING2, PxD6Motion::eFREE);
 
+.. note:: Angular projection is implemented only for the cases when two or three angular degrees of freedom are locked.
+
 ++++++
 Limits
 ++++++

@@ -48,9 +48,6 @@ fi
 echo ant build and deploy
 
 SampleDir="Samples"
-if [[ $ANDROID_CONFIG == *_neon ]]; then
-	SampleDir="SamplesNeon"
-fi
 nativeLibDir=$SDK_ROOT/Samples/AndroidActivities/$SampleDir/$target/libs/armeabi-v7a
 mkdir -p $nativeLibDir
 

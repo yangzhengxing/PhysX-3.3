@@ -97,7 +97,7 @@ template<> struct PxEnumTraits< physx::PxJointConcreteType::Enum > { PxEnumTrait
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxJoint*)NULL );
+			return inOperator( reinterpret_cast<PxJoint*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -225,7 +225,7 @@ template<> struct PxEnumTraits< physx::PxD6Drive::Enum > { PxEnumTraits() : Name
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxD6Joint*)NULL );
+			return inOperator( reinterpret_cast<PxD6Joint*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -318,7 +318,7 @@ template<> struct PxEnumTraits< physx::PxDistanceJointFlag::Enum > { PxEnumTrait
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxDistanceJoint*)NULL );
+			return inOperator( reinterpret_cast<PxDistanceJoint*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -383,7 +383,7 @@ template<> struct PxEnumTraits< physx::PxDistanceJointFlag::Enum > { PxEnumTrait
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxFixedJoint*)NULL );
+			return inOperator( reinterpret_cast<PxFixedJoint*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -461,7 +461,7 @@ template<> struct PxEnumTraits< physx::PxPrismaticJointFlag::Enum > { PxEnumTrai
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxPrismaticJoint*)NULL );
+			return inOperator( reinterpret_cast<PxPrismaticJoint*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -554,7 +554,7 @@ template<> struct PxEnumTraits< physx::PxRevoluteJointFlag::Enum > { PxEnumTrait
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxRevoluteJoint*)NULL );
+			return inOperator( reinterpret_cast<PxRevoluteJoint*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -630,7 +630,7 @@ template<> struct PxEnumTraits< physx::PxSphericalJointFlag::Enum > { PxEnumTrai
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxSphericalJoint*)NULL );
+			return inOperator( reinterpret_cast<PxSphericalJoint*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -697,7 +697,7 @@ template<> struct PxEnumTraits< physx::PxSphericalJointFlag::Enum > { PxEnumTrai
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxJointLimitParameters*)NULL );
+			return inOperator( reinterpret_cast<PxJointLimitParameters*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -749,7 +749,7 @@ template<> struct PxEnumTraits< physx::PxSphericalJointFlag::Enum > { PxEnumTrai
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxJointLinearLimit*)NULL );
+			return inOperator( reinterpret_cast<PxJointLinearLimit*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -804,7 +804,7 @@ template<> struct PxEnumTraits< physx::PxSphericalJointFlag::Enum > { PxEnumTrai
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxJointLinearLimitPair*)NULL );
+			return inOperator( reinterpret_cast<PxJointLinearLimitPair*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -860,7 +860,7 @@ template<> struct PxEnumTraits< physx::PxSphericalJointFlag::Enum > { PxEnumTrai
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxJointAngularLimitPair*)NULL );
+			return inOperator( reinterpret_cast<PxJointAngularLimitPair*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -916,7 +916,7 @@ template<> struct PxEnumTraits< physx::PxSphericalJointFlag::Enum > { PxEnumTrai
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxJointLimitCone*)NULL );
+			return inOperator( reinterpret_cast<PxJointLimitCone*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -972,7 +972,7 @@ template<> struct PxEnumTraits< physx::PxSphericalJointFlag::Enum > { PxEnumTrai
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxSpring*)NULL );
+			return inOperator( reinterpret_cast<PxSpring*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )
@@ -1030,7 +1030,7 @@ template<> struct PxEnumTraits< physx::PxD6JointDriveFlag::Enum > { PxEnumTraits
 		template<typename TReturnType, typename TOperator>
 		TReturnType visitType( TOperator inOperator ) const
 		{
-			return inOperator( (PxD6JointDrive*)NULL );
+			return inOperator( reinterpret_cast<PxD6JointDrive*>(NULL) );
 		}
 		template<typename TOperator>
 		void visitBases( TOperator inOperator )

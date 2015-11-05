@@ -18,6 +18,7 @@
 
 #include "CctCharacterController.h"
 #include "PsUserAllocated.h"
+#include "PsMutex.h"
 #include "PxDeletionListener.h"
 
 namespace physx
@@ -35,6 +36,7 @@ namespace Cct
 
 	class Controller : public Ps::UserAllocated, public PxDeletionListener
 	{
+		PX_NOCOPY(Controller)
 	public:
 														Controller(const PxControllerDesc& desc, PxScene* scene);
 		virtual											~Controller();
@@ -74,6 +76,8 @@ namespace Cct
 					PxF32								mProxyScaleCoeff;	// Scale coeff for proxy actor
 					PxControllerCollisionFlags			mCollisionFlags;	// Last known collision flags (PxControllerFlag)
 					bool								mCachedStandingOnMoving;
+		mutable		Ps::Mutex							mWriteLock;			// Lock used for guarding touched pointers and cache data from overwriting 
+																			// during onRelease call.
 	protected:
 		// Internal methods
 					void								setUpDirectionInternal(const PxVec3& up);

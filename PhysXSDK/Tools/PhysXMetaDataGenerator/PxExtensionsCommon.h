@@ -12,12 +12,6 @@
 #ifndef PX_EXTENSIONS_COMMON_H
 #define PX_EXTENSIONS_COMMON_H
 
-//unused define for clang
-#if defined(PX_WIIU)
-	#undef __STRICT_ANSI__ //for strcasecmp
-	#undef _WIN32                    
-#endif         
-
 #include "PxPhysXConfig.h"
 
 struct PropertyOverride
@@ -64,4 +58,4 @@ struct CustomProperty
 	}
 };
 
-#endif
+#endif // PX_EXTENSIONS_COMMON_H

@@ -29,7 +29,7 @@ static const PxF32 gMaxOverlapRecover = 4.0f;	// PT: TODO: expose this
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-CharacterControllerManager::CharacterControllerManager(PxScene& scene) :
+CharacterControllerManager::CharacterControllerManager(PxScene& scene, bool lockingEnabled) :
 	mScene									(scene),
 	mRenderBuffer							(NULL),
 	mDebugRenderingFlags					(0),
@@ -37,7 +37,8 @@ CharacterControllerManager::CharacterControllerManager(PxScene& scene) :
 	mTessellation							(false),
 	mOverlapRecovery						(true),
 	mPreciseSweeps							(true),
-	mPreventVerticalSlidingAgainstCeiling	(false)
+	mPreventVerticalSlidingAgainstCeiling	(false),
+	mLockingEnabled							(lockingEnabled)
 {
 }
 
@@ -663,8 +664,8 @@ void CharacterControllerManager::computeInteractions(PxF32 elapsedTime, PxContro
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Public factory methods
 
-PX_C_EXPORT PX_PHYSX_CHARACTER_API PxControllerManager* PX_CALL_CONV PxCreateControllerManager(PxScene& scene)
+PX_C_EXPORT PX_PHYSX_CHARACTER_API PxControllerManager* PX_CALL_CONV PxCreateControllerManager(PxScene& scene, bool lockingEnabled)
 {
 	Ps::Foundation::incRefCount();
-	return PX_NEW(CharacterControllerManager)(scene);
+	return PX_NEW(CharacterControllerManager)(scene, lockingEnabled);
 }

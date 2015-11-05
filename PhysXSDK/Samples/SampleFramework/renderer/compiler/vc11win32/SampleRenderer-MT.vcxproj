@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup Label="ProjectConfigurations">
-	<ProjectConfiguration Include="debug|Win32">
+		<ProjectConfiguration Include="debug|Win32">
 			<Configuration>debug</Configuration>
 			<Platform>Win32</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="release|Win32">
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="release|Win32">
 			<Configuration>release</Configuration>
 			<Platform>Win32</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="checked|Win32">
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="checked|Win32">
 			<Configuration>checked</Configuration>
 			<Platform>Win32</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="profile|Win32">
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="profile|Win32">
 			<Configuration>profile</Configuration>
 			<Platform>Win32</Platform>
-	</ProjectConfiguration>
+		</ProjectConfiguration>
 	</ItemGroup>
 	<PropertyGroup Label="Globals">
-		<ApplicationEnvironment>title</ApplicationEnvironment>
-		<!-- - - - -->
-		<PlatformToolset>v110</PlatformToolset>
-		<MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+		<ProjectGuid>{67A61354-2C14-B851-8530-DDD43BDC1D9C}</ProjectGuid>
+		<RootNamespace>SampleRenderer-MT</RootNamespace>
 	</PropertyGroup>
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'" Label="Configuration">
@@ -76,7 +74,7 @@
 			<BasicRuntimeChecks>UninitializedLocalUsageCheck</BasicRuntimeChecks>
 			<AdditionalOptions>/EHsc /MP /Wall /wd4514 /wd4820 /wd4062 /wd4100 /wd4130 /wd4201 /wd4242 /wd4244 /wd4245 /wd4265 /wd4266 /wd4324 /wd4389 /wd4365 /wd4371 /wd4447 /wd4189 /wd4191 /wd4350 /wd4505 /wd4512 /wd4548 /wd4571 /wd4625 /wd4626 /wd4668 /wd4619 /wd4701 /wd4702 /wd4706 /wd4710 /wd4711 /wd4640 /wd4061 /wd4826 /wd4946 /wd4917 /wd4986 /wd4987 /d2Zi+</AdditionalOptions>
 			<Optimization>Disabled</Optimization>
-			<AdditionalIncludeDirectories>./../../include;./../../../platform/include;./../../../framework/include;./../../../../../Source/foundation/include;./../../../../../Source/foundation/include/windows;./../../../../../Include;./../../../../../Include;./../../../../../Include;./../../../../../externals/CUDA/6.5.19/include;$(DXSDK_DIR)/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../include;./../../../platform/include;./../../../framework/include;./../../../../../Source/foundation/include;./../../../../../Source/foundation/include/windows;./../../../../../Include;./../../../../../Include;./../../../../../Include;$(DXSDK_DIR)/Include;./../../../../../externals/CUDA/6.5.19/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>PHYSX_PROFILE_SDK;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;_DEBUG;PX_DEBUG;PX_CHECKED;PX_SUPPORT_VISUAL_DEBUGGER;PX_NVTX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
@@ -118,7 +116,7 @@
 			<FloatingPointModel>Fast</FloatingPointModel>
 			<AdditionalOptions>/EHsc /MP /Wall /wd4514 /wd4820 /wd4062 /wd4100 /wd4130 /wd4201 /wd4242 /wd4244 /wd4245 /wd4265 /wd4266 /wd4324 /wd4389 /wd4365 /wd4371 /wd4447 /wd4189 /wd4191 /wd4350 /wd4505 /wd4512 /wd4548 /wd4571 /wd4625 /wd4626 /wd4668 /wd4619 /wd4701 /wd4702 /wd4706 /wd4710 /wd4711 /wd4640 /wd4061 /wd4826 /wd4946 /wd4917 /wd4986 /wd4987 /d2Zi+</AdditionalOptions>
 			<Optimization>Full</Optimization>
-			<AdditionalIncludeDirectories>./../../include;./../../../platform/include;./../../../framework/include;./../../../../../Source/foundation/include;./../../../../../Source/foundation/include/windows;./../../../../../Include;./../../../../../Include;./../../../../../Include;./../../../../../externals/CUDA/6.5.19/include;$(DXSDK_DIR)/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../include;./../../../platform/include;./../../../framework/include;./../../../../../Source/foundation/include;./../../../../../Source/foundation/include/windows;./../../../../../Include;./../../../../../Include;./../../../../../Include;$(DXSDK_DIR)/Include;./../../../../../externals/CUDA/6.5.19/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>PHYSX_PROFILE_SDK;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
@@ -161,7 +159,7 @@
 			<FloatingPointModel>Fast</FloatingPointModel>
 			<AdditionalOptions>/EHsc /MP /Wall /wd4514 /wd4820 /wd4062 /wd4100 /wd4130 /wd4201 /wd4242 /wd4244 /wd4245 /wd4265 /wd4266 /wd4324 /wd4389 /wd4365 /wd4371 /wd4447 /wd4189 /wd4191 /wd4350 /wd4505 /wd4512 /wd4548 /wd4571 /wd4625 /wd4626 /wd4668 /wd4619 /wd4701 /wd4702 /wd4706 /wd4710 /wd4711 /wd4640 /wd4061 /wd4826 /wd4946 /wd4917 /wd4986 /wd4987 /d2Zi+</AdditionalOptions>
 			<Optimization>Full</Optimization>
-			<AdditionalIncludeDirectories>./../../include;./../../../platform/include;./../../../framework/include;./../../../../../Source/foundation/include;./../../../../../Source/foundation/include/windows;./../../../../../Include;./../../../../../Include;./../../../../../Include;./../../../../../externals/CUDA/6.5.19/include;$(DXSDK_DIR)/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../include;./../../../platform/include;./../../../framework/include;./../../../../../Source/foundation/include;./../../../../../Source/foundation/include/windows;./../../../../../Include;./../../../../../Include;./../../../../../Include;$(DXSDK_DIR)/Include;./../../../../../externals/CUDA/6.5.19/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>PHYSX_PROFILE_SDK;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_CHECKED;PX_SUPPORT_VISUAL_DEBUGGER;PX_NVTX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
@@ -203,7 +201,7 @@
 			<FloatingPointModel>Fast</FloatingPointModel>
 			<AdditionalOptions>/EHsc /MP /Wall /wd4514 /wd4820 /wd4062 /wd4100 /wd4130 /wd4201 /wd4242 /wd4244 /wd4245 /wd4265 /wd4266 /wd4324 /wd4389 /wd4365 /wd4371 /wd4447 /wd4189 /wd4191 /wd4350 /wd4505 /wd4512 /wd4548 /wd4571 /wd4625 /wd4626 /wd4668 /wd4619 /wd4701 /wd4702 /wd4706 /wd4710 /wd4711 /wd4640 /wd4061 /wd4826 /wd4946 /wd4917 /wd4986 /wd4987 /d2Zi+</AdditionalOptions>
 			<Optimization>Full</Optimization>
-			<AdditionalIncludeDirectories>./../../include;./../../../platform/include;./../../../framework/include;./../../../../../Source/foundation/include;./../../../../../Source/foundation/include/windows;./../../../../../Include;./../../../../../Include;./../../../../../Include;./../../../../../externals/CUDA/6.5.19/include;$(DXSDK_DIR)/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../include;./../../../platform/include;./../../../framework/include;./../../../../../Source/foundation/include;./../../../../../Source/foundation/include/windows;./../../../../../Include;./../../../../../Include;./../../../../../Include;$(DXSDK_DIR)/Include;./../../../../../externals/CUDA/6.5.19/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>PHYSX_PROFILE_SDK;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_PROFILE;PX_SUPPORT_VISUAL_DEBUGGER;PX_NVTX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>

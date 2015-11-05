@@ -131,9 +131,19 @@ bool PxcContactCapsuleHeightField(CONTACT_METHOD_ARGS)
 				// look up the face indices adjacent to the current edge
 				PxU32 adjFaceIndices[2];
 				const PxU32 adjFaceCount = hf.getEdgeTriangleIndices(edgeIndex, adjFaceIndices);
-				// check if either we have 2 adjacent faces both of which are holes or only 1 adjacent face which is a hole
-				if ((adjFaceCount == 2 && (adjFaceIndices[0] != 0xFFFFffff && adjFaceIndices[1] != 0xFFFFffff))
-					|| (adjFaceCount == 1 && adjFaceIndices[0] != 0xFFFFffff))
+
+				bool doEdgeEdgeCollision = false;
+				if(adjFaceCount == 2)
+				{
+					doEdgeEdgeCollision =		hf.getMaterialIndex0(adjFaceIndices[0] >> 1) != PxHeightFieldMaterial::eHOLE
+											||	hf.getMaterialIndex1(adjFaceIndices[1] >> 1) != PxHeightFieldMaterial::eHOLE;
+				}
+				else if(adjFaceCount == 1)
+				{
+					doEdgeEdgeCollision = (hf.getMaterialIndex0(adjFaceIndices[0] >> 1) != PxHeightFieldMaterial::eHOLE);
+				}
+
+				if(doEdgeEdgeCollision)
 				{
 					PxVec3 origin;
 					PxVec3 direction;
@@ -185,7 +195,15 @@ bool PxcContactCapsuleHeightField(CONTACT_METHOD_ARGS)
 
 							const PxVec3 worldPoint = worldCapsule.getPointAt(s);
 							const PxVec3 p = worldPoint - n * radius;
-							contactBuffer.contact(p, n, l-radius, PXC_CONTACT_NO_FACE_INDEX, adjFaceIndices[0]);
+
+							PxU32 adjTri = adjFaceIndices[0];
+							if(adjFaceCount == 2)
+							{
+								const PxU16 m0 = hf.getMaterialIndex0(adjFaceIndices[0] >> 1);
+								if(m0 == PxHeightFieldMaterial::eHOLE)
+									adjTri = adjFaceIndices[1];
+							}
+							contactBuffer.contact(p, n, l-radius, PXC_CONTACT_NO_FACE_INDEX, adjTri);
 							#if DEBUG_HFNORMAL
 								printf("n=%.5f %.5f %.5f; d=%.5f\n", n.x, n.y, n.z, l-radius);
 								#if DEBUG_RENDER_HFCONTACTS
@@ -216,6 +234,7 @@ bool PxcContactCapsuleHeightField(CONTACT_METHOD_ARGS)
 						// if any of those share a face with hf_edge for the currently considered capsule_edge/hf_vertex contact
 						bool normalFromFace = false;
 						PxVec3 n;
+						PxReal l = 1.0f;
 						for (PxU32 iVertexContact = 0; iVertexContact < numCapsuleVertexContacts; iVertexContact++)
 						{
 							const Gu::ContactPoint& cp = contactBuffer.contacts[iVertexContact];
@@ -227,11 +246,12 @@ bool PxcContactCapsuleHeightField(CONTACT_METHOD_ARGS)
 								&& (vi == vi0 || vi == vi1 || vi == vi2)) // with one of the face's vertices matching this one
 							{
 								n = cp.normal; // then copy the normal from this contact
+								l = PxAbs(d.dot(n));
 								normalFromFace = true;
 								break;
 							}
 						}
-						PxReal l = 1.0f;
+						
 						if (!normalFromFace)
 							n = hfUtil.computePointNormal(hfGeom.heightFieldFlags, d, transform1, ll, vertex.x, vertex.z, epsSqr, l);
 

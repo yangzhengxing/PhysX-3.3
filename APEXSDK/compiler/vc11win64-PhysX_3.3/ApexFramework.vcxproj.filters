@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
-		<Filter Include="resource"><!--  -->
+		<Filter Include="resource">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -10,7 +10,7 @@
 		</ResourceCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="include"><!--  -->
+		<Filter Include="include">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -169,11 +169,11 @@
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="public"><!--  -->
+		<Filter Include="public">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="public\PhysX3"><!--  -->
+		<Filter Include="public\PhysX3">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -367,11 +367,11 @@
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="src"><!--  -->
+		<Filter Include="src">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="src\windows"><!--  -->
+		<Filter Include="src\windows">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -520,7 +520,7 @@
 		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<Filter Include="param"><!--  -->
+		<Filter Include="param">
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>

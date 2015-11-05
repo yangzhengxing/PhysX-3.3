@@ -63,20 +63,14 @@ SnippetMultiThreading_debug_common_cflags    += -MMD
 SnippetMultiThreading_debug_common_cflags    += $(addprefix -D, $(SnippetMultiThreading_debug_defines))
 SnippetMultiThreading_debug_common_cflags    += $(addprefix -I, $(SnippetMultiThreading_debug_hpaths))
 SnippetMultiThreading_debug_common_cflags  += -m32
+SnippetMultiThreading_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetMultiThreading_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetMultiThreading_debug_common_cflags  += -Wno-long-long
+SnippetMultiThreading_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetMultiThreading_debug_common_cflags  += -Wno-unused-parameter
+SnippetMultiThreading_debug_common_cflags  += -g3 -gdwarf-2
 SnippetMultiThreading_debug_cflags	:= $(SnippetMultiThreading_debug_common_cflags)
-SnippetMultiThreading_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMultiThreading_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMultiThreading_debug_cflags  += -Wno-long-long
-SnippetMultiThreading_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMultiThreading_debug_cflags  += -Wno-unused-parameter
-SnippetMultiThreading_debug_cflags  += -g3 -gdwarf-2
 SnippetMultiThreading_debug_cppflags	:= $(SnippetMultiThreading_debug_common_cflags)
-SnippetMultiThreading_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMultiThreading_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMultiThreading_debug_cppflags  += -Wno-long-long
-SnippetMultiThreading_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMultiThreading_debug_cppflags  += -Wno-unused-parameter
-SnippetMultiThreading_debug_cppflags  += -g3 -gdwarf-2
 SnippetMultiThreading_debug_lflags    := $(SnippetMultiThreading_custom_lflags)
 SnippetMultiThreading_debug_lflags    += $(addprefix -L, $(SnippetMultiThreading_debug_lpaths))
 SnippetMultiThreading_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetMultiThreading_debug_libraries)) -Wl,--end-group
@@ -175,20 +169,14 @@ SnippetMultiThreading_checked_common_cflags    += -MMD
 SnippetMultiThreading_checked_common_cflags    += $(addprefix -D, $(SnippetMultiThreading_checked_defines))
 SnippetMultiThreading_checked_common_cflags    += $(addprefix -I, $(SnippetMultiThreading_checked_hpaths))
 SnippetMultiThreading_checked_common_cflags  += -m32
+SnippetMultiThreading_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetMultiThreading_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetMultiThreading_checked_common_cflags  += -Wno-long-long
+SnippetMultiThreading_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetMultiThreading_checked_common_cflags  += -Wno-unused-parameter
+SnippetMultiThreading_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetMultiThreading_checked_cflags	:= $(SnippetMultiThreading_checked_common_cflags)
-SnippetMultiThreading_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMultiThreading_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMultiThreading_checked_cflags  += -Wno-long-long
-SnippetMultiThreading_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMultiThreading_checked_cflags  += -Wno-unused-parameter
-SnippetMultiThreading_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetMultiThreading_checked_cppflags	:= $(SnippetMultiThreading_checked_common_cflags)
-SnippetMultiThreading_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMultiThreading_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMultiThreading_checked_cppflags  += -Wno-long-long
-SnippetMultiThreading_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMultiThreading_checked_cppflags  += -Wno-unused-parameter
-SnippetMultiThreading_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetMultiThreading_checked_lflags    := $(SnippetMultiThreading_custom_lflags)
 SnippetMultiThreading_checked_lflags    += $(addprefix -L, $(SnippetMultiThreading_checked_lpaths))
 SnippetMultiThreading_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetMultiThreading_checked_libraries)) -Wl,--end-group
@@ -287,20 +275,14 @@ SnippetMultiThreading_profile_common_cflags    += -MMD
 SnippetMultiThreading_profile_common_cflags    += $(addprefix -D, $(SnippetMultiThreading_profile_defines))
 SnippetMultiThreading_profile_common_cflags    += $(addprefix -I, $(SnippetMultiThreading_profile_hpaths))
 SnippetMultiThreading_profile_common_cflags  += -m32
+SnippetMultiThreading_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetMultiThreading_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetMultiThreading_profile_common_cflags  += -Wno-long-long
+SnippetMultiThreading_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetMultiThreading_profile_common_cflags  += -Wno-unused-parameter
+SnippetMultiThreading_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetMultiThreading_profile_cflags	:= $(SnippetMultiThreading_profile_common_cflags)
-SnippetMultiThreading_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMultiThreading_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMultiThreading_profile_cflags  += -Wno-long-long
-SnippetMultiThreading_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMultiThreading_profile_cflags  += -Wno-unused-parameter
-SnippetMultiThreading_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetMultiThreading_profile_cppflags	:= $(SnippetMultiThreading_profile_common_cflags)
-SnippetMultiThreading_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMultiThreading_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMultiThreading_profile_cppflags  += -Wno-long-long
-SnippetMultiThreading_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMultiThreading_profile_cppflags  += -Wno-unused-parameter
-SnippetMultiThreading_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetMultiThreading_profile_lflags    := $(SnippetMultiThreading_custom_lflags)
 SnippetMultiThreading_profile_lflags    += $(addprefix -L, $(SnippetMultiThreading_profile_lpaths))
 SnippetMultiThreading_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetMultiThreading_profile_libraries)) -Wl,--end-group
@@ -397,20 +379,14 @@ SnippetMultiThreading_release_common_cflags    += -MMD
 SnippetMultiThreading_release_common_cflags    += $(addprefix -D, $(SnippetMultiThreading_release_defines))
 SnippetMultiThreading_release_common_cflags    += $(addprefix -I, $(SnippetMultiThreading_release_hpaths))
 SnippetMultiThreading_release_common_cflags  += -m32
+SnippetMultiThreading_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetMultiThreading_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetMultiThreading_release_common_cflags  += -Wno-long-long
+SnippetMultiThreading_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetMultiThreading_release_common_cflags  += -Wno-unused-parameter
+SnippetMultiThreading_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetMultiThreading_release_cflags	:= $(SnippetMultiThreading_release_common_cflags)
-SnippetMultiThreading_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMultiThreading_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMultiThreading_release_cflags  += -Wno-long-long
-SnippetMultiThreading_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMultiThreading_release_cflags  += -Wno-unused-parameter
-SnippetMultiThreading_release_cflags  += -O3 -fno-strict-aliasing
 SnippetMultiThreading_release_cppflags	:= $(SnippetMultiThreading_release_common_cflags)
-SnippetMultiThreading_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetMultiThreading_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetMultiThreading_release_cppflags  += -Wno-long-long
-SnippetMultiThreading_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetMultiThreading_release_cppflags  += -Wno-unused-parameter
-SnippetMultiThreading_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetMultiThreading_release_lflags    := $(SnippetMultiThreading_custom_lflags)
 SnippetMultiThreading_release_lflags    += $(addprefix -L, $(SnippetMultiThreading_release_lpaths))
 SnippetMultiThreading_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetMultiThreading_release_libraries)) -Wl,--end-group

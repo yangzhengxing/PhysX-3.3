@@ -70,6 +70,7 @@ Public Types</h2></td></tr>
 <li>Setting this flag on a dynamic actor will put the actor to sleep and set the velocities to 0. </li>
 <li>If this flag gets cleared, the current sleep state of the actor will be kept.</li>
 </ul>
+<dl class="section note"><dt>Note</dt><dd>kinematic actors are incompatible with CCD so raising this flag will automatically clear eENABLE_CCD</dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classPxRigidDynamic.html#a4464d188e7a1e94582c9cf35da9bbc93" title="Moves kinematically controlled dynamic actors through the game world.">PxRigidDynamic.setKinematicTarget()</a>Enable kinematic mode for the body. </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a5fd4878ae66a98c030a9d976e8ba8596a983c62745e575428d8b0aadefc23e8bc"></a>eUSE_KINEMATIC_TARGET_FOR_SCENE_QUERIES</em>&nbsp;</td><td class="fielddoc">
@@ -79,7 +80,8 @@ Public Types</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a5fd4878ae66a98c030a9d976e8ba8596a686cdd889652a435c19d8c663d809d9e"></a>eENABLE_CCD</em>&nbsp;</td><td class="fielddoc">
 <p>Enables swept integration for the actor. </p>
-<p>If this flag is raised and CCD is enabled on the scene, then this body will be simulated by the CCD system to ensure that collisions are not missed due to high-speed motion. Note individual shape pairs still need to enable <a class="el" href="structPxPairFlag.html#a60e71a2948b030140f840766a3f7ac2fac41a9f8b9326480403c023ad20cdc2f1" title="This flag is used to indicate whether this pair generates CCD contacts.">PxPairFlag::eDETECT_CCD_CONTACT</a> in the collision filtering to enable the CCD to respond to individual interactions. Enable CCD for the body. </p>
+<p>If this flag is raised and CCD is enabled on the scene, then this body will be simulated by the CCD system to ensure that collisions are not missed due to high-speed motion. Note individual shape pairs still need to enable <a class="el" href="structPxPairFlag.html#a60e71a2948b030140f840766a3f7ac2fac41a9f8b9326480403c023ad20cdc2f1" title="This flag is used to indicate whether this pair generates CCD contacts.">PxPairFlag::eDETECT_CCD_CONTACT</a> in the collision filtering to enable the CCD to respond to individual interactions.</p>
+<dl class="section note"><dt>Note</dt><dd>kinematic actors are incompatible with CCD so this flag will be cleared automatically when raised on a kinematic actorEnable CCD for the body. </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a5fd4878ae66a98c030a9d976e8ba8596a37775d7c189d9f499fdfda010f73fb95"></a>eENABLE_CCD_FRICTION</em>&nbsp;</td><td class="fielddoc">
 <p>Enabled CCD in swept integration for the actor. </p>

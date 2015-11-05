@@ -48,19 +48,11 @@ content="text/html; charset=iso-8859-1">
 		<li>Press "Run" to build and run the selected snippet</li>
 		<li>In order to build and run release mode you need to select "Edit Scheme..." and change the "Build Configuration" to "release". Additionally, after building, you need to manually choose the "Executable" under ".../Bin/(osx32|osx64)/SNIPPET_EXE_NAME". See "Known XCode issues" below.</li>
 	</ul>
-	
-	<h4>Rebuilding Serialization Metadata:</h4>
-	<ul>
-		<li>Physics and Extensions: run "./Tools/PhysXMetaDataGenerator/PxPhysicsWithExtensions/runClang_osx.sh"</li>
-		<li>Vehicle: run "./Tools/PhysXMetaDataGenerator/PxVehicleExtension/runClang_osx.sh"</li>
-		<li>Snippet Extension: run "./Tools/PhysXMetaDataGenerator/PxSnippetExtension/runClang_osx.sh"</li>
-		<li>Please consult the PhysX Guide for additional information.</li>
-	</ul>
-	
+
 	<h4>Notes:</h4>
 	<ul>
 		<li>No support for building the Samples or Snippets with makefiles currently</li>
-		<li>Current xcode projects target XCode 4.6|5.0|5.0.1, apple clang version 4.1|5.0 and MacOSX10.8|10.9</li>
+		<li>Current xcode projects target XCode 6.3, apple clang version 6.1 and MacOSX 10.10</li>
 		<li>Known XCode issues:</li>
 		<ul>
 			<li>Differently named products across configurations don't seem to be supported properly. Changing the active configuration (Edit Scheme... , Run , Build Configuration) doesn't adjust the Executable products appropriately. The executable may have to be picked manually under (Executable , Other...).</li>	

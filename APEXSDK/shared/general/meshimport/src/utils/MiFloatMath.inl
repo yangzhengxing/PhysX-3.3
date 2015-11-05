@@ -73,9 +73,9 @@ void fm_decomposeTransform(const REAL local_transform[16],REAL trans[3],REAL rot
   trans[1] = local_transform[13];
   trans[2] = local_transform[14];
 
-  scale[0] = ::sqrt(fm_squared(local_transform[0*4+0]) + fm_squared(local_transform[0*4+1]) + fm_squared(local_transform[0*4+2]));
-  scale[1] = ::sqrt(fm_squared(local_transform[1*4+0]) + fm_squared(local_transform[1*4+1]) + fm_squared(local_transform[1*4+2]));
-  scale[2] = ::sqrt(fm_squared(local_transform[2*4+0]) + fm_squared(local_transform[2*4+1]) + fm_squared(local_transform[2*4+2]));
+  scale[0] = static_cast<REAL>(::sqrt(fm_squared(local_transform[0*4+0]) + fm_squared(local_transform[0*4+1]) + fm_squared(local_transform[0*4+2])));
+  scale[1] = static_cast<REAL>(::sqrt(fm_squared(local_transform[1*4+0]) + fm_squared(local_transform[1*4+1]) + fm_squared(local_transform[1*4+2])));
+  scale[2] = static_cast<REAL>(::sqrt(fm_squared(local_transform[2*4+0]) + fm_squared(local_transform[2*4+1]) + fm_squared(local_transform[2*4+2])));
 
   REAL m[16];
   memcpy(m,local_transform,sizeof(REAL)*16);
@@ -180,7 +180,7 @@ void  fm_quatToEuler(const REAL quat[4],REAL &ax,REAL &ay,REAL &az)
 
 	if ( (REAL)fabs(cost_temp) > 0.001f )
 	{
-		cost = ::sqrt( cost_temp );
+		cost = static_cast<REAL>(::sqrt( cost_temp ));
 	}
 
 	REAL sinv, cosv, sinf, cosf;
@@ -201,9 +201,9 @@ void  fm_quatToEuler(const REAL quat[4],REAL &ax,REAL &ay,REAL &az)
 	}
 
 	// compute output rotations
-	ax	= ::atan2( sinv, cosv );
-	ay	= ::atan2( sint, cost );
-  az	= ::atan2( sinf, cosf );
+	ax	= static_cast<REAL>(::atan2( sinv, cosv ));
+	ay	= static_cast<REAL>(::atan2( sint, cost ));
+	az	= static_cast<REAL>(::atan2( sinf, cosf ));
 
 }
 
@@ -255,13 +255,13 @@ void fm_eulerToQuat(REAL roll,REAL pitch,REAL yaw,REAL *quat) // convert euler a
 	pitch *= 0.5f;
 	yaw   *= 0.5f;
 
-	REAL cr = ::cos(roll);
-	REAL cp = ::cos(pitch);
-	REAL cy = ::cos(yaw);
+	REAL cr = static_cast<REAL>(::cos(roll));
+	REAL cp = static_cast<REAL>(::cos(pitch));
+	REAL cy = static_cast<REAL>(::cos(yaw));
 
-	REAL sr = ::sin(roll);
-	REAL sp = ::sin(pitch);
-	REAL sy = ::sin(yaw);
+	REAL sr = static_cast<REAL>(::sin(roll));
+	REAL sp = static_cast<REAL>(::sin(pitch));
+	REAL sy = static_cast<REAL>(::sin(yaw));
 
 	REAL cpcy = cp * cy;
 	REAL spsy = sp * sy;
@@ -360,7 +360,7 @@ void fm_matrixToQuat(const REAL *matrix,REAL *quat) // convert the 3x3 portion o
 		MiI32 j = nxt[i];
 		MiI32 k = nxt[j];
 
-		REAL s = ::sqrt ( ((matrix[i*4+i] - (matrix[j*4+j] + matrix[k*4+k])) + 1.0f) );
+		REAL s = static_cast<REAL>(::sqrt ( ((matrix[i*4+i] - (matrix[j*4+j] + matrix[k*4+k])) + 1.0f) ));
 
 		qa[i] = s * 0.5f;
 
@@ -447,7 +447,7 @@ REAL fm_distance(const REAL *p1,const REAL *p2)
 	REAL dy = p1[1] - p2[1];
 	REAL dz = p1[2] - p2[2];
 
-	return ::sqrt( dx*dx + dy*dy + dz *dz );
+	return static_cast<REAL>(::sqrt( dx*dx + dy*dy + dz *dz ));
 }
 
 REAL fm_distanceSquared(const REAL *p1,const REAL *p2)
@@ -483,7 +483,7 @@ REAL fm_computePlane(const REAL *A,const REAL *B,const REAL *C,REAL *n) // retur
 	REAL vw_y = vz * wx - vx * wz;
 	REAL vw_z = vx * wy - vy * wx;
 
-	REAL mag = ::sqrt((vw_x * vw_x) + (vw_y * vw_y) + (vw_z * vw_z));
+	REAL mag = static_cast<REAL>(::sqrt((vw_x * vw_x) + (vw_y * vw_y) + (vw_z * vw_z)));
 
 	if ( mag < 0.000001f )
 	{
@@ -646,17 +646,17 @@ void  fm_eulerToQuatDX(REAL x,REAL y,REAL z,REAL *quat) // convert euler angles 
 void  fm_eulerToMatrixDX(REAL x,REAL y,REAL z,REAL *matrix) // convert euler angles to quaternion using the fucked up DirectX method.
 {
   fm_identity(matrix);
-  matrix[0*4+0] = ::cos(z)*::cos(y) + ::sin(z)*::sin(x)*::sin(y);
-  matrix[0*4+1] = ::sin(z)*::cos(x);
-  matrix[0*4+2] = ::cos(z)*-::sin(y) + ::sin(z)*::sin(x)*::cos(y);
+  matrix[0*4+0] = static_cast<REAL>(::cos(z)*::cos(y) + ::sin(z)*::sin(x)*::sin(y));
+  matrix[0*4+1] = static_cast<REAL>(::sin(z)*::cos(x));
+  matrix[0*4+2] = static_cast<REAL>(::cos(z)*-::sin(y) + ::sin(z)*::sin(x)*::cos(y));
 
-  matrix[1*4+0] = -::sin(z)*::cos(y)+::cos(z)*::sin(x)*::sin(y);
-  matrix[1*4+1] = ::cos(z)*::cos(x);
-  matrix[1*4+2] = ::sin(z)*::sin(y) +::cos(z)*::sin(x)*::cos(y);
+  matrix[1*4+0] = static_cast<REAL>(-::sin(z)*::cos(y)+::cos(z)*::sin(x)*::sin(y));
+  matrix[1*4+1] = static_cast<REAL>(::cos(z)*::cos(x));
+  matrix[1*4+2] = static_cast<REAL>(::sin(z)*::sin(y) +::cos(z)*::sin(x)*::cos(y));
 
-  matrix[2*4+0] = ::cos(x)*::sin(y);
-  matrix[2*4+1] = -::sin(x);
-  matrix[2*4+2] = ::cos(x)*::cos(y);
+  matrix[2*4+0] = static_cast<REAL>(::cos(x)*::sin(y));
+  matrix[2*4+1] = static_cast<REAL>(-::sin(x));
+  matrix[2*4+2] = static_cast<REAL>(::cos(x)*::cos(y));
 }
 
 
@@ -723,10 +723,10 @@ Output, REAL ENORM0_3D, the Euclidean norm of (P1-P0).
 {
   REAL value;
 
-  value = ::sqrt (
+  value = static_cast<REAL>(::sqrt (
     ( x1 - x0 ) * ( x1 - x0 ) + 
     ( y1 - y0 ) * ( y1 - y0 ) + 
-    ( z1 - z0 ) * ( z1 - z0 ) );
+    ( z1 - z0 ) * ( z1 - z0 ) ));
 
   return value;
 }
@@ -791,7 +791,7 @@ static REAL triangle_area_3d ( REAL x1, REAL y1, REAL z1, REAL x2,REAL y2, REAL 
     b = y3 - y1 - alpha * ( y2 - y1 );
     c = z3 - z1 - alpha * ( z2 - z1 );
 
-    height = ::sqrt ( a * a + b * b + c * c );
+    height = static_cast<REAL>(::sqrt ( a * a + b * b + c * c ));
 
   }
 
@@ -1021,9 +1021,9 @@ FM_Axis fm_getDominantAxis(const REAL normal[3])
 {
   FM_Axis ret = FM_XAXIS;
 
-  REAL x = fabs(normal[0]);
-  REAL y = fabs(normal[1]);
-  REAL z = fabs(normal[2]);
+  REAL x = static_cast<REAL>(fabs(normal[0]));
+  REAL y = static_cast<REAL>(fabs(normal[1]));
+  REAL z = static_cast<REAL>(fabs(normal[2]));
 
   if ( y > x && y > z )
     ret = FM_YAXIS;
@@ -1044,7 +1044,7 @@ bool fm_lineSphereIntersect(const REAL *center,REAL radius,const REAL *p1,const 
   dir[1] = p2[1]-p1[1];
   dir[2] = p2[2]-p1[2];
 
-  REAL distance = ::sqrt( dir[0]*dir[0]+dir[1]*dir[1]+dir[2]*dir[2]);
+  REAL distance = static_cast<REAL>(::sqrt( dir[0]*dir[0]+dir[1]*dir[1]+dir[2]*dir[2]));
 
   if ( distance > 0 )
   {
@@ -1115,7 +1115,7 @@ bool fm_raySphereIntersect(const REAL *center,REAL radius,const REAL *pos,const 
 	{
 		if ( intersect )
 		{
-		  REAL d = ::sqrt(disc);
+		  REAL d = static_cast<REAL>(::sqrt(disc));
       REAL diff = v-d;
       if ( diff < distance )
       {
@@ -1195,7 +1195,7 @@ void fm_rotationArc(const REAL *v0,const REAL *v1,REAL *quat)
   }
   else
   {
-	  REAL s = ::sqrt((1+d)*2);
+	  REAL s = static_cast<REAL>(::sqrt((1+d)*2));
 	  REAL recip = 1.0f / s;
 
 	  quat[0] = cross[0] * recip;
@@ -1221,7 +1221,7 @@ REAL fm_distancePointLineSegment(const REAL *Point,const REAL *LineStart,const R
       REAL d2 = fm_distanceSquared(Point,LineEnd);
       if ( d1 <= d2 )
       {
-        ret = ::sqrt(d1);
+        ret = static_cast<REAL>(::sqrt(d1));
         intersection[0] = LineStart[0];
         intersection[1] = LineStart[1];
         intersection[2] = LineStart[2];
@@ -1229,7 +1229,7 @@ REAL fm_distancePointLineSegment(const REAL *Point,const REAL *LineStart,const R
       }
       else
       {
-        ret = ::sqrt(d2);
+        ret = static_cast<REAL>(::sqrt(d2));
         intersection[0] = LineEnd[0];
         intersection[1] = LineEnd[1];
         intersection[2] = LineEnd[2];
@@ -1306,7 +1306,7 @@ public:
     m_afSubd[2] = 0;
     if (fM02 != (Type)0.0)
     {
-      Type fLength = ::sqrt(fM01*fM01+fM02*fM02);
+      Type fLength = static_cast<Type>(::sqrt(fM01*fM01+fM02*fM02));
       Type fInvLength = ((Type)1.0)/fLength;
       fM01 *= fInvLength;
       fM02 *= fInvLength;
@@ -1357,7 +1357,7 @@ public:
         MiI32 i2;
         for (i2 = i0; i2 <= (3-2); i2++)
         {
-          Type fTmp = fabs(m_afDiag[i2]) + fabs(m_afDiag[i2+1]);
+          Type fTmp = static_cast<Type>(fabs(m_afDiag[i2]) + fabs(m_afDiag[i2+1]));
           if ( fabs(m_afSubd[i2]) + fTmp == fTmp )
             break;
         }
@@ -1367,7 +1367,7 @@ public:
         }
 
         Type fG = (m_afDiag[i0+1] - m_afDiag[i0])/(((Type)2.0) * m_afSubd[i0]);
-        Type fR = ::sqrt(fG*fG+(Type)1.0);
+        Type fR = static_cast<Type>(::sqrt(fG*fG+(Type)1.0));
         if (fG < (Type)0.0)
         {
           fG = m_afDiag[i2]-m_afDiag[i0]+m_afSubd[i0]/(fG-fR);
@@ -1384,7 +1384,7 @@ public:
           if (fabs(fF) >= fabs(fG))
           {
             fCos = fG/fF;
-            fR = ::sqrt(fCos*fCos+(Type)1.0);
+            fR = static_cast<Type>(::sqrt(fCos*fCos+(Type)1.0));
             m_afSubd[i3+1] = fF*fR;
             fSin = ((Type)1.0)/fR;
             fCos *= fSin;
@@ -1392,7 +1392,7 @@ public:
           else
           {
             fSin = fF/fG;
-            fR = ::sqrt(fSin*fSin+(Type)1.0);
+            fR = static_cast<Type>(::sqrt(fSin*fSin+(Type)1.0));
             m_afSubd[i3+1] = fG*fR;
             fCos = ((Type)1.0)/fR;
             fSin *= fCos;

@@ -45,6 +45,16 @@ struct NxMeshProcessingParameters
 	unsigned microgridSize;
 
 	/**
+		Open mesh handling.  Modes: Automatic, Closed, Open (see NxBSPOpenMode)
+		Closed mode assumes the mesh is closed and attempts to insert interior faces.
+		Open mode assumes the mesh is open and does not insert interior faces.
+		Automatic mode attempts to determine if the mesh is open or closed, and act accordingly.
+
+		Default is Automatic mode.
+	*/
+	physx::apex::NxBSPOpenMode::Enum meshMode;
+
+	/**
 		Debug output verbosity level.  The higher the number, the more messages are output.
 		Default = 0.
 	*/
@@ -62,6 +72,7 @@ struct NxMeshProcessingParameters
 		islandGeneration = false;
 		removeTJunctions = false;
 		microgridSize = 65536;
+		meshMode = physx::NxBSPOpenMode::Automatic;
 		verbosity = 0;
 	}
 };

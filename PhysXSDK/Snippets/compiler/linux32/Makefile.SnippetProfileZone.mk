@@ -63,20 +63,14 @@ SnippetProfileZone_debug_common_cflags    += -MMD
 SnippetProfileZone_debug_common_cflags    += $(addprefix -D, $(SnippetProfileZone_debug_defines))
 SnippetProfileZone_debug_common_cflags    += $(addprefix -I, $(SnippetProfileZone_debug_hpaths))
 SnippetProfileZone_debug_common_cflags  += -m32
+SnippetProfileZone_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetProfileZone_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetProfileZone_debug_common_cflags  += -Wno-long-long
+SnippetProfileZone_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetProfileZone_debug_common_cflags  += -Wno-unused-parameter
+SnippetProfileZone_debug_common_cflags  += -g3 -gdwarf-2
 SnippetProfileZone_debug_cflags	:= $(SnippetProfileZone_debug_common_cflags)
-SnippetProfileZone_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetProfileZone_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetProfileZone_debug_cflags  += -Wno-long-long
-SnippetProfileZone_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetProfileZone_debug_cflags  += -Wno-unused-parameter
-SnippetProfileZone_debug_cflags  += -g3 -gdwarf-2
 SnippetProfileZone_debug_cppflags	:= $(SnippetProfileZone_debug_common_cflags)
-SnippetProfileZone_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetProfileZone_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetProfileZone_debug_cppflags  += -Wno-long-long
-SnippetProfileZone_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetProfileZone_debug_cppflags  += -Wno-unused-parameter
-SnippetProfileZone_debug_cppflags  += -g3 -gdwarf-2
 SnippetProfileZone_debug_lflags    := $(SnippetProfileZone_custom_lflags)
 SnippetProfileZone_debug_lflags    += $(addprefix -L, $(SnippetProfileZone_debug_lpaths))
 SnippetProfileZone_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetProfileZone_debug_libraries)) -Wl,--end-group
@@ -175,20 +169,14 @@ SnippetProfileZone_checked_common_cflags    += -MMD
 SnippetProfileZone_checked_common_cflags    += $(addprefix -D, $(SnippetProfileZone_checked_defines))
 SnippetProfileZone_checked_common_cflags    += $(addprefix -I, $(SnippetProfileZone_checked_hpaths))
 SnippetProfileZone_checked_common_cflags  += -m32
+SnippetProfileZone_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetProfileZone_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetProfileZone_checked_common_cflags  += -Wno-long-long
+SnippetProfileZone_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetProfileZone_checked_common_cflags  += -Wno-unused-parameter
+SnippetProfileZone_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetProfileZone_checked_cflags	:= $(SnippetProfileZone_checked_common_cflags)
-SnippetProfileZone_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetProfileZone_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetProfileZone_checked_cflags  += -Wno-long-long
-SnippetProfileZone_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetProfileZone_checked_cflags  += -Wno-unused-parameter
-SnippetProfileZone_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetProfileZone_checked_cppflags	:= $(SnippetProfileZone_checked_common_cflags)
-SnippetProfileZone_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetProfileZone_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetProfileZone_checked_cppflags  += -Wno-long-long
-SnippetProfileZone_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetProfileZone_checked_cppflags  += -Wno-unused-parameter
-SnippetProfileZone_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetProfileZone_checked_lflags    := $(SnippetProfileZone_custom_lflags)
 SnippetProfileZone_checked_lflags    += $(addprefix -L, $(SnippetProfileZone_checked_lpaths))
 SnippetProfileZone_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetProfileZone_checked_libraries)) -Wl,--end-group
@@ -287,20 +275,14 @@ SnippetProfileZone_profile_common_cflags    += -MMD
 SnippetProfileZone_profile_common_cflags    += $(addprefix -D, $(SnippetProfileZone_profile_defines))
 SnippetProfileZone_profile_common_cflags    += $(addprefix -I, $(SnippetProfileZone_profile_hpaths))
 SnippetProfileZone_profile_common_cflags  += -m32
+SnippetProfileZone_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetProfileZone_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetProfileZone_profile_common_cflags  += -Wno-long-long
+SnippetProfileZone_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetProfileZone_profile_common_cflags  += -Wno-unused-parameter
+SnippetProfileZone_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetProfileZone_profile_cflags	:= $(SnippetProfileZone_profile_common_cflags)
-SnippetProfileZone_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetProfileZone_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetProfileZone_profile_cflags  += -Wno-long-long
-SnippetProfileZone_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetProfileZone_profile_cflags  += -Wno-unused-parameter
-SnippetProfileZone_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetProfileZone_profile_cppflags	:= $(SnippetProfileZone_profile_common_cflags)
-SnippetProfileZone_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetProfileZone_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetProfileZone_profile_cppflags  += -Wno-long-long
-SnippetProfileZone_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetProfileZone_profile_cppflags  += -Wno-unused-parameter
-SnippetProfileZone_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetProfileZone_profile_lflags    := $(SnippetProfileZone_custom_lflags)
 SnippetProfileZone_profile_lflags    += $(addprefix -L, $(SnippetProfileZone_profile_lpaths))
 SnippetProfileZone_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetProfileZone_profile_libraries)) -Wl,--end-group
@@ -397,20 +379,14 @@ SnippetProfileZone_release_common_cflags    += -MMD
 SnippetProfileZone_release_common_cflags    += $(addprefix -D, $(SnippetProfileZone_release_defines))
 SnippetProfileZone_release_common_cflags    += $(addprefix -I, $(SnippetProfileZone_release_hpaths))
 SnippetProfileZone_release_common_cflags  += -m32
+SnippetProfileZone_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetProfileZone_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetProfileZone_release_common_cflags  += -Wno-long-long
+SnippetProfileZone_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetProfileZone_release_common_cflags  += -Wno-unused-parameter
+SnippetProfileZone_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetProfileZone_release_cflags	:= $(SnippetProfileZone_release_common_cflags)
-SnippetProfileZone_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetProfileZone_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetProfileZone_release_cflags  += -Wno-long-long
-SnippetProfileZone_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetProfileZone_release_cflags  += -Wno-unused-parameter
-SnippetProfileZone_release_cflags  += -O3 -fno-strict-aliasing
 SnippetProfileZone_release_cppflags	:= $(SnippetProfileZone_release_common_cflags)
-SnippetProfileZone_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetProfileZone_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetProfileZone_release_cppflags  += -Wno-long-long
-SnippetProfileZone_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetProfileZone_release_cppflags  += -Wno-unused-parameter
-SnippetProfileZone_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetProfileZone_release_lflags    := $(SnippetProfileZone_custom_lflags)
 SnippetProfileZone_release_lflags    += $(addprefix -L, $(SnippetProfileZone_release_lpaths))
 SnippetProfileZone_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetProfileZone_release_libraries)) -Wl,--end-group

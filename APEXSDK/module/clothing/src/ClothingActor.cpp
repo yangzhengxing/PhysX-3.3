@@ -338,7 +338,7 @@ ClothingActor::ClothingActor(const NxParameterized::Interface& descriptor, Cloth
 
 		// PH: So if backend name is 'embedded', i won't get an asset cooked data ever, so it also won't complain about the cooked version, good
 		// if backend is native, it might, but that's only when you force native with the 2.8.x sdk on a 3.2 asset
-		//const char* cookingDataType = mAsset->getModule()->getBackendFactory(mBackendName)->getCookingJobType();
+		// const char* cookingDataType = mAsset->getModule()->getBackendFactory(mBackendName)->getCookingJobType();
 		NxParameterized::Interface* assetCookedData = mAsset->getCookedData(mActorDesc->actorScale);
 		NxParameterized::Interface* actorCookedData = mActorDesc->runtimeCooked;
 
@@ -629,7 +629,12 @@ void ClothingActor::updateState(const PxMat44& globalPose, const PxMat44* newBon
 	}
 
 	mActorDesc->globalPose = globalPose;
-
+	if (!physx::PxEquals(globalPose.column0.magnitude(), mActorDesc->actorScale, 1e-6))
+	{
+		APEX_DEBUG_WARNING("Actor Scale wasn't set properly, it doesn't equal to the Global Pose scale: %f != %f",
+			mActorDesc->actorScale,
+			globalPose.column0.magnitude());
+	}
 
 	PX_ASSERT(newBoneMatrices == NULL || boneMatricesByteStride >= sizeof(PxMat44));
 	if (boneMatricesByteStride >= sizeof(PxMat44) && newBoneMatrices != NULL)
@@ -1902,7 +1907,8 @@ void ClothingActor::visualize()
 	{
 		return;
 	}
-	if ( !mEnableDebugVisualization ) return;
+	if (!mEnableDebugVisualization) 
+		return;
 
 	NiApexRenderDebug& renderDebug = *mClothingScene->mRenderDebug;
 
@@ -1949,7 +1955,7 @@ void ClothingActor::visualize()
 
 	renderDataLock();
 
-#if 0
+#if 1
 	static bool turnOn = true;
 	if (turnOn)
 	{
@@ -1960,13 +1966,13 @@ void ClothingActor::visualize()
 		{
 			renderDebug.setCurrentColor(colorBlue);
 
-			PxU32* morphMap = mAsset->getMorphMapping(mCurrentGraphicalLodId);
-
 			for (PxU32 s = 0; s < rma->getSubmeshCount(); s++)
 			{
+				PxU32* morphMap = mAsset->getMorphMapping(mCurrentGraphicalLodId, s);
+
 				const PxU32 numVertices = rma->getSubmesh(s).getVertexCount(0);
 				const NxVertexFormat& format = rma->getSubmesh(s).getVertexBuffer().getFormat();
-				const PxU32 positionIndex = format.getBufferIndexFromID(format.getSemanticID(NxRenderVertexSemantic::POSITION));
+				const PxU32 positionIndex = (PxU32)format.getBufferIndexFromID(format.getSemanticID(NxRenderVertexSemantic::POSITION));
 				if (format.getBufferFormat(positionIndex) == NxRenderDataFormat::FLOAT3)
 				{
 					PxVec3* positions = (PxVec3*)rma->getSubmesh(s).getVertexBuffer().getBuffer(positionIndex);
@@ -1985,7 +1991,7 @@ void ClothingActor::visualize()
 
 		if (mActorDesc->morphPhysicalMeshNewPositions.buf != NULL)
 		{
-			mClothingScene-> mrenderDebug.setCurrentColor(colorRed);
+			renderDebug.setCurrentColor(colorRed);
 
 			ClothingPhysicalMeshParametersNS::PhysicalMesh_Type* physicalMesh = mAsset->getPhysicalMeshFromLod(mCurrentGraphicalLodId);
 			PxU32 offset = mAsset->getPhysicalMeshOffset(mAsset->getPhysicalMeshID(mCurrentGraphicalLodId));
@@ -4102,7 +4108,9 @@ void ClothingActor::updateRenderProxy()
 
 	// get a new render proxy from the pool
 	NiApexRenderMeshAsset* renderMeshAsset = mAsset->getGraphicalMesh(mCurrentGraphicalLodId);
-	ClothingRenderProxy* renderProxy = mClothingScene->getRenderProxy(renderMeshAsset, mActorDesc->fallbackSkinning, mClothingSimulation != NULL, mOverrideMaterials, mActorDesc->morphGraphicalMeshNewPositions.buf, &mGraphicalMeshes[mCurrentGraphicalLodId].morphTargetVertexOffsets[0]);
+	ClothingRenderProxy* renderProxy = mClothingScene->getRenderProxy(renderMeshAsset, mActorDesc->fallbackSkinning, mClothingSimulation != NULL, 
+																	mOverrideMaterials, mActorDesc->morphGraphicalMeshNewPositions.buf, 
+																	&mGraphicalMeshes[mCurrentGraphicalLodId].morphTargetVertexOffsets[0]);
 
 	mGraphicalMeshes[mCurrentGraphicalLodId].renderProxy = renderProxy;
 }
@@ -5053,7 +5061,7 @@ void ClothingActor::visualizeBackstopPrecise(NiApexRenderDebug& renderDebug, PxF
 			up *= shortestEdgeLength;
 
 			const PxF32 r = collisionSphereRadius;
-			const PxF32 back = r - sqrt(r * r - shortestEdgeLength * shortestEdgeLength);
+			const PxF32 back = r - sqrtf(r * r - shortestEdgeLength * shortestEdgeLength);
 
 			// move the verts a bit back such that they are on the sphere
 			centerToSim *= back;
@@ -5145,13 +5153,14 @@ NxClothingPlane* ClothingActor::createCollisionPlane(const PxPlane& plane)
 
 NxClothingConvex* ClothingActor::createCollisionConvex(NxClothingPlane** planes, PxU32 numPlanes)
 {
-	if (numPlanes == 0)
+	if (numPlanes < 3)
 		return NULL;
 
 	ClothingConvex* convex = NULL;
 	convex = PX_NEW(ClothingConvex)(mCollisionConvexes, *this, planes, numPlanes);
 	PX_ASSERT(convex != NULL);
 	bActorCollisionChanged = true;
+
 	return convex;
 }
 

@@ -64,20 +64,14 @@ SnippetHelloWorld_debug_common_cflags    += -MMD
 SnippetHelloWorld_debug_common_cflags    += $(addprefix -D, $(SnippetHelloWorld_debug_defines))
 SnippetHelloWorld_debug_common_cflags    += $(addprefix -I, $(SnippetHelloWorld_debug_hpaths))
 SnippetHelloWorld_debug_common_cflags  += -m64
+SnippetHelloWorld_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetHelloWorld_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetHelloWorld_debug_common_cflags  += -Wno-long-long
+SnippetHelloWorld_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetHelloWorld_debug_common_cflags  += -Wno-unused-parameter
+SnippetHelloWorld_debug_common_cflags  += -g3 -gdwarf-2
 SnippetHelloWorld_debug_cflags	:= $(SnippetHelloWorld_debug_common_cflags)
-SnippetHelloWorld_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetHelloWorld_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetHelloWorld_debug_cflags  += -Wno-long-long
-SnippetHelloWorld_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetHelloWorld_debug_cflags  += -Wno-unused-parameter
-SnippetHelloWorld_debug_cflags  += -g3 -gdwarf-2
 SnippetHelloWorld_debug_cppflags	:= $(SnippetHelloWorld_debug_common_cflags)
-SnippetHelloWorld_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetHelloWorld_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetHelloWorld_debug_cppflags  += -Wno-long-long
-SnippetHelloWorld_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetHelloWorld_debug_cppflags  += -Wno-unused-parameter
-SnippetHelloWorld_debug_cppflags  += -g3 -gdwarf-2
 SnippetHelloWorld_debug_lflags    := $(SnippetHelloWorld_custom_lflags)
 SnippetHelloWorld_debug_lflags    += $(addprefix -L, $(SnippetHelloWorld_debug_lpaths))
 SnippetHelloWorld_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetHelloWorld_debug_libraries)) -Wl,--end-group
@@ -176,20 +170,14 @@ SnippetHelloWorld_checked_common_cflags    += -MMD
 SnippetHelloWorld_checked_common_cflags    += $(addprefix -D, $(SnippetHelloWorld_checked_defines))
 SnippetHelloWorld_checked_common_cflags    += $(addprefix -I, $(SnippetHelloWorld_checked_hpaths))
 SnippetHelloWorld_checked_common_cflags  += -m64
+SnippetHelloWorld_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetHelloWorld_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetHelloWorld_checked_common_cflags  += -Wno-long-long
+SnippetHelloWorld_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetHelloWorld_checked_common_cflags  += -Wno-unused-parameter
+SnippetHelloWorld_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetHelloWorld_checked_cflags	:= $(SnippetHelloWorld_checked_common_cflags)
-SnippetHelloWorld_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetHelloWorld_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetHelloWorld_checked_cflags  += -Wno-long-long
-SnippetHelloWorld_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetHelloWorld_checked_cflags  += -Wno-unused-parameter
-SnippetHelloWorld_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetHelloWorld_checked_cppflags	:= $(SnippetHelloWorld_checked_common_cflags)
-SnippetHelloWorld_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetHelloWorld_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetHelloWorld_checked_cppflags  += -Wno-long-long
-SnippetHelloWorld_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetHelloWorld_checked_cppflags  += -Wno-unused-parameter
-SnippetHelloWorld_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetHelloWorld_checked_lflags    := $(SnippetHelloWorld_custom_lflags)
 SnippetHelloWorld_checked_lflags    += $(addprefix -L, $(SnippetHelloWorld_checked_lpaths))
 SnippetHelloWorld_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetHelloWorld_checked_libraries)) -Wl,--end-group
@@ -288,20 +276,14 @@ SnippetHelloWorld_profile_common_cflags    += -MMD
 SnippetHelloWorld_profile_common_cflags    += $(addprefix -D, $(SnippetHelloWorld_profile_defines))
 SnippetHelloWorld_profile_common_cflags    += $(addprefix -I, $(SnippetHelloWorld_profile_hpaths))
 SnippetHelloWorld_profile_common_cflags  += -m64
+SnippetHelloWorld_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetHelloWorld_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetHelloWorld_profile_common_cflags  += -Wno-long-long
+SnippetHelloWorld_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetHelloWorld_profile_common_cflags  += -Wno-unused-parameter
+SnippetHelloWorld_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetHelloWorld_profile_cflags	:= $(SnippetHelloWorld_profile_common_cflags)
-SnippetHelloWorld_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetHelloWorld_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetHelloWorld_profile_cflags  += -Wno-long-long
-SnippetHelloWorld_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetHelloWorld_profile_cflags  += -Wno-unused-parameter
-SnippetHelloWorld_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetHelloWorld_profile_cppflags	:= $(SnippetHelloWorld_profile_common_cflags)
-SnippetHelloWorld_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetHelloWorld_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetHelloWorld_profile_cppflags  += -Wno-long-long
-SnippetHelloWorld_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetHelloWorld_profile_cppflags  += -Wno-unused-parameter
-SnippetHelloWorld_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetHelloWorld_profile_lflags    := $(SnippetHelloWorld_custom_lflags)
 SnippetHelloWorld_profile_lflags    += $(addprefix -L, $(SnippetHelloWorld_profile_lpaths))
 SnippetHelloWorld_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetHelloWorld_profile_libraries)) -Wl,--end-group
@@ -398,20 +380,14 @@ SnippetHelloWorld_release_common_cflags    += -MMD
 SnippetHelloWorld_release_common_cflags    += $(addprefix -D, $(SnippetHelloWorld_release_defines))
 SnippetHelloWorld_release_common_cflags    += $(addprefix -I, $(SnippetHelloWorld_release_hpaths))
 SnippetHelloWorld_release_common_cflags  += -m64
+SnippetHelloWorld_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetHelloWorld_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetHelloWorld_release_common_cflags  += -Wno-long-long
+SnippetHelloWorld_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetHelloWorld_release_common_cflags  += -Wno-unused-parameter
+SnippetHelloWorld_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetHelloWorld_release_cflags	:= $(SnippetHelloWorld_release_common_cflags)
-SnippetHelloWorld_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetHelloWorld_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetHelloWorld_release_cflags  += -Wno-long-long
-SnippetHelloWorld_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetHelloWorld_release_cflags  += -Wno-unused-parameter
-SnippetHelloWorld_release_cflags  += -O3 -fno-strict-aliasing
 SnippetHelloWorld_release_cppflags	:= $(SnippetHelloWorld_release_common_cflags)
-SnippetHelloWorld_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetHelloWorld_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetHelloWorld_release_cppflags  += -Wno-long-long
-SnippetHelloWorld_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetHelloWorld_release_cppflags  += -Wno-unused-parameter
-SnippetHelloWorld_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetHelloWorld_release_lflags    := $(SnippetHelloWorld_custom_lflags)
 SnippetHelloWorld_release_lflags    += $(addprefix -L, $(SnippetHelloWorld_release_lpaths))
 SnippetHelloWorld_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetHelloWorld_release_libraries)) -Wl,--end-group

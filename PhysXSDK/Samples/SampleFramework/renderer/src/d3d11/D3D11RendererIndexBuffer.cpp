@@ -76,7 +76,7 @@ D3D11RendererIndexBuffer::~D3D11RendererIndexBuffer(void)
 {
 	if (m_d3dIndexBuffer)
 	{
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if (m_interopContext && m_registeredInCUDA)
 		{
 			m_registeredInCUDA = !m_interopContext->unregisterResourceInCuda(m_InteropHandle);
@@ -96,7 +96,7 @@ void D3D11RendererIndexBuffer::onDeviceLost(void)
 
 	if (m_d3dIndexBuffer)
 	{
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if (m_interopContext && m_registeredInCUDA)
 		{
 			m_registeredInCUDA = !m_interopContext->unregisterResourceInCuda(m_InteropHandle);
@@ -113,7 +113,7 @@ void D3D11RendererIndexBuffer::onDeviceReset(void)
 	{
 		m_d3dDevice.CreateBuffer(&m_d3dBufferDesc, NULL, &m_d3dIndexBuffer);
 		RENDERER_ASSERT(m_d3dIndexBuffer, "Failed to create DIRECT3D11 Index Buffer.");
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if (m_interopContext && m_d3dIndexBuffer && m_mustBeRegisteredInCUDA)
 		{
 			m_registeredInCUDA = m_interopContext->registerResourceInCudaD3D(m_InteropHandle, m_d3dIndexBuffer);

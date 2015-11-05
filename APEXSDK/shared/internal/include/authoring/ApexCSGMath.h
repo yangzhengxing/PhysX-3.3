@@ -392,9 +392,25 @@ public:
 		Vec4Real::set(x, y, z, (Real)0);
 	}
 
-	PX_INLINE Dir	operator ^(const Dir& d)	const
+	PX_INLINE Dir	cross(const Dir& d)	const	// Simple cross-product
 	{
 		return Dir(el[1] * d[2] - el[2] * d[1], el[2] * d[0] - el[0] * d[2], el[0] * d[1] - el[1] * d[0]);
+	}
+
+	PX_INLINE Real	dot(const Dir& d)	const	// Simple dot-product
+	{
+		return el[0]*d[0] + el[1]*d[1] + el[2]*d[2];
+	}
+
+	PX_INLINE Dir	operator ^(const Dir& d)	const	// Uses an improvement step for more accuracy
+	{
+		const Dir c = cross(d);	// Cross-product gives perpendicular
+		const Real c2 = c|c;
+		if (c2 != 0.0f)
+		{
+			return c + ((dot(c))*(c.cross(d)) + (d | c)*(cross(c))) / c2;	// Improvement to (*this d)^T(c) = (0)
+		}
+		return c;
 	}
 };
 
@@ -514,6 +530,24 @@ public:
 		ALL_i(4, r[i] = el[i] | v);
 		return r;
 	}
+	PX_INLINE	Mat4Real	operator +	(const Mat4Real& m)	const
+	{
+		Mat4Real r;
+		for (int i = 0; i < 4; ++i) for (int j = 0; j < 4; ++j)
+			{
+				r[i][j] = el[i][j] + m[i][j];
+			}
+		return r;
+	}
+	PX_INLINE	Mat4Real	operator -	(const Mat4Real& m)	const
+	{
+		Mat4Real r;
+		for (int i = 0; i < 4; ++i) for (int j = 0; j < 4; ++j)
+			{
+				r[i][j] = el[i][j] - m[i][j];
+			}
+		return r;
+	}
 	PX_INLINE	Mat4Real	operator *	(const Mat4Real& m)	const
 	{
 		Mat4Real r((Real)0);
@@ -557,18 +591,48 @@ public:
 	}
 	PX_INLINE	Mat4Real	cof34()								const;	// Assumes last row = (0,0,0,1)
 	PX_INLINE	Mat4Real	inverse34()							const;	// Assumes last row = (0,0,0,1)
+	PX_INLINE	Mat4Real	transpose()							const
+	{
+		Mat4Real r;
+		for (int i = 0; i < 4; ++i) for (int j = 0; j < 4; ++j)
+			{
+				r[i][j] = el[j][i];
+			}
+		return r;
+	}
 };
 
 PX_INLINE Mat4Real
 Mat4Real::cof34() const
 {
-	Mat4Real r;
-	r[0].set(el[1][1]*el[2][2] - el[1][2]*el[2][1], el[1][2]*el[2][0] - el[1][0]*el[2][2], el[1][0]*el[2][1] - el[1][1]*el[2][0], 0);
-	r[1].set(el[2][1]*el[0][2] - el[2][2]*el[0][1], el[2][2]*el[0][0] - el[2][0]*el[0][2], el[2][0]*el[0][1] - el[2][1]*el[0][0], 0);
-	r[2].set(el[0][1]*el[1][2] - el[0][2]*el[1][1], el[0][2]*el[1][0] - el[0][0]*el[1][2], el[0][0]*el[1][1] - el[0][1]*el[1][0], 0);
-	r[3] = -el[0][3] * r[0] - el[1][3] * r[1] - el[2][3] * r[2];
-	r[3][3] = r[0][0] * el[0][0] + r[0][1] * el[0][1] + r[0][2] * el[0][2];
-	return r;
+	Dir col0 = getCol(0);
+	Dir col1 = getCol(1);
+	Dir col2 = getCol(2);
+
+	const Real Sx = col0.normalize();
+	const Real Sy = col1.normalize();
+	const Real Sz = col2.normalize();
+
+	const Real detR = (col0|(col1^col2)) > 0 ? (Real)1 : -(Real)1;
+
+	const Pos t = getCol(3);
+
+	const Dir cofCol0 = (detR*Sy*Sz)*col0;
+	const Dir cofCol1 = (detR*Sz*Sx)*col1;
+	const Dir cofCol2 = (detR*Sx*Sy)*col2;
+
+	Mat4Real cof;
+
+	cof.setCol(0, cofCol0);
+	cof.setCol(1, cofCol1);
+	cof.setCol(2, cofCol2);
+	cof.setCol(3, Vec4Real((Real)0, (Real)0, (Real)0, Sx*Sy*Sz));
+
+	cof[3][0] = -t|cofCol0;
+	cof[3][1] = -t|cofCol1;
+	cof[3][2] = -t|cofCol2;
+
+	return cof;
 }
 
 PX_INLINE Mat4Real

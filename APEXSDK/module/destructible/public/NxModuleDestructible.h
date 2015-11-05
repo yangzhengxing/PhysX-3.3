@@ -221,7 +221,7 @@ struct NxDestructibleChunkEvent
 
 
 /**
-	Chunk state event data pushed to the user, if the user requests it via NxModuleDestructible::setChunkReportSendChunkStateEvents.
+	Chunk state event data pushed to the user, if the user requests it via NxModuleDestructible::scheduleChunkStateEventCallback.
 */
 struct NxApexChunkStateEventData
 {
@@ -254,24 +254,41 @@ public:
 		See the definition of NxApexDamageEventReportData for the information provided
 		to the function.
 	*/
-	virtual void	onDamageNotify(const NxApexDamageEventReportData& damageEvent) = 0;
+	virtual void	onDamageNotify(const physx::NxApexDamageEventReportData& damageEvent) = 0;
 
 	/**
 		User implementation of NxUserChunkReport must overload this function.
 		This function gets called when chunk visibility changes occur, if the user has selected
-		this option via NxModuleDestructible::setChunkReportSendChunkStateEvents.
+		this option via NxModuleDestructible::scheduleChunkStateEventCallback.
 		See the definition of NxApexChunkStateEventData for the information provided
 		to the function.
+
+		*Please note* the user must also set the NxParameterized actor parameter 'createChunkEvents' to true,
+		on individual destructible actors, to receive state change events from that actor.
 	*/
-	virtual void	onStateChangeNotify(const NxApexChunkStateEventData& visibilityEvent) = 0;
+	virtual void	onStateChangeNotify(const physx::NxApexChunkStateEventData& visibilityEvent) = 0;
 
 	/**
 		Called when an NxDestructibleActor contains no visible chunks.  If the user returns true,
 		APEX will release the destructible actor.  If the user returns false, they should not
 		release the destructible actor from within the callback, and instead must wait until
 		the completion of NxApexScene::fetchResults().
+
+		Default implementation returns false, which is the legacy behavior.
+
+		If this class (NxUserChunkReport) is not implemented, APEX will not destroy the NxDestructibleActor.
 	*/
-	virtual bool	releaseOnNoChunksVisible(const NxDestructibleActor* destructible) = 0;
+	virtual bool	releaseOnNoChunksVisible(const physx::NxDestructibleActor* destructible) { PX_UNUSED(destructible);  return false; }
+
+	/**
+		List of destructible actors that have just become awake (any associated PhysX actor has become awake).
+	**/
+	virtual void	onDestructibleWake(physx::NxDestructibleActor** destructibles, physx::PxU32 count) = 0;
+
+	/**
+		List of destructible actors that have just gone to sleep (all associated PhysX actors have gone to sleep).
+	**/
+	virtual void	onDestructibleSleep(physx::NxDestructibleActor** destructibles, physx::PxU32 count) = 0;
 
 protected:
 	virtual			~NxUserChunkReport() {}
@@ -348,7 +365,6 @@ public:
 	/** Called immediately before a PxActor is released in the Destruction module. */
 	virtual void	onPhysXActorRelease(const physx::PxActor& actor) = 0;
 #endif
-
 protected:
 	virtual		~NxUserDestructiblePhysXActorReport() {}
 };
@@ -634,7 +650,7 @@ public:
 		Set whether or not the NxUserChunkReport::onStateChangeNotify interface will be used to deliver visibility
 		change data to the user.
 
-		Default = false.
+		Default = NxDestructibleCallbackSchedule::Disabled.
 	*/
 	virtual void							scheduleChunkStateEventCallback(NxDestructibleCallbackSchedule::Enum chunkStateEventCallbackSchedule) = 0;
 

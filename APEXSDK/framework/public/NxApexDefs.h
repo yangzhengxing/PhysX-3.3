@@ -51,7 +51,7 @@
 #define NX_APEX_SDK_VERSION 1
 #define NX_APEX_SDK_RELEASE 0x01030300
 
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && !defined(PX_VC14)
 #define APEX_CUDA_SUPPORT 1
 #endif
 
@@ -62,7 +62,7 @@
 #define DYNAMIC_CAST(type) static_cast<type>
 #endif
 
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && !defined(PX_VC14)
 #define APEX_USE_PARTICLES 1
 #else
 #define APEX_USE_PARTICLES 0

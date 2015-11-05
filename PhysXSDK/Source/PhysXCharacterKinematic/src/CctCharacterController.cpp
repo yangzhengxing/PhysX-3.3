@@ -2137,6 +2137,10 @@ bool Controller::rideOnTouchedObject(SweptVolume& volume, const PxVec3& upDirect
 
 PxControllerCollisionFlags Controller::move(SweptVolume& volume, const PxVec3& originalDisp, PxF32 minDist, PxF32 elapsedTime, const PxControllerFilters& filters, const PxObstacleContext* obstacleContext, bool constrainedClimbingMode)
 {
+	const bool lockWrite = mManager->mLockingEnabled;
+	if(lockWrite)
+		mWriteLock.lock();	
+
 	mGlobalTime += elapsedTime;
 
 	// Init CCT with per-controller settings
@@ -2432,6 +2436,9 @@ PxControllerCollisionFlags Controller::move(SweptVolume& volume, const PxVec3& o
 	}
 
 	mManager->resetObstaclesBuffers();
+
+	if (lockWrite)
+		mWriteLock.unlock();
 
 	return collisionFlags;
 }

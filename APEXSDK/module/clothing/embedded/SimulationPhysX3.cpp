@@ -1555,7 +1555,7 @@ void SimulationPhysX3::createAttenuationData()
 				mSelfCollisionAttenuationPairs.pushBack(PxMin(i,j));
 				mSelfCollisionAttenuationPairs.pushBack(PxMax(i,j));
 
-				PxF32 ratio = sqrt(restD2 / collD2) - 1.0f;
+				PxF32 ratio = sqrtf(restD2 / collD2) - 1.0f;
 				mSelfCollisionAttenuationValues.pushBack(ratio);
 			}
 		}
@@ -1978,8 +1978,8 @@ bool SimulationPhysX3::applyClothingMaterial(tMaterial* material, PxVec3 scaledG
 	const PxF32 dampingStiffnessFrequency = 10.0f;
 	const PxF32 exponentDamping = dampingStiffnessFrequency / material->stiffnessFrequency * log2(1 - material->damping);
 	const PxF32 exponentDrag = dampingStiffnessFrequency / material->stiffnessFrequency * log2(1 - material->drag);
-	const PxF32 newDamping = 1.0f - ::exp(exponentDamping * 0.693147180559945309417f); // exp -> exp2, 0.69 = ln(2)
-	const PxF32 newDrag = 1.0f - ::exp(exponentDrag * 0.693147180559945309417f); // exp -> exp2
+	const PxF32 newDamping = 1.0f - ::expf(exponentDamping * 0.693147180559945309417f); // exp -> exp2, 0.69 = ln(2)
+	const PxF32 newDrag = 1.0f - ::expf(exponentDrag * 0.693147180559945309417f); // exp -> exp2
 
 	// damping
 	// TODO damping as vector

@@ -184,6 +184,7 @@ ClothingAuthoring::ClothingAuthoring(physx::apex::NxApexSDK* apexSDK,
 	physx::apex::NxApexSceneDesc sceneDesc;
 
 #ifdef PX_WINDOWS
+#if PX_SUPPORT_GPU_PHYSX == 1
 	// create cuda context manager
 	if (mSimulation.cudaContextManager == NULL)
 	{
@@ -199,6 +200,7 @@ ClothingAuthoring::ClothingAuthoring(physx::apex::NxApexSDK* apexSDK,
 		}
 #endif
 	}
+#endif
 #endif
 
 

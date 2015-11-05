@@ -67,20 +67,14 @@ PxToolkit_debug_common_cflags    += -MMD
 PxToolkit_debug_common_cflags    += $(addprefix -D, $(PxToolkit_debug_defines))
 PxToolkit_debug_common_cflags    += $(addprefix -I, $(PxToolkit_debug_hpaths))
 PxToolkit_debug_common_cflags  += -m64
+PxToolkit_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PxToolkit_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PxToolkit_debug_common_cflags  += -Wno-long-long
+PxToolkit_debug_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+PxToolkit_debug_common_cflags  += -Wno-unused-parameter
+PxToolkit_debug_common_cflags  += -g3 -gdwarf-2
 PxToolkit_debug_cflags	:= $(PxToolkit_debug_common_cflags)
-PxToolkit_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PxToolkit_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PxToolkit_debug_cflags  += -Wno-long-long
-PxToolkit_debug_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-PxToolkit_debug_cflags  += -Wno-unused-parameter
-PxToolkit_debug_cflags  += -g3 -gdwarf-2
 PxToolkit_debug_cppflags	:= $(PxToolkit_debug_common_cflags)
-PxToolkit_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PxToolkit_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PxToolkit_debug_cppflags  += -Wno-long-long
-PxToolkit_debug_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-PxToolkit_debug_cppflags  += -Wno-unused-parameter
-PxToolkit_debug_cppflags  += -g3 -gdwarf-2
 PxToolkit_debug_lflags    := $(PxToolkit_custom_lflags)
 PxToolkit_debug_lflags    += $(addprefix -L, $(PxToolkit_debug_lpaths))
 PxToolkit_debug_lflags    += -Wl,--start-group $(addprefix -l, $(PxToolkit_debug_libraries)) -Wl,--end-group
@@ -179,20 +173,14 @@ PxToolkit_checked_common_cflags    += -MMD
 PxToolkit_checked_common_cflags    += $(addprefix -D, $(PxToolkit_checked_defines))
 PxToolkit_checked_common_cflags    += $(addprefix -I, $(PxToolkit_checked_hpaths))
 PxToolkit_checked_common_cflags  += -m64
+PxToolkit_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PxToolkit_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PxToolkit_checked_common_cflags  += -Wno-long-long
+PxToolkit_checked_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+PxToolkit_checked_common_cflags  += -Wno-unused-parameter
+PxToolkit_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PxToolkit_checked_cflags	:= $(PxToolkit_checked_common_cflags)
-PxToolkit_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PxToolkit_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PxToolkit_checked_cflags  += -Wno-long-long
-PxToolkit_checked_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-PxToolkit_checked_cflags  += -Wno-unused-parameter
-PxToolkit_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PxToolkit_checked_cppflags	:= $(PxToolkit_checked_common_cflags)
-PxToolkit_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PxToolkit_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PxToolkit_checked_cppflags  += -Wno-long-long
-PxToolkit_checked_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-PxToolkit_checked_cppflags  += -Wno-unused-parameter
-PxToolkit_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PxToolkit_checked_lflags    := $(PxToolkit_custom_lflags)
 PxToolkit_checked_lflags    += $(addprefix -L, $(PxToolkit_checked_lpaths))
 PxToolkit_checked_lflags    += -Wl,--start-group $(addprefix -l, $(PxToolkit_checked_libraries)) -Wl,--end-group
@@ -291,20 +279,14 @@ PxToolkit_profile_common_cflags    += -MMD
 PxToolkit_profile_common_cflags    += $(addprefix -D, $(PxToolkit_profile_defines))
 PxToolkit_profile_common_cflags    += $(addprefix -I, $(PxToolkit_profile_hpaths))
 PxToolkit_profile_common_cflags  += -m64
+PxToolkit_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PxToolkit_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PxToolkit_profile_common_cflags  += -Wno-long-long
+PxToolkit_profile_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+PxToolkit_profile_common_cflags  += -Wno-unused-parameter
+PxToolkit_profile_common_cflags  += -O3 -fno-strict-aliasing
 PxToolkit_profile_cflags	:= $(PxToolkit_profile_common_cflags)
-PxToolkit_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PxToolkit_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PxToolkit_profile_cflags  += -Wno-long-long
-PxToolkit_profile_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-PxToolkit_profile_cflags  += -Wno-unused-parameter
-PxToolkit_profile_cflags  += -O3 -fno-strict-aliasing
 PxToolkit_profile_cppflags	:= $(PxToolkit_profile_common_cflags)
-PxToolkit_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PxToolkit_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PxToolkit_profile_cppflags  += -Wno-long-long
-PxToolkit_profile_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-PxToolkit_profile_cppflags  += -Wno-unused-parameter
-PxToolkit_profile_cppflags  += -O3 -fno-strict-aliasing
 PxToolkit_profile_lflags    := $(PxToolkit_custom_lflags)
 PxToolkit_profile_lflags    += $(addprefix -L, $(PxToolkit_profile_lpaths))
 PxToolkit_profile_lflags    += -Wl,--start-group $(addprefix -l, $(PxToolkit_profile_libraries)) -Wl,--end-group
@@ -401,20 +383,14 @@ PxToolkit_release_common_cflags    += -MMD
 PxToolkit_release_common_cflags    += $(addprefix -D, $(PxToolkit_release_defines))
 PxToolkit_release_common_cflags    += $(addprefix -I, $(PxToolkit_release_hpaths))
 PxToolkit_release_common_cflags  += -m64
+PxToolkit_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PxToolkit_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PxToolkit_release_common_cflags  += -Wno-long-long
+PxToolkit_release_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+PxToolkit_release_common_cflags  += -Wno-unused-parameter
+PxToolkit_release_common_cflags  += -O3 -fno-strict-aliasing
 PxToolkit_release_cflags	:= $(PxToolkit_release_common_cflags)
-PxToolkit_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PxToolkit_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PxToolkit_release_cflags  += -Wno-long-long
-PxToolkit_release_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-PxToolkit_release_cflags  += -Wno-unused-parameter
-PxToolkit_release_cflags  += -O3 -fno-strict-aliasing
 PxToolkit_release_cppflags	:= $(PxToolkit_release_common_cflags)
-PxToolkit_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PxToolkit_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PxToolkit_release_cppflags  += -Wno-long-long
-PxToolkit_release_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-PxToolkit_release_cppflags  += -Wno-unused-parameter
-PxToolkit_release_cppflags  += -O3 -fno-strict-aliasing
 PxToolkit_release_lflags    := $(PxToolkit_custom_lflags)
 PxToolkit_release_lflags    += $(addprefix -L, $(PxToolkit_release_lpaths))
 PxToolkit_release_lflags    += -Wl,--start-group $(addprefix -l, $(PxToolkit_release_libraries)) -Wl,--end-group

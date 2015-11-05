@@ -19,6 +19,8 @@
 		</ProjectConfiguration>
 	</ItemGroup>
 	<PropertyGroup Label="Globals">
+		<ProjectGuid>{AE26EE6F-9143-D9EE-6480-FA134AAAFC48}</ProjectGuid>
+		<RootNamespace>PxToolkit</RootNamespace>
 	</PropertyGroup>
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'" Label="Configuration">

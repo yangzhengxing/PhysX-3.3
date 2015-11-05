@@ -63,20 +63,14 @@ SnippetConvert_debug_common_cflags    += -MMD
 SnippetConvert_debug_common_cflags    += $(addprefix -D, $(SnippetConvert_debug_defines))
 SnippetConvert_debug_common_cflags    += $(addprefix -I, $(SnippetConvert_debug_hpaths))
 SnippetConvert_debug_common_cflags  += -m32
+SnippetConvert_debug_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetConvert_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetConvert_debug_common_cflags  += -Wno-long-long
+SnippetConvert_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetConvert_debug_common_cflags  += -Wno-unused-parameter
+SnippetConvert_debug_common_cflags  += -g3 -gdwarf-2
 SnippetConvert_debug_cflags	:= $(SnippetConvert_debug_common_cflags)
-SnippetConvert_debug_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetConvert_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetConvert_debug_cflags  += -Wno-long-long
-SnippetConvert_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetConvert_debug_cflags  += -Wno-unused-parameter
-SnippetConvert_debug_cflags  += -g3 -gdwarf-2
 SnippetConvert_debug_cppflags	:= $(SnippetConvert_debug_common_cflags)
-SnippetConvert_debug_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetConvert_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetConvert_debug_cppflags  += -Wno-long-long
-SnippetConvert_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetConvert_debug_cppflags  += -Wno-unused-parameter
-SnippetConvert_debug_cppflags  += -g3 -gdwarf-2
 SnippetConvert_debug_lflags    := $(SnippetConvert_custom_lflags)
 SnippetConvert_debug_lflags    += $(addprefix -L, $(SnippetConvert_debug_lpaths))
 SnippetConvert_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetConvert_debug_libraries)) -Wl,--end-group
@@ -175,20 +169,14 @@ SnippetConvert_checked_common_cflags    += -MMD
 SnippetConvert_checked_common_cflags    += $(addprefix -D, $(SnippetConvert_checked_defines))
 SnippetConvert_checked_common_cflags    += $(addprefix -I, $(SnippetConvert_checked_hpaths))
 SnippetConvert_checked_common_cflags  += -m32
+SnippetConvert_checked_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetConvert_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetConvert_checked_common_cflags  += -Wno-long-long
+SnippetConvert_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetConvert_checked_common_cflags  += -Wno-unused-parameter
+SnippetConvert_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetConvert_checked_cflags	:= $(SnippetConvert_checked_common_cflags)
-SnippetConvert_checked_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetConvert_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetConvert_checked_cflags  += -Wno-long-long
-SnippetConvert_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetConvert_checked_cflags  += -Wno-unused-parameter
-SnippetConvert_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetConvert_checked_cppflags	:= $(SnippetConvert_checked_common_cflags)
-SnippetConvert_checked_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetConvert_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetConvert_checked_cppflags  += -Wno-long-long
-SnippetConvert_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetConvert_checked_cppflags  += -Wno-unused-parameter
-SnippetConvert_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetConvert_checked_lflags    := $(SnippetConvert_custom_lflags)
 SnippetConvert_checked_lflags    += $(addprefix -L, $(SnippetConvert_checked_lpaths))
 SnippetConvert_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetConvert_checked_libraries)) -Wl,--end-group
@@ -287,20 +275,14 @@ SnippetConvert_profile_common_cflags    += -MMD
 SnippetConvert_profile_common_cflags    += $(addprefix -D, $(SnippetConvert_profile_defines))
 SnippetConvert_profile_common_cflags    += $(addprefix -I, $(SnippetConvert_profile_hpaths))
 SnippetConvert_profile_common_cflags  += -m32
+SnippetConvert_profile_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetConvert_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetConvert_profile_common_cflags  += -Wno-long-long
+SnippetConvert_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetConvert_profile_common_cflags  += -Wno-unused-parameter
+SnippetConvert_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetConvert_profile_cflags	:= $(SnippetConvert_profile_common_cflags)
-SnippetConvert_profile_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetConvert_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetConvert_profile_cflags  += -Wno-long-long
-SnippetConvert_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetConvert_profile_cflags  += -Wno-unused-parameter
-SnippetConvert_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetConvert_profile_cppflags	:= $(SnippetConvert_profile_common_cflags)
-SnippetConvert_profile_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetConvert_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetConvert_profile_cppflags  += -Wno-long-long
-SnippetConvert_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetConvert_profile_cppflags  += -Wno-unused-parameter
-SnippetConvert_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetConvert_profile_lflags    := $(SnippetConvert_custom_lflags)
 SnippetConvert_profile_lflags    += $(addprefix -L, $(SnippetConvert_profile_lpaths))
 SnippetConvert_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetConvert_profile_libraries)) -Wl,--end-group
@@ -397,20 +379,14 @@ SnippetConvert_release_common_cflags    += -MMD
 SnippetConvert_release_common_cflags    += $(addprefix -D, $(SnippetConvert_release_defines))
 SnippetConvert_release_common_cflags    += $(addprefix -I, $(SnippetConvert_release_hpaths))
 SnippetConvert_release_common_cflags  += -m32
+SnippetConvert_release_common_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetConvert_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetConvert_release_common_cflags  += -Wno-long-long
+SnippetConvert_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetConvert_release_common_cflags  += -Wno-unused-parameter
+SnippetConvert_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetConvert_release_cflags	:= $(SnippetConvert_release_common_cflags)
-SnippetConvert_release_cflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetConvert_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetConvert_release_cflags  += -Wno-long-long
-SnippetConvert_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetConvert_release_cflags  += -Wno-unused-parameter
-SnippetConvert_release_cflags  += -O3 -fno-strict-aliasing
 SnippetConvert_release_cppflags	:= $(SnippetConvert_release_common_cflags)
-SnippetConvert_release_cppflags  += -Werror -m32 -fPIC -msse2 -mfpmath=sse -malign-double -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetConvert_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetConvert_release_cppflags  += -Wno-long-long
-SnippetConvert_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetConvert_release_cppflags  += -Wno-unused-parameter
-SnippetConvert_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetConvert_release_lflags    := $(SnippetConvert_custom_lflags)
 SnippetConvert_release_lflags    += $(addprefix -L, $(SnippetConvert_release_lpaths))
 SnippetConvert_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetConvert_release_libraries)) -Wl,--end-group

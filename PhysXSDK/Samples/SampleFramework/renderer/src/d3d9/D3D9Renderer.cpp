@@ -302,6 +302,8 @@ D3D9Renderer::~D3D9Renderer(void)
 	if(m_d3dDevice)              m_d3dDevice->Release();
 	if(m_d3d)                    m_d3d->Release();
 	if(m_displayBuffer)          m_displayBuffer->Release();
+
+	Sleep(100); // this fixes a crash in a nvd3dum.dll thread on windows 10 vc11, probably due to a resource leak (DE10640)
 }
 
 bool D3D9Renderer::checkResize(bool isDeviceLost)

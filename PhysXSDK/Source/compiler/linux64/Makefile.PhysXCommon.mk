@@ -193,20 +193,14 @@ PhysXCommon_debug_common_cflags    += -MMD
 PhysXCommon_debug_common_cflags    += $(addprefix -D, $(PhysXCommon_debug_defines))
 PhysXCommon_debug_common_cflags    += $(addprefix -I, $(PhysXCommon_debug_hpaths))
 PhysXCommon_debug_common_cflags  += -m64
+PhysXCommon_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PhysXCommon_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PhysXCommon_debug_common_cflags  += -Wno-long-long
+PhysXCommon_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PhysXCommon_debug_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PhysXCommon_debug_common_cflags  += -g3 -gdwarf-2
 PhysXCommon_debug_cflags	:= $(PhysXCommon_debug_common_cflags)
-PhysXCommon_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCommon_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCommon_debug_cflags  += -Wno-long-long
-PhysXCommon_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCommon_debug_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCommon_debug_cflags  += -g3 -gdwarf-2
 PhysXCommon_debug_cppflags	:= $(PhysXCommon_debug_common_cflags)
-PhysXCommon_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCommon_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCommon_debug_cppflags  += -Wno-long-long
-PhysXCommon_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCommon_debug_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCommon_debug_cppflags  += -g3 -gdwarf-2
 PhysXCommon_debug_lflags    := $(PhysXCommon_custom_lflags)
 PhysXCommon_debug_lflags    += $(addprefix -L, $(PhysXCommon_debug_lpaths))
 PhysXCommon_debug_lflags    += -Wl,--start-group $(addprefix -l, $(PhysXCommon_debug_libraries)) -Wl,--end-group
@@ -303,20 +297,14 @@ PhysXCommon_checked_common_cflags    += -MMD
 PhysXCommon_checked_common_cflags    += $(addprefix -D, $(PhysXCommon_checked_defines))
 PhysXCommon_checked_common_cflags    += $(addprefix -I, $(PhysXCommon_checked_hpaths))
 PhysXCommon_checked_common_cflags  += -m64
+PhysXCommon_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PhysXCommon_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PhysXCommon_checked_common_cflags  += -Wno-long-long
+PhysXCommon_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PhysXCommon_checked_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PhysXCommon_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PhysXCommon_checked_cflags	:= $(PhysXCommon_checked_common_cflags)
-PhysXCommon_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCommon_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCommon_checked_cflags  += -Wno-long-long
-PhysXCommon_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCommon_checked_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCommon_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PhysXCommon_checked_cppflags	:= $(PhysXCommon_checked_common_cflags)
-PhysXCommon_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCommon_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCommon_checked_cppflags  += -Wno-long-long
-PhysXCommon_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCommon_checked_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCommon_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 PhysXCommon_checked_lflags    := $(PhysXCommon_custom_lflags)
 PhysXCommon_checked_lflags    += $(addprefix -L, $(PhysXCommon_checked_lpaths))
 PhysXCommon_checked_lflags    += -Wl,--start-group $(addprefix -l, $(PhysXCommon_checked_libraries)) -Wl,--end-group
@@ -413,20 +401,14 @@ PhysXCommon_profile_common_cflags    += -MMD
 PhysXCommon_profile_common_cflags    += $(addprefix -D, $(PhysXCommon_profile_defines))
 PhysXCommon_profile_common_cflags    += $(addprefix -I, $(PhysXCommon_profile_hpaths))
 PhysXCommon_profile_common_cflags  += -m64
+PhysXCommon_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PhysXCommon_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PhysXCommon_profile_common_cflags  += -Wno-long-long
+PhysXCommon_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PhysXCommon_profile_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PhysXCommon_profile_common_cflags  += -O3 -fno-strict-aliasing
 PhysXCommon_profile_cflags	:= $(PhysXCommon_profile_common_cflags)
-PhysXCommon_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCommon_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCommon_profile_cflags  += -Wno-long-long
-PhysXCommon_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCommon_profile_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCommon_profile_cflags  += -O3 -fno-strict-aliasing
 PhysXCommon_profile_cppflags	:= $(PhysXCommon_profile_common_cflags)
-PhysXCommon_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCommon_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCommon_profile_cppflags  += -Wno-long-long
-PhysXCommon_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCommon_profile_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCommon_profile_cppflags  += -O3 -fno-strict-aliasing
 PhysXCommon_profile_lflags    := $(PhysXCommon_custom_lflags)
 PhysXCommon_profile_lflags    += $(addprefix -L, $(PhysXCommon_profile_lpaths))
 PhysXCommon_profile_lflags    += -Wl,--start-group $(addprefix -l, $(PhysXCommon_profile_libraries)) -Wl,--end-group
@@ -521,20 +503,14 @@ PhysXCommon_release_common_cflags    += -MMD
 PhysXCommon_release_common_cflags    += $(addprefix -D, $(PhysXCommon_release_defines))
 PhysXCommon_release_common_cflags    += $(addprefix -I, $(PhysXCommon_release_hpaths))
 PhysXCommon_release_common_cflags  += -m64
+PhysXCommon_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+PhysXCommon_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+PhysXCommon_release_common_cflags  += -Wno-long-long
+PhysXCommon_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+PhysXCommon_release_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+PhysXCommon_release_common_cflags  += -O3 -fno-strict-aliasing
 PhysXCommon_release_cflags	:= $(PhysXCommon_release_common_cflags)
-PhysXCommon_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCommon_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCommon_release_cflags  += -Wno-long-long
-PhysXCommon_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCommon_release_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCommon_release_cflags  += -O3 -fno-strict-aliasing
 PhysXCommon_release_cppflags	:= $(PhysXCommon_release_common_cflags)
-PhysXCommon_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-PhysXCommon_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-PhysXCommon_release_cppflags  += -Wno-long-long
-PhysXCommon_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-PhysXCommon_release_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-PhysXCommon_release_cppflags  += -O3 -fno-strict-aliasing
 PhysXCommon_release_lflags    := $(PhysXCommon_custom_lflags)
 PhysXCommon_release_lflags    += $(addprefix -L, $(PhysXCommon_release_lpaths))
 PhysXCommon_release_lflags    += -Wl,--start-group $(addprefix -l, $(PhysXCommon_release_libraries)) -Wl,--end-group

@@ -2058,7 +2058,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Name" value="PxCapsuleControllerDesc"><param name="Local" value="group__character.html#ga030da33b9be17c7cd67c6be5904d4860"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="PxControllerDesc"><param name="Local" value="group__character.html#ga749a16c7bcdb8341d346abe43c023c12"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="PxControllerDesc"><param name="Local" value="group__character.html#ga3144636d9207dbed885c9579898987a5"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="PxCreateControllerManager"><param name="Local" value="group__character.html#gac665a6d24d6e1b231b65028fff30729b"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="PxCreateControllerManager"><param name="Local" value="group__character.html#ga4a13c0d87b6c72ec7bf5e701157c358b"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="setToDefault"><param name="Local" value="group__character.html#gaf2f271a2e1d38f619d345bd89f737412"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="setToDefault"><param name="Local" value="group__character.html#ga48c1aa8996f7a4686f65cf517fb466e5"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="toVec3"><param name="Local" value="group__character.html#ga05750d6d68cb164b2de6c80e93ca29d1"><param name="ImageNumber" value="11"></OBJECT>
@@ -11906,7 +11906,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Name" value="PxControllerManager.h"><param name="Local" value="PxControllerManager_8h.html"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="PxControllerDebugRenderFlags"><param name="Local" value="PxControllerManager_8h.html#ga2404e3aa455180820b7fa4900d75f18e"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="PxCreateControllerManager"><param name="Local" value="PxControllerManager_8h.html#gac665a6d24d6e1b231b65028fff30729b"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="PxCreateControllerManager"><param name="Local" value="PxControllerManager_8h.html#ga4a13c0d87b6c72ec7bf5e701157c358b"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="PxControllerObstacles.h"><param name="Local" value="PxControllerObstacles_8h.html"><param name="ImageNumber" value="1"></OBJECT>
       <UL>

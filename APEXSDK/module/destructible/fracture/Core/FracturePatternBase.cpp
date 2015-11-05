@@ -350,7 +350,7 @@ void FracturePattern::create2dVoronoi(const PxVec3 &dims, int numCells, float bi
 			PxVec3 n(PxCos(phi), PxSin(phi), 0.0f);
 
 			for (int j = 0; j < cellsPerRay; j++) {
-				float rj = dr * pow((float)(j+1), biasExp);
+				float rj = dr * powf((float)(j+1), biasExp);
 				PxVec3 p = n * rj;
 				p.x += shdfnd::rand(-rj * eps, rj * eps);
 				p.y += shdfnd::rand(-rj * eps, rj * eps);
@@ -871,7 +871,7 @@ void FracturePattern::getCompoundIntersection(const Compound *compound, const Px
 		}
 
 		float vol = mConvexVolumes[i] * transScale;
-		float volDiff = fabs(vol - volumeFraction) / vol;
+		float volDiff = fabsf(vol - volumeFraction) / vol;
 
 		if (splitCell) {			// each convex piece within the pattern piece becomes a separate compound
 			for (physx::PxU32 j = 0; j < cellConvexes.size(); j++) {

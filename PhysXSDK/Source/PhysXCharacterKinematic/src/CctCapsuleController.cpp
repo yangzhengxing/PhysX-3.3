@@ -12,6 +12,7 @@
 
 #include "PxController.h"
 #include "CctCapsuleController.h"
+#include "CctCharacterControllerManager.h"
 #include "PxCapsuleGeometry.h"
 #include "PxRigidDynamic.h"
 #include "PxShape.h"
@@ -50,7 +51,16 @@ CapsuleController::~CapsuleController()
 
 void CapsuleController::invalidateCache()
 {
-	mCctModule.voidTestCache();
+	if(mManager->mLockingEnabled)
+	{
+		mWriteLock.lock();
+		mCctModule.voidTestCache();
+		mWriteLock.unlock();
+	}
+	else
+	{
+		mCctModule.voidTestCache();
+	}	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

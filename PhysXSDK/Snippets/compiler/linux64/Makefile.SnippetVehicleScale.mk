@@ -71,20 +71,14 @@ SnippetVehicleScale_debug_common_cflags    += -MMD
 SnippetVehicleScale_debug_common_cflags    += $(addprefix -D, $(SnippetVehicleScale_debug_defines))
 SnippetVehicleScale_debug_common_cflags    += $(addprefix -I, $(SnippetVehicleScale_debug_hpaths))
 SnippetVehicleScale_debug_common_cflags  += -m64
+SnippetVehicleScale_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleScale_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleScale_debug_common_cflags  += -Wno-long-long
+SnippetVehicleScale_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleScale_debug_common_cflags  += -Wno-unused-parameter
+SnippetVehicleScale_debug_common_cflags  += -g3 -gdwarf-2
 SnippetVehicleScale_debug_cflags	:= $(SnippetVehicleScale_debug_common_cflags)
-SnippetVehicleScale_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleScale_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleScale_debug_cflags  += -Wno-long-long
-SnippetVehicleScale_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleScale_debug_cflags  += -Wno-unused-parameter
-SnippetVehicleScale_debug_cflags  += -g3 -gdwarf-2
 SnippetVehicleScale_debug_cppflags	:= $(SnippetVehicleScale_debug_common_cflags)
-SnippetVehicleScale_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleScale_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleScale_debug_cppflags  += -Wno-long-long
-SnippetVehicleScale_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleScale_debug_cppflags  += -Wno-unused-parameter
-SnippetVehicleScale_debug_cppflags  += -g3 -gdwarf-2
 SnippetVehicleScale_debug_lflags    := $(SnippetVehicleScale_custom_lflags)
 SnippetVehicleScale_debug_lflags    += $(addprefix -L, $(SnippetVehicleScale_debug_lpaths))
 SnippetVehicleScale_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleScale_debug_libraries)) -Wl,--end-group
@@ -183,20 +177,14 @@ SnippetVehicleScale_checked_common_cflags    += -MMD
 SnippetVehicleScale_checked_common_cflags    += $(addprefix -D, $(SnippetVehicleScale_checked_defines))
 SnippetVehicleScale_checked_common_cflags    += $(addprefix -I, $(SnippetVehicleScale_checked_hpaths))
 SnippetVehicleScale_checked_common_cflags  += -m64
+SnippetVehicleScale_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleScale_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleScale_checked_common_cflags  += -Wno-long-long
+SnippetVehicleScale_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleScale_checked_common_cflags  += -Wno-unused-parameter
+SnippetVehicleScale_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetVehicleScale_checked_cflags	:= $(SnippetVehicleScale_checked_common_cflags)
-SnippetVehicleScale_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleScale_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleScale_checked_cflags  += -Wno-long-long
-SnippetVehicleScale_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleScale_checked_cflags  += -Wno-unused-parameter
-SnippetVehicleScale_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetVehicleScale_checked_cppflags	:= $(SnippetVehicleScale_checked_common_cflags)
-SnippetVehicleScale_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleScale_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleScale_checked_cppflags  += -Wno-long-long
-SnippetVehicleScale_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleScale_checked_cppflags  += -Wno-unused-parameter
-SnippetVehicleScale_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetVehicleScale_checked_lflags    := $(SnippetVehicleScale_custom_lflags)
 SnippetVehicleScale_checked_lflags    += $(addprefix -L, $(SnippetVehicleScale_checked_lpaths))
 SnippetVehicleScale_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleScale_checked_libraries)) -Wl,--end-group
@@ -295,20 +283,14 @@ SnippetVehicleScale_profile_common_cflags    += -MMD
 SnippetVehicleScale_profile_common_cflags    += $(addprefix -D, $(SnippetVehicleScale_profile_defines))
 SnippetVehicleScale_profile_common_cflags    += $(addprefix -I, $(SnippetVehicleScale_profile_hpaths))
 SnippetVehicleScale_profile_common_cflags  += -m64
+SnippetVehicleScale_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleScale_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleScale_profile_common_cflags  += -Wno-long-long
+SnippetVehicleScale_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleScale_profile_common_cflags  += -Wno-unused-parameter
+SnippetVehicleScale_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleScale_profile_cflags	:= $(SnippetVehicleScale_profile_common_cflags)
-SnippetVehicleScale_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleScale_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleScale_profile_cflags  += -Wno-long-long
-SnippetVehicleScale_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleScale_profile_cflags  += -Wno-unused-parameter
-SnippetVehicleScale_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleScale_profile_cppflags	:= $(SnippetVehicleScale_profile_common_cflags)
-SnippetVehicleScale_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleScale_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleScale_profile_cppflags  += -Wno-long-long
-SnippetVehicleScale_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleScale_profile_cppflags  += -Wno-unused-parameter
-SnippetVehicleScale_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetVehicleScale_profile_lflags    := $(SnippetVehicleScale_custom_lflags)
 SnippetVehicleScale_profile_lflags    += $(addprefix -L, $(SnippetVehicleScale_profile_lpaths))
 SnippetVehicleScale_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleScale_profile_libraries)) -Wl,--end-group
@@ -405,20 +387,14 @@ SnippetVehicleScale_release_common_cflags    += -MMD
 SnippetVehicleScale_release_common_cflags    += $(addprefix -D, $(SnippetVehicleScale_release_defines))
 SnippetVehicleScale_release_common_cflags    += $(addprefix -I, $(SnippetVehicleScale_release_hpaths))
 SnippetVehicleScale_release_common_cflags  += -m64
+SnippetVehicleScale_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetVehicleScale_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetVehicleScale_release_common_cflags  += -Wno-long-long
+SnippetVehicleScale_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
+SnippetVehicleScale_release_common_cflags  += -Wno-unused-parameter
+SnippetVehicleScale_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleScale_release_cflags	:= $(SnippetVehicleScale_release_common_cflags)
-SnippetVehicleScale_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleScale_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleScale_release_cflags  += -Wno-long-long
-SnippetVehicleScale_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleScale_release_cflags  += -Wno-unused-parameter
-SnippetVehicleScale_release_cflags  += -O3 -fno-strict-aliasing
 SnippetVehicleScale_release_cppflags	:= $(SnippetVehicleScale_release_common_cflags)
-SnippetVehicleScale_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetVehicleScale_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetVehicleScale_release_cppflags  += -Wno-long-long
-SnippetVehicleScale_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized
-SnippetVehicleScale_release_cppflags  += -Wno-unused-parameter
-SnippetVehicleScale_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetVehicleScale_release_lflags    := $(SnippetVehicleScale_custom_lflags)
 SnippetVehicleScale_release_lflags    += $(addprefix -L, $(SnippetVehicleScale_release_lpaths))
 SnippetVehicleScale_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetVehicleScale_release_libraries)) -Wl,--end-group

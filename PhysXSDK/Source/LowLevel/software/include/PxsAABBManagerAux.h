@@ -63,7 +63,17 @@ template<class T> T* resizePODArray(const PxU32 oldMaxNb, const PxU32 newMaxNb, 
 	return newElements;
 }
 
-
+template<class T> T* resizePODArray(const PxU32 oldMaxNb, const PxU32 newMaxNb, PxcScratchAllocator* scratchAllocator, T* elements)
+{
+	PX_ASSERT(newMaxNb > oldMaxNb);
+	PX_ASSERT(newMaxNb > 0);
+	PX_ASSERT(0==((newMaxNb*sizeof(T)) & 15)); 
+	T* newElements = (T*)scratchAllocator->alloc(sizeof(T)*newMaxNb, true);
+	PX_ASSERT(0==((uintptr_t)newElements & 0x0f));
+	copyPodArray<T>(newElements, elements, newMaxNb, oldMaxNb);
+	if(elements) scratchAllocator->free(elements);
+	return newElements;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -332,6 +342,11 @@ struct Aggregate
 		actorHeadID = PX_INVALID_BP_HANDLE;
 		userData	= NULL;
 	}
+
+	PX_FORCE_INLINE bool performSelfCollision() const
+	{
+		return (selfCollide && (nbActive > 0));
+	}
 };
 #if defined(PX_PS3) || defined(PX_X360) 
 PX_COMPILE_TIME_ASSERT(0==(sizeof(Aggregate) & 0x0f));
@@ -395,7 +410,7 @@ public:
 				return ((i << 5) + Ps::highestSetBit(mWords[i]));
 			}
 		}
-		return 0;
+		return MAX_AGGREGATE_BOUND_SIZE;
 	}
 
 #ifndef NDEBUG
@@ -644,7 +659,7 @@ public:
 	  {
 		  PX_ASSERT(id<mAggregatesCapacity);
 		  const PxU32 last = mAggregateAvailableElemsWords[id].findLast();
-		  if(last != 0)
+		  if (last != MAX_AGGREGATE_BOUND_SIZE)
 		  {
 			  PX_ASSERT(mAggregateAvailableElemsWords[id].hasNonZeroWords());
 			  mAggregateAvailableElemsWords[id].reset(last);
@@ -655,7 +670,6 @@ public:
 			  PX_ASSERT(!mAggregateAvailableElemsWords[id].hasNonZeroWords());
 			  return PX_INVALID_BP_HANDLE;
 		  }
-
 	  }
 
 	  PX_FORCE_INLINE void setClean(const PxcBpHandle id)

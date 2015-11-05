@@ -398,3 +398,12 @@ The overlaps with trigger shapes are reported in SampleSubmarine through the imp
     }
     
 The code above iterates through all pairs of overlapping shapes that involve a trigger shape.  If it is found that the treasure has been touched by the submarine then the flag *gTreasureFound* is set true.
+
+====================
+Interactions
+====================
+
+The SDK internally creates an interaction object for each overlapping pair reported by the broad-phase. These objects are not only created for pairs of colliding rigid bodies, but also for pairs of overlapping triggers. Generally speaking users should assume that such objects are created regardless of the involved objects' types (rigid body, trigger, cloth, etc) and regardless of involved *PxFilterFlag* flags.
+
+There is currently a limit of 65535 such interaction objects for each actor. If more than 65535 interactions involve the same actor, then the SDK outputs an error message and the extra interactions are ignored.
+

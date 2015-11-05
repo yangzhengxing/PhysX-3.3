@@ -632,7 +632,7 @@ PX_INLINE physx::PxF32	NxRecipSqrt(physx::PxF32 x)
 	}
 	return y;
 #else
-	return 1.0f / sqrt(x);
+	return 1.0f / sqrtf(x);
 #endif
 }
 

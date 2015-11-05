@@ -54,7 +54,7 @@ namespace physx
 	class PxCudaContextManagerDesc;
 
 #if PX_SUPPORT_GPU_PHYSX
-	#define DEFAULT_PHYSX_GPU_GUID    "351581E7-B1DF-4ac0-9606-CC16515AF48A"
+	#define DEFAULT_PHYSX_GPU_GUID    "2D61CA5B-494A-45c7-85B7-4E898F07037E"
 
 	typedef int (getOrdinal_FUNC) ( PxErrorCallback& errc );
 	typedef PxCudaContextManager* (createContext_FUNC) ( PxFoundation& foundation, const PxCudaContextManagerDesc& desc, physx::PxProfileZoneManager* mgr );

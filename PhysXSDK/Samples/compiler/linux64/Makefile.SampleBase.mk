@@ -101,20 +101,14 @@ SampleBase_debug_common_cflags    += -MMD
 SampleBase_debug_common_cflags    += $(addprefix -D, $(SampleBase_debug_defines))
 SampleBase_debug_common_cflags    += $(addprefix -I, $(SampleBase_debug_hpaths))
 SampleBase_debug_common_cflags  += -m64
+SampleBase_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleBase_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleBase_debug_common_cflags  += -Wno-long-long
+SampleBase_debug_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleBase_debug_common_cflags  += -Wno-unused-parameter
+SampleBase_debug_common_cflags  += -g3 -gdwarf-2
 SampleBase_debug_cflags	:= $(SampleBase_debug_common_cflags)
-SampleBase_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleBase_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleBase_debug_cflags  += -Wno-long-long
-SampleBase_debug_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleBase_debug_cflags  += -Wno-unused-parameter
-SampleBase_debug_cflags  += -g3 -gdwarf-2
 SampleBase_debug_cppflags	:= $(SampleBase_debug_common_cflags)
-SampleBase_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleBase_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleBase_debug_cppflags  += -Wno-long-long
-SampleBase_debug_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleBase_debug_cppflags  += -Wno-unused-parameter
-SampleBase_debug_cppflags  += -g3 -gdwarf-2
 SampleBase_debug_lflags    := $(SampleBase_custom_lflags)
 SampleBase_debug_lflags    += $(addprefix -L, $(SampleBase_debug_lpaths))
 SampleBase_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SampleBase_debug_libraries)) -Wl,--end-group
@@ -213,20 +207,14 @@ SampleBase_checked_common_cflags    += -MMD
 SampleBase_checked_common_cflags    += $(addprefix -D, $(SampleBase_checked_defines))
 SampleBase_checked_common_cflags    += $(addprefix -I, $(SampleBase_checked_hpaths))
 SampleBase_checked_common_cflags  += -m64
+SampleBase_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleBase_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleBase_checked_common_cflags  += -Wno-long-long
+SampleBase_checked_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleBase_checked_common_cflags  += -Wno-unused-parameter
+SampleBase_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SampleBase_checked_cflags	:= $(SampleBase_checked_common_cflags)
-SampleBase_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleBase_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleBase_checked_cflags  += -Wno-long-long
-SampleBase_checked_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleBase_checked_cflags  += -Wno-unused-parameter
-SampleBase_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SampleBase_checked_cppflags	:= $(SampleBase_checked_common_cflags)
-SampleBase_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleBase_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleBase_checked_cppflags  += -Wno-long-long
-SampleBase_checked_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleBase_checked_cppflags  += -Wno-unused-parameter
-SampleBase_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SampleBase_checked_lflags    := $(SampleBase_custom_lflags)
 SampleBase_checked_lflags    += $(addprefix -L, $(SampleBase_checked_lpaths))
 SampleBase_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SampleBase_checked_libraries)) -Wl,--end-group
@@ -325,20 +313,14 @@ SampleBase_profile_common_cflags    += -MMD
 SampleBase_profile_common_cflags    += $(addprefix -D, $(SampleBase_profile_defines))
 SampleBase_profile_common_cflags    += $(addprefix -I, $(SampleBase_profile_hpaths))
 SampleBase_profile_common_cflags  += -m64
+SampleBase_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleBase_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleBase_profile_common_cflags  += -Wno-long-long
+SampleBase_profile_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleBase_profile_common_cflags  += -Wno-unused-parameter
+SampleBase_profile_common_cflags  += -O3 -fno-strict-aliasing
 SampleBase_profile_cflags	:= $(SampleBase_profile_common_cflags)
-SampleBase_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleBase_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleBase_profile_cflags  += -Wno-long-long
-SampleBase_profile_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleBase_profile_cflags  += -Wno-unused-parameter
-SampleBase_profile_cflags  += -O3 -fno-strict-aliasing
 SampleBase_profile_cppflags	:= $(SampleBase_profile_common_cflags)
-SampleBase_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleBase_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleBase_profile_cppflags  += -Wno-long-long
-SampleBase_profile_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleBase_profile_cppflags  += -Wno-unused-parameter
-SampleBase_profile_cppflags  += -O3 -fno-strict-aliasing
 SampleBase_profile_lflags    := $(SampleBase_custom_lflags)
 SampleBase_profile_lflags    += $(addprefix -L, $(SampleBase_profile_lpaths))
 SampleBase_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SampleBase_profile_libraries)) -Wl,--end-group
@@ -435,20 +417,14 @@ SampleBase_release_common_cflags    += -MMD
 SampleBase_release_common_cflags    += $(addprefix -D, $(SampleBase_release_defines))
 SampleBase_release_common_cflags    += $(addprefix -I, $(SampleBase_release_hpaths))
 SampleBase_release_common_cflags  += -m64
+SampleBase_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SampleBase_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SampleBase_release_common_cflags  += -Wno-long-long
+SampleBase_release_common_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
+SampleBase_release_common_cflags  += -Wno-unused-parameter
+SampleBase_release_common_cflags  += -O3 -fno-strict-aliasing
 SampleBase_release_cflags	:= $(SampleBase_release_common_cflags)
-SampleBase_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleBase_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleBase_release_cflags  += -Wno-long-long
-SampleBase_release_cflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleBase_release_cflags  += -Wno-unused-parameter
-SampleBase_release_cflags  += -O3 -fno-strict-aliasing
 SampleBase_release_cppflags	:= $(SampleBase_release_common_cflags)
-SampleBase_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SampleBase_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SampleBase_release_cppflags  += -Wno-long-long
-SampleBase_release_cppflags  += -Wno-unknown-pragmas -Wno-char-subscripts -Wno-unused-variable -Wno-reorder -Wno-sign-compare
-SampleBase_release_cppflags  += -Wno-unused-parameter
-SampleBase_release_cppflags  += -O3 -fno-strict-aliasing
 SampleBase_release_lflags    := $(SampleBase_custom_lflags)
 SampleBase_release_lflags    += $(addprefix -L, $(SampleBase_release_lpaths))
 SampleBase_release_lflags    += -Wl,--start-group $(addprefix -l, $(SampleBase_release_libraries)) -Wl,--end-group

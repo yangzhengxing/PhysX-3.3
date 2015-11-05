@@ -16,6 +16,7 @@
 #include "NxApexActor.h"
 #include "NxApexRenderable.h"
 #include "NxModuleDestructible.h"
+#include "PxForceMode.h"
 
 #if NX_SDK_VERSION_MAJOR == 2
 #include "NxBox.h"
@@ -103,13 +104,28 @@ struct NxDestructiblePhysXActorQueryFlags
 {
 	enum Enum
 	{
-		None				= 0,
+		None = 0,
 
-		Static				= (1 << 0),	// Destructible-static, which is a kinematic PhysX actor that hasn't been turned dynamic yet
-		Dynamic				= (1 << 1),	// Dynamic, not dormant (not kinematic)
-		Dormant				= (1 << 2),	// Dynamic, but dormant (had been made dynamic, but is now in a dormant, PhysX-kinematic state)
+		// Actor states
+		Static = (1 << 0),	/// Destructible-static, which is a kinematic PhysX actor that hasn't been turned dynamic yet
+		Dynamic = (1 << 1),	/// Dynamic, not dormant (not kinematic)
+		Dormant = (1 << 2),	/// Dynamic, but dormant (had been made dynamic, but is now in a dormant, PhysX-kinematic state)
 
-		All					= Static | Dynamic | Dormant
+		AllStates = Static | Dynamic | Dormant,
+
+		// Other filters
+		/**
+		Whether or not to ensure that PhysX actors are not listed more than once when this NxDestructibleActor is
+		part of an extended structure.  If this is true, then some NxDestructibleActors may not return all PhysX actors associated with
+		all of their chunks (and in fact may return no PhysX actors), but after querying all NxDestructibleActors in a given structure,
+		every PhysX actor will be accounted for.
+		*/
+		AllowRedundancy = (1 << 3),
+
+		/**
+		Whether or not to allow actors not yet put into the PxScene (e.g. there has not been a simulation step since the actor was created) are also returned.
+		*/
+		AllowActorsNotInScenes = (1 << 4)
 	};
 };
 
@@ -214,7 +230,7 @@ public:
 		See NxDestructibleChunkEvent.  This buffer is filled with chunk events if the NxDestructibleActor parameter createChunkEvents is set to true.
 		This buffer is not automatically cleared by APEX.  The user must clear it using releaseChunkEventBuffer(true).
 
-		N.B. This function only works when the user has *not* requested chunk event callbacks via NxModuleDestructible::setChunkReportSendChunkStateEvents.
+		N.B. This function only works when the user has *not* requested chunk event callbacks via NxModuleDestructible::scheduleChunkStateEventCallback.
 
 		\return		Returns true if successful, false otherwise.
 	*/
@@ -237,17 +253,13 @@ public:
 		\param buffer						returned buffer, if successful
 		\param bufferSize					returned buffer size, if successful
 		\param flags						flags which control which actors are returned.  See NxDestructiblePhysXActorQueryFlags.
-		\param eliminateRedundantActors		whether or not to ensure that PhysX actors are not listed more than once when this NxDestructibleActor is
-												part of an extended structure.  If this is true, then some NxDestructibleActors may not return all PhysX actors associated with
-												all of their chunks (and in fact may return no PhysX actors), but after querying all NxDestructibleActors in a given structure,
-												every PhysX actor will be accounted for.  Default = true.
 		
 		\return								Returns true if successful, false otherwise.
 	*/
 #if NX_SDK_VERSION_MAJOR == 2
-	virtual bool					acquirePhysXActorBuffer(NxActor**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags = NxDestructiblePhysXActorQueryFlags::All, bool eliminateRedundantActors = true) = 0;
+	virtual bool					acquirePhysXActorBuffer(NxActor**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags = NxDestructiblePhysXActorQueryFlags::AllStates) = 0;
 #elif NX_SDK_VERSION_MAJOR == 3
-	virtual bool					acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags = NxDestructiblePhysXActorQueryFlags::All, bool eliminateRedundantActors = true) = 0;
+	virtual bool					acquirePhysXActorBuffer(physx::PxRigidDynamic**& buffer, physx::PxU32& bufferSize, physx::PxU32 flags = NxDestructiblePhysXActorQueryFlags::AllStates) = 0;
 #endif
 
 	/**
@@ -404,6 +416,29 @@ public:
 		Returns true iff hard sleeping is selected for this NxDestructibleActor.
 	*/
 	virtual bool					isHardSleepingEnabled() const = 0;
+
+	/**
+		Puts the PxActor associated with the given chunk to sleep, or wakes it up, depending upon the value of the 'awake' bool.
+			
+		\param chunkIndex	the chunk index within the actor
+		\param awake		if true, wakes the actor, otherwise puts the actor to sleep
+
+		Returns true iff successful.
+	*/
+	virtual	bool					setChunkPhysXActorAwakeState(physx::PxU32 chunkIndex, bool awake) = 0;
+
+	/**
+		Apply force to chunk's actor
+
+		\param chunkIndex	the chunk index within the actor
+		\param force		force, impulse, velocity change, or acceleration (depending on value of mode)
+		\param mode			PhysX force mode (PxForceMode::Enum)
+		\param position		if not null, applies force at position.  Otherwise applies force at center of mass
+		\param wakeup		if true, the actor is awakened
+
+		Returns true iff successful.
+	*/
+	virtual bool					addForce(PxU32 chunkIndex, const PxVec3& force, physx::PxForceMode::Enum mode, const PxVec3* position = NULL, bool wakeup = true) = 0;
 
 	/**
 		Sets the override material.

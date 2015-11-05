@@ -65,7 +65,7 @@ D3D9RendererIndexBuffer::~D3D9RendererIndexBuffer(void)
 {
 	if(m_d3dIndexBuffer)
 	{
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if(m_interopContext && m_registeredInCUDA)
 		{
 			m_registeredInCUDA = !m_interopContext->unregisterResourceInCuda(m_InteropHandle);
@@ -81,7 +81,7 @@ void D3D9RendererIndexBuffer::onDeviceLost(void)
 
 	if(m_pool != D3DPOOL_MANAGED && m_d3dIndexBuffer)
 	{
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if(m_interopContext && m_registeredInCUDA)
 		{
 			m_registeredInCUDA = !m_interopContext->unregisterResourceInCuda(m_InteropHandle);
@@ -98,7 +98,7 @@ void D3D9RendererIndexBuffer::onDeviceReset(void)
 	{
 		m_d3dDevice.CreateIndexBuffer(m_bufferSize, m_usage, m_format, m_pool, &m_d3dIndexBuffer, 0);
 		RENDERER_ASSERT(m_d3dIndexBuffer, "Failed to create Direct3D9 Index Buffer.");
-#if defined(PX_WINDOWS)
+#if defined(PX_WINDOWS) && PX_SUPPORT_GPU_PHYSX
 		if(m_interopContext && m_d3dIndexBuffer && m_mustBeRegisteredInCUDA)
 		{
 			m_registeredInCUDA = m_interopContext->registerResourceInCudaD3D(m_InteropHandle, m_d3dIndexBuffer);

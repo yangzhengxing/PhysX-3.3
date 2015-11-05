@@ -127,7 +127,7 @@ public:
 	// Shader Name
 	typedef D3DStringKey                               key_type;
 	typedef std::pair<ID3D11GeometryShader*,ID3DBlob*> value_type;
-	static const char* getEntry() { return "gmain"; }()
+	static const char* getEntry() { return "gmain"; }
 	static const char* getProfile(D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_11_0) 
 	{ 
 		switch(featureLevel)

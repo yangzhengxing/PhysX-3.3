@@ -55,8 +55,8 @@ struct PxsRigidCore
 														//"frozen". By "frozen", we mean that the body's transform is unchanged
 														//from the previous frame. This permits various optimizations.
 	};
-	PxsRigidCore()									{}
-	PxsRigidCore(const PxEMPTY&) : mFlags(PxEmpty)	{}
+	PxsRigidCore()														{}
+	PxsRigidCore(const PxEMPTY&) : mFlags(PxEmpty), mInternalFlags(0)	{}
 
 	PX_ALIGN_PREFIX(16)
 	PxTransform			body2World PX_ALIGN_SUFFIX(16);
@@ -64,17 +64,17 @@ struct PxsRigidCore
 	PxU8				mInternalFlags;
 	PxU16				solverIterationCounts;	//vel iters are in low word and pos iters in high word.
 
-	PxU32 isKinematic() const
+	PX_FORCE_INLINE PxU32 isKinematic() const
 	{
 		return mFlags & PxRigidBodyFlag::eKINEMATIC;
 	}
 
-	PxU32 hasCCD() const
+	PX_FORCE_INLINE PxU32 hasCCD() const
 	{
 		return mFlags & PxRigidBodyFlag::eENABLE_CCD;
 	}
 
-	PxU32 hasCCDFriction() const
+	PX_FORCE_INLINE PxU32 hasCCDFriction() const
 	{
 		return mFlags & PxRigidBodyFlag::eENABLE_CCD_FRICTION;
 	}

@@ -44,20 +44,14 @@ SnippetUtils_debug_common_cflags    += -MMD
 SnippetUtils_debug_common_cflags    += $(addprefix -D, $(SnippetUtils_debug_defines))
 SnippetUtils_debug_common_cflags    += $(addprefix -I, $(SnippetUtils_debug_hpaths))
 SnippetUtils_debug_common_cflags  += -m64
+SnippetUtils_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetUtils_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetUtils_debug_common_cflags  += -Wno-long-long
+SnippetUtils_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+SnippetUtils_debug_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+SnippetUtils_debug_common_cflags  += -g3 -gdwarf-2
 SnippetUtils_debug_cflags	:= $(SnippetUtils_debug_common_cflags)
-SnippetUtils_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetUtils_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetUtils_debug_cflags  += -Wno-long-long
-SnippetUtils_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SnippetUtils_debug_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SnippetUtils_debug_cflags  += -g3 -gdwarf-2
 SnippetUtils_debug_cppflags	:= $(SnippetUtils_debug_common_cflags)
-SnippetUtils_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetUtils_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetUtils_debug_cppflags  += -Wno-long-long
-SnippetUtils_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SnippetUtils_debug_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SnippetUtils_debug_cppflags  += -g3 -gdwarf-2
 SnippetUtils_debug_lflags    := $(SnippetUtils_custom_lflags)
 SnippetUtils_debug_lflags    += $(addprefix -L, $(SnippetUtils_debug_lpaths))
 SnippetUtils_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetUtils_debug_libraries)) -Wl,--end-group
@@ -137,20 +131,14 @@ SnippetUtils_checked_common_cflags    += -MMD
 SnippetUtils_checked_common_cflags    += $(addprefix -D, $(SnippetUtils_checked_defines))
 SnippetUtils_checked_common_cflags    += $(addprefix -I, $(SnippetUtils_checked_hpaths))
 SnippetUtils_checked_common_cflags  += -m64
+SnippetUtils_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetUtils_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetUtils_checked_common_cflags  += -Wno-long-long
+SnippetUtils_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+SnippetUtils_checked_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+SnippetUtils_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetUtils_checked_cflags	:= $(SnippetUtils_checked_common_cflags)
-SnippetUtils_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetUtils_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetUtils_checked_cflags  += -Wno-long-long
-SnippetUtils_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SnippetUtils_checked_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SnippetUtils_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetUtils_checked_cppflags	:= $(SnippetUtils_checked_common_cflags)
-SnippetUtils_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetUtils_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetUtils_checked_cppflags  += -Wno-long-long
-SnippetUtils_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SnippetUtils_checked_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SnippetUtils_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SnippetUtils_checked_lflags    := $(SnippetUtils_custom_lflags)
 SnippetUtils_checked_lflags    += $(addprefix -L, $(SnippetUtils_checked_lpaths))
 SnippetUtils_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetUtils_checked_libraries)) -Wl,--end-group
@@ -230,20 +218,14 @@ SnippetUtils_profile_common_cflags    += -MMD
 SnippetUtils_profile_common_cflags    += $(addprefix -D, $(SnippetUtils_profile_defines))
 SnippetUtils_profile_common_cflags    += $(addprefix -I, $(SnippetUtils_profile_hpaths))
 SnippetUtils_profile_common_cflags  += -m64
+SnippetUtils_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetUtils_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetUtils_profile_common_cflags  += -Wno-long-long
+SnippetUtils_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+SnippetUtils_profile_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+SnippetUtils_profile_common_cflags  += -O3 -fno-strict-aliasing
 SnippetUtils_profile_cflags	:= $(SnippetUtils_profile_common_cflags)
-SnippetUtils_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetUtils_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetUtils_profile_cflags  += -Wno-long-long
-SnippetUtils_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SnippetUtils_profile_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SnippetUtils_profile_cflags  += -O3 -fno-strict-aliasing
 SnippetUtils_profile_cppflags	:= $(SnippetUtils_profile_common_cflags)
-SnippetUtils_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetUtils_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetUtils_profile_cppflags  += -Wno-long-long
-SnippetUtils_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SnippetUtils_profile_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SnippetUtils_profile_cppflags  += -O3 -fno-strict-aliasing
 SnippetUtils_profile_lflags    := $(SnippetUtils_custom_lflags)
 SnippetUtils_profile_lflags    += $(addprefix -L, $(SnippetUtils_profile_lpaths))
 SnippetUtils_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetUtils_profile_libraries)) -Wl,--end-group
@@ -321,20 +303,14 @@ SnippetUtils_release_common_cflags    += -MMD
 SnippetUtils_release_common_cflags    += $(addprefix -D, $(SnippetUtils_release_defines))
 SnippetUtils_release_common_cflags    += $(addprefix -I, $(SnippetUtils_release_hpaths))
 SnippetUtils_release_common_cflags  += -m64
+SnippetUtils_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SnippetUtils_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SnippetUtils_release_common_cflags  += -Wno-long-long
+SnippetUtils_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+SnippetUtils_release_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+SnippetUtils_release_common_cflags  += -O3 -fno-strict-aliasing
 SnippetUtils_release_cflags	:= $(SnippetUtils_release_common_cflags)
-SnippetUtils_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetUtils_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetUtils_release_cflags  += -Wno-long-long
-SnippetUtils_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SnippetUtils_release_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SnippetUtils_release_cflags  += -O3 -fno-strict-aliasing
 SnippetUtils_release_cppflags	:= $(SnippetUtils_release_common_cflags)
-SnippetUtils_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SnippetUtils_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SnippetUtils_release_cppflags  += -Wno-long-long
-SnippetUtils_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SnippetUtils_release_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SnippetUtils_release_cppflags  += -O3 -fno-strict-aliasing
 SnippetUtils_release_lflags    := $(SnippetUtils_custom_lflags)
 SnippetUtils_release_lflags    += $(addprefix -L, $(SnippetUtils_release_lpaths))
 SnippetUtils_release_lflags    += -Wl,--start-group $(addprefix -l, $(SnippetUtils_release_libraries)) -Wl,--end-group

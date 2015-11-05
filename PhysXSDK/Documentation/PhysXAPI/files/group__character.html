@@ -163,11 +163,12 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gac665a6d24d6e1b231b65028fff30729b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__foundation.html#gaea189596f11f07c586d4757cc67e8f7f">PX_C_EXPORT</a> <br class="typebreak"/>
+<tr class="memitem:ga4a13c0d87b6c72ec7bf5e701157c358b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__foundation.html#gaea189596f11f07c586d4757cc67e8f7f">PX_C_EXPORT</a> <br class="typebreak"/>
 <a class="el" href="group__character.html#gabef9fd69c168f4786e1682b6271b617c">PX_PHYSX_CHARACTER_API</a> <br class="typebreak"/>
 physx::PxControllerManager <br class="typebreak"/>
-*<a class="el" href="group__foundation.html#ga65a319adb859941e5bd98575280b8d19">PX_CALL_CONV</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__character.html#gac665a6d24d6e1b231b65028fff30729b">PxCreateControllerManager</a> (physx::PxScene &amp;scene)</td></tr>
-<tr class="separator:gac665a6d24d6e1b231b65028fff30729b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+*<a class="el" href="group__foundation.html#ga65a319adb859941e5bd98575280b8d19">PX_CALL_CONV</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__character.html#ga4a13c0d87b6c72ec7bf5e701157c358b">PxCreateControllerManager</a> (physx::PxScene &amp;scene, bool lockingEnabled=false)</td></tr>
+<tr class="memdesc:ga4a13c0d87b6c72ec7bf5e701157c358b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the controller manager.  <a href="#ga4a13c0d87b6c72ec7bf5e701157c358b">More...</a><br/></td></tr>
+<tr class="separator:ga4a13c0d87b6c72ec7bf5e701157c358b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga05750d6d68cb164b2de6c80e93ca29d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__foundation.html#ga6a774eed3cad34b0f636332a3d28c6bb">PX_FORCE_INLINE</a> <a class="el" href="classPxVec3.html">PxVec3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__character.html#ga05750d6d68cb164b2de6c80e93ca29d1">toVec3</a> (const <a class="el" href="structPxExtendedVec3.html">PxExtendedVec3</a> &amp;v)</td></tr>
 <tr class="separator:ga05750d6d68cb164b2de6c80e93ca29d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5d8e29dacee8a0a6543029435c0d5dc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__foundation.html#gacb03347b642a2a5bdea1f9b305a6fbec">PX_INLINE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__character.html#ga5d8e29dacee8a0a6543029435c0d5dc6">PxBoxControllerDesc::PxBoxControllerDesc</a> ()</td></tr>
@@ -794,7 +795,7 @@ physx::PxControllerManager <br class="typebreak"/>
 
 </div>
 </div>
-<a class="anchor" id="gac665a6d24d6e1b231b65028fff30729b"></a>
+<a class="anchor" id="ga4a13c0d87b6c72ec7bf5e701157c358b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -802,11 +803,34 @@ physx::PxControllerManager <br class="typebreak"/>
           <td class="memname"><a class="el" href="group__foundation.html#gaea189596f11f07c586d4757cc67e8f7f">PX_C_EXPORT</a> <a class="el" href="group__character.html#gabef9fd69c168f4786e1682b6271b617c">PX_PHYSX_CHARACTER_API</a> physx::PxControllerManager* <a class="el" href="group__foundation.html#ga65a319adb859941e5bd98575280b8d19">PX_CALL_CONV</a> PxCreateControllerManager </td>
           <td>(</td>
           <td class="paramtype">physx::PxScene &amp;&#160;</td>
-          <td class="paramname"><em>scene</em></td><td>)</td>
+          <td class="paramname"><em>scene</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>lockingEnabled</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates the controller manager. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">scene</td><td>PhysX scene. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lockingEnabled</td><td>Enables/disables internal locking.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The character controller is informed by <a class="el" href="classPxDeletionListener.html#a76fa5705a41d0996d0f31c591f4f049c" title="Notification if an object or its memory gets released.">PxDeletionListener::onRelease()</a> when actors or shapes are released, and updates its internal caches accordingly. If character controller movement or a call to <a class="el" href="classPxControllerManager.html#a6cbb06688c15bed0838ee051127905f8" title="Shift the origin of the character controllers and obstacle objects by the specified vector...">PxControllerManager::shiftOrigin()</a> may overlap with actor/shape releases, internal data structures must be guarded against concurrent access.</p>
+<p>Locking guarantees thread safety in such scenarios.</p>
+<dl class="section note"><dt>Note</dt><dd>locking may result in significant slowdown for release of actors or shapes.</dd></dl>
+<p>By default, locking is disabled. </p>
 
 </div>
 </div>

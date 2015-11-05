@@ -629,6 +629,17 @@ void ModuleClothing::destroy()
 		mApexClothingPreviewParams = NULL;
 	}
 
+#ifdef PX_WINDOWS
+	for (PxU32 i = 0; i < mGpuFactories.size(); i++)
+	{
+		//APEX_DEBUG_INFO("Release Gpu factory %d", i);
+		PX_DELETE(mGpuFactories[i].factoryGpu);
+		mGpuFactories.replaceWithLast(i);
+	}
+#endif
+	PX_DELETE(mCpuFactory);
+	mCpuFactory = NULL;
+
 #ifndef WITHOUT_PVD
 	destroyPvdInstances();
 #endif

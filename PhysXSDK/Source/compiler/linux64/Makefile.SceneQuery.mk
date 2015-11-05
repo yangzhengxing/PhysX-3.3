@@ -73,20 +73,14 @@ SceneQuery_debug_common_cflags    += -MMD
 SceneQuery_debug_common_cflags    += $(addprefix -D, $(SceneQuery_debug_defines))
 SceneQuery_debug_common_cflags    += $(addprefix -I, $(SceneQuery_debug_hpaths))
 SceneQuery_debug_common_cflags  += -m64
+SceneQuery_debug_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SceneQuery_debug_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SceneQuery_debug_common_cflags  += -Wno-long-long
+SceneQuery_debug_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+SceneQuery_debug_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+SceneQuery_debug_common_cflags  += -g3 -gdwarf-2
 SceneQuery_debug_cflags	:= $(SceneQuery_debug_common_cflags)
-SceneQuery_debug_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SceneQuery_debug_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SceneQuery_debug_cflags  += -Wno-long-long
-SceneQuery_debug_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SceneQuery_debug_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SceneQuery_debug_cflags  += -g3 -gdwarf-2
 SceneQuery_debug_cppflags	:= $(SceneQuery_debug_common_cflags)
-SceneQuery_debug_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SceneQuery_debug_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SceneQuery_debug_cppflags  += -Wno-long-long
-SceneQuery_debug_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SceneQuery_debug_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SceneQuery_debug_cppflags  += -g3 -gdwarf-2
 SceneQuery_debug_lflags    := $(SceneQuery_custom_lflags)
 SceneQuery_debug_lflags    += $(addprefix -L, $(SceneQuery_debug_lpaths))
 SceneQuery_debug_lflags    += -Wl,--start-group $(addprefix -l, $(SceneQuery_debug_libraries)) -Wl,--end-group
@@ -189,20 +183,14 @@ SceneQuery_checked_common_cflags    += -MMD
 SceneQuery_checked_common_cflags    += $(addprefix -D, $(SceneQuery_checked_defines))
 SceneQuery_checked_common_cflags    += $(addprefix -I, $(SceneQuery_checked_hpaths))
 SceneQuery_checked_common_cflags  += -m64
+SceneQuery_checked_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SceneQuery_checked_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SceneQuery_checked_common_cflags  += -Wno-long-long
+SceneQuery_checked_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+SceneQuery_checked_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+SceneQuery_checked_common_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SceneQuery_checked_cflags	:= $(SceneQuery_checked_common_cflags)
-SceneQuery_checked_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SceneQuery_checked_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SceneQuery_checked_cflags  += -Wno-long-long
-SceneQuery_checked_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SceneQuery_checked_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SceneQuery_checked_cflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SceneQuery_checked_cppflags	:= $(SceneQuery_checked_common_cflags)
-SceneQuery_checked_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SceneQuery_checked_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SceneQuery_checked_cppflags  += -Wno-long-long
-SceneQuery_checked_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SceneQuery_checked_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SceneQuery_checked_cppflags  += -g3 -gdwarf-2 -O3 -fno-strict-aliasing
 SceneQuery_checked_lflags    := $(SceneQuery_custom_lflags)
 SceneQuery_checked_lflags    += $(addprefix -L, $(SceneQuery_checked_lpaths))
 SceneQuery_checked_lflags    += -Wl,--start-group $(addprefix -l, $(SceneQuery_checked_libraries)) -Wl,--end-group
@@ -305,20 +293,14 @@ SceneQuery_profile_common_cflags    += -MMD
 SceneQuery_profile_common_cflags    += $(addprefix -D, $(SceneQuery_profile_defines))
 SceneQuery_profile_common_cflags    += $(addprefix -I, $(SceneQuery_profile_hpaths))
 SceneQuery_profile_common_cflags  += -m64
+SceneQuery_profile_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SceneQuery_profile_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SceneQuery_profile_common_cflags  += -Wno-long-long
+SceneQuery_profile_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+SceneQuery_profile_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+SceneQuery_profile_common_cflags  += -O3 -fno-strict-aliasing
 SceneQuery_profile_cflags	:= $(SceneQuery_profile_common_cflags)
-SceneQuery_profile_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SceneQuery_profile_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SceneQuery_profile_cflags  += -Wno-long-long
-SceneQuery_profile_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SceneQuery_profile_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SceneQuery_profile_cflags  += -O3 -fno-strict-aliasing
 SceneQuery_profile_cppflags	:= $(SceneQuery_profile_common_cflags)
-SceneQuery_profile_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SceneQuery_profile_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SceneQuery_profile_cppflags  += -Wno-long-long
-SceneQuery_profile_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SceneQuery_profile_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SceneQuery_profile_cppflags  += -O3 -fno-strict-aliasing
 SceneQuery_profile_lflags    := $(SceneQuery_custom_lflags)
 SceneQuery_profile_lflags    += $(addprefix -L, $(SceneQuery_profile_lpaths))
 SceneQuery_profile_lflags    += -Wl,--start-group $(addprefix -l, $(SceneQuery_profile_libraries)) -Wl,--end-group
@@ -419,20 +401,14 @@ SceneQuery_release_common_cflags    += -MMD
 SceneQuery_release_common_cflags    += $(addprefix -D, $(SceneQuery_release_defines))
 SceneQuery_release_common_cflags    += $(addprefix -I, $(SceneQuery_release_hpaths))
 SceneQuery_release_common_cflags  += -m64
+SceneQuery_release_common_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
+SceneQuery_release_common_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
+SceneQuery_release_common_cflags  += -Wno-long-long
+SceneQuery_release_common_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
+SceneQuery_release_common_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
+SceneQuery_release_common_cflags  += -O3 -fno-strict-aliasing
 SceneQuery_release_cflags	:= $(SceneQuery_release_common_cflags)
-SceneQuery_release_cflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SceneQuery_release_cflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SceneQuery_release_cflags  += -Wno-long-long
-SceneQuery_release_cflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SceneQuery_release_cflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SceneQuery_release_cflags  += -O3 -fno-strict-aliasing
 SceneQuery_release_cppflags	:= $(SceneQuery_release_common_cflags)
-SceneQuery_release_cppflags  += -Werror -m64 -fPIC -msse2 -mfpmath=sse -ffast-math -fno-exceptions -fno-rtti -fvisibility=hidden -fvisibility-inlines-hidden
-SceneQuery_release_cppflags  += -Wall -Wextra -Wstrict-aliasing=2 -fdiagnostics-show-option
-SceneQuery_release_cppflags  += -Wno-long-long
-SceneQuery_release_cppflags  += -Wno-unknown-pragmas -Wno-invalid-offsetof -Wno-uninitialized -Wno-attributes -Wno-unused-local-typedefs
-SceneQuery_release_cppflags  += -Wno-unused-parameter -Wno-missing-field-initializers -Wno-ignored-qualifiers
-SceneQuery_release_cppflags  += -O3 -fno-strict-aliasing
 SceneQuery_release_lflags    := $(SceneQuery_custom_lflags)
 SceneQuery_release_lflags    += $(addprefix -L, $(SceneQuery_release_lpaths))
 SceneQuery_release_lflags    += -Wl,--start-group $(addprefix -l, $(SceneQuery_release_libraries)) -Wl,--end-group

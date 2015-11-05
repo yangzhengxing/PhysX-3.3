@@ -698,7 +698,7 @@ PX_FORCE_INLINE FloatV FRsqrt(const FloatV a)
 
 PX_FORCE_INLINE FloatV FSqrt(const FloatV a)
 {
-	return vmul_f32(a, VRECIPSQRT(a));
+	return FSel(FIsEq(a, FZero()), a, vmul_f32(a, VRECIPSQRT(a)));
 }
 
 PX_FORCE_INLINE FloatV FRsqrtFast(const FloatV a)
@@ -1356,9 +1356,7 @@ PX_FORCE_INLINE FloatV V3Length(const Vec3V a)
 	const float32x2_t sumTmp = vpadd_f32(low, high); 		// = {0+z, x+y}
 	const float32x2_t sum0ZYX = vpadd_f32(sumTmp, sumTmp);	// = {x+y+z, x+y+z}
 
-	const float32x2_t len = vmul_f32(VRECIPSQRTE(sum0ZYX), sum0ZYX);
-
-	return len;
+	return FSqrt(sum0ZYX);
 }
 
 PX_FORCE_INLINE FloatV V3LengthSq(const Vec3V a)
@@ -1777,8 +1775,18 @@ PX_FORCE_INLINE PxU32 V3InBounds(const Vec3V a, const Vec3V bounds)
 	return internalUnitNeonSimd::BAllTrue4_R(geq);
 }
 
-
-
+PX_FORCE_INLINE void V3Transpose(Vec3V& col0, Vec3V& col1, Vec3V& col2)
+{
+	Vec3V col3 = V3Zero();
+	const float32x4x2_t v0v1 = vzipq_f32(col0, col2);
+	const float32x4x2_t v2v3 = vzipq_f32(col1, col3);
+	const float32x4x2_t zip0 = vzipq_f32(v0v1.val[0], v2v3.val[0]);
+	const float32x4x2_t zip1 = vzipq_f32(v0v1.val[1], v2v3.val[1]);
+	col0 = zip0.val[0];
+	col1 = zip0.val[1];
+	col2 = zip1.val[0];
+	//col3 = zip1.val[1];
+}
 
 //////////////////////////////////
 //VEC4V
@@ -2119,7 +2127,7 @@ PX_FORCE_INLINE Vec4V V4RsqrtFast(const Vec4V a)
 
 PX_FORCE_INLINE Vec4V V4Sqrt(const Vec4V a)
 {
-	return V4Mul(a, VRECIPSQRTQ(a));
+	return V4Sel(V4IsEq(a, V4Zero()), a, V4Mul(a, VRECIPSQRTQ(a)));
 }
 
 PX_FORCE_INLINE Vec4V V4ScaleAdd(const Vec4V a, const FloatV b, const Vec4V c)
@@ -2178,9 +2186,7 @@ PX_FORCE_INLINE FloatV V4Length(const Vec4V a)
 
 	const float32x2_t sumTmp = vpadd_f32(low, high); 		// = {0+z, x+y}
 	const float32x2_t sumWZYX = vpadd_f32(sumTmp, sumTmp);	// = {x+y+z, x+y+z}
-	const float32x2_t len = vmul_f32(VRECIPSQRTE(sumWZYX), sumWZYX);
-
-	return len;
+	return FSqrt(sumWZYX);
 }
 
 PX_FORCE_INLINE FloatV V4LengthSq(const Vec4V a)
@@ -2411,7 +2417,17 @@ PX_FORCE_INLINE Vec4V V4Cos(const Vec4V a)
 	return Result;
 }
 
-
+PX_FORCE_INLINE void V4Transpose(Vec4V& col0, Vec4V& col1, Vec4V& col2, Vec4V& col3)
+{
+	const float32x4x2_t v0v1 = vzipq_f32(col0, col2);
+	const float32x4x2_t v2v3 = vzipq_f32(col1, col3);
+	const float32x4x2_t zip0 = vzipq_f32(v0v1.val[0], v2v3.val[0]);
+	const float32x4x2_t zip1 = vzipq_f32(v0v1.val[1], v2v3.val[1]);
+	col0 = zip0.val[0];
+	col1 = zip0.val[1];
+	col2 = zip1.val[0];
+	col3 = zip1.val[1];
+}
 
 //////////////////////////////////
 //VEC4V
@@ -2674,6 +2690,15 @@ PX_FORCE_INLINE PxU32 BAllEq(const BoolV a, const BoolV b)
 {
 	const BoolV bTest = vceqq_u32(a, b);
 	return internalUnitNeonSimd::BAllTrue4_R(bTest);
+}
+
+PX_FORCE_INLINE PxU32 BGetBitMask(const BoolV a)
+{
+	static PX_ALIGN(16, const PxU32) bitMaskData[4] = { 1, 2, 4, 8 };
+	const uint32x4_t bitMask = *(const uint32x4_t*)bitMaskData;
+	const uint32x4_t t0 = vandq_u32(a, bitMask);
+	const uint32x2_t t1 = vpadd_u32(vget_low_u32(t0), vget_high_u32(t0));	// Pairwise add (0 + 1), (2 + 3)
+	return (PxU32)vget_lane_u32(vpadd_u32(t1, t1), 0);
 }
 
 //////////////////////////////////
@@ -3061,6 +3086,8 @@ PX_FORCE_INLINE VecU32V V4U32Andc(VecU32V a, VecU32V b)
 	//return vbicq_u32(a, b); // creates gcc compiler bug in RTreeQueries.cpp
 	return vandq_u32(a, vmvnq_u32(b));
 }
+
+
 
 /*
 PX_FORCE_INLINE VecU16V V4U16Or(VecU16V a, VecU16V b)

@@ -75,7 +75,9 @@ public:
 	virtual			void					switchToNoSim();
 	virtual			void					switchFromNoSim();
 
+#ifdef PX_CHECKED
 	bool									checkConstraintValidity() const;
+#endif
 
 	PX_FORCE_INLINE	const Scb::Actor&		getScbActorFast()		const	{ return mRigidStatic;	}
 	PX_FORCE_INLINE	Scb::Actor&				getScbActorFast()				{ return mRigidStatic;	}

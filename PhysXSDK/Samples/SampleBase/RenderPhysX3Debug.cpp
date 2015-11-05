@@ -589,7 +589,7 @@ static inline PxU32 minArgument(const PxVec3 &v)
 }
 static inline PxVec3 abs(const PxVec3 &v)
 {
-	return PxVec3( ::abs(v.x), ::abs(v.y), ::abs(v.z));
+	return PxVec3(PxAbs(v.x), PxAbs(v.y), PxAbs(v.z));
 }
 
 void RenderPhysX3Debug::addConeExt(float r0, float r1, const PxVec3& p0, const PxVec3& p1 , const RendererColor& color, PxU32 renderFlags)

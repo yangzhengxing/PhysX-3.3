@@ -333,12 +333,14 @@ void NpScene::addActor(PxActor& actor)
 	CM_PROFILE_ZONE_WITH_SUBSYSTEM(mScene,API,addActor);
 	NP_WRITE_CHECK(this);
 
+#ifdef PX_CHECKED
 	PxRigidStatic* a = actor.is<PxRigidStatic>();
 	if(a && !static_cast<NpRigidStatic*>(a)->checkConstraintValidity())
 	{
 		Ps::getFoundation().error(PxErrorCode::eINVALID_OPERATION, __FILE__, __LINE__, "PxScene::addActor(): actor has invalid constraint and may not be added to scene");
 		return;
 	}
+#endif
 
 	Scb::ControlState::Enum cs = NpActor::getScbFromPxActor(actor).getControlState();
 	if ((cs == Scb::ControlState::eNOT_IN_SCENE) || ((cs == Scb::ControlState::eREMOVE_PENDING) && (NpActor::getOwnerScene(actor) == this)))
@@ -2114,41 +2116,14 @@ void NpScene::collide(PxReal _elapsedTime, physx::PxBaseTask* completionTask, vo
 bool NpScene::checkResultsInternal(bool block)
 {
 	CM_PROFILE_ZONE_WITH_SUBSYSTEM(mScene,Basic,checkResults);
-
-	// ret is ANDed with all results the user wants to check
-	bool ret = true;
-
-	if(block) 
-	{
-		ret = mPhysicsDone.wait(Ps::Sync::waitForever);
-	} 
-	else
-	{
-		ret = mPhysicsDone.wait(0);
-	}
-
-	return ret;
+	return mPhysicsDone.wait(block ? Ps::Sync::waitForever : 0);
 }
 
 bool NpScene::checkCollisionInternal(bool block)
 {
 	CM_PROFILE_ZONE_WITH_SUBSYSTEM(mScene,Basic,checkCollision);
-
-	// ret is ANDed with all results the user wants to check
-	bool ret = true;
-
-	if(block) 
-	{
-		ret = mCollisionDone.wait(Ps::Sync::waitForever);
-	} 
-	else 
-	{
-		ret = mCollisionDone.wait(0);
-	}
-
-	return ret;
+	return mCollisionDone.wait(block ? Ps::Sync::waitForever : 0);
 }
-
 
 bool NpScene::checkResults(bool block)
 {
@@ -2769,13 +2744,14 @@ PxU32 NpScene::getContactReportStreamBufferSize() const
 	return mScene.getScScene().getDefaultContactReportStreamBufferSize();
 }
 
-
+#ifdef PX_CHECKED
 void NpScene::checkPositionSanity(const PxRigidActor& a, const PxTransform& pose, const char* fnName) const
 {
 	if(!mSanityBounds.contains(pose.p))
 		Ps::getFoundation().error(PxErrorCode::eDEBUG_WARNING, __FILE__, __LINE__,
 			"%s: actor pose for %lp is outside sanity bounds\n", fnName, &a);
 }
+#endif
 
 namespace 
 {

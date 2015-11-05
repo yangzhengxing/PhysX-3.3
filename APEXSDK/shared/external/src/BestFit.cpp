@@ -134,7 +134,7 @@ void fm_matrixToQuat(const REAL* matrix, REAL* quat) // convert the 3x3 portion 
 		int j = nxt[i];
 		int k = nxt[j];
 
-		REAL s = sqrt(((matrix[i * 4 + i] - (matrix[j * 4 + j] + matrix[k * 4 + k])) + 1.0f));
+		REAL s = static_cast<REAL>(sqrt(((matrix[i * 4 + i] - (matrix[j * 4 + j] + matrix[k * 4 + k])) + 1.0f)));
 
 		qa[i] = s * 0.5f;
 
@@ -283,7 +283,7 @@ void fm_rotationArc(const REAL* v0, const REAL* v1, REAL* quat)
 
 	fm_cross(cross, v0, v1);
 	REAL d = fm_dot(v0, v1);
-	REAL s = sqrt((1 + d) * 2);
+	REAL s = static_cast<REAL>(sqrt((1 + d) * 2));
 	REAL recip = 1.0f / s;
 
 	quat[0] = cross[0] * recip;
@@ -321,13 +321,13 @@ void fm_eulerToQuat(REAL roll, REAL pitch, REAL yaw, REAL* quat) // convert eule
 	pitch *= 0.5f;
 	yaw   *= 0.5f;
 
-	REAL cr = cos(roll);
-	REAL cp = cos(pitch);
-	REAL cy = cos(yaw);
+	REAL cr = static_cast<REAL>(cos(roll));
+	REAL cp = static_cast<REAL>(cos(pitch));
+	REAL cy = static_cast<REAL>(cos(yaw));
 
-	REAL sr = sin(roll);
-	REAL sp = sin(pitch);
-	REAL sy = sin(yaw);
+	REAL sr = static_cast<REAL>(sin(roll));
+	REAL sp = static_cast<REAL>(sin(pitch));
+	REAL sy = static_cast<REAL>(sin(yaw));
 
 	REAL cpcy = cp * cy;
 	REAL spsy = sp * sy;
@@ -379,7 +379,7 @@ public:
 		m_afSubd[2] = 0;
 		if (fM02 != (Type)0.0)
 		{
-			Type fLength = sqrt(fM01 * fM01 + fM02 * fM02);
+			Type fLength = static_cast<Type>(sqrt(fM01 * fM01 + fM02 * fM02));
 			Type fInvLength = ((Type)1.0) / fLength;
 			fM01 *= fInvLength;
 			fM02 *= fInvLength;
@@ -430,7 +430,7 @@ public:
 				int i2;
 				for (i2 = i0; i2 <= (3 - 2); i2++)
 				{
-					Type fTmp = fabs(m_afDiag[i2]) + fabs(m_afDiag[i2 + 1]);
+					Type fTmp = static_cast<Type>(fabs(m_afDiag[i2]) + fabs(m_afDiag[i2 + 1]));
 					if (fabs(m_afSubd[i2]) + fTmp == fTmp)
 					{
 						break;
@@ -442,7 +442,7 @@ public:
 				}
 
 				Type fG = (m_afDiag[i0 + 1] - m_afDiag[i0]) / (((Type)2.0) * m_afSubd[i0]);
-				Type fR = sqrt(fG * fG + (Type)1.0);
+				Type fR = static_cast<Type>(sqrt(fG * fG + (Type)1.0));
 				if (fG < (Type)0.0)
 				{
 					fG = m_afDiag[i2] - m_afDiag[i0] + m_afSubd[i0] / (fG - fR);
@@ -459,7 +459,7 @@ public:
 					if (fabs(fF) >= fabs(fG))
 					{
 						fCos = fG / fF;
-						fR = sqrt(fCos * fCos + (Type)1.0);
+						fR = static_cast<Type>(sqrt(fCos * fCos + (Type)1.0));
 						m_afSubd[i3 + 1] = fF * fR;
 						fSin = ((Type)1.0) / fR;
 						fCos *= fSin;
@@ -467,7 +467,7 @@ public:
 					else
 					{
 						fSin = fF / fG;
-						fR = sqrt(fSin * fSin + (Type)1.0);
+						fR = static_cast<Type>(sqrt(fSin * fSin + (Type)1.0));
 						m_afSubd[i3 + 1] = fG * fR;
 						fCos = ((Type)1.0) / fR;
 						fSin *= fCos;
@@ -881,7 +881,7 @@ REAL  computeBestFitSphere(size_t vcount, const REAL* points, size_t pstride, RE
 	center[0] = omatrix[12];
 	center[1] = omatrix[13];
 	center[2] = omatrix[14];
-	REAL radius = sqrt(sides[0] * sides[0] + sides[1] * sides[1] + sides[2] * sides[2]);
+	REAL radius = static_cast<REAL>(sqrt(sides[0] * sides[0] + sides[1] * sides[1] + sides[2] * sides[2]));
 	return radius * 0.5f;
 }
 
