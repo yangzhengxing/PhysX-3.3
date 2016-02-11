@@ -341,7 +341,7 @@ namespace physx { namespace debugger {
 		static PvdObjectModel& create( PxAllocatorCallback& callback, PvdObjectModelMetaData& metaData, bool isCapture = false);
 	};
 
-#if defined(PX_VC11) || defined(PX_VC12)
+#if defined(PX_VC11) || defined(PX_VC12) || defined(PX_VC14)
 #pragma warning(pop)
 #endif
 }}
