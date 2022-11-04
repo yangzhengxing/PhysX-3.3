@@ -14,6 +14,9 @@
 #include "windows/PxWindowsDelayLoadHook.h"
 #include "windows/PsWindowsInclude.h"
 #include "windows/PsWindowsLoadLibrary.h"
+
+// Prior to Visual Studio 2015 Update 3, these hooks were non-const.
+#define DELAYIMP_INSECURE_WRITABLE_HOOKS
 #include <delayimp.h>
 
 static const physx::PxDelayLoadHook* gDelayLoadHook = NULL;
