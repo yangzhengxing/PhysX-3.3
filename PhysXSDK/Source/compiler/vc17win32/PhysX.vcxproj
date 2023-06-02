@@ -55,7 +55,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
-    <OutDir>./../../../bin/vc14win32\</OutDir>
+    <OutDir>./../../../bin/vc17win32\</OutDir>
     <IntDir>./Win32/PhysX/debug\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>PhysX3DEBUG_x86</TargetName>
@@ -90,7 +90,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../../Lib/vc17win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -100,7 +100,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">
-    <OutDir>./../../../bin/vc14win32\</OutDir>
+    <OutDir>./../../../bin/vc17win32\</OutDir>
     <IntDir>./Win32/PhysX/checked\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>PhysX3CHECKED_x86</TargetName>
@@ -134,7 +134,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../../Lib/vc17win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -144,7 +144,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">
-    <OutDir>./../../../bin/vc14win32\</OutDir>
+    <OutDir>./../../../bin/vc17win32\</OutDir>
     <IntDir>./Win32/PhysX/profile\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>PhysX3PROFILE_x86</TargetName>
@@ -178,7 +178,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../../Lib/vc17win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -188,7 +188,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
-    <OutDir>./../../../bin/vc14win32\</OutDir>
+    <OutDir>./../../../bin/vc17win32\</OutDir>
     <IntDir>./Win32/PhysX/release\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>PhysX3_x86</TargetName>
@@ -222,7 +222,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../../Lib/vc17win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>

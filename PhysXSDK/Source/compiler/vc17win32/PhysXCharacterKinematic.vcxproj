@@ -55,7 +55,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
-    <OutDir>./../../../bin/vc14win32\</OutDir>
+    <OutDir>./../../../bin/vc17win32\</OutDir>
     <IntDir>./Win32/PhysXCharacterKinematic/debug\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>PhysX3CharacterKinematicDEBUG_x86</TargetName>
@@ -90,7 +90,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../../Lib/vc17win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -100,7 +100,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">
-    <OutDir>./../../../bin/vc14win32\</OutDir>
+    <OutDir>./../../../bin/vc17win32\</OutDir>
     <IntDir>./Win32/PhysXCharacterKinematic/checked\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>PhysX3CharacterKinematicCHECKED_x86</TargetName>
@@ -134,7 +134,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../../Lib/vc17win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -144,7 +144,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">
-    <OutDir>./../../../bin/vc14win32\</OutDir>
+    <OutDir>./../../../bin/vc17win32\</OutDir>
     <IntDir>./Win32/PhysXCharacterKinematic/profile\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>PhysX3CharacterKinematicPROFILE_x86</TargetName>
@@ -178,7 +178,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../../Lib/vc17win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -188,7 +188,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
-    <OutDir>./../../../bin/vc14win32\</OutDir>
+    <OutDir>./../../../bin/vc17win32\</OutDir>
     <IntDir>./Win32/PhysXCharacterKinematic/release\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>PhysX3CharacterKinematic_x86</TargetName>
@@ -222,7 +222,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../../Lib/vc17win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
