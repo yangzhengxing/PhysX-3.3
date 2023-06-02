@@ -59,7 +59,7 @@
     <Import Project="./nxpath.vsprops" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
-    <OutDir>./../../bin/vc14win32-PhysX_3.3\</OutDir>
+    <OutDir>./../../bin/vc17win32-PhysX_3.3\</OutDir>
     <IntDir>./build/Win32/ApexFramework/debug\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>$(ProjectName)DEBUG_x86</TargetName>
@@ -87,10 +87,10 @@
       <AdditionalOptions>/MACHINE:x86 /INCREMENTAL:NO /DELAYLOAD:nvcuda.dll</AdditionalOptions>
       <AdditionalDependencies>./../../externals/nvToolsExt/1/lib/win32/nvToolsExt32_1.lib;DelayImp.lib;cuda.lib;PhysX3CommonDEBUG_x86.lib;PxTaskDEBUG.lib;PhysXVisualDebuggerSDKDEBUG.lib;PhysXProfileSDKDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName)DEBUG_x86.dll</OutputFile>
-      <AdditionalLibraryDirectories>$(NXPATH)/Lib/vc14WIN32;./../../externals/CUDA_6.5.19/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(NXPATH)/Lib/vc17win32;./../../externals/CUDA_6.5.19/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)/$(ProjectName)DEBUG_x86.dll.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../lib/vc14win32-PhysX_3.3/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../lib/vc17win32-PhysX_3.3/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -100,7 +100,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">
-    <OutDir>./../../bin/vc14win32-PhysX_3.3\</OutDir>
+    <OutDir>./../../bin/vc17win32-PhysX_3.3\</OutDir>
     <IntDir>./build/Win32/ApexFramework/checked\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>$(ProjectName)CHECKED_x86</TargetName>
@@ -128,10 +128,10 @@
       <AdditionalOptions>/MACHINE:x86 /INCREMENTAL:NO /DELAYLOAD:nvcuda.dll</AdditionalOptions>
       <AdditionalDependencies>./../../externals/nvToolsExt/1/lib/win32/nvToolsExt32_1.lib;DelayImp.lib;cuda.lib;PhysX3CommonCHECKED_x86.lib;PxTaskCHECKED.lib;PhysXVisualDebuggerSDKCHECKED.lib;PhysXProfileSDKCHECKED.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName)CHECKED_x86.dll</OutputFile>
-      <AdditionalLibraryDirectories>$(NXPATH)/Lib/vc14WIN32;./../../externals/CUDA_6.5.19/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(NXPATH)/Lib/vc17win32;./../../externals/CUDA_6.5.19/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)/$(ProjectName)CHECKED_x86.dll.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../lib/vc14win32-PhysX_3.3/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../lib/vc17win32-PhysX_3.3/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -141,7 +141,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
-    <OutDir>./../../bin/vc14win32-PhysX_3.3\</OutDir>
+    <OutDir>./../../bin/vc17win32-PhysX_3.3\</OutDir>
     <IntDir>./build/Win32/ApexFramework/release\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>$(ProjectName)_x86</TargetName>
@@ -169,10 +169,10 @@
       <AdditionalOptions>/MACHINE:x86 /INCREMENTAL:NO /DELAYLOAD:nvcuda.dll</AdditionalOptions>
       <AdditionalDependencies>./../../externals/nvToolsExt/1/lib/win32/nvToolsExt32_1.lib;DelayImp.lib;cuda.lib;PhysX3Common_x86.lib;PxTask.lib;PhysXVisualDebuggerSDK.lib;PhysXProfileSDK.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName)_x86.dll</OutputFile>
-      <AdditionalLibraryDirectories>$(NXPATH)/Lib/vc14WIN32;./../../externals/CUDA_6.5.19/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(NXPATH)/Lib/vc17win32;./../../externals/CUDA_6.5.19/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)/$(ProjectName)_x86.dll.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../lib/vc14win32-PhysX_3.3/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../lib/vc17win32-PhysX_3.3/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -182,7 +182,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">
-    <OutDir>./../../bin/vc14win32-PhysX_3.3\</OutDir>
+    <OutDir>./../../bin/vc17win32-PhysX_3.3\</OutDir>
     <IntDir>./build/Win32/ApexFramework/profile\</IntDir>
     <TargetExt>.dll</TargetExt>
     <TargetName>$(ProjectName)PROFILE_x86</TargetName>
@@ -210,10 +210,10 @@
       <AdditionalOptions>/MACHINE:x86 /INCREMENTAL:NO /DELAYLOAD:nvcuda.dll</AdditionalOptions>
       <AdditionalDependencies>./../../externals/nvToolsExt/1/lib/win32/nvToolsExt32_1.lib;DelayImp.lib;cuda.lib;PhysX3CommonPROFILE_x86.lib;PxTaskPROFILE.lib;PhysXVisualDebuggerSDKPROFILE.lib;PhysXProfileSDKPROFILE.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName)PROFILE_x86.dll</OutputFile>
-      <AdditionalLibraryDirectories>$(NXPATH)/Lib/vc14WIN32;./../../externals/CUDA_6.5.19/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(NXPATH)/Lib/vc17win32;./../../externals/CUDA_6.5.19/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)/$(ProjectName)PROFILE_x86.dll.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>./../../lib/vc14win32-PhysX_3.3/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>./../../lib/vc17win32-PhysX_3.3/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
